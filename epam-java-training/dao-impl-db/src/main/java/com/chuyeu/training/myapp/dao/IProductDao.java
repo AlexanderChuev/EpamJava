@@ -2,10 +2,8 @@ package com.chuyeu.training.myapp.dao;
 
 import com.chuyeu.training.myapp.datamodel.Product;
 
-public interface IProductDao {
+public interface IProductDao extends IAbstractDao<Product, Integer>{
 
-	Product getId(Integer id);
-	void insert(Product product);
-	void update(Product product);
+	// Здесь есть методы
 	
 }

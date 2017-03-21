@@ -2,29 +2,42 @@ package com.chuyeu.training.myapp.datamodel;
 
 public class Product extends AbstractModel{
 
-	private String firstName;
-	private String lastName;
-	private String address;
-	
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	private String name;
+	private String description;
+	private Double startingPrice;
+	private boolean active;
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Double getStartingPrice() {
+		return startingPrice;
+	}
+	public void setStartingPrice(Double startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Product [name=" + name + ", description=" + description + ", startingPrice=" + startingPrice
+				+ ", active=" + active + "]";
+	}
 	
 }
