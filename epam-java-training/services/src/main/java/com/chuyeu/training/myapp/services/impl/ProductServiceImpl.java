@@ -18,7 +18,7 @@ public class ProductServiceImpl implements IProductService{
 
 	@Override
 	public List<Product> getAll() {
-		return null;
+		return productDao.getAll();
 	}
 
 	@Override
@@ -28,17 +28,17 @@ public class ProductServiceImpl implements IProductService{
 
 	@Override
 	public Product insert(Product product) {
-		return null;
+		return productDao.insert(product);
 	}
 
 	@Override
 	public Product update(Product product) {
-		return null;
+		return productDao.update(product);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		
+		productDao.delete(id);
 	}
 	
 

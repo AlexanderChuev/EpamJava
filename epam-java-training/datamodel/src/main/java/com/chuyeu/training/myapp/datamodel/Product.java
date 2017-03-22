@@ -26,7 +26,7 @@ public class Product extends AbstractModel{
 	public void setStartingPrice(Double startingPrice) {
 		this.startingPrice = startingPrice;
 	}
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 	public void setActive(boolean active) {

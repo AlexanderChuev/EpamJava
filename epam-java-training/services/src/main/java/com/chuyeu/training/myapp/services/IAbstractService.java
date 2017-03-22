@@ -1,8 +1,8 @@
-package com.chuyeu.training.myapp.dao;
+package com.chuyeu.training.myapp.services;
 
 import java.util.List;
 
-public interface IAbstractDao <T> {
+public interface IAbstractService<T> {
 
 	List<T> getAll();
 	
@@ -13,4 +13,5 @@ public interface IAbstractDao <T> {
 	T update(T product);
 	
 	void delete (Integer id);
+	
 }
