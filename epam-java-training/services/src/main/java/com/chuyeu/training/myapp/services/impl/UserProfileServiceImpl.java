@@ -2,39 +2,42 @@ package com.chuyeu.training.myapp.services.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.chuyeu.training.myapp.dao.IUserProfileDao;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.services.IUserProfileService;
 
-public class UserProfileServiceImpl implements IUserProfileService{
+@Service
+public class UserProfileServiceImpl implements IUserProfileService {
+
+	@Inject
+	private IUserProfileDao userProfileDao;
 
 	@Override
 	public List<UserProfile> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userProfileDao.getAll();
 	}
 
 	@Override
 	public UserProfile get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserProfile insert(UserProfile product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserProfile update(UserProfile product) {
-		// TODO Auto-generated method stub
-		return null;
+		return userProfileDao.get(id);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+		userProfileDao.delete(id);
+	}
+
+	@Override
+	public UserProfile saveOrUpdate(UserProfile entity) {
+		if (entity.getId() == null) {
+			return userProfileDao.insert(entity);
+		} else {
+			return userProfileDao.update(entity);
+		}
 	}
 
 }

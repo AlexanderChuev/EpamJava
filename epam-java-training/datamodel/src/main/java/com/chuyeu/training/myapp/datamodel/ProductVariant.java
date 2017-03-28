@@ -4,6 +4,10 @@ import java.util.List;
 
 public class ProductVariant extends AbstractModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2816697463793299620L;
 	private Product product;
 	private Integer quantity;
 	private Double priceInfluence;
@@ -36,5 +40,10 @@ public class ProductVariant extends AbstractModel {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "ProductVariant [product=" + product + ", quantity=" + quantity + ", priceInfluence=" + priceInfluence
+				+ ", attributes=" + attributes + "]";
+	}
 	
 }

@@ -62,7 +62,7 @@ public class ProductDaoImpl implements IProductDao{
 	public Product update(Product product) {
 		jdbcTemplate.update("update product set name = ?, description = ?, starting_price = ?, active = ?"
 				+ " where id = ?" , product.getName(), product.getDescription(), product.getStartingPrice(), product.getActive() ,product.getId());
-		return get(product.getId());
+		return get(product.getId());  // ничего не возвращает
 	}
 
 	@Override

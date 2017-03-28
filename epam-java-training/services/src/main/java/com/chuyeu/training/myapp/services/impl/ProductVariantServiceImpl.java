@@ -2,39 +2,42 @@ package com.chuyeu.training.myapp.services.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.chuyeu.training.myapp.dao.IProductVariantDao;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IProductVariantService;
 
-public class ProductVariantServiceImpl implements IProductVariantService{
+@Service
+public class ProductVariantServiceImpl implements IProductVariantService {
+
+	@Inject
+	private IProductVariantDao productVariantDao;
 
 	@Override
 	public List<ProductVariant> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return productVariantDao.getAll();
 	}
 
 	@Override
 	public ProductVariant get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ProductVariant insert(ProductVariant product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ProductVariant update(ProductVariant product) {
-		// TODO Auto-generated method stub
-		return null;
+		return productVariantDao.get(id);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+		productVariantDao.delete(id);
+	}
+
+	@Override
+	public ProductVariant saveOrUpdate(ProductVariant entity) {
+		if (entity.getId() == null) {
+			return productVariantDao.insert(entity);
+		} else {
+			return productVariantDao.update(entity);
+		}
 	}
 
 }

@@ -2,39 +2,42 @@ package com.chuyeu.training.myapp.services.impl;
 
 import java.util.List;
 
-import com.chuyeu.training.myapp.datamodel.OrderItem;
-import com.chuyeu.training.myapp.services.IOrderItemService;
+import javax.inject.Inject;
 
-public class OrderServiceImpl implements IOrderItemService{
+import org.springframework.stereotype.Service;
+
+import com.chuyeu.training.myapp.dao.IOrdersDao;
+import com.chuyeu.training.myapp.datamodel.Order;
+import com.chuyeu.training.myapp.services.IOrderService;
+
+@Service
+public class OrderServiceImpl implements IOrderService {
+
+	@Inject
+	private IOrdersDao ordersDao;
 
 	@Override
-	public List<OrderItem> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getAll() {
+		return ordersDao.getAll();
 	}
 
 	@Override
-	public OrderItem get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrderItem insert(OrderItem product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrderItem update(OrderItem product) {
-		// TODO Auto-generated method stub
-		return null;
+	public Order get(Integer id) {
+		return ordersDao.get(id);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+		ordersDao.delete(id);
+	}
+
+	@Override
+	public Order saveOrUpdate(Order entity) {
+		if (entity.getId() == null) {
+			return ordersDao.insert(entity);
+		} else {
+			return ordersDao.update(entity);
+		}
 	}
 
 }

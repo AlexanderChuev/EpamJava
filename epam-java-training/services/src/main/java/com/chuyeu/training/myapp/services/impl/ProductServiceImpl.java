@@ -10,9 +10,8 @@ import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
 
 @Service
-public class ProductServiceImpl implements IProductService{
+public class ProductServiceImpl implements IProductService {
 
-	
 	@Inject
 	private IProductDao productDao;
 
@@ -27,19 +26,17 @@ public class ProductServiceImpl implements IProductService{
 	}
 
 	@Override
-	public Product insert(Product product) {
-		return productDao.insert(product);
-	}
-
-	@Override
-	public Product update(Product product) {
-		return productDao.update(product);
-	}
-
-	@Override
 	public void delete(Integer id) {
 		productDao.delete(id);
 	}
-	
+
+	@Override
+	public Product saveOrUpdate(Product entity) {
+		if (entity.getId() == null) {
+			return productDao.insert(entity);
+		} else {
+			return productDao.update(entity);
+		}
+	}
 
 }

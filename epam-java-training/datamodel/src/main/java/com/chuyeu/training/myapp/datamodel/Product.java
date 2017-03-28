@@ -2,6 +2,10 @@ package com.chuyeu.training.myapp.datamodel;
 
 public class Product extends AbstractModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1239132148748692829L;
 	private String name;
 	private String description;
 	private Double startingPrice;

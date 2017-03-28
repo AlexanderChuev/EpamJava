@@ -8,9 +8,7 @@ public interface IAbstractService<T> {
 	
 	T get(Integer id);
 	
-	T insert(T product);
-	
-	T update(T product);
+	T saveOrUpdate(T entity);
 	
 	void delete (Integer id);
 	

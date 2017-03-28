@@ -1,30 +1,41 @@
 package com.chuyeu.training.myapp.datamodel;
 
-public class OrderItem extends AbstractModel{
-	
+public class OrderItem extends AbstractModel {
+
+	private static final long serialVersionUID = -6334637123535313625L;
+
 	private ProductVariant productVariant;
-	private Integer quantity;
-	private Integer orderId;
-	
-	
+	private Integer orderQuantity;
+	private Order order;
+
 	public ProductVariant getProductVariant() {
 		return productVariant;
 	}
+
 	public void setProductVariant(ProductVariant productVariant) {
 		this.productVariant = productVariant;
 	}
-	public Integer getQuantity() {
-		return quantity;
+
+	public Integer getOrderQuantity() {
+		return orderQuantity;
 	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+
+	public void setOrderQuantity(Integer orderQuantity) {
+		this.orderQuantity = orderQuantity;
 	}
-	public Integer getOrderId() {
-		return orderId;
+
+	public Order getOrder() {
+		return order;
 	}
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "OrderItem [productVariant=" + productVariant + ", orderQuantity=" + orderQuantity + ", order=" + order
+				+ "]";
+	}
+
 }

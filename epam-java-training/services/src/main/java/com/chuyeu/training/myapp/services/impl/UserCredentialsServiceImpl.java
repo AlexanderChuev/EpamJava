@@ -2,39 +2,42 @@ package com.chuyeu.training.myapp.services.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.chuyeu.training.myapp.dao.IUserCredentialsDao;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.services.IUserCredentialsService;
 
-public class UserCredentialsServiceImpl implements IUserCredentialsService{
+@Service
+public class UserCredentialsServiceImpl implements IUserCredentialsService {
+
+	@Inject
+	private IUserCredentialsDao userCredentialsDao;
 
 	@Override
 	public List<UserCredentials> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userCredentialsDao.getAll();
 	}
 
 	@Override
 	public UserCredentials get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserCredentials insert(UserCredentials product) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserCredentials update(UserCredentials product) {
-		// TODO Auto-generated method stub
-		return null;
+		return userCredentialsDao.get(id);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
-		
+		userCredentialsDao.delete(id);
+	}
+
+	@Override
+	public UserCredentials saveOrUpdate(UserCredentials entity) {
+		if (entity.getId() == null) {
+			return userCredentialsDao.insert(entity);
+		} else {
+			return userCredentialsDao.update(entity);
+		}
 	}
 
 }
