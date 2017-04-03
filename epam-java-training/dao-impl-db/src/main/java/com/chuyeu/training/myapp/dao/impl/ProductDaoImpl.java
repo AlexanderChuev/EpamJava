@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -62,11 +63,11 @@ public class ProductDaoImpl implements IProductDao{
 	public Product update(Product product) {
 		jdbcTemplate.update("update product set name = ?, description = ?, starting_price = ?, active = ?"
 				+ " where id = ?" , product.getName(), product.getDescription(), product.getStartingPrice(), product.getActive() ,product.getId());
-		return get(product.getId());  // ничего не возвращает
+		return get(product.getId());
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(Integer id) throws EmptyResultDataAccessException{
 		jdbcTemplate.update("delete from product where id=" + id);		
 	}
 

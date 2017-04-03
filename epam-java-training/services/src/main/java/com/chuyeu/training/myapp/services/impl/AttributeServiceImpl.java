@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.IAttributeDao;
@@ -19,26 +17,27 @@ public class AttributeServiceImpl implements IAttributeService {
 	private IAttributeDao attributeDao;
 
 	@Override
-	public List<Attribute> getAll() {
-		return attributeDao.getAll();
+	public List<String> getNames() {
+		return attributeDao.getNames();
 	}
 
 	@Override
-	public Attribute get(Integer id) {
-		return attributeDao.get(id);
+	public List<String> getValuesByName(String attributeName) {
+		return attributeDao.getValuesByName(attributeName);
 	}
 
 	@Override
-	public Attribute saveOrUpdate(Attribute entity) throws DuplicateKeyException{
-		if (entity.getId() == null) {
-			return attributeDao.insert(entity);
-		} else {
-			return attributeDao.update(entity);
-		}
+	public Integer getIdByNameAndValue(String name, String value) {
+		return attributeDao.getIdByNameAndValue(name, value);
 	}
 
 	@Override
-	public void delete(Integer id) throws EmptyResultDataAccessException {
+	public Attribute saveOrUpdate(Attribute attribute) {
+		return attributeDao.insert(attribute);
+	}
+
+	@Override
+	public void delete(Integer id) {
 		attributeDao.delete(id);
 	}
 

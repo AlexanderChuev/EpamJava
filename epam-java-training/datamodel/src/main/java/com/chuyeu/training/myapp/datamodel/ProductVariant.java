@@ -1,49 +1,40 @@
 package com.chuyeu.training.myapp.datamodel;
 
-import java.util.List;
-
 public class ProductVariant extends AbstractModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2816697463793299620L;
-	private Product product;
-	private Integer quantity;
+	private Integer productId;
+	private Integer availableQuantity;
 	private Double priceInfluence;
-	private List<Attribute> attributes;
-	
-	
-	public Product getProduct() {
-		return product;
+
+	public Integer getProductId() {
+		return productId;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
-	public Integer getQuantity() {
-		return quantity;
+
+	public Integer getAvailableQuantity() {
+		return availableQuantity;
 	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+
+	public void setAvailableQuantity(Integer availableQuantity) {
+		this.availableQuantity = availableQuantity;
 	}
+
 	public Double getPriceInfluence() {
 		return priceInfluence;
 	}
+
 	public void setPriceInfluence(Double priceInfluence) {
 		this.priceInfluence = priceInfluence;
 	}
-	public List<Attribute> getAttributes() {
-		return attributes;
-	}
-	public void setAttributes(List<Attribute> attributes) {
-		this.attributes = attributes;
-	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "ProductVariant [product=" + product + ", quantity=" + quantity + ", priceInfluence=" + priceInfluence
-				+ ", attributes=" + attributes + "]";
+		return "ProductVariant [productId=" + productId + ", availableQuantity=" + availableQuantity
+				+ ", priceInfluence=" + priceInfluence + "]";
 	}
-	
+
 }

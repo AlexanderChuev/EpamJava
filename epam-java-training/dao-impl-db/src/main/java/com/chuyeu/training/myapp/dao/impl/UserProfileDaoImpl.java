@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -15,7 +16,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.IUserProfileDao;
-import com.chuyeu.training.myapp.dao.mapper.UserProfileMapper;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 
 @Repository
@@ -26,7 +26,7 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 	
 	@Override
 	public List<UserProfile> getAll() {
-		return jdbcTemplate.query("select * from user_profile f left join user_credentials s on f.user_credentials_id = s.id", new UserProfileMapper());
+		return jdbcTemplate.query("select * from user_profile", new BeanPropertyRowMapper<UserProfile>(UserProfile.class));
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 				ps.setString(1, userProfile.getFirstName());
 				ps.setString(2, userProfile.getLastName());
-				ps.setInt(3, userProfile.getUserCredentials().getId());
+				ps.setInt(3, userProfile.getUserCredentialsId());
 				return ps;
 			}
 		}, keyHolder);
@@ -59,12 +59,12 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 	@Override
 	public UserProfile update(UserProfile userProfile) {
 		jdbcTemplate.update("update user_profile set first_name = ?, last_name = ?, user_credentials_id = ? "
-				+ "where id = ?" , userProfile.getFirstName(), userProfile.getLastName(), userProfile.getUserCredentials().getId(), userProfile.getId());
-		return get(userProfile.getId());  // ничего не возвращает
+				+ "where id = ?" , userProfile.getFirstName(), userProfile.getLastName(), userProfile.getUserCredentialsId(), userProfile.getId());
+		return get(userProfile.getId());
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(Integer id) throws EmptyResultDataAccessException{
 		jdbcTemplate.update("delete from user_profile where id=" + id);	
 		
 	}

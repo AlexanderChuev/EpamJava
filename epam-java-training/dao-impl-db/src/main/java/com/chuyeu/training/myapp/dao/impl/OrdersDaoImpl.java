@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.IOrdersDao;
 import com.chuyeu.training.myapp.datamodel.Order;
+import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
 @Repository
 public class OrdersDaoImpl implements IOrdersDao{
@@ -32,7 +33,8 @@ public class OrdersDaoImpl implements IOrdersDao{
 
 	@Override
 	public Order get(Integer id) {
-		return null;
+		return jdbcTemplate.queryForObject("select * from orders where id = ? ", new Object[] { id },
+				new BeanPropertyRowMapper<Order>(Order.class));
 	}
 
 	@Override
@@ -46,8 +48,8 @@ public class OrdersDaoImpl implements IOrdersDao{
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-				ps.setTimestamp(1, new Timestamp(new Date().getTime()));
-				ps.setInt(2, order.getUserProfile().getId());
+				ps.setTimestamp(1, new Timestamp(order.getCreated().getTime()));
+				ps.setInt(2, order.getUserProfileId());
 				ps.setDouble(3, order.getTotalPrice());
 				return ps;
 			}
@@ -61,12 +63,20 @@ public class OrdersDaoImpl implements IOrdersDao{
 
 	@Override
 	public Order update(Order order) {
-		return null;
+		jdbcTemplate.update("update orders set user_profile_id = ?, total_price = ? " + "where id = ?",
+				order.getUserProfileId(), order.getTotalPrice(), order.getId());
+		return get(order.getId()); 
 	}
 
 	@Override
-	public void delete(Integer id) {
-		
+	public void delete(Integer id) throws EmptyResultDataAccessException{
+		jdbcTemplate.update("delete from orders where id=" + id);
+	}
+
+	@Override
+	public Order getOrderByStatus(Integer id, OrderStatus status) {
+		return jdbcTemplate.queryForObject("select * from orders where id = ? and order_status = ?", new Object[] { id, status.toString() },
+				new BeanPropertyRowMapper<Order>(Order.class));
 	}
 
 

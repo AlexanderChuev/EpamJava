@@ -1,17 +1,7 @@
 package services;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.junit.Test;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.util.Assert;
-
-import com.chuyeu.training.myapp.datamodel.Attribute;
-import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IOrderItemService;
 
 public class OrderItemServiceTest extends AbstractTest{

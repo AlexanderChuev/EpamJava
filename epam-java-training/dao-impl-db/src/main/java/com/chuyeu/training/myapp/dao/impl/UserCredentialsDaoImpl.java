@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -34,7 +35,7 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 	}
 
 	@Override
-	public UserCredentials insert(UserCredentials userCredentials) {
+	public UserCredentials insert(UserCredentials userCredentials) throws DuplicateKeyException{
 		final String INSERT_SQL = "insert into user_credentials (email, password, user_role) values(?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -59,7 +60,7 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 	public UserCredentials update(UserCredentials userCredentials) {
 		jdbcTemplate.update("update user_credentials set email = ?, password = ?, user_role = ? "
 				+ "where id = ?" , userCredentials.getEmail(), userCredentials.getPassword(), userCredentials.getUserRole().toString(), userCredentials.getId());
-		return get(userCredentials.getId());  // ничего не возвращает
+		return get(userCredentials.getId());
 	}
 
 	@Override

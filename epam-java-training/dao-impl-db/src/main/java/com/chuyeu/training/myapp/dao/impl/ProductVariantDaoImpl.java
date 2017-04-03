@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -14,7 +15,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.IProductVariantDao;
-import com.chuyeu.training.myapp.dao.mapper.ProductVariantMapper;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 
 @Repository
@@ -23,40 +23,23 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
-	// +++
+	// +++ возможно не нужен вообще!
 	@Override
 	public List<ProductVariant> getAll() {
-		return jdbcTemplate.query( "select * from product_variant pv, product p, variants v, attribute a where pv.product_id = p.id "
-				+ "and pv.id = v.product_variant_id and a.id = v.attribute_id", new ProductVariantMapper());
-		
+		return jdbcTemplate.query("select * from product_variant",
+				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
+
 	}
-	
+
 	// +++
 	@Override
 	public ProductVariant get(Integer id) {
-		
-		/*ProductVariant productVariant = jdbcTemplate.queryForObject("select * from product_variant pv "
-				+ "inner join product p on pv.product_id = p.id "
-				+ "where pv.id = ?", new Object[] { id }, new ProductVariantMapper());
-		
-		productVariant.setAttributes(getAttributes(id));*/
-		
-		return jdbcTemplate.queryForObject( "select * from product_variant pv, product p, variants v, attribute a where pv.product_id = p.id "
-				+ "and pv.id = v.product_variant_id and a.id = v.attribute_id and pv.id = ?", new Object[] { id }, new ProductVariantMapper());
-		
-	//	return productVariant;
-		
-		
+
+		return jdbcTemplate.queryForObject("select * from product_variant where id = ? ", new Object[] { id },
+				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
+
 	}
 
-	/*private List<Attribute> getAttributes(Integer id){
-		
-		return jdbcTemplate.query("select * from variants v "
-				+ "inner join attribute a on a.id = v.attribute_id "
-				+ "inner join product_variant pv on v.product_variant_id = pv.id "
-				+ "where pv.id = ?",  new Object[] { id }, new AttributesMapper());
-	}*/
-	
 	@Override
 	public ProductVariant insert(ProductVariant productVariant) {
 
@@ -68,8 +51,8 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-				ps.setInt(1, productVariant.getProduct().getId());
-				ps.setInt(2, productVariant.getQuantity());
+				ps.setInt(1, productVariant.getProductId());
+				ps.setInt(2, productVariant.getAvailableQuantity());
 				ps.setDouble(3, productVariant.getPriceInfluence());
 				return ps;
 			}
@@ -84,15 +67,21 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	public ProductVariant update(ProductVariant product_variant) {
 		jdbcTemplate.update(
 				"update product_variant set product_id = ?, quantity = ?, price_influence = ?" + " where id = ?",
-				product_variant.getProduct().getId(), product_variant.getQuantity(), product_variant.getPriceInfluence(),
-				product_variant.getId());
-		return get(product_variant.getId());  // ничего не возвращает
+				product_variant.getProductId(), product_variant.getAvailableQuantity(),
+				product_variant.getPriceInfluence(), product_variant.getId());
+		return get(product_variant.getId());
 	}
 
 	@Override
 	public void delete(Integer id) {
-		jdbcTemplate.update("delete from product_variant where id=" + id);	
+		jdbcTemplate.update("delete from product_variant where id=" + id);
 
+	}
+
+	@Override
+	public List<ProductVariant> getAllByProduct(Integer productId) {
+		return jdbcTemplate.query("select * from product_variant where product_id = ?", new Object[] { productId },
+				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
 	}
 
 }

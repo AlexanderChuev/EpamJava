@@ -6,7 +6,7 @@ public class UserProfile extends AbstractModel {
 
 	private String firstName;
 	private String lastName;
-	private UserCredentials userCredentials;
+	private Integer userCredentialsId;
 
 	public String getFirstName() {
 		return firstName;
@@ -24,18 +24,18 @@ public class UserProfile extends AbstractModel {
 		this.lastName = lastName;
 	}
 
-	public UserCredentials getUserCredentials() {
-		return userCredentials;
+	public Integer getUserCredentialsId() {
+		return userCredentialsId;
 	}
 
-	public void setUserCredentials(UserCredentials userCredentials) {
-		this.userCredentials = userCredentials;
+	public void setUserCredentialsId(Integer userCredentialsId) {
+		this.userCredentialsId = userCredentialsId;
 	}
 
 	@Override
 	public String toString() {
-		return "UserProfile [firstName=" + firstName + ", lastName=" + lastName + ", userCredentials=" + userCredentials
-				+ "]";
+		return "UserProfile [firstName=" + firstName + ", lastName=" + lastName + ", userCredentialsId="
+				+ userCredentialsId + "]";
 	}
-	
+
 }

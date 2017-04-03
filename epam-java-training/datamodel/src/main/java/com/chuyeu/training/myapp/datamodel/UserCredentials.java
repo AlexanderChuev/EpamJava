@@ -34,7 +34,8 @@ public class UserCredentials extends AbstractModel {
 
 	@Override
 	public String toString() {
-		return "UserCredentials [email=" + email + ", password=" + password + ", userRole=" + userRole + "]";
+		return "UserCredentials [email=" + email + ", password=" + password + ", userRole=" + userRole + ", getId()="
+				+ getId() + "]";
 	}
 
 }

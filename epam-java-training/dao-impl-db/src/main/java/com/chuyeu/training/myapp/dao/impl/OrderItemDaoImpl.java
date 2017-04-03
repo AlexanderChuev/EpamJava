@@ -1,11 +1,18 @@
 package com.chuyeu.training.myapp.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.IOrderItemDao;
@@ -32,8 +39,8 @@ public class OrderItemDaoImpl implements IOrderItemDao {
 
 	@Override
 	public OrderItem insert(OrderItem orderItem) {
-		/*
-		final String INSERT_SQL = "insert into attribute (attribute_name, value) values(?, ?)";
+		
+		final String INSERT_SQL = "insert into order_item (product_variant_id, order_quantity, orders_id) values(?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -41,26 +48,28 @@ public class OrderItemDaoImpl implements IOrderItemDao {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-				ps.setString(1, attribute.getAttributeName());
-				ps.setString(2, attribute.getValue());
+				ps.setInt(1, orderItem.getProductVariantId());
+				ps.setInt(2, orderItem.getOrderQuantity());
+				ps.setInt(3, orderItem.getOrdersId());
 				return ps;
 			}
 		}, keyHolder);
 
-		attribute.setId(keyHolder.getKey().intValue());*/
+		orderItem.setId(keyHolder.getKey().intValue());
 
 		return orderItem;
 	}
 
 	@Override
 	public OrderItem update(OrderItem orderItem) {
-		// TODO Auto-generated method stub
-		return null;
+		jdbcTemplate.update("update order_item set product_variant_id = ?, order_quantity = ?, orders_id = ? "
+				+ "where id = ?" , orderItem.getProductVariantId(), orderItem.getOrderQuantity(), orderItem.getOrdersId(), orderItem.getId());
+		return get(orderItem.getId());
 	}
 
 	@Override
-	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+	public void delete(Integer id) throws EmptyResultDataAccessException{
+		jdbcTemplate.update("delete from product where id=" + id);		
 		
 	}
 

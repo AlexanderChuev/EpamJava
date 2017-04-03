@@ -31,11 +31,11 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Product saveOrUpdate(Product entity) {
-		if (entity.getId() == null) {
-			return productDao.insert(entity);
+	public Product saveOrUpdate(Product product) {
+		if (product.getId() == null) {
+			return productDao.insert(product);
 		} else {
-			return productDao.update(entity);
+			return productDao.update(product);
 		}
 	}
 

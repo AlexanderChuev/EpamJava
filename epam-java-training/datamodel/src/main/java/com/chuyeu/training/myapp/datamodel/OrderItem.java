@@ -4,16 +4,16 @@ public class OrderItem extends AbstractModel {
 
 	private static final long serialVersionUID = -6334637123535313625L;
 
-	private ProductVariant productVariant;
+	private Integer productVariantId;
 	private Integer orderQuantity;
-	private Order order;
+	private Integer ordersId;
 
-	public ProductVariant getProductVariant() {
-		return productVariant;
+	public Integer getProductVariantId() {
+		return productVariantId;
 	}
 
-	public void setProductVariant(ProductVariant productVariant) {
-		this.productVariant = productVariant;
+	public void setProductVariantId(Integer productVariantId) {
+		this.productVariantId = productVariantId;
 	}
 
 	public Integer getOrderQuantity() {
@@ -24,18 +24,18 @@ public class OrderItem extends AbstractModel {
 		this.orderQuantity = orderQuantity;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Integer getOrdersId() {
+		return ordersId;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrdersId(Integer ordersId) {
+		this.ordersId = ordersId;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderItem [productVariant=" + productVariant + ", orderQuantity=" + orderQuantity + ", order=" + order
-				+ "]";
+		return "OrderItem [productVariantId=" + productVariantId + ", orderQuantity=" + orderQuantity + ", ordersId="
+				+ ordersId + "]";
 	}
 
 }
