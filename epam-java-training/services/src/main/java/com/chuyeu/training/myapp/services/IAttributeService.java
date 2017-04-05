@@ -12,7 +12,9 @@ public interface IAttributeService {
 
 	Integer getIdByNameAndValue(String name, String value);
 
-	Attribute saveOrUpdate(Attribute attribute);
+	Attribute add(Attribute attribute);
 
-	void delete(Integer id);
+	void deleteValue(Integer id);
+	
+	void deleteName(String name);
 }

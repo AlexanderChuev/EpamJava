@@ -10,19 +10,11 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<common.project.version>1.0</common.project.version>
 		<spring.version>4.0.4.RELEASE</spring.version>
 		<jetty9.version>9.2.13.v20150730</jetty9.version>
-		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-
-		<!-- UI framework versions -->
-		<spring-security.version>4.0.2.RELEASE</spring-security.version>
-		<spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
-		<hibernate.version>4.3.11.Final</hibernate.version>
-		<hibernate-validator.version>5.2.1.Final</hibernate-validator.version>
-		<jstl.version>1.2</jstl.version>
 
 	</properties>
 
@@ -72,51 +64,15 @@
 				<version>1.0.0</version>
 			</dependency>
 
-			<!-- UI libraries -->
 
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
-				<version>${spring-security.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>${hibernate-validator.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-jpa</artifactId>
-				<version>${spring-data-jpa.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>${hibernate.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
-				<version>${jstl.version}</version>
-			</dependency>
+			<!-- Other libraries -->
 
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
-				<version>${javax.servlet-api.version}</version>
+				<version>3.1.0</version>
+				<scope>provided</scope>
 			</dependency>
-
-			<!-- Other libraries -->
 
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
@@ -129,6 +85,7 @@
 				<artifactId>jackson-mapper-asl</artifactId>
 				<version>1.9.13</version>
 			</dependency>
+
 
 			<dependency>
 				<groupId>javax.inject</groupId>
@@ -195,6 +152,7 @@
 				<artifactId>commons-io</artifactId>
 				<version>2.5</version>
 			</dependency>
+
 
 			<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
 			<dependency>
@@ -277,15 +235,6 @@
 				<version>${jetty9.version}</version>
 				<scope>test</scope>
 			</dependency>
-
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-
-
 
 		</dependencies>
 	</dependencyManagement>

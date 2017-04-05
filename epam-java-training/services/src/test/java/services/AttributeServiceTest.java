@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.junit.Test;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
@@ -16,6 +17,16 @@ public class AttributeServiceTest extends AbstractTest {
 
 	@Inject
 	private IAttributeService attributeService;
+	
+	@Test
+	public void addTest(){
+		Attribute attribute = new Attribute();
+		attribute.setName("Color");
+		attribute.setValue("Grey");
+		
+		attributeService.add(attribute);
+		
+	}
 	
 	@Test
 	public void getNamesTest() {
@@ -41,14 +52,14 @@ public class AttributeServiceTest extends AbstractTest {
 
 	}
 
-	@Test
+/*	@Test
 	public void saveOrUpdateTest() {
 
 		Attribute attribute = new Attribute();
 		attribute.setName("Size");
 		attribute.setValue(String.valueOf(new Date().getTime()));
 
-		Attribute attributeFromDb = attributeService.saveOrUpdate(attribute);
+		Attribute attributeFromDb = attributeService.add(attribute);
 
 		Assert.notNull(attributeFromDb, "The attribute must not be null");
 
@@ -62,9 +73,9 @@ public class AttributeServiceTest extends AbstractTest {
 		Assert.isTrue(attribute.getValue().equals(attributeFromDb.getValue()),
 				"Field values of the value must be equal");
 
-		/* System.out.println(attributeFromDb); */
+		 System.out.println(attributeFromDb); 
 
-	}
+	}*/
 
 	@Test(expected = DuplicateKeyException.class)
 	public void saveOrUpdateUniqueValueTest() {
@@ -80,20 +91,13 @@ public class AttributeServiceTest extends AbstractTest {
 		secondAttribute.setName("attributeName");
 		secondAttribute.setValue(attributeValue);
 
-		attributeService.saveOrUpdate(firstAttribute);
-		attributeService.saveOrUpdate(secondAttribute);
+		attributeService.add(firstAttribute);
+		attributeService.add(secondAttribute);
 	}
 
-	/*@Test(expected = EmptyResultDataAccessException.class)
+/*	@Test(expected = EmptyResultDataAccessException.class)
 	public void deleteTest() {
-
-		Attribute attribute = new Attribute();
-		attribute.setAttributeName("Size");
-		attribute.setValue(String.valueOf(new Date().getTime()));
-
-		Attribute attributeFromDb = attributeService.saveOrUpdate(attribute);
-		attributeService.delete(attributeFromDb.getId());
-		attributeService.get(attributeFromDb.getId());
+		attributeService.deleteValue(163);
 
 	}*/
 

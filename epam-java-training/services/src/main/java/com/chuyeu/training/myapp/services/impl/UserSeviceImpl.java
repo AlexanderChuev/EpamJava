@@ -21,6 +21,8 @@ public class UserSeviceImpl implements IUserService {
 
 	@Inject
 	private IUserCredentialsDao userCredentialsDao;
+	
+
 
 	@Override
 	public void register(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException{

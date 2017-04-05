@@ -32,13 +32,18 @@ public class AttributeServiceImpl implements IAttributeService {
 	}
 
 	@Override
-	public Attribute saveOrUpdate(Attribute attribute) {
+	public Attribute add(Attribute attribute) {
 		return attributeDao.insert(attribute);
 	}
 
 	@Override
-	public void delete(Integer id) {
-		attributeDao.delete(id);
+	public void deleteValue(Integer id) {
+		attributeDao.deleteValue(id);
+	}
+
+	@Override
+	public void deleteName(String name) {
+		attributeDao.deleteName(name);
 	}
 
 }

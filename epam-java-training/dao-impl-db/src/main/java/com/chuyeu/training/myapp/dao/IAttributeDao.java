@@ -14,7 +14,9 @@ public interface IAttributeDao {
 
 	Integer getIdByNameAndValue(String attributeName, String attributeValue);
 	
-	void delete(Integer id);
+	void deleteValue(Integer id);
+	
+	void deleteName(String name);
 	
 	Attribute insert(Attribute attribute);
 }

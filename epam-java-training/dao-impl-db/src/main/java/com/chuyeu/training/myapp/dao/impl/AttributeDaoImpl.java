@@ -8,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -47,8 +46,13 @@ public class AttributeDaoImpl implements IAttributeDao {
 	}
 
 	@Override
-	public void delete(Integer id) throws EmptyResultDataAccessException {
-		jdbcTemplate.update("delete from attribute where id=" + id);
+	public void deleteValue(Integer id) {
+		jdbcTemplate.update("delete from attribute where id = " + id);
+	}
+	
+	@Override
+	public void deleteName(String name) {
+		jdbcTemplate.update("delete from attribute where name = " + name);
 	}
 
 	@Override
