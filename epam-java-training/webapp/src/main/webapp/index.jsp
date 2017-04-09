@@ -5,6 +5,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:forward page ="/jsp/login.jsp"/>
+	<jsp:forward page ="/jsp/admin-panel.jsp"/>
 </body>
 </html>

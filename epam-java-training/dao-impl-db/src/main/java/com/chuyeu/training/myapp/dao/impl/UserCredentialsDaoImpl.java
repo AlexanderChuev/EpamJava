@@ -25,8 +25,9 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<UserCredentials> getAll() {
-		return jdbcTemplate.query("select * from user_credentials", new BeanPropertyRowMapper<UserCredentials>(UserCredentials.class));
+	public List<UserCredentials> getAll() throws UnsupportedOperationException{
+		/*return jdbcTemplate.query("select * from user_credentials", new BeanPropertyRowMapper<UserCredentials>(UserCredentials.class));*/
+		return null;
 	}
 
 	@Override

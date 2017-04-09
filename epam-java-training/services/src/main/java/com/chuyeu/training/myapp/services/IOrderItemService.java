@@ -2,6 +2,8 @@ package com.chuyeu.training.myapp.services;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.chuyeu.training.myapp.datamodel.OrderItem;
 
 public interface IOrderItemService{
@@ -10,7 +12,9 @@ public interface IOrderItemService{
 	
 	OrderItem get(Integer id);
 	
+	@Transactional
 	OrderItem saveOrUpdate(OrderItem orderItem);
 	
+	@Transactional
 	void delete (Integer id);
 }

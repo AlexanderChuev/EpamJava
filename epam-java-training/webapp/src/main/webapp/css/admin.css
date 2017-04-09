@@ -1,0 +1,73 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Прибиваю футтер */
+
+.page-wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+* html .page-wrapper {
+    height: 100%;
+}
+.page-buffer {
+    height: 50px;
+}
+
+.page-footer {
+	margin: 0;
+    padding: 0;
+	background-color: #f0f0f0;
+	font-size: 18px;
+}
+
+/* ...прибил */
+ 
+ ul {
+    width: 250px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16pt;
+   }
+   li ul {
+    position: absolute;
+    display: none;
+    margin-left: 165px;
+    margin-top: -2em;
+   }
+   li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #666;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-bottom: none;
+   }
+   
+   li a:hover {
+    color: #ffe;
+    background-color: #5488af;
+   }
+
+   .brd {
+    border-bottom: 1px solid #ccc;
+   }
+
+.logo {
+	background-color: #D6D6D6;
+	min-width: 100%;
+	text-align:center;
+	padding: 10px;
+}
+
+.menu_wrapper {
+
+}
+

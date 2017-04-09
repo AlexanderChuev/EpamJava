@@ -1,0 +1,10 @@
+.select_attribute_wrapper {
+  border: 1px solid black;
+  width: 400px;
+  text-align: center;
+  
+}
+  
+.select_attribute {
+	padding-bottom: 10px;
+}

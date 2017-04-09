@@ -17,88 +17,96 @@ public class AttributeServiceTest extends AbstractTest {
 
 	@Inject
 	private IAttributeService attributeService;
-	
-	@Test
-	public void addTest(){
-		Attribute attribute = new Attribute();
-		attribute.setName("Color");
-		attribute.setValue("Grey");
-		
-		attributeService.add(attribute);
-		
-	}
-	
-	@Test
-	public void getNamesTest() {
-		List<String> names = attributeService.getNames();
-		
-		for (String string : names) {
-			System.out.println(string);
-		}
-	}
+
+	/*-------------------------------------------------------------------------------------------*/
 
 	@Test
-	public void getIdTest() {
-
-		/*Attribute attributeFromDb = attributeService.get(1);
-
-		Assert.notNull(attributeFromDb, "The attribute must not be null");
-
-		Assert.notNull(attributeFromDb.getAttributeName(), "The name attributeFromDb must not be null");
-
-		Assert.notNull(attributeFromDb.getValue(), "The value attributeFromDb must not be null");*/
-
-		/* System.out.println(attributeFromDb); */
-
+	public void test() {
+		Assert.notNull(attributeService);
 	}
-
-/*	@Test
-	public void saveOrUpdateTest() {
-
-		Attribute attribute = new Attribute();
-		attribute.setName("Size");
-		attribute.setValue(String.valueOf(new Date().getTime()));
-
-		Attribute attributeFromDb = attributeService.add(attribute);
-
-		Assert.notNull(attributeFromDb, "The attribute must not be null");
-
-		Assert.notNull(attributeFromDb.getName(), "The name attributeFromDb must not be null");
-
-		Assert.notNull(attributeFromDb.getValue(), "The value attributeFromDb must not be null");
-
-		Assert.isTrue(attribute.getName().equals(attributeFromDb.getName()),
-				"Field values of the name must be equal");
-
-		Assert.isTrue(attribute.getValue().equals(attributeFromDb.getValue()),
-				"Field values of the value must be equal");
-
-		 System.out.println(attributeFromDb); 
-
-	}*/
 
 	@Test(expected = DuplicateKeyException.class)
-	public void saveOrUpdateUniqueValueTest() {
+	public void addTest() {
 
-		Attribute firstAttribute = new Attribute();
-		Attribute secondAttribute = new Attribute();
-		
-		String attributeValue = "value" + new Date().getTime();
-		
-		firstAttribute.setName("attributeName");
-		firstAttribute.setValue(attributeValue);
-		
-		secondAttribute.setName("attributeName");
-		secondAttribute.setValue(attributeValue);
-
-		attributeService.add(firstAttribute);
-		attributeService.add(secondAttribute);
+		Attribute attribute = createAttribute();
+		attributeService.add(attribute);
+		attributeService.add(attribute);
 	}
 
-/*	@Test(expected = EmptyResultDataAccessException.class)
-	public void deleteTest() {
-		attributeService.deleteValue(163);
+	@Test(expected = DuplicateKeyException.class)
+	public void addAttributeTest() {
+		String name = "Name" + new Date().getTime();
+		attributeService.add(name);
+		attributeService.add(name);
+	}
 
-	}*/
+	/*-------------------------------------------------------------------------------------------*/
+
+	@Test
+	public void getNamesTest() {
+
+		List<String> names = attributeService.getNames();
+		Assert.notNull(names);
+		Assert.noNullElements(names.toArray());
+	}
+
+	@Test
+	public void getValuesByNameTest() {
+		// TODO
+	}
+
+	@Test
+	public void getIdByNameAndValueTest() {
+
+		Attribute attribute = createAttribute();
+
+		attributeService.add(attribute);
+		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
+		Assert.notNull(id, "The id must not be null");
+
+	}
+
+	/*-------------------------------------------------------------------------------------------*/
+
+	@Test(expected = EmptyResultDataAccessException.class)
+	public void deleteAttributeValue() {
+
+		Attribute attribute = createAttribute();
+
+		attributeService.add(attribute);
+
+		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
+
+		attributeService.deleteAttributeValue(id);
+
+		attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
+	}
+
+	@Test
+	public void delete() {
+
+		Attribute attribute = createAttribute();
+
+		attributeService.add(attribute);
+		attributeService.delete(attribute.getName());
+
+		Assert.isTrue(attributeService.getValuesByName(attribute.getName()).isEmpty());
+
+	}
+
+	/*-------------------------------------------------------------------------------------------*/
+
+	private Attribute createAttribute() {
+
+		Attribute attribute = new Attribute();
+
+		String name = "Name" + new Date().getTime();
+		String value = "Value" + new Date().getTime();
+
+		attribute.setName(name);
+		attribute.setValue(value);
+
+		return attribute;
+	}
 
 }
