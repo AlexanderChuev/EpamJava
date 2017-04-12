@@ -31,6 +31,7 @@ public class AttributeServiceTest extends AbstractTest {
 		Attribute attribute = createAttribute();
 		attributeService.add(attribute);
 		attributeService.add(attribute);
+		
 	}
 
 	@Test(expected = DuplicateKeyException.class)
@@ -45,14 +46,22 @@ public class AttributeServiceTest extends AbstractTest {
 	@Test
 	public void getNamesTest() {
 
+		Attribute attribute = createAttribute();
+		attributeService.add(attribute);
 		List<String> names = attributeService.getNames();
 		Assert.notNull(names);
 		Assert.noNullElements(names.toArray());
+		Assert.notEmpty(names);
 	}
 
 	@Test
 	public void getValuesByNameTest() {
-		// TODO
+		Attribute attribute = createAttribute();
+		attributeService.add(attribute);
+		List<String> values = attributeService.getValuesByName(attribute.getName());
+		Assert.notNull(values);
+		Assert.noNullElements(values.toArray());
+		Assert.notEmpty(values);
 	}
 
 	@Test
@@ -63,7 +72,6 @@ public class AttributeServiceTest extends AbstractTest {
 		attributeService.add(attribute);
 		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
 		Assert.notNull(id, "The id must not be null");
-
 	}
 
 	/*-------------------------------------------------------------------------------------------*/

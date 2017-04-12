@@ -15,7 +15,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.IProductDao;
+import com.chuyeu.training.myapp.dao.api.IProductDao;
+import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 
 @Repository
@@ -24,19 +25,25 @@ public class ProductDaoImpl implements IProductDao{
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 	
+	
 	@Override
 	public Product get(Integer id) {
-		return jdbcTemplate.queryForObject("select * from product where id = ? ", new Object []{ id }, new BeanPropertyRowMapper<Product>(Product.class));		
+		return jdbcTemplate.queryForObject("select * from product where id = ?", new Object []{ id }, new BeanPropertyRowMapper<Product>(Product.class));		
 	}
 	
 	@Override
-	public List<Product> getAll() {
-		return jdbcTemplate.query("select * from product", new BeanPropertyRowMapper<Product>(Product.class));
+	public List<Product> getAll(ProductFilter filter) {
+		String sql = createSql(filter);
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
 	}
 
+	@Override
+	public Integer getProductQuantity() {
+		return jdbcTemplate.queryForObject("select count (*) from product", Integer.class);
+	}
 
 	@Override
-	public Product insert(Product product) {
+	public Integer add(Product product) {
 		
 		final String INSERT_SQL = "insert into product (name, description, starting_price, active) values(?, ?, ?, ?)";
 		
@@ -54,24 +61,45 @@ public class ProductDaoImpl implements IProductDao{
             }
         }, keyHolder);
 
-        product.setId(keyHolder.getKey().intValue());
+        
 
-        return product;
+        return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public Product update(Product product) {
+	public void update(Product product) {
 		jdbcTemplate.update("update product set name = ?, description = ?, starting_price = ?, active = ?"
 				+ " where id = ?" , product.getName(), product.getDescription(), product.getStartingPrice(), product.getActive() ,product.getId());
-		return get(product.getId());
 	}
 
 	@Override
 	public void delete(Integer id) throws EmptyResultDataAccessException{
 		jdbcTemplate.update("delete from product where id=" + id);		
 	}
-
-
-
 	
+
+	public String createSql(ProductFilter filter){
+		
+		//"select * from product limit "+filter.getLimit()+" offset "+ offset
+		
+		Integer offset = filter.getLimit()*(filter.getPageNumber() - 1);
+		
+		StringBuilder stringBuilder = new StringBuilder("select * from product ");
+		
+		if (filter.getSort().getColumn() != null){
+			stringBuilder.append("order by ").append(filter.getSort().getColumn());
+			
+			if ("desc".equals(filter.getSort().getDirection())){
+				stringBuilder.append(" desc");
+			}
+		}
+		
+		stringBuilder.append(" limit ");
+		stringBuilder.append(filter.getLimit());
+		stringBuilder.append(" offset ");
+		stringBuilder.append(offset);
+		System.out.println(stringBuilder.toString());
+		return stringBuilder.toString();
+	}
+
 }

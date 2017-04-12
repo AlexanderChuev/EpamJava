@@ -5,7 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
-import com.chuyeu.training.myapp.dao.IProductDao;
+
+import com.chuyeu.training.myapp.dao.api.IProductDao;
+import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
 
@@ -16,8 +18,8 @@ public class ProductServiceImpl implements IProductService {
 	private IProductDao productDao;
 
 	@Override
-	public List<Product> getAll() {
-		return productDao.getAll();
+	public List<Product> getAll(ProductFilter filter) {
+		return productDao.getAll(filter);
 	}
 
 	@Override
@@ -31,12 +33,18 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Product saveOrUpdate(Product product) {
-		if (product.getId() == null) {
-			return productDao.insert(product);
-		} else {
-			return productDao.update(product);
-		}
+	public Integer add(Product product) {
+		return productDao.add(product);
+	}
+
+	@Override
+	public void update(Product product) {
+		productDao.update(product);
+	}
+
+	@Override
+	public Integer getProductQuantity() {
+		return productDao.getProductQuantity();
 	}
 
 }

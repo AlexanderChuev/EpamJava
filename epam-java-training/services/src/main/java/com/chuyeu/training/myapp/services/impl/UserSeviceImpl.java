@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import com.chuyeu.training.myapp.dao.IUserCredentialsDao;
-import com.chuyeu.training.myapp.dao.IUserProfileDao;
+import com.chuyeu.training.myapp.dao.api.IUserCredentialsDao;
+import com.chuyeu.training.myapp.dao.api.IUserProfileDao;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.services.IUserService;

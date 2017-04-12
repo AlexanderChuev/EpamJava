@@ -4,16 +4,22 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 
 public interface IProductService {
 
-	List<Product> getAll();
+	List<Product> getAll(ProductFilter filter);
 	
 	Product get(Integer id);
 	
+	Integer getProductQuantity();
+	
 	@Transactional
-	Product saveOrUpdate(Product product);
+	Integer add(Product product);
+	
+	@Transactional
+	void update(Product product);
 	
 	@Transactional
 	void delete (Integer id);

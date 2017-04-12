@@ -6,11 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.chuyeu.training.myapp.dao.IAttributeDao;
+import com.chuyeu.training.myapp.dao.api.IAttributeDao;
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IVariantsService;
-import com.chuyeu.training.myapp.services.util.Converter;
 
 @Service
 public class AttributeServiceImpl implements IAttributeService {
@@ -32,6 +31,18 @@ public class AttributeServiceImpl implements IAttributeService {
 		attributeDao.add(name);
 	}
 	
+	@Override
+	public void deleteAttributeValue(Integer id) {
+		variantsService.delete(id);
+		attributeDao.deleteAttributeValue(id);
+	}
+
+	@Override
+	public void delete(String name) {
+		variantsService.delete(attributeDao.listIdByName(name));
+		attributeDao.delete(name);
+	}
+	
 	
 	@Override
 	public List<String> getNames() {
@@ -46,21 +57,6 @@ public class AttributeServiceImpl implements IAttributeService {
 	@Override
 	public Integer getIdByNameAndValue(String name, String value) {
 		return attributeDao.getIdByNameAndValue(name, value);
-	}
-
-
-	@Override
-	public void deleteAttributeValue(Integer id) {
-		variantsService.delete(id);
-		attributeDao.deleteAttributeValue(id);
-	}
-
-	@Override
-	public void delete(String name) {
-		Converter converter = new Converter();
-		String stringIds = converter.listIdToString(attributeDao.listIdByName(name));
-		variantsService.delete(stringIds);
-		attributeDao.delete(name);
 	}
 
 

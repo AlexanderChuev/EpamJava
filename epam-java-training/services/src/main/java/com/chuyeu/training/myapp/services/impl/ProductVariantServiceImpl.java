@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.chuyeu.training.myapp.dao.IAttributeDao;
-import com.chuyeu.training.myapp.dao.IProductDao;
-import com.chuyeu.training.myapp.dao.IProductVariantDao;
+import com.chuyeu.training.myapp.dao.api.IAttributeDao;
+import com.chuyeu.training.myapp.dao.api.IProductDao;
+import com.chuyeu.training.myapp.dao.api.IProductVariantDao;
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;

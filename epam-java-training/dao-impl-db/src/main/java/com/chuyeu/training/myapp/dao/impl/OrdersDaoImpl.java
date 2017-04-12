@@ -16,7 +16,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.IOrdersDao;
+import com.chuyeu.training.myapp.dao.api.IOrdersDao;
 import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 

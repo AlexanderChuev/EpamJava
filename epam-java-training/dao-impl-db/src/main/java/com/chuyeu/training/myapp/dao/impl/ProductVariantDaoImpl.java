@@ -14,7 +14,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.IProductVariantDao;
+import com.chuyeu.training.myapp.dao.api.IProductVariantDao;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 
 @Repository

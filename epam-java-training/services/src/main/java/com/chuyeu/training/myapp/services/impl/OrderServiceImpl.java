@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.chuyeu.training.myapp.dao.IOrdersDao;
+import com.chuyeu.training.myapp.dao.api.IOrdersDao;
 import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.services.IOrderService;

@@ -15,7 +15,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.IUserCredentialsDao;
+import com.chuyeu.training.myapp.dao.api.IUserCredentialsDao;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 
 @Repository

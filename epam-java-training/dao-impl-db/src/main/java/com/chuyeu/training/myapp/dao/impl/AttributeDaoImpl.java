@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.IAttributeDao;
+import com.chuyeu.training.myapp.dao.api.IAttributeDao;
 import com.chuyeu.training.myapp.datamodel.Attribute;
 
 @Repository
@@ -17,8 +17,6 @@ public class AttributeDaoImpl implements IAttributeDao {
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
-	
-	// методу пофиг на null, поэтому пишу string "null"
 	@Override
 	public void add(String name) /*throws DuplicateKeyException*/ {
 		jdbcTemplate.update("insert into attribute (name, value) values (?,?)", name, "no value");
@@ -39,6 +37,27 @@ public class AttributeDaoImpl implements IAttributeDao {
 		jdbcTemplate.update("delete from attribute where name = '" + name + "'");
 	}
 
+	
+	@Override
+	public List<String> getNames() {
+		return jdbcTemplate.queryForList("select distinct name from attribute", String.class);
+	}
+	
+	
+	@Override
+	public List<String> getValuesByName(String name) {
+		return jdbcTemplate.queryForList("select value from attribute where name = ?", new Object[] { name },
+				String.class);
+	}
+	
+	
+	@Override
+	public Integer getIdByNameAndValue(String name, String value) {
+		return jdbcTemplate.queryForObject("select id from attribute where name = ? and value = ?",
+				new Object[] { name, value }, Integer.class);
+	}
+	
+	
 	@Override
 	public List<Integer> listIdByName(String name) {
 		return jdbcTemplate.queryForList("select id from attribute where name = ?", new Object[] { name },
@@ -52,21 +71,5 @@ public class AttributeDaoImpl implements IAttributeDao {
 				new Object[] { productVariantId }, new BeanPropertyRowMapper<Attribute>(Attribute.class));
 	}
 
-	@Override
-	public List<String> getNames() {
-		return jdbcTemplate.queryForList("select distinct name from attribute", String.class);
-	}
-
-	@Override
-	public List<String> getValuesByName(String name) {
-		return jdbcTemplate.queryForList("select value from attribute where name = ?", new Object[] { name },
-				String.class);
-	}
-
-	@Override
-	public Integer getIdByNameAndValue(String name, String value) {
-		return jdbcTemplate.queryForObject("select id from attribute where name = ? and value = ?",
-				new Object[] { name, value }, Integer.class);
-	}
 
 }
