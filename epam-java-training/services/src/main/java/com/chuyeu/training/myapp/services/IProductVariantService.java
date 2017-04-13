@@ -14,7 +14,7 @@ public interface IProductVariantService {
 	ProductVariantEntity getProductVariant(Integer id);
 	
 	@Transactional
-	ProductVariant saveOrUpdate(ProductVariant productVariant);
+	void saveOrUpdate(ProductVariant productVariant);
 	
 	@Transactional
 	void delete (Integer id);

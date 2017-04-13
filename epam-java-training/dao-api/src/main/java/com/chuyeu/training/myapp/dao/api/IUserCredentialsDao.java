@@ -10,9 +10,8 @@ public interface IUserCredentialsDao {
 
 	UserCredentials get(Integer id);
 
-	UserCredentials insert(UserCredentials userCredentials);
+	UserCredentials add(UserCredentials userCredentials);
 
 	UserCredentials update(UserCredentials userCredentials);
 
-	void delete(Integer id);
 }

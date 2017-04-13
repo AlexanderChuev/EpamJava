@@ -12,7 +12,7 @@ public interface IProductVariantDao {
 
 	ProductVariant get(Integer id);
 
-	ProductVariant insert(ProductVariant productVariant);
+	void add(ProductVariant productVariant);
 
 	ProductVariant update (ProductVariant productVariant);
 

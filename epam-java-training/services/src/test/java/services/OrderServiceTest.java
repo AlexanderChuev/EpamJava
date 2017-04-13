@@ -16,5 +16,6 @@ public class OrderServiceTest extends AbstractTest {
 	public void getOrderByStatusTest() {
 
 		System.out.println(orderService.getOrderByStatus(1, OrderStatus.BASKET));
+		
 	}
 }

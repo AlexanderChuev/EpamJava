@@ -80,8 +80,6 @@ public class ProductDaoImpl implements IProductDao{
 
 	public String createSql(ProductFilter filter){
 		
-		//"select * from product limit "+filter.getLimit()+" offset "+ offset
-		
 		Integer offset = filter.getLimit()*(filter.getPageNumber() - 1);
 		
 		StringBuilder stringBuilder = new StringBuilder("select * from product ");

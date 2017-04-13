@@ -102,19 +102,5 @@ public class AttributeServiceTest extends AbstractTest {
 
 	}
 
-	/*-------------------------------------------------------------------------------------------*/
-
-	private Attribute createAttribute() {
-
-		Attribute attribute = new Attribute();
-
-		String name = "Name" + new Date().getTime();
-		String value = "Value" + new Date().getTime();
-
-		attribute.setName(name);
-		attribute.setValue(value);
-
-		return attribute;
-	}
 
 }

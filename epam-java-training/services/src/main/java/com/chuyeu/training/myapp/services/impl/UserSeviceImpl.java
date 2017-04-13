@@ -23,11 +23,10 @@ public class UserSeviceImpl implements IUserService {
 	private IUserCredentialsDao userCredentialsDao;
 	
 
-
 	@Override
-	public void register(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException{
+	public void add(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException{
 		
-		UserCredentials userCredentialsFromDB = userCredentialsDao.insert(userCredentials);
+		UserCredentials userCredentialsFromDB = userCredentialsDao.add(userCredentials);
 		Integer userCredentialsId = userCredentialsFromDB.getId();
 		userProfile.setUserCredentialsId(userCredentialsId);
 		userProfileDao.insert(userProfile);
@@ -47,11 +46,6 @@ public class UserSeviceImpl implements IUserService {
 	public void update(UserProfile profile) {
 		userProfileDao.update(profile);
 
-	}
-
-	@Override
-	public void delete(Integer id) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

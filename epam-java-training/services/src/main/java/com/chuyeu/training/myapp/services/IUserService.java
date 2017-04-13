@@ -10,7 +10,7 @@ import com.chuyeu.training.myapp.datamodel.UserProfile;
 public interface IUserService {
 	
 	@Transactional
-    void register(UserProfile userProfile, UserCredentials userCredentials);
+    void add(UserProfile userProfile, UserCredentials userCredentials);
 
     UserProfile getProfile(Integer id);
 
@@ -18,9 +18,6 @@ public interface IUserService {
 
     @Transactional
     void update(UserProfile profile);
-
-    @Transactional
-    void delete(Integer id);
 
     List<UserProfile> getAll();
 

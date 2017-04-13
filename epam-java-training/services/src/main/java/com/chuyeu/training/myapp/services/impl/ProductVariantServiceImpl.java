@@ -34,11 +34,11 @@ public class ProductVariantServiceImpl implements IProductVariantService {
 		List<ProductVariant> allByProduct = productVariantDao.getAllByProduct(productId);
 		List<ProductVariantEntity> productVariantEntities = new ArrayList<>();
 
-		Product commonProduct = productDao.get(allByProduct.get(0).getProductId());
+		Product currentProduct = productDao.get(allByProduct.get(0).getProductId());
 
 		for (ProductVariant productVariant : allByProduct) {
 			List<Attribute> attributes = attributeDao.getProductVariantAttributes(productVariant.getId());
-			productVariantEntities.add(new ProductVariantEntity(productVariant, commonProduct, attributes));
+			productVariantEntities.add(new ProductVariantEntity(productVariant, currentProduct, attributes));
 		}
 
 		return productVariantEntities;
@@ -47,19 +47,19 @@ public class ProductVariantServiceImpl implements IProductVariantService {
 	@Override
 	public ProductVariantEntity getProductVariant(Integer id) {
 
-		ProductVariant pv = productVariantDao.get(id);
-		Product product = productDao.get(pv.getProductId());
+		ProductVariant productVariant = productVariantDao.get(id);
+		Product product = productDao.get(productVariant.getProductId());
 		List<Attribute> attributes = attributeDao.getProductVariantAttributes(id);
 
-		return new ProductVariantEntity(pv, product, attributes);
+		return new ProductVariantEntity(productVariant, product, attributes);
 	}
 
 	@Override
-	public ProductVariant saveOrUpdate(ProductVariant productVariant) {
+	public void saveOrUpdate(ProductVariant productVariant) {
 		if (productVariant.getId() == null) {
-			return productVariantDao.insert(productVariant);
+			productVariantDao.add(productVariant);
 		} else {
-			return productVariantDao.update(productVariant);
+			productVariantDao.update(productVariant);
 		}
 	}
 	

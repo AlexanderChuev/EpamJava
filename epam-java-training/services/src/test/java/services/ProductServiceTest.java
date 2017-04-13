@@ -68,7 +68,8 @@ public class ProductServiceTest extends AbstractTest {
 
 		productService.add(createProduct());
 		Integer productQuantity = productService.getProductQuantity();
-
+		Assert.notNull(productQuantity);
+		
 		ProductFilter filter = new ProductFilter();
 
 		Integer limit = 5;
@@ -92,20 +93,11 @@ public class ProductServiceTest extends AbstractTest {
 
 			for (Product product : products) {
 				checkProductFromDb(product);
-				System.out.println(product);
 			}
 		}
 	}
 
-	private Product createProduct() {
-
-		Product product = new Product();
-		product.setName("Saucony" + new Date().getTime());
-		product.setDescription("China shoes");
-		product.setStartingPrice((double) 50);
-		product.setActive(true);
-		return product;
-	}
+	
 
 	private Product changeProduct(Product product) {
 		product.setName("Adidas" + new Date().getTime());
