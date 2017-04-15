@@ -16,7 +16,7 @@ import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
 import com.chuyeu.training.myapp.services.IVariantsService;
 
-public class VariantsServiceTest extends AbstractTest{
+public class VariantsServiceTest extends AbstractTesst{
 
 	@Inject
 	private IVariantsService variantsService;
@@ -40,7 +40,7 @@ public class VariantsServiceTest extends AbstractTest{
 	
 	@Test
 	//@Rollback(false)
-	public void add(){
+	public void addTest(){
 	
 		Integer productId = productService.add(createProduct());
 		
@@ -58,7 +58,7 @@ public class VariantsServiceTest extends AbstractTest{
 	
 	@Test
 	@Rollback(false)
-	public void delete(){
+	public void deleteTest(){
 		
 		Integer productId = productService.add(createProduct());
 		

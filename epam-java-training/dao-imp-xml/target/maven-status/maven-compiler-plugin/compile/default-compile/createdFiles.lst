@@ -1,0 +1,4 @@
+com\chuyeu\training\myapp\dao\xml\impl\ProductDaoXmlImpl.class
+com\chuyeu\training\myapp\dao\xml\impl\VariantsDaoXmlImpl.class
+com\chuyeu\training\myapp\dao\xml\impl\wrapper\XmlModelWrapper.class
+com\chuyeu\training\myapp\dao\xml\impl\UserProfileDaoXmlImpl.class

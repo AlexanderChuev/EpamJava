@@ -14,7 +14,7 @@ import com.chuyeu.training.myapp.dao.api.filters.SortData;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
 
-public class ProductServiceTest extends AbstractTest {
+public class ProductServiceTest extends AbstractTesst {
 
 	@Inject
 	private IProductService productService;

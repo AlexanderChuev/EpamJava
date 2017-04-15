@@ -14,7 +14,7 @@ import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
 import com.chuyeu.training.myapp.services.entity.ProductVariantEntity;
 
-public class ProductVariantServiceTest extends AbstractTest {
+public class ProductVariantServiceTest extends AbstractTesst {
 
 	@Inject
 	private IProductVariantService productVariantService;

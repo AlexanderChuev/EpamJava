@@ -23,7 +23,7 @@ import com.chuyeu.training.myapp.services.IProductVariantService;
 import com.chuyeu.training.myapp.services.IUserService;
 import com.chuyeu.training.myapp.services.entity.ProductVariantEntity;
 
-public class OrderItemServiceTest extends AbstractTest{
+public class OrderItemServiceTest extends AbstractTesst{
 
 	@Inject
 	private IOrderItemService orderItemService;

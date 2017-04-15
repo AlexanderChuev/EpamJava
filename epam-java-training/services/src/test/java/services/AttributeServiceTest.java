@@ -13,7 +13,7 @@ import org.springframework.util.Assert;
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
 
-public class AttributeServiceTest extends AbstractTest {
+public class AttributeServiceTest extends AbstractTesst {
 
 	@Inject
 	private IAttributeService attributeService;
@@ -77,7 +77,7 @@ public class AttributeServiceTest extends AbstractTest {
 	/*-------------------------------------------------------------------------------------------*/
 
 	@Test(expected = EmptyResultDataAccessException.class)
-	public void deleteAttributeValue() {
+	public void deleteAttributeValueTest() {
 
 		Attribute attribute = createAttribute();
 
@@ -91,7 +91,7 @@ public class AttributeServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void delete() {
+	public void deleteTest() {
 
 		Attribute attribute = createAttribute();
 

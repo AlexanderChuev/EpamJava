@@ -15,7 +15,7 @@ import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
 
-public class UserServiceTest extends AbstractTest {
+public class UserServiceTest extends AbstractTesst {
 
 	@Inject
 	private IUserService userService;
@@ -183,7 +183,7 @@ public class UserServiceTest extends AbstractTest {
 	}
 
 	@Test(expected = EmptyResultDataAccessException.class)
-	public void delete() { 
+	public void deleteTest() { 
 		
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();

@@ -14,7 +14,6 @@
 
 	<dependencies>
 
-
 		<dependency>
 			<groupId>com.chuyeu.training.myapp</groupId>
 			<artifactId>dao-impl-db</artifactId>
@@ -28,6 +27,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
 		</dependency>
 
 	</dependencies>

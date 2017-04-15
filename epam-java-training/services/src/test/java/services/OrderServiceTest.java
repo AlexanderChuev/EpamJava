@@ -18,7 +18,7 @@ import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.services.IOrderService;
 import com.chuyeu.training.myapp.services.IUserService;
 
-public class OrderServiceTest extends AbstractTest {
+public class OrderServiceTest extends AbstractTesst {
 
 	@Inject
 	private IOrderService orderService;
