@@ -18,8 +18,8 @@ public class ProductServiceImpl implements IProductService {
 	private IProductDao productDao;
 
 	@Override
-	public List<Product> getAll(ProductFilter filter) {
-		return productDao.getAll(filter);
+	public List<Product> getAll(ProductFilter productFilter) {
+		return productDao.getAll(productFilter);
 	}
 
 	@Override

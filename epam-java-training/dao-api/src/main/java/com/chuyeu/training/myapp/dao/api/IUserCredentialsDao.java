@@ -10,8 +10,12 @@ public interface IUserCredentialsDao {
 
 	UserCredentials get(Integer id);
 
-	UserCredentials add(UserCredentials userCredentials);
+	Integer add(UserCredentials userCredentials);
 
 	UserCredentials update(UserCredentials userCredentials);
+
+	UserCredentials find(String email, String password);
+	
+	void delete(Integer id);
 
 }

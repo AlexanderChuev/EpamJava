@@ -36,7 +36,7 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 	}
 
 	@Override
-	public UserCredentials add(UserCredentials userCredentials) throws DuplicateKeyException{
+	public Integer add(UserCredentials userCredentials) throws DuplicateKeyException{
 		final String INSERT_SQL = "insert into user_credentials (email, password, user_role) values(?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -52,9 +52,7 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 			}
 		}, keyHolder);
 
-		userCredentials.setId(keyHolder.getKey().intValue());
-
-		return userCredentials;
+		return keyHolder.getKey().intValue();
 	}
 
 	@Override
@@ -62,6 +60,17 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 		jdbcTemplate.update("update user_credentials set email = ?, password = ?, user_role = ? "
 				+ "where id = ?" , userCredentials.getEmail(), userCredentials.getPassword(), userCredentials.getUserRole().toString(), userCredentials.getId());
 		return get(userCredentials.getId());
+	}
+
+	@Override
+	public UserCredentials find(String email, String password) {
+		return jdbcTemplate.queryForObject("select * from user_credentials where email = ? and password = ?", new Object []{email, password}, new BeanPropertyRowMapper<UserCredentials>(UserCredentials.class));
+	}
+
+	@Override
+	public void delete(Integer id) {
+		jdbcTemplate.update("delete from user_credentials where id = " + id);
+		
 	}
 
 }

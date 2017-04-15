@@ -9,7 +9,7 @@ import com.chuyeu.training.myapp.datamodel.Product;
 
 public interface IProductService {
 
-	List<Product> getAll(ProductFilter filter);
+	List<Product> getAll(ProductFilter productFilter);
 	
 	Product get(Integer id);
 	

@@ -21,8 +21,8 @@ public class VariantsServiceImpl implements IVariantsService{
 	}
 
 	@Override
-	public void delete(Integer id) {
-		variantsDao.delete(id);
+	public void delete(Integer attributeId) {
+		variantsDao.delete(attributeId);
 	}
 	
 	

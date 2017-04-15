@@ -25,6 +25,8 @@ public class ProductVariantServiceTest extends AbstractTest {
 	@Test
 	public void test() {
 		Assert.notNull(productVariantService);
+		Assert.notNull(productService);
+		
 	}
 
 	@Test

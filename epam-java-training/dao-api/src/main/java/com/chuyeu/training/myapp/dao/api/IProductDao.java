@@ -7,7 +7,7 @@ import com.chuyeu.training.myapp.datamodel.Product;
 
 public interface IProductDao {
 
-	List<Product> getAll(ProductFilter filter);
+	List<Product> getAll(ProductFilter productFilter);
 
 	Product get(Integer id);
 

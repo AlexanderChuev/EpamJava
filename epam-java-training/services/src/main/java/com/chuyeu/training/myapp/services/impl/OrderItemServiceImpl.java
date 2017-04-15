@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.chuyeu.training.myapp.dao.api.IOrderItemDao;
 import com.chuyeu.training.myapp.datamodel.OrderItem;
 import com.chuyeu.training.myapp.services.IOrderItemService;
-import com.chuyeu.training.myapp.services.IProductVariantService;
-import com.chuyeu.training.myapp.services.entity.ProductVariantEntity;
 
 @Service
 public class OrderItemServiceImpl implements IOrderItemService {
@@ -18,20 +16,14 @@ public class OrderItemServiceImpl implements IOrderItemService {
 	@Inject
 	private IOrderItemDao orderItemDao;
 	
-	@Inject
-	private IProductVariantService productVariantService;
-
 	@Override
-	public List<OrderItem> getAll() {
+	public List<OrderItem> getAllByOrderId(Integer orderId) {
 		return orderItemDao.getAll();
 	}
 
 	@Override
 	public OrderItem get(Integer id) {
-		OrderItem orderItem = orderItemDao.get(id);
-		ProductVariantEntity productVariant = productVariantService.getProductVariant(orderItem.getProductVariantId());
-		// TODO get Orders
-		return orderItem;
+		return orderItemDao.get(id);
 	}
 
 	@Override

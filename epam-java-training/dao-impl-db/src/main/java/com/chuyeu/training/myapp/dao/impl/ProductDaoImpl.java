@@ -32,8 +32,8 @@ public class ProductDaoImpl implements IProductDao{
 	}
 	
 	@Override
-	public List<Product> getAll(ProductFilter filter) {
-		String sql = createSql(filter);
+	public List<Product> getAll(ProductFilter productFilter) {
+		String sql = createSql(productFilter);
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
 	}
 
@@ -78,22 +78,22 @@ public class ProductDaoImpl implements IProductDao{
 	}
 	
 
-	public String createSql(ProductFilter filter){
+	public String createSql(ProductFilter productFilter){
 		
-		Integer offset = filter.getLimit()*(filter.getPageNumber() - 1);
+		Integer offset = productFilter.getLimit()*(productFilter.getPageNumber() - 1);
 		
 		StringBuilder stringBuilder = new StringBuilder("select * from product ");
 		
-		if (filter.getSort().getColumn() != null){
-			stringBuilder.append("order by ").append(filter.getSort().getColumn());
+		if (productFilter.getSort().getColumn() != null){
+			stringBuilder.append("order by ").append(productFilter.getSort().getColumn());
 			
-			if ("desc".equals(filter.getSort().getDirection())){
+			if ("desc".equals(productFilter.getSort().getDirection())){
 				stringBuilder.append(" desc");
 			}
 		}
 		
 		stringBuilder.append(" limit ");
-		stringBuilder.append(filter.getLimit());
+		stringBuilder.append(productFilter.getLimit());
 		stringBuilder.append(" offset ");
 		stringBuilder.append(offset);
 		System.out.println(stringBuilder.toString());

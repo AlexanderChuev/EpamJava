@@ -8,7 +8,7 @@ import com.chuyeu.training.myapp.datamodel.OrderItem;
 
 public interface IOrderItemService{
 
-	List<OrderItem> getAll();
+	List<OrderItem> getAllByOrderId(Integer orderId);
 	
 	OrderItem get(Integer id);
 	

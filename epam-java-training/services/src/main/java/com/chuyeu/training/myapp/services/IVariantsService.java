@@ -10,7 +10,7 @@ public interface IVariantsService {
 	void delete(List<Integer> listId);
 
 	@Transactional
-	void delete(Integer id);
+	void delete(Integer attributeId);
 	
 	@Transactional
 	void add(Integer productVariantId, List<Integer> listAttributeId);

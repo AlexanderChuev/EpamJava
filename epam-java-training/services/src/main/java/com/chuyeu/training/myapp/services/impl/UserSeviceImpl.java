@@ -21,25 +21,35 @@ public class UserSeviceImpl implements IUserService {
 
 	@Inject
 	private IUserCredentialsDao userCredentialsDao;
-	
 
 	@Override
-	public void add(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException{
-		
-		UserCredentials userCredentialsFromDB = userCredentialsDao.add(userCredentials);
-		Integer userCredentialsId = userCredentialsFromDB.getId();
-		userProfile.setUserCredentialsId(userCredentialsId);
-		userProfileDao.insert(userProfile);
-	}
-
-	@Override
-	public UserProfile getProfile(Integer id) {
-		return userProfileDao.get(id);
+	public UserCredentials findUserCredentials(String email, String password) {
+		return userCredentialsDao.find(email, password);
 	}
 
 	@Override
 	public UserCredentials getCredentials(Integer id) {
 		return userCredentialsDao.get(id);
+	}
+
+	@Override
+	public void update(UserCredentials credentials) {
+		userCredentialsDao.update(credentials);
+
+	}
+
+	@Override
+	public UserProfile saveUser(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException {
+
+		Integer userCredentialsId = userCredentialsDao.add(userCredentials);
+		userProfile.setUserCredentialsId(userCredentialsId);
+		return userProfileDao.insert(userProfile);
+	}
+	
+
+	@Override
+	public UserProfile getUserProfile(Integer id) {
+		return userProfileDao.get(id);
 	}
 
 	@Override
@@ -52,11 +62,11 @@ public class UserSeviceImpl implements IUserService {
 	public List<UserProfile> getAll() {
 		return userProfileDao.getAll();
 	}
-
+	
 	@Override
-	public void update(UserCredentials credentials) {
-		userCredentialsDao.update(credentials);
-
+	public void delete(Integer id) {
+		userProfileDao.delete(id);
+		userCredentialsDao.delete(id);
 	}
 
 }

@@ -70,23 +70,23 @@ public class ProductServiceTest extends AbstractTest {
 		Integer productQuantity = productService.getProductQuantity();
 		Assert.notNull(productQuantity);
 		
-		ProductFilter filter = new ProductFilter();
+		ProductFilter productFilter = new ProductFilter();
 
 		Integer limit = 5;
 
 		Integer pageNumber = (int) Math.ceil((double) productQuantity / limit);
 
-		filter.setLimit(limit);
+		productFilter.setLimit(limit);
 		
 		SortData sort = new SortData();
 		sort.setColumn("name");
-		filter.setSort(sort);
+		productFilter.setSort(sort);
 
 		for (int i = 1; i <= pageNumber; i++) {
 
-			filter.setPageNumber(i);
+			productFilter.setPageNumber(i);
 
-			List<Product> products = productService.getAll(filter);
+			List<Product> products = productService.getAll(productFilter);
 
 			Assert.notNull(products);
 			Assert.notEmpty(products);

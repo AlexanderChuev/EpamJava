@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,30 +15,34 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
+import com.chuyeu.training.myapp.dao.mapper.OrderMapper;
+import com.chuyeu.training.myapp.dao.util.Converter;
 import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
 @Repository
-public class OrdersDaoImpl implements IOrdersDao{
-	
+public class OrdersDaoImpl implements IOrdersDao {
+
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Order> getAll() {
-		return jdbcTemplate.query("select * from orders", new BeanPropertyRowMapper<Order>(Order.class));
+	public List<Order> getAll(OrderFilter orderFilter) {
+		Converter converter = new Converter();
+		String sql = converter.buildGetAllOrderSql(orderFilter);
+		return jdbcTemplate.query("select * from orders" + sql, new OrderMapper());
 	}
 
 	@Override
 	public Order get(Integer id) {
 		return jdbcTemplate.queryForObject("select * from orders where id = ? ", new Object[] { id },
-				new BeanPropertyRowMapper<Order>(Order.class));
+				new OrderMapper());
 	}
 
 	@Override
-	public Order insert(Order order) {
-		
-		final String INSERT_SQL = "insert into orders (created, user_profile_id, total_price) values(?, ?, ?)";
+	public Integer save(Order order) {
+
+		final String INSERT_SQL = "insert into orders (created, user_profile_id, total_price, order_status) values(?, ?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -51,33 +53,25 @@ public class OrdersDaoImpl implements IOrdersDao{
 				ps.setTimestamp(1, new Timestamp(order.getCreated().getTime()));
 				ps.setInt(2, order.getUserProfileId());
 				ps.setDouble(3, order.getTotalPrice());
+				ps.setString(4, order.getOrderStatus().toString());
 				return ps;
 			}
 		}, keyHolder);
 
-		order.setId(keyHolder.getKey().intValue());
+		return keyHolder.getKey().intValue();
 
-		return order;
-		
 	}
 
 	@Override
-	public Order update(Order order) {
-		jdbcTemplate.update("update orders set user_profile_id = ?, total_price = ? " + "where id = ?",
-				order.getUserProfileId(), order.getTotalPrice(), order.getId());
-		return get(order.getId()); 
+	public void update(Order order) {
+		jdbcTemplate.update("update orders set order_status = ? " + "where id = ?", order.getOrderStatus().toString(),
+				order.getId());
+
 	}
 
 	@Override
-	public void delete(Integer id) throws EmptyResultDataAccessException{
+	public void delete(Integer id){
 		jdbcTemplate.update("delete from orders where id=" + id);
 	}
-
-	@Override
-	public Order getOrderByStatus(Integer id, OrderStatus status) {
-		return jdbcTemplate.queryForObject("select * from orders where id = ? and order_status = ?", new Object[] { id, status.toString() },
-				new BeanPropertyRowMapper<Order>(Order.class));
-	}
-
 
 }

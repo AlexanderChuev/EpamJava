@@ -2,11 +2,9 @@ package com.chuyeu.training.myapp.datamodel;
 
 public class OrderItem extends AbstractModel {
 
-	private static final long serialVersionUID = -6334637123535313625L;
-
 	private Integer productVariantId;
 	private Integer orderQuantity;
-	private Integer ordersId;
+	private Integer orderId;
 
 	public Integer getProductVariantId() {
 		return productVariantId;
@@ -24,18 +22,18 @@ public class OrderItem extends AbstractModel {
 		this.orderQuantity = orderQuantity;
 	}
 
-	public Integer getOrdersId() {
-		return ordersId;
+	public Integer getOrderId() {
+		return orderId;
 	}
 
-	public void setOrdersId(Integer ordersId) {
-		this.ordersId = ordersId;
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderItem [productVariantId=" + productVariantId + ", orderQuantity=" + orderQuantity + ", ordersId="
-				+ ordersId + "]";
+		return "OrderItem [productVariantId=" + productVariantId + ", orderQuantity=" + orderQuantity + ", orderId="
+				+ orderId + "]";
 	}
 
 }

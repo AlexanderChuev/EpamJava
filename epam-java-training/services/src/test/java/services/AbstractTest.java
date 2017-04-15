@@ -10,12 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
+import com.chuyeu.training.myapp.datamodel.UserCredentials;
+import com.chuyeu.training.myapp.datamodel.UserProfile;
+import com.chuyeu.training.myapp.datamodel.UserRole;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:services-context-test.xml")
 @Transactional
 public class AbstractTest {
-	
+
 	public Product createProduct() {
 
 		Product product = new Product();
@@ -25,7 +28,7 @@ public class AbstractTest {
 		product.setActive(true);
 		return product;
 	}
-	
+
 	public Attribute createAttribute() {
 
 		Attribute attribute = new Attribute();
@@ -38,14 +41,30 @@ public class AbstractTest {
 
 		return attribute;
 	}
-	
+
 	public ProductVariant createProductVariant(Integer productId) {
-		
+
 		ProductVariant productVariant = new ProductVariant();
 		productVariant.setProductId(productId);
 		productVariant.setAvailableQuantity(2);
 		productVariant.setPriceInfluence(30d);
 		return productVariant;
+	}
+
+	public UserCredentials createUserCredentials() {
+		UserCredentials userCredentials = new UserCredentials();
+		userCredentials.setEmail("emael" + new Date().getTime());
+		userCredentials.setPassword("password" + new Date().getTime());
+		userCredentials.setUserRole(UserRole.CLIENT);
+		return userCredentials;
+	}
+
+	public UserProfile createUserProfile() {
+
+		UserProfile userProfile = new UserProfile();
+		userProfile.setFirstName("FirstName" + new Date().getTime());
+		userProfile.setLastName("LastName" + new Date().getTime());
+		return userProfile;
 	}
 
 }

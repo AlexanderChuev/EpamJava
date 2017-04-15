@@ -4,20 +4,22 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
 public interface IOrderService {
 
-	List<Order> getAll();
+	List<Order> getAll(OrderFilter orderFilter);
 	
-	Order getOrderByStatus(Integer id, OrderStatus orderStatus);
-	
+	Order get(Integer id);
+
 	@Transactional
-	Order saveOrUpdate(Order order);
-	
+	Integer save(Order order);
+
 	@Transactional
-	void delete (Integer id);
-	
-	
+	void update(Order order);
+
+	@Transactional
+	void delete(Integer id);
+
 }

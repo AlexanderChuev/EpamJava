@@ -9,10 +9,12 @@ import com.chuyeu.training.myapp.datamodel.UserProfile;
 
 public interface IUserService {
 	
+	UserCredentials findUserCredentials(String email, String password);
+	
 	@Transactional
-    void add(UserProfile userProfile, UserCredentials userCredentials);
+	UserProfile saveUser(UserProfile userProfile, UserCredentials userCredentials);
 
-    UserProfile getProfile(Integer id);
+    UserProfile getUserProfile(Integer id);
 
     UserCredentials getCredentials(Integer id);
 
@@ -23,5 +25,8 @@ public interface IUserService {
 
     @Transactional
     void update(UserCredentials credentials);
+    
+    @Transactional
+	void delete(Integer id);
 
 }

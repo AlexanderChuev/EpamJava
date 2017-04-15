@@ -2,21 +2,19 @@ package com.chuyeu.training.myapp.dao.api;
 
 import java.util.List;
 
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
 public interface IOrdersDao {
 
-	List<Order> getAll();
+	List<Order> getAll(OrderFilter orderFilter);
 
-	Order get(Integer id);
+	Integer save(Order order);
 
-	Order insert(Order order);
-
-	Order update(Order order);
+	void update(Order order);
 
 	void delete(Integer id);
-
-	Order getOrderByStatus(Integer id, OrderStatus orderStatus);
+	
+	Order get(Integer id);
 
 }

@@ -40,7 +40,7 @@ public class OrderItemDaoImpl implements IOrderItemDao {
 	@Override
 	public OrderItem insert(OrderItem orderItem) {
 		
-		final String INSERT_SQL = "insert into order_item (product_variant_id, order_quantity, orders_id) values(?, ?, ?)";
+		final String INSERT_SQL = "insert into order_item (product_variant_id, order_quantity, order_id) values(?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -50,7 +50,7 @@ public class OrderItemDaoImpl implements IOrderItemDao {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 				ps.setInt(1, orderItem.getProductVariantId());
 				ps.setInt(2, orderItem.getOrderQuantity());
-				ps.setInt(3, orderItem.getOrdersId());
+				ps.setInt(3, orderItem.getOrderId());
 				return ps;
 			}
 		}, keyHolder);
@@ -62,14 +62,14 @@ public class OrderItemDaoImpl implements IOrderItemDao {
 
 	@Override
 	public OrderItem update(OrderItem orderItem) {
-		jdbcTemplate.update("update order_item set product_variant_id = ?, order_quantity = ?, orders_id = ? "
-				+ "where id = ?" , orderItem.getProductVariantId(), orderItem.getOrderQuantity(), orderItem.getOrdersId(), orderItem.getId());
+		jdbcTemplate.update("update order_item set product_variant_id = ?, order_quantity = ?, order_id = ? "
+				+ "where id = ?" , orderItem.getProductVariantId(), orderItem.getOrderQuantity(), orderItem.getOrderId(), orderItem.getId());
 		return get(orderItem.getId());
 	}
 
 	@Override
-	public void delete(Integer id) throws EmptyResultDataAccessException{
-		jdbcTemplate.update("delete from product where id=" + id);		
+	public void delete(Integer id) {
+		jdbcTemplate.update("delete from order_item where id=" + id);		
 		
 	}
 

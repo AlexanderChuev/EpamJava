@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.services.IOrderService;
 
 @Service
@@ -17,13 +17,9 @@ public class OrderServiceImpl implements IOrderService {
 	@Inject
 	private IOrdersDao ordersDao;
 
-	// скорее всего не нужен
 	@Override
-	public List<Order> getAll() {
-
-		List<Order> all = ordersDao.getAll();
-
-		return all;
+	public List<Order> getAll(OrderFilter orderFilter) {
+		return ordersDao.getAll(orderFilter);
 	}
 
 	@Override
@@ -32,17 +28,18 @@ public class OrderServiceImpl implements IOrderService {
 	}
 
 	@Override
-	public Order saveOrUpdate(Order order) {
-		if (order.getId() == null) {
-			return ordersDao.insert(order);
-		} else {
-			return ordersDao.update(order);
-		}
+	public Integer save(Order order) {
+		return ordersDao.save(order);
 	}
 
 	@Override
-	public Order getOrderByStatus(Integer id, OrderStatus orderStatus) {
-		return ordersDao.getOrderByStatus(id, orderStatus);
+	public void update(Order order) {
+		ordersDao.update(order);
+	}
+
+	@Override
+	public Order get(Integer id) {
+		return ordersDao.get(id);
 	}
 
 }
