@@ -1,6 +1,8 @@
-package com.chuyeu.training.myapp.datamodel;
+package com.chuyeu.training.myapp.webapp.models;
 
-public class UserCredentials extends AbstractModel {
+import com.chuyeu.training.myapp.datamodel.UserRole;
+
+public class UserCredentialsModel {
 
 	private String email;
 	private String password;
@@ -29,11 +31,4 @@ public class UserCredentials extends AbstractModel {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
-
-	@Override
-	public String toString() {
-		return "UserCredentials [email=" + email + ", password=" + password + ", userRole=" + userRole + ", getId()="
-				+ getId() + "]";
-	}
-
 }

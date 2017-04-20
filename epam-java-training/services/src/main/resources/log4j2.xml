@@ -19,14 +19,18 @@
 	</Appenders>
 
 	<Loggers>
-	
+
 		<Root level="info">
-			<AppenderRef ref="Console" />
+			<!-- <AppenderRef ref="Console" /> -->
 		</Root>
 
-		<Logger level="info" name="com.chuyeu.training.myapp"
-			additivity="false">
-			<AppenderRef ref="Console" />
+		<Logger level="info" name="com.chuyeu.training.myapp.services.impl"
+			additivity="true">
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+
+		<Logger level="debug" name="com.chuyeu.training.myapp.dao.impl"
+			additivity="true">
 			<AppenderRef ref="RollingFile" />
 		</Logger>
 

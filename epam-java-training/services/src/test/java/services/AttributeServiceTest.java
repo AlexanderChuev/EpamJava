@@ -1,6 +1,5 @@
 package services;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +21,7 @@ public class AttributeServiceTest extends AbstractTesst {
 
 	@Test
 	public void test() {
-		Assert.notNull(attributeService);
+		Assert.notNull(attributeService,"The attributeService must not be null");
 	}
 
 	@Test(expected = DuplicateKeyException.class)
@@ -34,13 +33,6 @@ public class AttributeServiceTest extends AbstractTesst {
 		
 	}
 
-	@Test(expected = DuplicateKeyException.class)
-	public void addAttributeTest() {
-		String name = "Name" + new Date().getTime();
-		attributeService.add(name);
-		attributeService.add(name);
-	}
-
 	/*-------------------------------------------------------------------------------------------*/
 
 	@Test
@@ -49,29 +41,29 @@ public class AttributeServiceTest extends AbstractTesst {
 		Attribute attribute = createAttribute();
 		attributeService.add(attribute);
 		List<String> names = attributeService.getNames();
-		Assert.notNull(names);
-		Assert.noNullElements(names.toArray());
-		Assert.notEmpty(names);
+		Assert.notNull(names, "The list of attribute names must not be null");
+		Assert.noNullElements(names.toArray(), "The list of attribute names must not contain null elements");
+		Assert.notEmpty(names, "The list of attribute names must not contain empty elements");
 	}
 
 	@Test
 	public void getValuesByNameTest() {
+		
 		Attribute attribute = createAttribute();
 		attributeService.add(attribute);
 		List<String> values = attributeService.getValuesByName(attribute.getName());
-		Assert.notNull(values);
-		Assert.noNullElements(values.toArray());
-		Assert.notEmpty(values);
+		Assert.notNull(values, "The list of attribute values must not be null");
+		Assert.noNullElements(values.toArray(), "The list of attribute values must not contain null elements");
+		Assert.notEmpty(values, "The list of attribute values must not contain empty elements");
 	}
 
 	@Test
 	public void getIdByNameAndValueTest() {
 
 		Attribute attribute = createAttribute();
-
 		attributeService.add(attribute);
 		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
-		Assert.notNull(id, "The id must not be null");
+		Assert.notNull(id, "Attribute id must not be null");
 	}
 
 	/*-------------------------------------------------------------------------------------------*/
@@ -80,13 +72,9 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void deleteAttributeValueTest() {
 
 		Attribute attribute = createAttribute();
-
 		attributeService.add(attribute);
-
 		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
-
 		attributeService.deleteAttributeValue(id);
-
 		attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
 	}
 
@@ -94,13 +82,10 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void deleteTest() {
 
 		Attribute attribute = createAttribute();
-
 		attributeService.add(attribute);
 		attributeService.delete(attribute.getName());
-
-		Assert.isTrue(attributeService.getValuesByName(attribute.getName()).isEmpty());
+		Assert.isTrue(attributeService.getValuesByName(attribute.getName()).isEmpty(), "The list of attribut values must be empty");
 
 	}
-
 
 }

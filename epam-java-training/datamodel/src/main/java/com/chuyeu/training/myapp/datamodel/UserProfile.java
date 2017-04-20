@@ -2,8 +2,6 @@ package com.chuyeu.training.myapp.datamodel;
 
 public class UserProfile extends AbstractModel {
 
-	private static final long serialVersionUID = -3738771608596521540L;
-
 	private String firstName;
 	private String lastName;
 	private Integer userCredentialsId;

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.api.IProductDao;
@@ -14,6 +16,8 @@ import com.chuyeu.training.myapp.services.IProductService;
 @Service
 public class ProductServiceImpl implements IProductService {
 
+	private  final Logger LOGGER = LoggerFactory.getLogger(AttributeServiceImpl.class);
+	
 	@Inject
 	private IProductDao productDao;
 
@@ -34,6 +38,8 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public Integer add(Product product) {
+		LOGGER.info("Insert new product name={}. description={}. basePrice={}. active={}", 
+				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive());
 		return productDao.add(product);
 	}
 

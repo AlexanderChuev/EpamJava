@@ -1,13 +1,16 @@
-package com.chuyeu.training.myapp.datamodel;
+package com.chuyeu.training.myapp.webapp.models;
 
 import java.util.Date;
+import java.util.List;
 
-public class Order extends AbstractModel {
+import com.chuyeu.training.myapp.datamodel.OrderStatus;
+
+public class OrderModel {
 
 	private Date created;
-	private Integer userProfileId;
 	private Double totalPrice;
 	private OrderStatus orderStatus;
+	private List<OrderItemModel> listOrderItemModel;
 
 	public Date getCreated() {
 		return created;
@@ -15,14 +18,6 @@ public class Order extends AbstractModel {
 
 	public void setCreated(Date created) {
 		this.created = created;
-	}
-
-	public Integer getUserProfileId() {
-		return userProfileId;
-	}
-
-	public void setUserProfileId(Integer userProfileId) {
-		this.userProfileId = userProfileId;
 	}
 
 	public Double getTotalPrice() {
@@ -41,10 +36,12 @@ public class Order extends AbstractModel {
 		this.orderStatus = orderStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [created=" + created + ", userProfileId=" + userProfileId + ", totalPrice=" + totalPrice
-				+ ", orderStatus=" + orderStatus + "]";
+	public List<OrderItemModel> getListOrderItemModel() {
+		return listOrderItemModel;
+	}
+
+	public void setListOrderItemModel(List<OrderItemModel> listOrderItemModel) {
+		this.listOrderItemModel = listOrderItemModel;
 	}
 
 }

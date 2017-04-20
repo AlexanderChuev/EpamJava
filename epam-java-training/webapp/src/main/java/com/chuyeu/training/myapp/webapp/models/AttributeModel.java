@@ -1,6 +1,6 @@
-package com.chuyeu.training.myapp.datamodel;
+package com.chuyeu.training.myapp.webapp.models;
 
-public class Attribute extends AbstractModel {
+public class AttributeModel {
 
 	private String name;
 	private String value;
@@ -19,11 +19,6 @@ public class Attribute extends AbstractModel {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	@Override
-	public String toString() {
-		return "Attribute [name=" + name + ", value=" + value + "]";
 	}
 
 }

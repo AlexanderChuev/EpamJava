@@ -1,16 +1,10 @@
 package services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.junit.Test;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.util.Assert;
 
-import com.chuyeu.training.myapp.datamodel.Attribute;
-import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
@@ -32,14 +26,13 @@ public class VariantsServiceTest extends AbstractTesst{
 
 	@Test
 	public void test() {
-		Assert.notNull(variantsService);
-		Assert.notNull(productService);
-		Assert.notNull(productVariantsService);
-		Assert.notNull(attributeService);
+		Assert.notNull(variantsService, "The variantsService must not be null");
+		Assert.notNull(productService, "The productService must not be null");
+		Assert.notNull(productVariantsService, "The productVariantsService must not be null");
+		Assert.notNull(attributeService, "The attributeService must not be null");
 	}
 	
-	@Test
-	//@Rollback(false)
+	/*@Test
 	public void addTest(){
 	
 		Integer productId = productService.add(createProduct());
@@ -57,7 +50,6 @@ public class VariantsServiceTest extends AbstractTesst{
 	}
 	
 	@Test
-	@Rollback(false)
 	public void deleteTest(){
 		
 		Integer productId = productService.add(createProduct());
@@ -81,6 +73,6 @@ public class VariantsServiceTest extends AbstractTesst{
 		Attribute attribute = createAttribute();
 		attributeService.add(attribute);
 		return attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
-	}
+	}*/
 	
 }

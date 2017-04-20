@@ -1,18 +1,12 @@
 package services;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.junit.Test;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
-import com.chuyeu.training.myapp.datamodel.Product;
-import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
-import com.chuyeu.training.myapp.services.entity.ProductVariantEntity;
 
 public class ProductVariantServiceTest extends AbstractTesst {
 
@@ -24,12 +18,12 @@ public class ProductVariantServiceTest extends AbstractTesst {
 
 	@Test
 	public void test() {
-		Assert.notNull(productVariantService);
-		Assert.notNull(productService);
+		Assert.notNull(productVariantService, "The productVariantService must not be null");
+		Assert.notNull(productService, "The productService must not be null");
 		
 	}
 
-	@Test
+	/*@Test
 	public void getAllByProductTest() {
 
 		ProductVariant productVariant = createProductVariant();
@@ -113,6 +107,6 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		Integer productId = productService.add(product);
 		ProductVariant productVariant = createProductVariant(productId);
 		return productVariant;
-	}
+	}*/
 
 }

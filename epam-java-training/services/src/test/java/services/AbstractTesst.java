@@ -24,7 +24,7 @@ public class AbstractTesst {
 		Product product = new Product();
 		product.setName("Saucony" + new Date().getTime());
 		product.setDescription("China shoes");
-		product.setStartingPrice((double) 50);
+		product.setBasePrice((double) 50);
 		product.setActive(true);
 		return product;
 	}

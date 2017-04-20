@@ -18,8 +18,6 @@ public interface IAttributeDao {
 	
 	void delete(String name);
 	
-	void add(String name);
-	
 	void add(Attribute attribute);
 
 	List<Integer> listIdByName(String name);

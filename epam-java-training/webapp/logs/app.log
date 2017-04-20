@@ -1,0 +1,5 @@
+16:36:51.673 [qtp1037324811-14] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new product name=Adidas climacool. description=very nice shoes. startingPrice=50.0. active=true
+17:59:19.524 [qtp1037324811-16] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new product name=Adidas climacool. description=very nice shoes. startingPrice=50.0. active=true
+18:01:47.514 [qtp1037324811-18] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new product name=Adidas climacool. description=very nice shoes. startingPrice=50.0. active=true
+18:48:00.443 [qtp1037324811-19] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new product name=Adidas climacool. description=very nice shoes. startingPrice=50.0. active=true
+18:50:11.061 [qtp1037324811-20] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new product name=Adidas climacool. description=very nice shoes. startingPrice=50.0. active=true

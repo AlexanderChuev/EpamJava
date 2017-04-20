@@ -1,11 +1,18 @@
 package com.chuyeu.training.myapp.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IProductVariantDao;
@@ -35,19 +42,32 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	}
 
 	@Override
-	public void add(ProductVariant productVariant) {
-		jdbcTemplate.update("insert into product_variant (product_id, available_quantity, price_influence) values(?, ?, ?)",
-				productVariant.getProductId(), productVariant.getAvailableQuantity(),
-				productVariant.getPriceInfluence());
+	public Integer add(ProductVariant productVariant) {
+
+		final String INSERT_SQL = "insert into product_variant (product_id, available_quantity, price_influence) values(?, ?, ?)";
+
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
+				ps.setInt(1, productVariant.getProductId());
+				ps.setInt(2, productVariant.getAvailableQuantity());
+				ps.setDouble(3, productVariant.getPriceInfluence());
+				return ps;
+			}
+		}, keyHolder);
+
+		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public ProductVariant update(ProductVariant product_variant) {
-		jdbcTemplate.update(
+	public Integer update(ProductVariant product_variant) {
+		return jdbcTemplate.update(
 				"update product_variant set product_id = ?, available_quantity = ?, price_influence = ?" + " where id = ?",
 				product_variant.getProductId(), product_variant.getAvailableQuantity(),
 				product_variant.getPriceInfluence(), product_variant.getId());
-		return get(product_variant.getId());
 	}
 
 	@Override
@@ -57,7 +77,7 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	}
 
 	@Override
-	public List<ProductVariant> getAllByProduct(Integer productId) {
+	public List<ProductVariant> getAllByProduct(Integer productId) throws EmptyResultDataAccessException{
 		return jdbcTemplate.query("select * from product_variant where product_id = ?", new Object[] { productId },
 				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
 	}

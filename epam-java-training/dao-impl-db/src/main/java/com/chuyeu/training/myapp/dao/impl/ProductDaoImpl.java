@@ -45,7 +45,7 @@ public class ProductDaoImpl implements IProductDao {
 	@Override
 	public Integer add(Product product) {
 
-		final String INSERT_SQL = "insert into product (name, description, starting_price, active) values(?, ?, ?, ?)";
+		final String INSERT_SQL = "insert into product (name, description, base_price, active) values(?, ?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -55,7 +55,7 @@ public class ProductDaoImpl implements IProductDao {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
 				ps.setString(1, product.getName());
 				ps.setString(2, product.getDescription());
-				ps.setDouble(3, product.getStartingPrice());
+				ps.setDouble(3, product.getBasePrice());
 				ps.setBoolean(4, product.getActive());
 				return ps;
 			}
@@ -67,8 +67,8 @@ public class ProductDaoImpl implements IProductDao {
 	@Override
 	public void update(Product product) {
 		jdbcTemplate.update(
-				"update product set name = ?, description = ?, starting_price = ?, active = ?" + " where id = ?",
-				product.getName(), product.getDescription(), product.getStartingPrice(), product.getActive(),
+				"update product set name = ?, description = ?, base_price = ?, active = ?" + " where id = ?",
+				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive(),
 				product.getId());
 	}
 
@@ -95,7 +95,6 @@ public class ProductDaoImpl implements IProductDao {
 		stringBuilder.append(productFilter.getLimit());
 		stringBuilder.append(" offset ");
 		stringBuilder.append(offset);
-		System.out.println(stringBuilder.toString());
 		return stringBuilder.toString();
 	}
 

@@ -19,14 +19,13 @@
 	</Appenders>
 
 	<Loggers>
-	
+
 		<Root level="info">
 			<AppenderRef ref="Console" />
 		</Root>
 
-		<Logger level="info" name="com.chuyeu.training.myapp"
-			additivity="false">
-			<AppenderRef ref="Console" />
+		<Logger level="info" name="com.chuyeu.training.myapp.webapp"
+			additivity="true">
 			<AppenderRef ref="RollingFile" />
 		</Logger>
 

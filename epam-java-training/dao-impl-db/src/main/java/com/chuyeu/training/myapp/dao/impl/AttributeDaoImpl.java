@@ -16,14 +16,12 @@ public class AttributeDaoImpl implements IAttributeDao {
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
-
-	@Override
-	public void add(String name) /*throws DuplicateKeyException*/ {
-		jdbcTemplate.update("insert into attribute (name, value) values (?,?)", name, "no value");
-	}
 	
 	@Override
 	public void add(Attribute attribute) {
+		if(attribute.getValue() == null){
+			attribute.setValue("choose value");
+		}
 		jdbcTemplate.update("insert into attribute (name, value) values (?,?)", attribute.getName(), attribute.getValue());
 	}
 

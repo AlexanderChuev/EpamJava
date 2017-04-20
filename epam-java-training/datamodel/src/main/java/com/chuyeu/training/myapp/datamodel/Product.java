@@ -2,10 +2,9 @@ package com.chuyeu.training.myapp.datamodel;
 
 public class Product extends AbstractModel {
 
-	private static final long serialVersionUID = -1239132148748692829L;
 	private String name;
 	private String description;
-	private Double startingPrice;
+	private Double basePrice;
 	private Boolean active;
 
 	public String getName() {
@@ -24,12 +23,12 @@ public class Product extends AbstractModel {
 		this.description = description;
 	}
 
-	public Double getStartingPrice() {
-		return startingPrice;
+	public Double getBasePrice() {
+		return basePrice;
 	}
 
-	public void setStartingPrice(Double startingPrice) {
-		this.startingPrice = startingPrice;
+	public void setBasePrice(Double basePrice) {
+		this.basePrice = basePrice;
 	}
 
 	public Boolean getActive() {
@@ -42,8 +41,8 @@ public class Product extends AbstractModel {
 
 	@Override
 	public String toString() {
-		return "Product [name=" + name + ", description=" + description + ", startingPrice=" + startingPrice
-				+ ", active=" + active + "]";
+		return "Product [name=" + name + ", description=" + description + ", basePrice=" + basePrice + ", active="
+				+ active + "]";
 	}
 
 }

@@ -2,7 +2,6 @@ package com.chuyeu.training.myapp.datamodel;
 
 public class ProductVariant extends AbstractModel {
 
-	private static final long serialVersionUID = 2816697463793299620L;
 	private Integer productId;
 	private Integer availableQuantity;
 	private Double priceInfluence;

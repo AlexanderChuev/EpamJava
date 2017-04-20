@@ -28,8 +28,8 @@ public class OrderServiceTest extends AbstractTesst {
 
 	@Test
 	public void test() {
-		Assert.notNull(orderService);
-		Assert.notNull(userService);
+		Assert.notNull(orderService, "The orderService must not be null");
+		Assert.notNull(userService, "The userService must not be null");
 	}
 
 	@Test
@@ -41,12 +41,7 @@ public class OrderServiceTest extends AbstractTesst {
 		List<Order> allOrders = orderService.getAll(new OrderFilter());
 
 		for (Order order : allOrders) {
-			Assert.notNull(order);
-			Assert.notNull(order.getId());
-			Assert.notNull(order.getOrderStatus());
-			Assert.notNull(order.getTotalPrice());
-			Assert.notNull(order.getCreated());
-			Assert.notNull(order.getUserProfileId());
+			checkOrder(order);
 		}
 	}
 
@@ -67,12 +62,7 @@ public class OrderServiceTest extends AbstractTesst {
 		List<Order> allOrders = orderService.getAll(orderFilter);
 
 		for (Order order : allOrders) {
-			Assert.notNull(order);
-			Assert.notNull(order.getId());
-			Assert.notNull(order.getOrderStatus());
-			Assert.notNull(order.getTotalPrice());
-			Assert.notNull(order.getCreated());
-			Assert.notNull(order.getUserProfileId());
+			checkOrder(order);
 		}
 	}
 
@@ -82,24 +72,16 @@ public class OrderServiceTest extends AbstractTesst {
 		Order order = createOrder();
 
 		Integer orderId = orderService.save(order);
-		Assert.notNull(orderId);
+		Assert.notNull(orderId, "Id from order must not be null");
 
 		Order orderFromDb = orderService.get(orderId);
+		
+		checkOrder(orderFromDb);
 
-		Assert.notNull(orderFromDb);
-		Assert.notNull(orderFromDb.getId());
-		Assert.notNull(orderFromDb.getOrderStatus());
-		Assert.notNull(orderFromDb.getTotalPrice());
-		Assert.notNull(orderFromDb.getCreated());
-		Assert.notNull(orderFromDb.getUserProfileId());
-
-		System.out.println(orderFromDb.getCreated());
-		System.out.println(order.getCreated());
-		Assert.isTrue(orderFromDb.getCreated().equals(order.getCreated()), "A");
-
-		Assert.isTrue(orderFromDb.getTotalPrice().equals(order.getTotalPrice()), "B");
-		Assert.isTrue(orderFromDb.getUserProfileId().equals(order.getUserProfileId()), "C");
-		Assert.isTrue(orderFromDb.getOrderStatus().equals(order.getOrderStatus()), "D");
+		Assert.isTrue(orderFromDb.getCreated().equals(order.getCreated()), "The columns with the date must be equals");
+		Assert.isTrue(orderFromDb.getTotalPrice().equals(order.getTotalPrice()), "The columns with the totalPrice must be equals");
+		Assert.isTrue(orderFromDb.getUserProfileId().equals(order.getUserProfileId()), "The columns with the UserProfileId must be equals");
+		Assert.isTrue(orderFromDb.getOrderStatus().equals(order.getOrderStatus()), "The columns with the OrderStatus must be equals");
 	}
 
 	@Test
@@ -113,17 +95,12 @@ public class OrderServiceTest extends AbstractTesst {
 
 		Order updatedOrder = orderService.get(orderId);
 
-		Assert.notNull(updatedOrder);
-		Assert.notNull(updatedOrder.getId());
-		Assert.notNull(updatedOrder.getOrderStatus());
-		Assert.notNull(updatedOrder.getTotalPrice());
-		Assert.notNull(updatedOrder.getCreated());
-		Assert.notNull(updatedOrder.getUserProfileId());
+		checkOrder(updatedOrder);
 
-		Assert.isTrue(updatedOrder.getId().equals(orderFromDb.getId()));
-		Assert.isTrue(updatedOrder.getCreated().equals(orderFromDb.getCreated()));
-		Assert.isTrue(updatedOrder.getTotalPrice().equals(orderFromDb.getTotalPrice()));
-		Assert.isTrue(updatedOrder.getUserProfileId().equals(orderFromDb.getUserProfileId()));
+		Assert.isTrue(updatedOrder.getId().equals(orderFromDb.getId()), "The columns with the id must be equals");
+		Assert.isTrue(updatedOrder.getCreated().equals(orderFromDb.getCreated()), "The columns with the date must be equals");
+		Assert.isTrue(updatedOrder.getTotalPrice().equals(orderFromDb.getTotalPrice()), "The columns with the totalPrice must be equals");
+		Assert.isTrue(updatedOrder.getUserProfileId().equals(orderFromDb.getUserProfileId()), "The columns with the UserProfileId must be equals");
 
 	}
 
@@ -134,6 +111,17 @@ public class OrderServiceTest extends AbstractTesst {
 		orderService.delete(orderId);
 		orderService.get(orderId);
 	}
+	
+	
+	private void checkOrder(Order order){
+		Assert.notNull(order, "The order must not be null");
+		Assert.notNull(order.getId(), "Id from order must not be null");
+		Assert.notNull(order.getOrderStatus(), "OrderStatus from order must not be null");
+		Assert.notNull(order.getTotalPrice(), "TotalPrice from order must not be null");
+		Assert.notNull(order.getCreated(), "Date from order must not be null");
+		Assert.notNull(order.getUserProfileId(), "UserProfileId from order must not be null");
+	}
+	
 
 	private Order createOrder() {
 
