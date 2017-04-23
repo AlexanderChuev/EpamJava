@@ -29,29 +29,24 @@ public class ProductVariantController extends AbstractConroller{
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllByProduct(@RequestParam(value = "product-id", required = false) Integer productId) {
-
 		
 		List<ProductVariantModel> productVariantsModel = new ArrayList<>();
 		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
 		
 		for (ProductVariant productVariant : productVariants) {
-			
-			ProductVariantModel productVariantModel = new ProductVariantModel();
-			productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
-			productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
-			productVariantModel.setProductId(productId);
-			productVariantsModel.add(productVariantModel);
+			productVariantsModel.add(entity2model(productVariant,productId));
 		}
 		return new ResponseEntity<List<ProductVariantModel>>(productVariantsModel, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
+	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
 		
-		ProductVariant productVariant = productVariantService.getProductVariant(id);
+		ProductVariant productVariant = productVariantService.getProductVariant(variantId);
 		
 		ProductVariantModel productVariantModel = new ProductVariantModel();
-		productVariantModel.setProductId(id);
+		productVariantModel.setId(productVariant.getId());
+		productVariantModel.setProductId(productVariant.getProductId());
 		productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
 		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
 		
@@ -71,6 +66,15 @@ public class ProductVariantController extends AbstractConroller{
 		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());
 		Integer id = productVariantService.saveOrUpdate(productVariant);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
+	}
+	
+	private ProductVariantModel entity2model(ProductVariant productVariant, Integer id){
+		ProductVariantModel productVariantModel = new ProductVariantModel();
+		productVariantModel.setId(productVariant.getId());
+		productVariantModel.setProductId(id);
+		productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
+		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
+		return productVariantModel;
 	}
 
 /*	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)

@@ -19,6 +19,7 @@ import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IVariantService;
 import com.chuyeu.training.myapp.webapp.models.AttributeModel;
 import com.chuyeu.training.myapp.webapp.models.IdModel;
+import com.chuyeu.training.myapp.webapp.models.ValueModel;
 
 @RestController
 @RequestMapping("/attribute")
@@ -33,7 +34,14 @@ public class AttributeController extends AbstractConroller {
 	
 	@RequestMapping(value = "/names", method = RequestMethod.GET)
 	public ResponseEntity<?> getAttributeNames() {
-		return new ResponseEntity<List<String>>(attributeService.getNames(), HttpStatus.OK);
+		
+		List<String> names = attributeService.getNames();
+		List<ValueModel> values = new ArrayList<>();
+		
+		for (String value : names) {
+			values.add(new ValueModel(value));
+		}
+		return new ResponseEntity<List<ValueModel>>(values, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/values", method = RequestMethod.GET)
@@ -83,7 +91,7 @@ public class AttributeController extends AbstractConroller {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createVariants(@RequestBody VariantsModel variantsModel) {
 		variantsService.add(variantsModel.getProductVariantId(), variantsModel.getAttributeIds());
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}*/
 	
 }

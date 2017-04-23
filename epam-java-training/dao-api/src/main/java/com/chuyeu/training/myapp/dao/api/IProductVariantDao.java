@@ -8,8 +8,6 @@ public interface IProductVariantDao {
 
 	List<ProductVariant> getAllByProduct(Integer productId);
 
-	List<ProductVariant> getAll();
-
 	ProductVariant get(Integer id);
 
 	Integer add(ProductVariant productVariant);

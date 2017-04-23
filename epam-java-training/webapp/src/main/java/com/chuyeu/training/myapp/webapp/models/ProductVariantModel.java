@@ -1,12 +1,19 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-import java.util.List;
-
 public class ProductVariantModel {
 
+	private Integer id;
 	private Integer productId;
 	private Integer availableQuantity;
 	private Double priceInfluence;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getProductId() {
 		return productId;

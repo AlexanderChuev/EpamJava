@@ -24,13 +24,6 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
-	// +++ возможно не нужен вообще!
-	@Override
-	public List<ProductVariant> getAll() {
-		return jdbcTemplate.query("select * from product_variant",
-				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
-
-	}
 
 	// +++
 	@Override
