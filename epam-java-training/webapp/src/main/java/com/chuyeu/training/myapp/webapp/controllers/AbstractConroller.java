@@ -12,13 +12,12 @@ import com.chuyeu.training.myapp.webapp.models.ProductVariantModel;
 
 public class AbstractConroller {
 
-	public ProductModel entity2model(Product product, List<ProductVariantModel> productVariantModels) {
+	public ProductModel entity2model(Product product) {
 		ProductModel model = new ProductModel();
 		model.setName(product.getName());
 		model.setDescription(product.getDescription());
 		model.setActive(product.getActive());
 		model.setBasePrice(product.getBasePrice());
-		model.setListProductVariantModel(productVariantModels);
 		return model;
 	}
 
@@ -48,7 +47,7 @@ public class AbstractConroller {
 	public ProductVariantModel entity2model (ProductVariant productVariant, Product product, List<Attribute> attributes) {
 		ProductVariantModel model = new ProductVariantModel();
 		model.setAvailableQuantity(productVariant.getAvailableQuantity());
-		model.setPriceInfuence(productVariant.getPriceInfluence());
+		model.setPriceInfluence(productVariant.getPriceInfluence());
 		List<AttributeModel> attributesModel = new ArrayList<>();
 		for (Attribute attribute : attributes) {
 			attributesModel.add(entity2model(attribute));
@@ -60,7 +59,7 @@ public class AbstractConroller {
 	public ProductVariant model2entity (ProductVariantModel productVariantModel, Integer productId) {
 		ProductVariant productVariant = new ProductVariant();
 		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
-		productVariant.setPriceInfluence(productVariantModel.getPriceInfuence());
+		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());
 		productVariant.setProductId(productId);
 		return productVariant;
 	}

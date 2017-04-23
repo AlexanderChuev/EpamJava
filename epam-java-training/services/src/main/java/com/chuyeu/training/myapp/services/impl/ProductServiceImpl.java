@@ -33,6 +33,7 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public void delete(Integer id) {
+		
 		productDao.delete(id);
 	}
 

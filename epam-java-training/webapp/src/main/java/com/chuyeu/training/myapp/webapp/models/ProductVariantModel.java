@@ -4,10 +4,18 @@ import java.util.List;
 
 public class ProductVariantModel {
 
+	private Integer productId;
 	private Integer availableQuantity;
-	private Double priceInfuence;
+	private Double priceInfluence;
 	private List<AttributeModel> attributes;
-	
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
 
 	public Integer getAvailableQuantity() {
 		return availableQuantity;
@@ -17,12 +25,12 @@ public class ProductVariantModel {
 		this.availableQuantity = availableQuantity;
 	}
 
-	public Double getPriceInfuence() {
-		return priceInfuence;
+	public Double getPriceInfluence() {
+		return priceInfluence;
 	}
 
-	public void setPriceInfuence(Double priceInfuence) {
-		this.priceInfuence = priceInfuence;
+	public void setPriceInfluence(Double priceInfluence) {
+		this.priceInfluence = priceInfluence;
 	}
 
 	public List<AttributeModel> getAttributes() {
