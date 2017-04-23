@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-public interface IVariantsService {
+public interface IVariantService {
 
 	@Transactional
 	void delete(List<Integer> listId);
@@ -13,5 +13,5 @@ public interface IVariantsService {
 	void delete(Integer attributeId);
 	
 	@Transactional
-	void add(Integer productVariantId, List<Integer> listAttributeId);
+	void add(Integer productVariantId, Integer attributeId);
 }

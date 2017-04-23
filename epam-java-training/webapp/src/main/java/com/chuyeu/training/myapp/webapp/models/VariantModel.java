@@ -1,11 +1,9 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-import java.util.List;
-
-public class VariantsModel {
+public class VariantModel {
 
 	private Integer productVariantId;
-	private List<Integer> attributeIds;
+	private Integer attributeId;
 
 	public Integer getProductVariantId() {
 		return productVariantId;
@@ -15,12 +13,12 @@ public class VariantsModel {
 		this.productVariantId = productVariantId;
 	}
 
-	public List<Integer> getAttributeIds() {
-		return attributeIds;
+	public Integer getAttributeId() {
+		return attributeId;
 	}
 
-	public void setAttributeIds(List<Integer> attributeIds) {
-		this.attributeIds = attributeIds;
+	public void setAttributeId(Integer attributeId) {
+		this.attributeId = attributeId;
 	}
 
 }

@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
-import com.chuyeu.training.myapp.services.IVariantsService;
+import com.chuyeu.training.myapp.services.IVariantService;
 import com.chuyeu.training.myapp.webapp.models.AttributeModel;
 import com.chuyeu.training.myapp.webapp.models.IdModel;
-import com.chuyeu.training.myapp.webapp.models.VariantsModel;
 
 @RestController
 @RequestMapping("/attribute")
@@ -29,7 +28,7 @@ public class AttributeController extends AbstractConroller {
 	private IAttributeService attributeService;
 	
 	@Inject
-	private IVariantsService variantsService;
+	private IVariantService variantService;
 	
 	
 	@RequestMapping(value = "/names", method = RequestMethod.GET)

@@ -8,12 +8,12 @@ import org.springframework.util.Assert;
 import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
-import com.chuyeu.training.myapp.services.IVariantsService;
+import com.chuyeu.training.myapp.services.IVariantService;
 
 public class VariantsServiceTest extends AbstractTesst{
 
 	@Inject
-	private IVariantsService variantsService;
+	private IVariantService variantService;
 	
 	@Inject
 	private IProductService productService;
@@ -26,7 +26,7 @@ public class VariantsServiceTest extends AbstractTesst{
 
 	@Test
 	public void test() {
-		Assert.notNull(variantsService, "The variantsService must not be null");
+		Assert.notNull(variantService, "The variantsService must not be null");
 		Assert.notNull(productService, "The productService must not be null");
 		Assert.notNull(productVariantsService, "The productVariantsService must not be null");
 		Assert.notNull(attributeService, "The attributeService must not be null");

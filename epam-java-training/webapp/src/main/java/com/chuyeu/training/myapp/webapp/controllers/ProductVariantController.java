@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
-import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
-import com.chuyeu.training.myapp.webapp.models.AttributeModel;
 import com.chuyeu.training.myapp.webapp.models.IdModel;
 import com.chuyeu.training.myapp.webapp.models.ProductVariantModel;
 
@@ -28,9 +25,7 @@ public class ProductVariantController extends AbstractConroller{
 
 	@Inject
 	private IProductVariantService productVariantService;
-	
-	@Inject
-	private IAttributeService attributeService;
+
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllByProduct(@RequestParam(value = "product-id", required = false) Integer productId) {
@@ -55,21 +50,12 @@ public class ProductVariantController extends AbstractConroller{
 		
 		ProductVariant productVariant = productVariantService.getProductVariant(id);
 		
-		List<Attribute> attributes = attributeService.getProductVariantAttributes(productVariant.getId());
-		List<AttributeModel> attributesModel = new ArrayList<>();
-		
-		for (Attribute attribute : attributes) {
-			attributesModel.add(entity2model(attribute));
-		}
-		
 		ProductVariantModel productVariantModel = new ProductVariantModel();
 		productVariantModel.setProductId(id);
 		productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
 		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
-		productVariantModel.setAttributes(attributesModel);
 		
 		return new ResponseEntity<ProductVariantModel>(productVariantModel, HttpStatus.OK);
-
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

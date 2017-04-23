@@ -7,7 +7,6 @@ public class ProductVariantModel {
 	private Integer productId;
 	private Integer availableQuantity;
 	private Double priceInfluence;
-	private List<AttributeModel> attributes;
 
 	public Integer getProductId() {
 		return productId;
@@ -31,14 +30,6 @@ public class ProductVariantModel {
 
 	public void setPriceInfluence(Double priceInfluence) {
 		this.priceInfluence = priceInfluence;
-	}
-
-	public List<AttributeModel> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(List<AttributeModel> attributes) {
-		this.attributes = attributes;
 	}
 
 }

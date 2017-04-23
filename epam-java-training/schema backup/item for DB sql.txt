@@ -1,0 +1,5 @@
+/* Create attribute fot tests */
+
+INSERT INTO attribute(name, value) VALUES ('Size', 'XL');
+INSERT INTO attribute(name, value) VALUES ('Color', 'Black');
+INSERT INTO attribute(name, value) VALUES ('Color', 'Red');

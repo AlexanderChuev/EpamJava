@@ -44,17 +44,7 @@ public class AbstractConroller {
 		return attribute;
 	}	
 	
-	public ProductVariantModel entity2model (ProductVariant productVariant, Product product, List<Attribute> attributes) {
-		ProductVariantModel model = new ProductVariantModel();
-		model.setAvailableQuantity(productVariant.getAvailableQuantity());
-		model.setPriceInfluence(productVariant.getPriceInfluence());
-		List<AttributeModel> attributesModel = new ArrayList<>();
-		for (Attribute attribute : attributes) {
-			attributesModel.add(entity2model(attribute));
-		}
-		model.setAttributes(attributesModel);
-		return model;
-	}
+
 	
 	public ProductVariant model2entity (ProductVariantModel productVariantModel, Integer productId) {
 		ProductVariant productVariant = new ProductVariant();
