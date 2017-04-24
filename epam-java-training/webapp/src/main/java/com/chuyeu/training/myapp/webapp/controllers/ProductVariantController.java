@@ -21,35 +21,34 @@ import com.chuyeu.training.myapp.webapp.models.ProductVariantModel;
 
 @RestController
 @RequestMapping("/product-variant")
-public class ProductVariantController extends AbstractConroller{
+public class ProductVariantController extends AbstractConroller {
 
 	@Inject
 	private IProductVariantService productVariantService;
 
-
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllByProduct(@RequestParam(value = "product-id", required = false) Integer productId) {
-		
+
 		List<ProductVariantModel> productVariantsModel = new ArrayList<>();
 		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
-		
+
 		for (ProductVariant productVariant : productVariants) {
-			productVariantsModel.add(entity2model(productVariant,productId));
+			productVariantsModel.add(entity2model(productVariant, productId));
 		}
 		return new ResponseEntity<List<ProductVariantModel>>(productVariantsModel, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
-		
+
 		ProductVariant productVariant = productVariantService.getProductVariant(variantId);
-		
+
 		ProductVariantModel productVariantModel = new ProductVariantModel();
 		productVariantModel.setId(productVariant.getId());
 		productVariantModel.setProductId(productVariant.getProductId());
 		productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
 		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
-		
+
 		return new ResponseEntity<ProductVariantModel>(productVariantModel, HttpStatus.OK);
 	}
 
@@ -59,7 +58,7 @@ public class ProductVariantController extends AbstractConroller{
 		if (productVariantModel == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		ProductVariant productVariant = new ProductVariant();
 		productVariant.setProductId(productVariantModel.getProductId());
 		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
@@ -67,8 +66,8 @@ public class ProductVariantController extends AbstractConroller{
 		Integer id = productVariantService.saveOrUpdate(productVariant);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
-	
-	private ProductVariantModel entity2model(ProductVariant productVariant, Integer id){
+
+	private ProductVariantModel entity2model(ProductVariant productVariant, Integer id) {
 		ProductVariantModel productVariantModel = new ProductVariantModel();
 		productVariantModel.setId(productVariant.getId());
 		productVariantModel.setProductId(id);
@@ -77,25 +76,29 @@ public class ProductVariantController extends AbstractConroller{
 		return productVariantModel;
 	}
 
-/*	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateProduct(@RequestBody ProductModel productModel,
-			@PathVariable(value = "id") Integer id) {
-
-		Product productFromDb = productService.get(id);
-		productFromDb.setName(productModel.getName());
-		productFromDb.setDescription(productModel.getDescription());
-		productFromDb.setActive(productModel.getActive());
-		productFromDb.setBasePrice(productModel.getBasePrice());
-		productService.update(productFromDb);
-
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}*/
+	/*
+	 * @RequestMapping(value = "/{id}", method = RequestMethod.PUT) public
+	 * ResponseEntity<Void> updateProduct(@RequestBody ProductModel
+	 * productModel,
+	 * 
+	 * @PathVariable(value = "id") Integer id) {
+	 * 
+	 * Product productFromDb = productService.get(id);
+	 * productFromDb.setName(productModel.getName());
+	 * productFromDb.setDescription(productModel.getDescription());
+	 * productFromDb.setActive(productModel.getActive());
+	 * productFromDb.setBasePrice(productModel.getBasePrice());
+	 * productService.update(productFromDb);
+	 * 
+	 * return new ResponseEntity<Void>(HttpStatus.OK); }
+	 */
 
 	// А надо ли оно вообще?
-	/*
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.DELETE) public
-	 * ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer
-	 * id) { productService.delete(id); return new
-	 * ResponseEntity<Void>(HttpStatus.OK); }
-	 */
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer id) {
+		productVariantService.delete(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
 }

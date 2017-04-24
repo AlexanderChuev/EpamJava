@@ -5,6 +5,7 @@ import com.chuyeu.training.myapp.datamodel.UserRole;
 public class UserCredentialsModel {
 
 	private String email;
+	private String password;
 	private UserRole userRole;
 
 	public String getEmail() {
@@ -15,6 +16,14 @@ public class UserCredentialsModel {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public UserRole getUserRole() {
 		return userRole;
 	}
@@ -22,4 +31,5 @@ public class UserCredentialsModel {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+
 }
