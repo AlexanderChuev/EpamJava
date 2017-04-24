@@ -6,7 +6,7 @@ public interface IVariantDao {
 
 	void delete(List<Integer> listId);
 	
-	void delete(Integer attributeId);
+	void delete(Integer attributeId, Integer productVariantId);
 
 	void add(Integer productVariantId, Integer attributeId);
 }

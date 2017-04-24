@@ -52,7 +52,6 @@ public class AttributeServiceImpl implements IAttributeService {
 
 	@Override
 	public void deleteAttributeValue(Integer id) {
-		variantService.delete(id);
 		attributeDao.deleteAttributeValue(id);
 	}
 

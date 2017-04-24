@@ -73,7 +73,7 @@ public class ProductController extends AbstractConroller {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 		Integer id = productService.add(model2entity(productModel));
-		return new ResponseEntity<IdModel>(new IdModel(id),HttpStatus.CREATED);
+		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -90,12 +90,10 @@ public class ProductController extends AbstractConroller {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	// А надо ли оно вообще?
-	/*
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.DELETE) public
-	 * ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer
-	 * id) { productService.delete(id); return new
-	 * ResponseEntity<Void>(HttpStatus.OK); }
-	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer id) {
+		productService.delete(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 
 }

@@ -24,8 +24,8 @@ public class VariantDaoImpl implements IVariantDao {
 	}
 
 	@Override
-	public void delete(Integer attributeId) {
-		jdbcTemplate.update("delete from variant where attribute_id = " + attributeId);
+	public void delete(Integer attributeId, Integer productVariantId) {
+		jdbcTemplate.update("delete from variant where attribute_id = ? and product_variant_id = ?", attributeId, productVariantId);
 	}
 
 	@Override

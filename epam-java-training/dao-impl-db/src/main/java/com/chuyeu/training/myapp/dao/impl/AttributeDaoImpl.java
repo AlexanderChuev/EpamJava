@@ -65,7 +65,7 @@ public class AttributeDaoImpl implements IAttributeDao {
 	@Override
 	public List<Attribute> getProductVariantAttributes(Integer productVariantId) {
 		return jdbcTemplate.query(
-				"select * from attribute a join variants v on v.attribute_id = a.id where v.product_variant_id = ?",
+				"select * from attribute a join variant v on v.attribute_id = a.id where v.product_variant_id = ?",
 				new Object[] { productVariantId }, new BeanPropertyRowMapper<Attribute>(Attribute.class));
 	}
 

@@ -32,6 +32,7 @@ public class AbstractConroller {
 
 	public AttributeModel entity2model(Attribute attribute) {
 		AttributeModel model = new AttributeModel();
+		model.setId(attribute.getId());
 		model.setName(attribute.getName());
 		model.setValue(attribute.getValue());
 		return model;

@@ -26,9 +26,9 @@ public class VariantController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> createVariant(@PathVariable(value = "id") Integer id) {
-		variantService.delete(id);
+	@RequestMapping(value = "/{id1}/{id2}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteVariant(@PathVariable(value = "id1") Integer attributeId, @PathVariable(value = "id2") Integer productVariantId) {
+		variantService.delete(attributeId, productVariantId);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
