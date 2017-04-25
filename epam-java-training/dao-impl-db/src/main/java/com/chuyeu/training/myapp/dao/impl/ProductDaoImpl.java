@@ -77,7 +77,9 @@ public class ProductDaoImpl implements IProductDao {
 		jdbcTemplate.update("delete from product where id=" + id);
 	}
 
-	public String createSql(ProductFilter productFilter) {
+	
+	
+	private String createSql(ProductFilter productFilter) {
 
 		Integer offset = productFilter.getLimit() * (productFilter.getPageNumber() - 1);
 

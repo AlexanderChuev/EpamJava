@@ -5,6 +5,12 @@ public class SortData {
 	private String column;
 	private String direction;
 
+	public SortData(String column, String direction) {
+		super();
+		this.column = column;
+		this.direction = direction;
+	}
+
 	public String getColumn() {
 		return column;
 	}

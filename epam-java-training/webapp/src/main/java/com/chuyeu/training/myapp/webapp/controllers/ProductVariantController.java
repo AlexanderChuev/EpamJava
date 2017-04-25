@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IProductVariantService;
-import com.chuyeu.training.myapp.webapp.models.IdModel;
 import com.chuyeu.training.myapp.webapp.models.ProductVariantModel;
+import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
 @RestController
 @RequestMapping("/product-variant")
-public class ProductVariantController extends AbstractConroller {
+public class ProductVariantController {
 
 	@Inject
 	private IProductVariantService productVariantService;
@@ -38,7 +38,8 @@ public class ProductVariantController extends AbstractConroller {
 		}
 		return new ResponseEntity<List<ProductVariantModel>>(productVariantsModel, HttpStatus.OK);
 	}
-
+	
+	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
 

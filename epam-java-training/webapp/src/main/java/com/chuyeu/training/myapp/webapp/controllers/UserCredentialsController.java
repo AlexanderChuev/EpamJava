@@ -19,9 +19,9 @@ import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IUserService;
-import com.chuyeu.training.myapp.webapp.models.IdModel;
 import com.chuyeu.training.myapp.webapp.models.ProductModel;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
+import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
 @RestController
 @RequestMapping("/user-credentials")

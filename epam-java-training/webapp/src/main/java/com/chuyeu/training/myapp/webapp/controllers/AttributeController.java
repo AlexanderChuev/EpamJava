@@ -18,12 +18,13 @@ import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IVariantService;
 import com.chuyeu.training.myapp.webapp.models.AttributeModel;
-import com.chuyeu.training.myapp.webapp.models.IdModel;
-import com.chuyeu.training.myapp.webapp.models.ValueModel;
+import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
+import com.chuyeu.training.myapp.webapp.models.parts.NameModel;
+import com.chuyeu.training.myapp.webapp.models.parts.ValueModel;
 
 @RestController
 @RequestMapping("/attribute")
-public class AttributeController extends AbstractConroller {
+public class AttributeController {
 
 	@Inject
 	private IAttributeService attributeService;
@@ -31,30 +32,40 @@ public class AttributeController extends AbstractConroller {
 	@Inject
 	private IVariantService variantService;
 	
-	//+++ сделать еще один клас модель
+	//+++
 	@RequestMapping(value = "/names", method = RequestMethod.GET)
 	public ResponseEntity<?> getAttributeNames() {
 		
-		List<String> names = attributeService.getNames();
+		List<String> attributeNames = attributeService.getNames();
+		List<NameModel> names = new ArrayList<>();
+		
+		for (String name : attributeNames) {
+			names.add(new NameModel(name));
+		}
+		return new ResponseEntity<List<NameModel>>(names, HttpStatus.OK);
+	}
+	
+	//+++
+	@RequestMapping(value = "/values", method = RequestMethod.GET)
+	public ResponseEntity<?> getAttributeValues(@RequestParam(value = "name", required = false) String name) {
+		
+		List<String> attributeValues = attributeService.getValuesByName(name);
 		List<ValueModel> values = new ArrayList<>();
 		
-		for (String value : names) {
+		for (String value : attributeValues) {
 			values.add(new ValueModel(value));
 		}
 		return new ResponseEntity<List<ValueModel>>(values, HttpStatus.OK);
 	}
+	
 	//+++
-	@RequestMapping(value = "/values", method = RequestMethod.GET)
-	public ResponseEntity<?> getAttributeValues(@RequestParam(value = "name", required = false) String name) {
-		return new ResponseEntity<List<String>>(attributeService.getValuesByName(name), HttpStatus.OK);
-	}
-
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getIdByNameAndValue(@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "value", required = false) String value) {
 		Integer id = attributeService.getIdByNameAndValue(name, value);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.OK);
 	}
+	
 	//+++
 	@RequestMapping(value = "/product-variant", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@RequestParam(value = "id", required = false) Integer id) {
@@ -69,7 +80,7 @@ public class AttributeController extends AbstractConroller {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> createNewAttribute(@RequestBody AttributeModel attributeModel) {
+	public ResponseEntity<Void> createAttribute(@RequestBody AttributeModel attributeModel) {
 		Attribute attribute = model2entity(attributeModel);
 		attributeService.add(attribute);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -85,6 +96,21 @@ public class AttributeController extends AbstractConroller {
 	public ResponseEntity<Void> deleteAttributeValue(@PathVariable(value = "name") String name) {
 		attributeService.delete(name);
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	public AttributeModel entity2model(Attribute attribute) {
+		AttributeModel model = new AttributeModel();
+		model.setId(attribute.getId());
+		model.setName(attribute.getName());
+		model.setValue(attribute.getValue());
+		return model;
+	}
+	
+	public Attribute model2entity(AttributeModel attributeModel) {
+		Attribute attribute = new Attribute();
+		attribute.setName(attributeModel.getName());
+		attribute.setValue(attributeModel.getValue());
+		return attribute;
 	}
 
 /*	// замапить на др адрес

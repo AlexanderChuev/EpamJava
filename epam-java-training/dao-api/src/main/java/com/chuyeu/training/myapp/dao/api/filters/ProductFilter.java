@@ -2,32 +2,30 @@ package com.chuyeu.training.myapp.dao.api.filters;
 
 public class ProductFilter {
 
-	private Integer limit;
 	private Integer pageNumber;
+	private Integer limit;
 	private SortData sort;
 
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
+	public ProductFilter(Integer pageNumber, Integer limit, String column, String direction) {
+		super();
+		if (pageNumber == null) {
+			pageNumber=1;
+		}
 		this.limit = limit;
-	}
-
-	public SortData getSort() {
-		return sort;
-	}
-
-	public void setSort(SortData sort) {
-		this.sort = sort;
+		this.pageNumber = pageNumber;
+		sort = new SortData(column, direction);
 	}
 
 	public Integer getPageNumber() {
 		return pageNumber;
 	}
 
-	public void setPageNumber(Integer pageNumber) {
-		this.pageNumber = pageNumber;
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public SortData getSort() {
+		return sort;
 	}
 
 }

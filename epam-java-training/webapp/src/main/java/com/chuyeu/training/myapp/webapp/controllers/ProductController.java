@@ -18,41 +18,45 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
-import com.chuyeu.training.myapp.webapp.models.IdModel;
 import com.chuyeu.training.myapp.webapp.models.ProductModel;
+import com.chuyeu.training.myapp.webapp.models.ProductModelWrapper;
+import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
 @RestController
-@RequestMapping("/product")
-public class ProductController extends AbstractConroller {
+@RequestMapping(value ={"/product"},produces="application/json;charset=UTF-8")
+public class ProductController {
 
 	@Inject
 	private IProductService productService;
 
+	// +++
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page) {
+	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "column", required = false) String column,
+			@RequestParam(value = "direction", required = false) String direction,
+			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		ProductFilter productFilter = new ProductFilter();
-		productFilter.setLimit(5);
-
-		if (page == null) {
-			productFilter.setPageNumber(1);
-		} else {
-			productFilter.setPageNumber(page);
-		}
+		ProductFilter productFilter = new ProductFilter(page,limit,column,direction);
 
 		List<Product> all = productService.getAll(productFilter);
 		List<ProductModel> productModels = new ArrayList<>();
 
 		for (Product product : all) {
 			ProductModel productModel = new ProductModel();
+			productModel.setId(product.getId());
 			productModel.setName(product.getName());
 			productModel.setBasePrice(product.getBasePrice());
 			productModels.add(productModel);
 		}
+		ProductModelWrapper wrapper = new ProductModelWrapper();
 
-		return new ResponseEntity<List<ProductModel>>(productModels, HttpStatus.OK);
+		wrapper.setListProductModel(productModels);
+		wrapper.setPageCount(productService.getProductQuantity());
+
+		return new ResponseEntity<ProductModelWrapper>(wrapper, HttpStatus.OK);
 	}
-
+	
+	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
 
@@ -66,6 +70,7 @@ public class ProductController extends AbstractConroller {
 
 	}
 
+	// +++
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createNewProduct(@RequestBody ProductModel productModel) {
 
@@ -76,6 +81,7 @@ public class ProductController extends AbstractConroller {
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
+	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateProduct(@RequestBody ProductModel productModel,
 			@PathVariable(value = "id") Integer id) {
@@ -90,10 +96,29 @@ public class ProductController extends AbstractConroller {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
+	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer id) {
 		productService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	public ProductModel entity2model(Product product) {
+		ProductModel model = new ProductModel();
+		model.setName(product.getName());
+		model.setDescription(product.getDescription());
+		model.setActive(product.getActive());
+		model.setBasePrice(product.getBasePrice());
+		return model;
+	}
+
+	public Product model2entity(ProductModel model) {
+		Product product = new Product();
+		product.setName(model.getName());
+		product.setDescription(model.getDescription());
+		product.setActive(model.getActive());
+		product.setBasePrice(model.getBasePrice());
+		return product;
 	}
 
 }

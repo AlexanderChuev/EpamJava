@@ -45,7 +45,7 @@ public class OrderServiceTest extends AbstractTesst {
 		}
 	}
 
-	@Test
+	/*@Test
 	public void getAllWithFilterTest() {
 
 		orderService.save(createOrder());
@@ -64,7 +64,7 @@ public class OrderServiceTest extends AbstractTesst {
 		for (Order order : allOrders) {
 			checkOrder(order);
 		}
-	}
+	}*/
 
 	@Test
 	public void getAndSaveTest() {

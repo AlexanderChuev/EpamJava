@@ -5,8 +5,8 @@ INSERT INTO product(name, description, base_price, active) VALUES ('Кроссо
 INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Nike', 'Lightweight running shoes', 60, true);
 INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Puma', 'Street style', 40, true);
 INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Reebok', 'Comfortable shoes', 55, false);
-INSERT INTO product(name, description, base_price, active) VALUES ('Куртка Nike', 'Nice clothes', 55, true);
-INSERT INTO product(name, description, base_price, active) VALUES ('Рюкзак Adidas', 'Big bag', 55, true);
+INSERT INTO product(name, description, base_price, active) VALUES ('Куртка Nike', 'Nice clothes', 35, true);
+INSERT INTO product(name, description, base_price, active) VALUES ('Рюкзак Adidas', 'Big bag', 45, true);
 
 INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (1, 1, 5);
 INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (1, 2, 10);
