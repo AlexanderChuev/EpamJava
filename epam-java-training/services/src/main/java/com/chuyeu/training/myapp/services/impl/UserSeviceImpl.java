@@ -32,7 +32,7 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public UserCredentials getCredentials(Integer id) {
+	public UserCredentials getUserCredentials(Integer id) {
 		return userCredentialsDao.get(id);
 	}
 

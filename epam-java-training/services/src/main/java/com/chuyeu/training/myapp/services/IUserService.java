@@ -16,7 +16,7 @@ public interface IUserService {
 
     UserProfile getUserProfile(Integer id);
 
-    UserCredentials getCredentials(Integer id);
+    UserCredentials getUserCredentials(Integer id);
 
     @Transactional
     void update(UserProfile profile);

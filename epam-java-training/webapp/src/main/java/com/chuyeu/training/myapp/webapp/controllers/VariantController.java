@@ -20,12 +20,14 @@ public class VariantController {
 	@Inject
 	private IVariantService variantService;
 
+	//+++
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createVariant(@RequestBody VariantModel variantModel) {
 		variantService.add(variantModel.getProductVariantId(), variantModel.getAttributeId());
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
-
+	
+	//+++
 	@RequestMapping(value = "/{id1}/{id2}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteVariant(@PathVariable(value = "id1") Integer attributeId, @PathVariable(value = "id2") Integer productVariantId) {
 		variantService.delete(attributeId, productVariantId);

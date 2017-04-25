@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
-import com.chuyeu.training.myapp.services.IVariantService;
 import com.chuyeu.training.myapp.webapp.models.AttributeModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 import com.chuyeu.training.myapp.webapp.models.parts.NameModel;
@@ -28,9 +27,6 @@ public class AttributeController {
 
 	@Inject
 	private IAttributeService attributeService;
-	
-	@Inject
-	private IVariantService variantService;
 	
 	//+++
 	@RequestMapping(value = "/names", method = RequestMethod.GET)
@@ -79,20 +75,22 @@ public class AttributeController {
 		return new ResponseEntity<List<AttributeModel>>(attributesModel, HttpStatus.OK);
 	}
 
+	//+++
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createAttribute(@RequestBody AttributeModel attributeModel) {
 		Attribute attribute = model2entity(attributeModel);
 		attributeService.add(attribute);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
-
+	
+	//+++
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteAttributeValue(@PathVariable(value = "id") Integer id) {
 		attributeService.deleteAttributeValue(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/all/{name}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteAttributeValue(@PathVariable(value = "name") String name) {
 		attributeService.delete(name);
 		return new ResponseEntity<Void>(HttpStatus.OK);
@@ -113,11 +111,5 @@ public class AttributeController {
 		return attribute;
 	}
 
-/*	// замапить на др адрес
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> createVariants(@RequestBody VariantsModel variantsModel) {
-		variantsService.add(variantsModel.getProductVariantId(), variantsModel.getAttributeIds());
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}*/
 	
 }
