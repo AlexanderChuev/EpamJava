@@ -31,7 +31,7 @@ public class AttributeController extends AbstractConroller {
 	@Inject
 	private IVariantService variantService;
 	
-	
+	//+++ сделать еще один клас модель
 	@RequestMapping(value = "/names", method = RequestMethod.GET)
 	public ResponseEntity<?> getAttributeNames() {
 		
@@ -43,7 +43,7 @@ public class AttributeController extends AbstractConroller {
 		}
 		return new ResponseEntity<List<ValueModel>>(values, HttpStatus.OK);
 	}
-
+	//+++
 	@RequestMapping(value = "/values", method = RequestMethod.GET)
 	public ResponseEntity<?> getAttributeValues(@RequestParam(value = "name", required = false) String name) {
 		return new ResponseEntity<List<String>>(attributeService.getValuesByName(name), HttpStatus.OK);
@@ -55,7 +55,7 @@ public class AttributeController extends AbstractConroller {
 		Integer id = attributeService.getIdByNameAndValue(name, value);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.OK);
 	}
-
+	//+++
 	@RequestMapping(value = "/product-variant", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@RequestParam(value = "id", required = false) Integer id) {
 

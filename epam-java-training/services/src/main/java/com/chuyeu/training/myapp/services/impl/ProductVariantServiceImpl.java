@@ -16,7 +16,7 @@ import com.chuyeu.training.myapp.services.IProductVariantService;
 @Service
 public class ProductVariantServiceImpl implements IProductVariantService {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(AttributeServiceImpl.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(ProductVariantServiceImpl.class);
 
 	@Inject
 	private IProductVariantDao productVariantDao;
@@ -39,7 +39,8 @@ public class ProductVariantServiceImpl implements IProductVariantService {
 					productVariant.getAvailableQuantity());
 			return productVariantDao.add(productVariant);
 		} else {
-			LOGGER.info("Insert new productVariant name={}. value={}", productVariant.getId());
+			LOGGER.info("Update productVariant product.id={}. priceInfluence={}. availableQuantity={}",productVariant.getProductId(), productVariant.getPriceInfluence(),
+					productVariant.getAvailableQuantity());
 			return productVariantDao.update(productVariant);
 		}
 

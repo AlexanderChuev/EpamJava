@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
@@ -14,6 +16,8 @@ import com.chuyeu.training.myapp.services.IOrderService;
 @Service
 public class OrderServiceImpl implements IOrderService {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
+	
 	@Inject
 	private IOrdersDao ordersDao;
 

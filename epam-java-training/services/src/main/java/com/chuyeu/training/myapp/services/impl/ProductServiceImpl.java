@@ -16,7 +16,7 @@ import com.chuyeu.training.myapp.services.IProductService;
 @Service
 public class ProductServiceImpl implements IProductService {
 
-	private  final Logger LOGGER = LoggerFactory.getLogger(AttributeServiceImpl.class);
+	private  final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 	
 	@Inject
 	private IProductDao productDao;

@@ -26,6 +26,7 @@ public class ProductVariantController extends AbstractConroller {
 	@Inject
 	private IProductVariantService productVariantService;
 
+	// +++
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllByProduct(@RequestParam(value = "product-id", required = false) Integer productId) {
 
@@ -42,7 +43,6 @@ public class ProductVariantController extends AbstractConroller {
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
 
 		ProductVariant productVariant = productVariantService.getProductVariant(variantId);
-
 		ProductVariantModel productVariantModel = new ProductVariantModel();
 		productVariantModel.setId(productVariant.getId());
 		productVariantModel.setProductId(productVariant.getProductId());
@@ -52,8 +52,9 @@ public class ProductVariantController extends AbstractConroller {
 		return new ResponseEntity<ProductVariantModel>(productVariantModel, HttpStatus.OK);
 	}
 
+	// +++
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createNewProductVariant(@RequestBody ProductVariantModel productVariantModel) {
+	public ResponseEntity<?> createProductVariant(@RequestBody ProductVariantModel productVariantModel) {
 
 		if (productVariantModel == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -67,6 +68,24 @@ public class ProductVariantController extends AbstractConroller {
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
+	// +++
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> updateProductVariant(@RequestBody ProductVariantModel productVariantModel, @PathVariable(value = "id") Integer id) {
+		
+		ProductVariant productVariant = productVariantService.getProductVariant(id);
+		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
+		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());
+		productVariantService.saveOrUpdate(productVariant);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
+	// +++
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteProductVariant(@PathVariable(value = "id") Integer id) {
+		productVariantService.delete(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
 	private ProductVariantModel entity2model(ProductVariant productVariant, Integer id) {
 		ProductVariantModel productVariantModel = new ProductVariantModel();
 		productVariantModel.setId(productVariant.getId());
@@ -75,30 +94,4 @@ public class ProductVariantController extends AbstractConroller {
 		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
 		return productVariantModel;
 	}
-
-	/*
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.PUT) public
-	 * ResponseEntity<Void> updateProduct(@RequestBody ProductModel
-	 * productModel,
-	 * 
-	 * @PathVariable(value = "id") Integer id) {
-	 * 
-	 * Product productFromDb = productService.get(id);
-	 * productFromDb.setName(productModel.getName());
-	 * productFromDb.setDescription(productModel.getDescription());
-	 * productFromDb.setActive(productModel.getActive());
-	 * productFromDb.setBasePrice(productModel.getBasePrice());
-	 * productService.update(productFromDb);
-	 * 
-	 * return new ResponseEntity<Void>(HttpStatus.OK); }
-	 */
-
-	// А надо ли оно вообще?
-
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer id) {
-		productVariantService.delete(id);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-
 }

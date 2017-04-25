@@ -1,5 +1,56 @@
 /* Create attribute fot tests */
 
-INSERT INTO attribute(name, value) VALUES ('Size', 'XL');
+
+INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Adidas', 'Very nice shoes', 50, true);
+INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Nike', 'Lightweight running shoes', 60, true);
+INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Puma', 'Street style', 40, true);
+INSERT INTO product(name, description, base_price, active) VALUES ('Кроссовки Reebok', 'Comfortable shoes', 55, false);
+INSERT INTO product(name, description, base_price, active) VALUES ('Куртка Nike', 'Nice clothes', 55, true);
+INSERT INTO product(name, description, base_price, active) VALUES ('Рюкзак Adidas', 'Big bag', 55, true);
+
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (1, 1, 5);
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (1, 2, 10);
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (2, 3, 15);
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (3, 2, 20);
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (4, 5, 25);
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (5, 3, 30);
+INSERT INTO product_variant(product_id, available_quantity, price_influence) VALUES (6, 1, 35);
+
+INSERT INTO attribute(name, value) VALUES ('Clothes Size', 'S');
+INSERT INTO attribute(name, value) VALUES ('Clothes Size', 'M');
+INSERT INTO attribute(name, value) VALUES ('Clothes Size', 'L');
+INSERT INTO attribute(name, value) VALUES ('Shoes Size', '42');
+INSERT INTO attribute(name, value) VALUES ('Shoes Size', '43');
+INSERT INTO attribute(name, value) VALUES ('Shoes Size', '44');
 INSERT INTO attribute(name, value) VALUES ('Color', 'Black');
 INSERT INTO attribute(name, value) VALUES ('Color', 'Red');
+INSERT INTO attribute(name, value) VALUES ('Color', 'White');
+
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (1, 4);
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (1, 5);
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (2, 6);
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (3, 4);
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (4, 6);
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (5, 1);
+INSERT INTO variant(product_variant_id, attribute_id) VALUES (6, 8);
+
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'aaa@mail.ru', 'aaaaaaaa', 'ADMIN');
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'bbb@mail.ru', 'bbbbbbbb', 'CLIENT');
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'ccc@mail.ru', 'cccccccc', 'CLIENT');
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'ddd@mail.ru', 'dddddddd', 'CLIENT');
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'eee@mail.ru', 'eeeeeeee', 'CLIENT');
+
+INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Иванов', 'Иван', 1);
+INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Петров', 'Петр', 2);
+INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Сидоров', 'Сид', 3);
+INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Гончаров', 'Гена', 4);
+INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Семенович', 'Семен', 5);
+/*
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES (?, ?, ?, ?);
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES (?, ?, ?, ?);
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES (?, ?, ?, ?);
+
+INSERT INTO order_item(product_variant_id, order_quantity, order_id) VALUES (?, ?, ?);
+INSERT INTO order_item(product_variant_id, order_quantity, order_id) VALUES (?, ?, ?);
+INSERT INTO order_item(product_variant_id, order_quantity, order_id) VALUES (?, ?, ?);
+*/
