@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
-import com.chuyeu.training.myapp.webapp.models.ProductModel;
+import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;
 
@@ -29,8 +30,32 @@ public class UserController {
 	@Inject
 	private IUserService userService;
 
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<?> getAllUserProfile(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "column", required = false) String column,
+			@RequestParam(value = "direction", required = false) String direction,
+			@RequestParam(value = "limit", required = false) Integer limit) {
+
+		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
+		
+		List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
+		List<UserProfileModel> listUserProfileModel = new ArrayList<>();
+
+		for (UserProfile userProfile : listUserProfileFromDB) {
+			listUserProfileModel.add(entity2model(userProfile));
+		}
+		
+		EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
+
+		wrapper.setListEntityModel(listUserProfileModel);
+		wrapper.setPageCount(userService.getUserProfileQuantity()); // тут quantity а не page count
+
+		return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
+	}
+
+	// +++
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
+	public ResponseEntity<?> getCredentials(@PathVariable(value = "id") Integer id) {
 
 		UserCredentials userCredentials = userService.getUserCredentials(id);
 		UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
@@ -40,77 +65,60 @@ public class UserController {
 		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> registration(@RequestBody UserCredentialsModel userCredentialsModel) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
+		UserProfile userProfile = userService.getUserProfile(id);
+		return new ResponseEntity<UserProfileModel>(entity2model(userProfile), HttpStatus.OK);
+	}
 
-		if (userCredentialsModel == null) {
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<?> registration(@RequestBody UserCredentialsModel userCredentialsModel,
+			@RequestBody UserProfileModel userProfileModel) {
+
+		if (userCredentialsModel == null || userProfileModel == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		UserCredentials userCredentials = new UserCredentials();
 		userCredentials.setEmail(userCredentialsModel.getEmail());
 		userCredentials.setPassword(userCredentialsModel.getPassword());
 		userCredentials.setUserRole(UserRole.CLIENT);
-		
-		Integer id = userService.
-		return new ResponseEntity<IdModel>(new IdModel(id),HttpStatus.CREATED);
+
+		UserProfile userProfile = new UserProfile();
+		userProfile.setFirstName(userProfileModel.getFirstName());
+		userProfile.setLastName(userProfileModel.getLastName());
+
+		userService.registration(userProfile, userCredentials);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateUserCredentials(@RequestBody UserCredentialsModel userCredentialsModel, @PathVariable(value = "id") Integer id) {
+		UserCredentials userCredentialsFromDb = userService.getUserCredentials(id);
+		userCredentialsFromDb.setPassword(userCredentialsModel.getPassword());
+		userCredentialsFromDb.setUserRole(UserRole.valueOf(userCredentialsModel.getUserRole()));
+		userService.update(userCredentialsFromDb);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/profile/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileModel userProfileModel,
+			@PathVariable(value = "id") Integer id) {
+		UserProfile userProfileFromDb = userService.getUserProfile(id);
+		userProfileFromDb.setFirstName(userProfileModel.getFirstName());
+		userProfileFromDb.setLastName(userProfileModel.getLastName());
+		userService.update(userProfileFromDb);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+
+	private UserProfileModel entity2model(UserProfile userProfile){
+		UserProfileModel userProfileModel = new UserProfileModel();
+		userProfileModel.setFirstName(userProfile.getFirstName());
+		userProfileModel.setLastName(userProfile.getLastName());
+		userProfileModel.setUserCredentialsId(userProfile.getUserCredentialsId());
+		return userProfileModel;
 	}
 
-	/*
-	 * 
-	 * @RequestMapping(method = RequestMethod.GET) public
-	 * ResponseEntity<List<ProductModel>> getAll() {
-	 * 
-	 * userService.getAll() List<ProductModel> productModels = new
-	 * ArrayList<>();
-	 * 
-	 * for (Product product : all) { productModels.add(entity2model(product,
-	 * null)); }
-	 * 
-	 * return new ResponseEntity<List<ProductModel>>(productModels,
-	 * HttpStatus.OK); }
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page) {
-
-		/*
-		 * ProductFilter productFilter = new ProductFilter();// заменить на др
-		 * фильтр productFilter.setLimit(10);
-		 * 
-		 * if (page == null) { productFilter.setPageNumber(1); } else {
-		 * productFilter.setPageNumber(page); }
-		 */
-
-		List<UserProfileModel> listUserModel = new ArrayList<>();
-
-		List<UserProfile> all = userService.getAll();
-
-		for (UserProfile userProfile : all) {
-			UserProfileModel userProfileModel = new UserProfileModel();
-			userProfileModel.setFirstName(userProfile.getFirstName());
-			userProfileModel.setLastName(userProfile.getLastName());
-			listUserModel.add(userProfileModel);
-		}
-
-		return new ResponseEntity<List<UserProfileModel>>(listUserModel, HttpStatus.OK);
-	}
-
-	/*
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.GET) public
-	 * ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
-	 * 
-	 * UserProfile userProfile = userService.getUserProfile(id); UserCredentials
-	 * credentials =
-	 * userService.getCredentials(userProfile.getUserCredentialsId());
-	 * 
-	 * UserProfileModel userProfileModel = new UserProfileModel();
-	 * userProfileModel.setFirstName(userProfile.getFirstName());
-	 * userProfileModel.setLastName(userProfile.getLastName());
-	 * userProfileModel.setEmail(credentials.getEmail());
-	 * userProfileModel.setLastName(credentials.getUserRole().toString());
-	 * 
-	 * return new ResponseEntity<UserProfileModel>(userProfileModel,
-	 * HttpStatus.OK); }
-	 */
 
 }

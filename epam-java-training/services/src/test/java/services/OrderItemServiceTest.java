@@ -139,7 +139,7 @@ public class OrderItemServiceTest extends AbstractTesst{
 		
 		UserProfile userProfile = createUserProfile();
 		UserCredentials userCredentials = createUserCredentials();
-		UserProfile user = userService.saveUser(userProfile, userCredentials);
+		UserProfile user = userService.registration(userProfile, userCredentials);
 		
 		Order order = new Order();
 		order.setCreated(new Date());

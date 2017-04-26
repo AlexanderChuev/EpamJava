@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.api.IUserCredentialsDao;
 import com.chuyeu.training.myapp.dao.api.IUserProfileDao;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.services.IUserService;
@@ -25,7 +26,8 @@ public class UserSeviceImpl implements IUserService {
 
 	@Inject
 	private IUserCredentialsDao userCredentialsDao;
-
+	
+///
 	@Override
 	public UserCredentials findUserCredentials(String email, String password) {
 		return userCredentialsDao.find(email, password);
@@ -43,7 +45,7 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public UserProfile saveUser(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException {
+	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException {
 
 		Integer userCredentialsId = userCredentialsDao.add(userCredentials);
 		userProfile.setUserCredentialsId(userCredentialsId);
@@ -63,14 +65,19 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public List<UserProfile> getAll() {
-		return userProfileDao.getAll();
+	public List<UserProfile> getAll(CommonFilter commonFilter) {
+		return userProfileDao.getAll(commonFilter);
 	}
 	
 	@Override
 	public void delete(Integer id) {
 		userProfileDao.delete(id);
 		userCredentialsDao.delete(id);
+	}
+
+	@Override
+	public Integer getUserProfileQuantity() {
+		return userProfileDao.getUserProfileQuantity();
 	}
 
 }

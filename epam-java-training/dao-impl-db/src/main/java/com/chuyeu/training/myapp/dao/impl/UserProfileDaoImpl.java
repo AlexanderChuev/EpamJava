@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IUserProfileDao;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 
 @Repository
@@ -25,8 +26,9 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<UserProfile> getAll() {
-		return jdbcTemplate.query("select * from user_profile", new BeanPropertyRowMapper<UserProfile>(UserProfile.class));
+	public List<UserProfile> getAll(CommonFilter commonFilter) {
+		String sql = createSql(commonFilter);
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<UserProfile>(UserProfile.class));
 	}
 
 	@Override
@@ -67,6 +69,32 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 	public void delete(Integer id) throws EmptyResultDataAccessException{
 		jdbcTemplate.update("delete from user_profile where id=" + id);	
 		
+	}
+	
+	@Override
+	public Integer getUserProfileQuantity() {
+		return jdbcTemplate.queryForObject("select count (*) from user_profile", Integer.class);
+	}
+	
+	private String createSql(CommonFilter commonFilter) {
+
+		Integer offset = commonFilter.getLimit() * (commonFilter.getPageNumber() - 1);
+
+		StringBuilder stringBuilder = new StringBuilder("select * from user_profile ");
+
+		if (commonFilter.getSort() != null && commonFilter.getSort().getColumn() != null) {
+			stringBuilder.append("order by ").append(commonFilter.getSort().getColumn());
+
+			if ("desc".equals(commonFilter.getSort().getDirection())) {
+				stringBuilder.append(" desc");
+			}
+		}
+
+		stringBuilder.append(" limit ");
+		stringBuilder.append(commonFilter.getLimit());
+		stringBuilder.append(" offset ");
+		stringBuilder.append(offset);
+		return stringBuilder.toString();
 	}
 
 }

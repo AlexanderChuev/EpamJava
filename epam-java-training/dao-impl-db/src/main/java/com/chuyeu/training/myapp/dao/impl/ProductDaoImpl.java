@@ -16,7 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IProductDao;
-import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 
 @Repository
@@ -32,8 +32,8 @@ public class ProductDaoImpl implements IProductDao {
 	}
 
 	@Override
-	public List<Product> getAll(ProductFilter productFilter) {
-		String sql = createSql(productFilter);
+	public List<Product> getAll(CommonFilter commonFilter) {
+		String sql = createSql(commonFilter);
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
 	}
 
@@ -79,22 +79,22 @@ public class ProductDaoImpl implements IProductDao {
 
 	
 	
-	private String createSql(ProductFilter productFilter) {
+	private String createSql(CommonFilter commonFilter) {
 
-		Integer offset = productFilter.getLimit() * (productFilter.getPageNumber() - 1);
+		Integer offset = commonFilter.getLimit() * (commonFilter.getPageNumber() - 1);
 
 		StringBuilder stringBuilder = new StringBuilder("select * from product ");
 
-		if (productFilter.getSort() != null && productFilter.getSort().getColumn() != null) {
-			stringBuilder.append("order by ").append(productFilter.getSort().getColumn());
+		if (commonFilter.getSort() != null && commonFilter.getSort().getColumn() != null) {
+			stringBuilder.append("order by ").append(commonFilter.getSort().getColumn());
 
-			if ("desc".equals(productFilter.getSort().getDirection())) {
+			if ("desc".equals(commonFilter.getSort().getDirection())) {
 				stringBuilder.append(" desc");
 			}
 		}
 
 		stringBuilder.append(" limit ");
-		stringBuilder.append(productFilter.getLimit());
+		stringBuilder.append(commonFilter.getLimit());
 		stringBuilder.append(" offset ");
 		stringBuilder.append(offset);
 		return stringBuilder.toString();

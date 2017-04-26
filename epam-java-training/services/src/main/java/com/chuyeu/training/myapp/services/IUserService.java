@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 
@@ -12,7 +13,7 @@ public interface IUserService {
 	UserCredentials findUserCredentials(String email, String password);
 	
 	@Transactional
-	UserProfile saveUser(UserProfile userProfile, UserCredentials userCredentials);
+	UserProfile registration(UserProfile userProfile, UserCredentials userCredentials);
 
     UserProfile getUserProfile(Integer id);
 
@@ -21,12 +22,14 @@ public interface IUserService {
     @Transactional
     void update(UserProfile profile);
 
-    List<UserProfile> getAll();
+    List<UserProfile> getAll(CommonFilter commonFilter);
 
     @Transactional
     void update(UserCredentials credentials);
     
     @Transactional
 	void delete(Integer id);
+    
+    Integer getUserProfileQuantity();
 
 }

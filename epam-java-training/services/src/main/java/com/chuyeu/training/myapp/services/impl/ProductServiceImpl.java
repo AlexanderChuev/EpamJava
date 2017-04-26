@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.api.IProductDao;
-import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
 
@@ -22,8 +22,8 @@ public class ProductServiceImpl implements IProductService {
 	private IProductDao productDao;
 
 	@Override
-	public List<Product> getAll(ProductFilter productFilter) {
-		return productDao.getAll(productFilter);
+	public List<Product> getAll(CommonFilter commonFilter) {
+		return productDao.getAll(commonFilter);
 	}
 
 	@Override

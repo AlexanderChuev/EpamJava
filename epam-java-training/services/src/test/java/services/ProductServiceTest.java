@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
-import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.dao.api.filters.SortData;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;

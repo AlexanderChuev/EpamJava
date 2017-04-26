@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chuyeu.training.myapp.dao.api.filters.ProductFilter;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.webapp.models.ProductModel;
-import com.chuyeu.training.myapp.webapp.models.ProductModelWrapper;
+import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
 @RestController
@@ -36,24 +36,25 @@ public class ProductController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		ProductFilter productFilter = new ProductFilter(page,limit,column,direction);
+		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
 
-		List<Product> all = productService.getAll(productFilter);
-		List<ProductModel> productModels = new ArrayList<>();
+		List<Product> listProductsFromDb = productService.getAll(commonFilter);
+		List<ProductModel> listProductModel = new ArrayList<>();
 
-		for (Product product : all) {
+		for (Product product : listProductsFromDb) {
 			ProductModel productModel = new ProductModel();
 			productModel.setId(product.getId());
 			productModel.setName(product.getName());
 			productModel.setBasePrice(product.getBasePrice());
-			productModels.add(productModel);
+			listProductModel.add(productModel);
 		}
-		ProductModelWrapper wrapper = new ProductModelWrapper();
+		
+		EntityModelWrapper<ProductModel> wrapper = new EntityModelWrapper<ProductModel>();
 
-		wrapper.setListProductModel(productModels);
+		wrapper.setListEntityModel(listProductModel);
 		wrapper.setPageCount(productService.getProductQuantity());
 
-		return new ResponseEntity<ProductModelWrapper>(wrapper, HttpStatus.OK);
+		return new ResponseEntity<EntityModelWrapper<ProductModel>>(wrapper, HttpStatus.OK);
 	}
 	
 	// +++

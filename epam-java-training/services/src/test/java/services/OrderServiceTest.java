@@ -128,7 +128,7 @@ public class OrderServiceTest extends AbstractTesst {
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 
-		UserProfile savedUser = userService.saveUser(userProfile, userCredentials);
+		UserProfile savedUser = userService.registration(userProfile, userCredentials);
 
 		Order order = new Order();
 		order.setCreated(new Date());
