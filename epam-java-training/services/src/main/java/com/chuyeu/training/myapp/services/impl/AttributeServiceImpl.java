@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.chuyeu.training.myapp.dao.api.IAttributeDao;
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
-import com.chuyeu.training.myapp.services.IVariantService;
 
 @Service
 public class AttributeServiceImpl implements IAttributeService {
@@ -20,9 +19,6 @@ public class AttributeServiceImpl implements IAttributeService {
 
 	@Inject
 	private IAttributeDao attributeDao;
-
-	@Inject
-	private IVariantService variantService;
 	
 	@Override
 	public List<Attribute> getProductVariantAttributes(Integer productVariantId) {
@@ -53,12 +49,13 @@ public class AttributeServiceImpl implements IAttributeService {
 	@Override
 	public void deleteAttributeValue(Integer id) {
 		attributeDao.deleteAttributeValue(id);
+		LOGGER.info("Delete attribute with id " + id);
 	}
 
 	@Override
 	public void delete(String name) {
-		variantService.delete(attributeDao.listIdByName(name));
 		attributeDao.delete(name);
+		LOGGER.info("Delete attribute with name " + name);
 	}
 
 }

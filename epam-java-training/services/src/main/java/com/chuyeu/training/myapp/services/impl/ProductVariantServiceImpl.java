@@ -34,12 +34,13 @@ public class ProductVariantServiceImpl implements IProductVariantService {
 	@Override
 	public Integer saveOrUpdate(ProductVariant productVariant) {
 		if (productVariant.getId() == null) {
-			LOGGER.info("Insert new productVariant product.id={}. priceInfluence={}. availableQuantity={}",
+			LOGGER.info("Insert productVariant with product.id={}. priceInfluence={}. availableQuantity={}",
 					productVariant.getProductId(), productVariant.getPriceInfluence(),
 					productVariant.getAvailableQuantity());
 			return productVariantDao.add(productVariant);
 		} else {
-			LOGGER.info("Update productVariant product.id={}. priceInfluence={}. availableQuantity={}",productVariant.getProductId(), productVariant.getPriceInfluence(),
+			LOGGER.info("Update productVariant with product.id={}. priceInfluence={}. availableQuantity={}",
+					productVariant.getProductId(), productVariant.getPriceInfluence(),
 					productVariant.getAvailableQuantity());
 			return productVariantDao.update(productVariant);
 		}
@@ -49,6 +50,7 @@ public class ProductVariantServiceImpl implements IProductVariantService {
 	@Override
 	public void delete(Integer id) {
 		productVariantDao.delete(id);
+		LOGGER.info("Delete productVariant with id " + id);
 	}
 
 }

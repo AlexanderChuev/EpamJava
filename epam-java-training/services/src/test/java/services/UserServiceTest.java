@@ -31,7 +31,7 @@ public class UserServiceTest extends AbstractTesst {
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 		userService.registration(userProfile, userCredentials);
-		UserCredentials userCredentialsFromDb = userService.findUserCredentials(userCredentials.getEmail(),
+		UserCredentials userCredentialsFromDb = userService.getByEmailAndPassword(userCredentials.getEmail(),
 				userCredentials.getPassword());
 		
 		checkUserCredentials(userCredentialsFromDb, userCredentials);

@@ -5,38 +5,39 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
 @Repository
 public class OrdersDaoXmlImpl implements IOrdersDao {
 
 	@Override
-	public List<Order> getAll() {
+	public List<Order> getAll(CommonFilter commonFilter) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Order get(Integer id) {
+	public Integer save(Order order) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Order insert(Order order) {
-		return null;
-	}
+	public void update(Order order) {
+		// TODO Auto-generated method stub
 
-	@Override
-	public Order update(Order order) {
-		return null;
 	}
 
 	@Override
 	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public Order getOrderByStatus(Integer id, OrderStatus status) {
+	public Order get(Integer id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

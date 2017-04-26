@@ -13,7 +13,7 @@ public interface IOrderItemService{
 	OrderItem get(Integer id);
 	
 	@Transactional
-	OrderItem saveOrUpdate(OrderItem orderItem);
+	void saveOrUpdate(OrderItem orderItem);
 	
 	@Transactional
 	void delete (Integer id);

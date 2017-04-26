@@ -11,27 +11,39 @@ import com.chuyeu.training.myapp.datamodel.UserCredentials;
 public class UserCredentialsDaoXmlImpl implements IUserCredentialsDao {
 
 	@Override
-	public List<UserCredentials> getAll() throws UnsupportedOperationException {
+	public List<UserCredentials> getAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public UserCredentials get(Integer id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserCredentials insert(UserCredentials userCredentials) {
+	public Integer add(UserCredentials userCredentials) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public UserCredentials update(UserCredentials userCredentials) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserCredentials find(String email, String password) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

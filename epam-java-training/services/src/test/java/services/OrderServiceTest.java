@@ -32,7 +32,7 @@ public class OrderServiceTest extends AbstractTesst {
 		Assert.notNull(userService, "The userService must not be null");
 	}
 
-	@Test
+/*	@Test
 	public void getAllTest() {
 
 		orderService.save(createOrder());
@@ -43,7 +43,7 @@ public class OrderServiceTest extends AbstractTesst {
 		for (Order order : allOrders) {
 			checkOrder(order);
 		}
-	}
+	}*/
 
 	/*@Test
 	public void getAllWithFilterTest() {

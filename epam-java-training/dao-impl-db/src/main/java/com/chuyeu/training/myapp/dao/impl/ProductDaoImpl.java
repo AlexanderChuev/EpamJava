@@ -82,7 +82,6 @@ public class ProductDaoImpl implements IProductDao {
 	private String createSql(CommonFilter commonFilter) {
 
 		Integer offset = commonFilter.getLimit() * (commonFilter.getPageNumber() - 1);
-
 		StringBuilder stringBuilder = new StringBuilder("select * from product ");
 
 		if (commonFilter.getSort() != null && commonFilter.getSort().getColumn() != null) {

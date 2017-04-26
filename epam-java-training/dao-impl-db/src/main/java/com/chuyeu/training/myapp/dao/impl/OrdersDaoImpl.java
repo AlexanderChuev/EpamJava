@@ -15,9 +15,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
-import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.dao.mapper.OrderMapper;
-import com.chuyeu.training.myapp.dao.util.Converter;
 import com.chuyeu.training.myapp.datamodel.Order;
 
 @Repository
@@ -27,9 +26,8 @@ public class OrdersDaoImpl implements IOrdersDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Order> getAll(OrderFilter orderFilter) {
-		Converter converter = new Converter();
-		String sql = converter.buildGetAllOrderSql(orderFilter);
+	public List<Order> getAll(CommonFilter commonFilter) {
+		String sql = createSql(commonFilter);
 		return jdbcTemplate.query("select * from orders" + sql, new OrderMapper());
 	}
 
@@ -72,6 +70,26 @@ public class OrdersDaoImpl implements IOrdersDao {
 	@Override
 	public void delete(Integer id){
 		jdbcTemplate.update("delete from orders where id=" + id);
+	}
+	
+	private String createSql(CommonFilter commonFilter) {
+
+		StringBuilder sql = new StringBuilder("");
+		if (commonFilter.getOrderStatus() != null) {
+			sql.append(" where order_status = '");
+			sql.append(commonFilter.getOrderStatus().toString());
+			sql.append("'");
+		}
+
+		if (commonFilter.getSort() != null && commonFilter.getSort().getColumn() != null) {
+			sql.append(" order by ");
+			sql.append(commonFilter.getSort().getColumn());
+			sql.append(" ");
+			if (commonFilter.getSort().getDirection() != null) {
+				sql.append(commonFilter.getSort().getDirection());
+			}
+		}
+		return sql.toString();
 	}
 
 }

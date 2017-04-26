@@ -16,8 +16,8 @@ import com.chuyeu.training.myapp.services.IProductService;
 @Service
 public class ProductServiceImpl implements IProductService {
 
-	private  final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
-	
+	private final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
+
 	@Inject
 	private IProductDao productDao;
 
@@ -33,20 +33,22 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public void delete(Integer id) {
-		
 		productDao.delete(id);
+		LOGGER.info("Delete product with id " + id);
 	}
 
 	@Override
 	public Integer add(Product product) {
-		LOGGER.info("Insert new product name={}. description={}. basePrice={}. active={}", 
-				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive());
+		LOGGER.info("Insert product with name={}. description={}. basePrice={}. active={}", product.getName(),
+				product.getDescription(), product.getBasePrice(), product.getActive());
 		return productDao.add(product);
 	}
 
 	@Override
 	public void update(Product product) {
 		productDao.update(product);
+		LOGGER.info("Update product with id={}. name={}. description={}. basePrice={}. active={}", product.getId(),
+				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive());
 	}
 
 	@Override

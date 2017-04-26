@@ -20,5 +20,5 @@ public interface IAttributeDao {
 	
 	void add(Attribute attribute);
 
-	List<Integer> listIdByName(String name);
+	List<Integer> getAllIdByName(String name);
 }

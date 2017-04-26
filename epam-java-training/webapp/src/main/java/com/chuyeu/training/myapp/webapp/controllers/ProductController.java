@@ -36,7 +36,7 @@ public class ProductController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
+		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction,null);
 
 		List<Product> listProductsFromDb = productService.getAll(commonFilter);
 		List<ProductModel> listProductModel = new ArrayList<>();

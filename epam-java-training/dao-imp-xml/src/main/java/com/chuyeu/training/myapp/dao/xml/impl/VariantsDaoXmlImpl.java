@@ -1,26 +1,22 @@
 package com.chuyeu.training.myapp.dao.xml.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.api.IVariantsDao;
+import com.chuyeu.training.myapp.dao.api.IVariantDao;
 
 @Repository
-public class VariantsDaoXmlImpl implements IVariantsDao{
-	
+public class VariantsDaoXmlImpl implements IVariantDao {
 
 	@Override
-	public void delete(List<Integer> listId) {
-	}
-	
-	@Override
-	public void delete(Integer id) {
-		
+	public void delete(Integer attributeId, Integer productVariantId) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void add(Integer productVariantId, List<Integer> listAttributeId) {
+	public void add(Integer productVariantId, Integer attributeId) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

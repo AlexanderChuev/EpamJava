@@ -22,6 +22,7 @@ import com.chuyeu.training.myapp.services.IUserService;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;
+import com.chuyeu.training.myapp.webapp.models.UserWrapper;
 
 @RestController
 @RequestMapping("/user")
@@ -30,13 +31,14 @@ public class UserController {
 	@Inject
 	private IUserService userService;
 
+	// +++
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUserProfile(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "column", required = false) String column,
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
+		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction,null);
 		
 		List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
 		List<UserProfileModel> listUserProfileModel = new ArrayList<>();
@@ -65,28 +67,43 @@ public class UserController {
 		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
 	}
 
+	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
 		UserProfile userProfile = userService.getUserProfile(id);
 		return new ResponseEntity<UserProfileModel>(entity2model(userProfile), HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "/authorization", method = RequestMethod.GET)
+	public ResponseEntity<?> getByEmailAndPassword(@RequestParam(value = "email", required = false) String email,
+			@RequestParam(value = "password", required = false) String password) {
 
+		UserCredentials userCredentialsFromDb = userService.getByEmailAndPassword(email, password);
+		UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
+		userCredentialsModel.setId(userCredentialsFromDb.getId());
+		userCredentialsModel.setEmail(userCredentialsFromDb.getEmail());
+
+		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
+	}
+
+	// +++
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> registration(@RequestBody UserCredentialsModel userCredentialsModel,
-			@RequestBody UserProfileModel userProfileModel) {
+	public ResponseEntity<?> registration(@RequestBody UserWrapper userWrapper) {
 
-		if (userCredentialsModel == null || userProfileModel == null) {
+		
+		if (userWrapper.getUserCredentialsModel() == null || userWrapper.getUserProfileModel() == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 
 		UserCredentials userCredentials = new UserCredentials();
-		userCredentials.setEmail(userCredentialsModel.getEmail());
-		userCredentials.setPassword(userCredentialsModel.getPassword());
+		userCredentials.setEmail(userWrapper.getUserCredentialsModel().getEmail());
+		userCredentials.setPassword(userWrapper.getUserCredentialsModel().getPassword());
 		userCredentials.setUserRole(UserRole.CLIENT);
 
 		UserProfile userProfile = new UserProfile();
-		userProfile.setFirstName(userProfileModel.getFirstName());
-		userProfile.setLastName(userProfileModel.getLastName());
+		userProfile.setFirstName(userWrapper.getUserProfileModel().getFirstName());
+		userProfile.setLastName(userWrapper.getUserProfileModel().getLastName());
 
 		userService.registration(userProfile, userCredentials);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -120,5 +137,13 @@ public class UserController {
 		return userProfileModel;
 	}
 
+	// json
+/*	@RequestMapping(value = "/c/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getC(@PathVariable(value = "id") Integer id) {
+		UserWrapper userWrapper = new UserWrapper();
+		userWrapper.setUserCredentialsModel(new UserCredentialsModel());
+		userWrapper.setUserProfileModel(new UserProfileModel());
+		return new ResponseEntity<UserWrapper>(userWrapper, HttpStatus.OK);
+	}*/
 
 }

@@ -10,9 +10,9 @@ public interface IOrderItemDao {
 
 	OrderItem get(Integer id);
 
-	OrderItem insert(OrderItem orderItem);
+	void insert(OrderItem orderItem);
 
-	OrderItem update(OrderItem orderItem);
+	void update(OrderItem orderItem);
 
 	void delete(Integer id);
 }

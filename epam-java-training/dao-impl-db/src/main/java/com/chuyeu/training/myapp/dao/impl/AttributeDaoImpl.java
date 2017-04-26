@@ -57,7 +57,7 @@ public class AttributeDaoImpl implements IAttributeDao {
 	
 	
 	@Override
-	public List<Integer> listIdByName(String name) {
+	public List<Integer> getAllIdByName(String name) {
 		return jdbcTemplate.queryForList("select id from attribute where name = ?", new Object[] { name },
 				Integer.class);
 	}

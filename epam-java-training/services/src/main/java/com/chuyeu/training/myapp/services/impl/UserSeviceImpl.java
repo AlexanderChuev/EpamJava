@@ -20,16 +20,16 @@ import com.chuyeu.training.myapp.services.IUserService;
 public class UserSeviceImpl implements IUserService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(UserSeviceImpl.class);
-	
+
 	@Inject
 	private IUserProfileDao userProfileDao;
 
 	@Inject
 	private IUserCredentialsDao userCredentialsDao;
-	
-///
+
+	///
 	@Override
-	public UserCredentials findUserCredentials(String email, String password) {
+	public UserCredentials getByEmailAndPassword(String email, String password) {
 		return userCredentialsDao.find(email, password);
 	}
 
@@ -39,19 +39,25 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public void update(UserCredentials credentials) {
-		userCredentialsDao.update(credentials);
-
+	public void update(UserCredentials userCredentials) {
+		userCredentialsDao.update(userCredentials);
+		LOGGER.info("Update userCredentials with id={}. Email={}. UserRole={}", userCredentials.getId(),
+				userCredentials.getEmail(), userCredentials.getUserRole().toString());
 	}
 
 	@Override
-	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials) throws DuplicateKeyException {
+	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials)
+			throws DuplicateKeyException {
 
 		Integer userCredentialsId = userCredentialsDao.add(userCredentials);
 		userProfile.setUserCredentialsId(userCredentialsId);
+
+		LOGGER.info("Insert user  with id={}. Email={}. UserRole={}. FirstName={}. LastName={}. ", userCredentialsId,
+				userCredentials.getEmail(), userCredentials.getUserRole().toString(), userProfile.getFirstName(),
+				userProfile.getLastName());
+
 		return userProfileDao.insert(userProfile);
 	}
-	
 
 	@Override
 	public UserProfile getUserProfile(Integer id) {
@@ -59,20 +65,25 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public void update(UserProfile profile) {
-		userProfileDao.update(profile);
-
+	public void update(UserProfile userProfile) {
+		userProfileDao.update(userProfile);
+		LOGGER.info("Update UserProfile with id={}. FirstName={}. LastName={}. UserCredentialsId={}",
+				userProfile.getId(), userProfile.getFirstName(), userProfile.getLastName(),
+				userProfile.getUserCredentialsId());
 	}
 
 	@Override
 	public List<UserProfile> getAll(CommonFilter commonFilter) {
 		return userProfileDao.getAll(commonFilter);
 	}
-	
+
+	/// ???
 	@Override
 	public void delete(Integer id) {
 		userProfileDao.delete(id);
+		LOGGER.info("Delete userProfile with id " + id);
 		userCredentialsDao.delete(id);
+		LOGGER.info("Delete userCredentials with id " + id);
 	}
 
 	@Override

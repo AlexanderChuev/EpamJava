@@ -2,15 +2,25 @@ package com.chuyeu.training.myapp.webapp.models;
 
 public class OrderItemModel {
 
-	private ProductVariantModel productVariantModel;
+	private Integer id;
+	private Integer productVariantId;
 	private Integer orderQuantity;
+	private Integer orderId;
 
-	public ProductVariantModel getProductVariantModel() {
-		return productVariantModel;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setProductVariantModel(ProductVariantModel productVariantModel) {
-		this.productVariantModel = productVariantModel;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getProductVariantId() {
+		return productVariantId;
+	}
+
+	public void setProductVariantId(Integer productVariantId) {
+		this.productVariantId = productVariantId;
 	}
 
 	public Integer getOrderQuantity() {
@@ -19,6 +29,14 @@ public class OrderItemModel {
 
 	public void setOrderQuantity(Integer orderQuantity) {
 		this.orderQuantity = orderQuantity;
+	}
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 }

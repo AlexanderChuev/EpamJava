@@ -10,7 +10,7 @@ import com.chuyeu.training.myapp.datamodel.UserProfile;
 
 public interface IUserService {
 	
-	UserCredentials findUserCredentials(String email, String password);
+	UserCredentials getByEmailAndPassword(String email, String password);
 	
 	@Transactional
 	UserProfile registration(UserProfile userProfile, UserCredentials userCredentials);

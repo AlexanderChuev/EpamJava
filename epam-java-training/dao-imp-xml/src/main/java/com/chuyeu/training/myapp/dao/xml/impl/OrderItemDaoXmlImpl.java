@@ -10,30 +10,34 @@ import com.chuyeu.training.myapp.datamodel.OrderItem;
 @Repository
 public class OrderItemDaoXmlImpl implements IOrderItemDao {
 
-	
 	@Override
 	public List<OrderItem> getAll() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OrderItem get(Integer id) {
-		return null;		
-	}
-
-	@Override
-	public OrderItem insert(OrderItem orderItem) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public OrderItem update(OrderItem orderItem) {
-		return null;
+	public void insert(OrderItem orderItem) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void delete(Integer id){
-		
+	public void update(OrderItem orderItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

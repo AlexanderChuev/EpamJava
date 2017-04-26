@@ -10,36 +10,34 @@ import com.chuyeu.training.myapp.datamodel.ProductVariant;
 @Repository
 public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 
-
 	@Override
-	public List<ProductVariant> getAll() {
+	public List<ProductVariant> getAllByProduct(Integer productId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
-	// +++
 	@Override
 	public ProductVariant get(Integer id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ProductVariant insert(ProductVariant productVariant) {
+	public Integer add(ProductVariant productVariant) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ProductVariant update(ProductVariant product_variant) {
+	public Integer update(ProductVariant productVariant) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void delete(Integer id) {
+		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public List<ProductVariant> getAllByProduct(Integer productId) {
-		return null;
 	}
 
 }

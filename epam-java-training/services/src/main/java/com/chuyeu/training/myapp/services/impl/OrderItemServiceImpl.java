@@ -16,10 +16,10 @@ import com.chuyeu.training.myapp.services.IOrderItemService;
 public class OrderItemServiceImpl implements IOrderItemService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(OrderItemServiceImpl.class);
-	
+
 	@Inject
 	private IOrderItemDao orderItemDao;
-	
+
 	@Override
 	public List<OrderItem> getAllByOrderId(Integer orderId) {
 		return orderItemDao.getAll();
@@ -33,15 +33,22 @@ public class OrderItemServiceImpl implements IOrderItemService {
 	@Override
 	public void delete(Integer id) {
 		orderItemDao.delete(id);
+		LOGGER.info("Delete order item with id " + id);
 	}
 
 	@Override
-	public OrderItem saveOrUpdate(OrderItem orderItem) {
+	public void saveOrUpdate(OrderItem orderItem) {
 		if (orderItem.getId() == null) {
-			return orderItemDao.insert(orderItem);
+			orderItemDao.insert(orderItem);
+			LOGGER.info("Insert OrderItem with ProductVariantId={}. OrderQuantity={}. OrderId={}",
+					orderItem.getProductVariantId(), orderItem.getOrderQuantity(), orderItem.getOrderId());
 		} else {
-			return orderItemDao.update(orderItem);
+			orderItemDao.update(orderItem);
+			LOGGER.info("Update OrderItem with Id ={}. ProductVariantId={}. OrderQuantity={}. OrderId={}",
+					orderItem.getId(), orderItem.getProductVariantId(), orderItem.getOrderQuantity(),
+					orderItem.getOrderId());
 		}
+
 	}
 
 }

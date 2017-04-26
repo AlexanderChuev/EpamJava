@@ -2,9 +2,18 @@ package com.chuyeu.training.myapp.webapp.models;
 
 public class UserCredentialsModel {
 
+	private Integer id;
 	private String email;
 	private String password;
 	private String userRole;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getEmail() {
 		return email;
