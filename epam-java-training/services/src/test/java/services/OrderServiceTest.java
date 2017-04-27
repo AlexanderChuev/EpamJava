@@ -20,11 +20,7 @@ import com.chuyeu.training.myapp.services.IUserService;
 
 public class OrderServiceTest extends AbstractTesst {
 
-	@Inject
-	private IOrderService orderService;
-
-	@Inject
-	private IUserService userService;
+	
 
 	@Test
 	public void test() {

@@ -10,18 +10,16 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
-import com.chuyeu.training.myapp.dao.api.filters.SortData;
+import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
 
 public class ProductServiceTest extends AbstractTesst {
 
-	@Inject
-	private IProductService productService;
 
 	@Test
 	public void test() {
-		Assert.notNull(productService,"The productService must not be null");
+		Assert.notNull(productService, "The productService must not be null");
 	}
 
 	@Test
@@ -61,30 +59,22 @@ public class ProductServiceTest extends AbstractTesst {
 		productService.get(id);
 	}
 
-/*	@Test
+	@Test
 	public void getAllTest() {
 
 		productService.add(createProduct());
 		Integer productQuantity = productService.getProductQuantity();
 		Assert.notNull(productQuantity, "The product quantity must not be null");
-		
-		ProductFilter productFilter = new ProductFilter();
+		Integer limit = 2;
 
-		Integer limit = 5;
+		Integer pageCount = (int) Math.ceil((double) productQuantity / limit);
 
-		Integer pageNumber = (int) Math.ceil((double) productQuantity / limit);
+		for (int i = 1; i <= pageCount; i++) {
 
-		productFilter.setLimit(limit);
-		
-		SortData sort = new SortData();
-		sort.setColumn("name");
-		productFilter.setSort(sort);
+			Integer pageNumber = pageCount;
+			CommonFilter commonFilter = new CommonFilter(pageNumber, limit, "name", "desc", OrderStatus.BASKET);
 
-		for (int i = 1; i <= pageNumber; i++) {
-
-			productFilter.setPageNumber(i);
-
-			List<Product> products = productService.getAll(productFilter);
+			List<Product> products = productService.getAll(commonFilter);
 
 			Assert.notNull(products, "The list of products must not be null");
 			Assert.notEmpty(products, "The list of products must not be empty");
@@ -93,9 +83,7 @@ public class ProductServiceTest extends AbstractTesst {
 				checkProductFromDb(product);
 			}
 		}
-	}*/
-
-	
+	}
 
 	private Product changeProduct(Product product) {
 		product.setName("Adidas" + new Date().getTime());
@@ -112,8 +100,7 @@ public class ProductServiceTest extends AbstractTesst {
 		Assert.isTrue(productFromDb.getName().equals(product.getName()), "Fields must be equal (name)");
 		Assert.isTrue(productFromDb.getDescription().equals(product.getDescription()),
 				"Fields must be equal (description)");
-		Assert.isTrue(productFromDb.getBasePrice().equals(product.getBasePrice()),
-				"Fields must be equal (price)");
+		Assert.isTrue(productFromDb.getBasePrice().equals(product.getBasePrice()), "Fields must be equal (price)");
 		Assert.isTrue(productFromDb.getActive().equals(product.getActive()), "Fields must be equal (active)");
 	}
 

@@ -10,12 +10,6 @@ import com.chuyeu.training.myapp.services.IProductVariantService;
 
 public class ProductVariantServiceTest extends AbstractTesst {
 
-	@Inject
-	private IProductVariantService productVariantService;
-
-	@Inject
-	private IProductService productService;
-
 	@Test
 	public void test() {
 		Assert.notNull(productVariantService, "The productVariantService must not be null");

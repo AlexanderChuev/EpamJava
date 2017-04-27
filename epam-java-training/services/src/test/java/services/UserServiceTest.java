@@ -17,9 +17,6 @@ import com.chuyeu.training.myapp.services.IUserService;
 
 public class UserServiceTest extends AbstractTesst {
 
-	@Inject
-	private IUserService userService;
-	
 	@Test
 	public void test() {
 		Assert.notNull(userService, "The userService must not be null");

@@ -19,21 +19,6 @@ import com.chuyeu.training.myapp.services.IUserService;
 
 public class OrderItemServiceTest extends AbstractTesst{
 
-	@Inject
-	private IOrderItemService orderItemService;
-	
-	@Inject
-	private IProductService productService;
-	
-	@Inject
-	private IProductVariantService productVariantService;
-	
-	@Inject
-	private IUserService userService;
-	
-	@Inject
-	private IOrderService orderService;
-	
 	
 	@Test
 	public void test() {

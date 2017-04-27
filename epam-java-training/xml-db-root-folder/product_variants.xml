@@ -1,0 +1,12 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.ProductVariant/>
+    <com.chuyeu.training.myapp.datamodel.ProductVariant>
+      <id>1</id>
+      <productId>23</productId>
+      <availableQuantity>2</availableQuantity>
+      <priceInfluence>30.0</priceInfluence>
+    </com.chuyeu.training.myapp.datamodel.ProductVariant>
+  </rows>
+  <lastId>1</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

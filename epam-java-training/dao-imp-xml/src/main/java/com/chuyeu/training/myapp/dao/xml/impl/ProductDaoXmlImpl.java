@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IProductDao;
@@ -25,28 +26,40 @@ public class ProductDaoXmlImpl implements IProductDao {
 
 	@Override
 	public List<Product> getAll(CommonFilter commonFilter) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Product get(Integer id) {
-		getFile();
-		return null;
+
+		File file = getFile();
+
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
+		List<Product> products = wrapper.getRows();
+
+		for (Product product : products) {
+			if (product.getId().equals(id)) {
+				return product;
+			}
+		}
+		throw new EmptyResultDataAccessException("This attribute is already exist",0);
 	}
 
 	@Override
 	public Integer add(Product product) {
+
 		File file = getFile();
 
+		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
 
-		List<Product> products = wrapper.getRows();
+		List<Product> productsFromDb = wrapper.getRows();
 		Integer lastId = wrapper.getLastId();
 		int newId = lastId + 1;
 
 		product.setId(newId);
-		products.add(product);
+		productsFromDb.add(product);
 
 		wrapper.setLastId(newId);
 		writeNewData(file, wrapper);
@@ -55,23 +68,62 @@ public class ProductDaoXmlImpl implements IProductDao {
 
 	@Override
 	public void update(Product product) {
-		// TODO Auto-generated method stub
 
+		File file = getFile();
+
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
+
+		List<Product> productsFromDb = wrapper.getRows();
+		for (Product productFromDb : productsFromDb) {
+			if (productFromDb.getId().equals(product.getId())) {
+				productFromDb.setName(product.getName());
+				productFromDb.setDescription(product.getDescription());
+				productFromDb.setBasePrice(product.getBasePrice());
+				productFromDb.setActive(product.getActive());
+				break;
+			}
+		}
+
+		writeNewData(file, wrapper);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+
+		File file = getFile();
+
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
+
+		List<Product> productsFromDb = wrapper.getRows();
+		Product found = null;
+		for (Product productFromDb : productsFromDb) {
+			if (productFromDb.getId().equals(id)) {
+				found = productFromDb;
+				break;
+			}
+		}
+		if (found != null) {
+			productsFromDb.remove(found);
+			writeNewData(file, wrapper);
+		}
 
 	}
 
 	@Override
 	public Integer getProductQuantity() {
-		// TODO Auto-generated method stub
-		return null;
+		File file = getFile();
+
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
+
+		List<Product> productsFromDb = wrapper.getRows();
+
+		return productsFromDb.size();
 	}
 
-	private void writeNewData(File file, XmlModelWrapper obj) {
+	private void writeNewData(File file, @SuppressWarnings("rawtypes") XmlModelWrapper obj) {
 		try {
 			xstream.toXML(obj, new FileOutputStream(file));
 		} catch (FileNotFoundException e) {
@@ -80,7 +132,7 @@ public class ProductDaoXmlImpl implements IProductDao {
 	}
 
 	private File getFile() {
-		File file = new File(rootFolder + "books.xml");
+		File file = new File(rootFolder + "products.xml");
 		return file;
 	}
 

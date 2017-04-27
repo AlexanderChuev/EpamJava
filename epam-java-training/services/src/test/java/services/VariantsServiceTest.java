@@ -1,10 +1,15 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.chuyeu.training.myapp.datamodel.Attribute;
+import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IAttributeService;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
@@ -12,67 +17,47 @@ import com.chuyeu.training.myapp.services.IVariantService;
 
 public class VariantsServiceTest extends AbstractTesst{
 
-	@Inject
-	private IVariantService variantService;
-	
-	@Inject
-	private IProductService productService;
-	
-	@Inject
-	private IProductVariantService productVariantsService;
-	
-	@Inject
-	private IAttributeService attributeService;
-
 	@Test
 	public void test() {
 		Assert.notNull(variantService, "The variantsService must not be null");
 		Assert.notNull(productService, "The productService must not be null");
-		Assert.notNull(productVariantsService, "The productVariantsService must not be null");
+		Assert.notNull(productVariantService, "The productVariantsService must not be null");
 		Assert.notNull(attributeService, "The attributeService must not be null");
 	}
 	
-	/*@Test
+	@Test
 	public void addTest(){
 	
 		Integer productId = productService.add(createProduct());
-		
 		ProductVariant productVariant = createProductVariant(productId);
-		productVariantsService.saveOrUpdate(productVariant);
-		
-		Integer productVariantId = productVariantsService.getAllByProduct(productId).get(0).getProductVariant().getId();
-		
-		List<Integer> list = new ArrayList<>();
-		list.add(getSavedAttributeId());
-		list.add(getSavedAttributeId());
-		variantsService.add(productVariantId, list);
-		
+		Integer productVariantId = productVariantService.saveOrUpdate(productVariant);
+		variantService.add(productVariantId, getSavedAttributeId());
 	}
 	
-	@Test
+	/*@Test
 	public void deleteTest(){
 		
 		Integer productId = productService.add(createProduct());
 		
 		ProductVariant productVariant = createProductVariant(productId);
-		productVariantsService.saveOrUpdate(productVariant);
+		productVariantService.saveOrUpdate(productVariant);
 		
-		Integer productVariantId = productVariantsService.getAllByProduct(productId).get(0).getProductVariant().getId();
+		Integer productVariantId = productVariantService.getAllByProduct(productId).get(0).getProductVariant().getId();
 		
 		Integer attributeId = getSavedAttributeId();
 		
 		List<Integer> list = new ArrayList<>();
 		list.add(attributeId);
-		variantsService.add(productVariantId, list);
+		variantService.add(productVariantId, list);
 		
-		variantsService.delete(attributeId);
-		variantsService.delete(attributeId);
-	}
+		variantService.delete(attributeId);
+		variantService.delete(attributeId);
+	}*/
 	
 	private Integer getSavedAttributeId(){
 		Attribute attribute = createAttribute();
 		attributeService.add(attribute);
 		return attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
-	}*/
+	}
 	
 }

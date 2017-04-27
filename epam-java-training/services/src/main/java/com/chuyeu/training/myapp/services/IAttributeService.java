@@ -24,5 +24,7 @@ public interface IAttributeService {
 
 	@Transactional
 	void delete(String name);
+	
+	List<Integer> getAllIdByName(String name);
 
 }

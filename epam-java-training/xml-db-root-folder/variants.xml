@@ -1,0 +1,17 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <attributeId>76</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <attributeId>77</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <attributeId>78</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <attributeId>79</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+  </rows>
+  <lastId>0</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

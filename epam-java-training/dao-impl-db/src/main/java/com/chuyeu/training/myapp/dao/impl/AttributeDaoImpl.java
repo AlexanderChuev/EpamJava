@@ -31,7 +31,7 @@ public class AttributeDaoImpl implements IAttributeDao {
 	}
 
 	@Override
-	public void delete(String name) {
+	public void deleteByName(String name) {
 		jdbcTemplate.update("delete from attribute where name = '" + name + "'");
 	}
 

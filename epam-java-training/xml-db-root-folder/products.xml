@@ -1,0 +1,152 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>1</id>
+      <name>Saucony1493277699511</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>2</id>
+      <name>Saucony1493277794840</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>3</id>
+      <name>Saucony1493278182093</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>4</id>
+      <name>Saucony1493278430328</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>5</id>
+      <name>Saucony1493278475499</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>6</id>
+      <name>Saucony1493278542656</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>7</id>
+      <name>Saucony1493278752121</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>8</id>
+      <name>Saucony1493278840442</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>9</id>
+      <name>Saucony1493278875133</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>10</id>
+      <name>Adidas1493281974589</name>
+      <description>Vietnam shoes</description>
+      <basePrice>60.0</basePrice>
+      <active>false</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>11</id>
+      <name>Saucony1493281974603</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>13</id>
+      <name>Adidas1493290085567</name>
+      <description>Vietnam shoes</description>
+      <basePrice>60.0</basePrice>
+      <active>false</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>14</id>
+      <name>Saucony1493290085582</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>15</id>
+      <name>Saucony1493290085598</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>17</id>
+      <name>Saucony1493295100942</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>18</id>
+      <name>Saucony1493295350785</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>19</id>
+      <name>Saucony1493295408205</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>20</id>
+      <name>Saucony1493295458993</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>21</id>
+      <name>Saucony1493297608201</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>22</id>
+      <name>Saucony1493297714698</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>23</id>
+      <name>Saucony1493297887298</name>
+      <description>China shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+  </rows>
+  <lastId>23</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

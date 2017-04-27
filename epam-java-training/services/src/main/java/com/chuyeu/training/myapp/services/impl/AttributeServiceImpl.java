@@ -54,8 +54,13 @@ public class AttributeServiceImpl implements IAttributeService {
 
 	@Override
 	public void delete(String name) {
-		attributeDao.delete(name);
+		attributeDao.deleteByName(name);
 		LOGGER.info("Delete attribute with name " + name);
+	}
+
+	@Override
+	public List<Integer> getAllIdByName(String name) {
+		return attributeDao.getAllIdByName(name);
 	}
 
 }

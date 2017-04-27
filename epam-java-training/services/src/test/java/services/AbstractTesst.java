@@ -2,6 +2,8 @@ package services;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -13,11 +15,46 @@ import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
+import com.chuyeu.training.myapp.services.IAttributeService;
+import com.chuyeu.training.myapp.services.IOrderItemService;
+import com.chuyeu.training.myapp.services.IOrderService;
+import com.chuyeu.training.myapp.services.IProductService;
+import com.chuyeu.training.myapp.services.IProductVariantService;
+import com.chuyeu.training.myapp.services.IUserService;
+import com.chuyeu.training.myapp.services.IVariantService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:services-context.xml")
-@Transactional
+//@Transactional
 public class AbstractTesst {
+	
+	@Inject
+	IProductService productService;
+	
+	@Inject
+	IVariantService variantService;
+	
+	@Inject
+	IAttributeService attributeService;
+	
+	@Inject
+	IProductVariantService productVariantService;
+	
+	@Inject
+	IOrderItemService orderItemService;
+	
+	@Inject
+	IOrderService orderService;
+
+	@Inject
+	IUserService userService;
+	
+	
+	
+	@Inject
+	private IProductVariantService productVariantsService;
+	
+	
 
 	public Product createProduct() {
 
