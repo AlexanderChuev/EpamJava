@@ -6,12 +6,10 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IVariantDao;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
-import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.Variant;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;

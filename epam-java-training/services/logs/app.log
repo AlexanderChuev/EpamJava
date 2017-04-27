@@ -156,3 +156,123 @@
 16:16:39.956 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 86
 16:16:39.966 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493298999960. value=Value1493298999960
 16:16:39.975 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493298999970. value=Value1493298999970
+16:24:29.174 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493299469173. description=China shoes. basePrice=50.0. active=true
+16:24:29.206 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=24. priceInfluence=30.0. availableQuantity=2
+16:24:29.228 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493299469209. value=Value1493299469209
+16:24:29.240 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=89. productVariantId=2 
+16:35:35.797 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493300135796. description=China shoes. basePrice=50.0. active=true
+16:35:35.830 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=25. priceInfluence=30.0. availableQuantity=2
+16:35:35.858 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493300135834. value=Value1493300135834
+16:35:35.869 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=90. productVariantId=3 
+16:35:35.872 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493300135872. description=China shoes. basePrice=50.0. active=true
+16:35:35.879 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=26. priceInfluence=30.0. availableQuantity=2
+16:35:35.891 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493300135882. value=Value1493300135882
+16:35:35.897 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=91. productVariantId=4 
+16:35:35.899 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Delete variant with attributeId=4. productVariantId=91 
+16:35:46.343 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493300146342. description=China shoes. basePrice=50.0. active=true
+16:35:46.376 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=27. priceInfluence=30.0. availableQuantity=2
+16:35:46.401 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493300146381. value=Value1493300146381
+16:35:46.413 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=92. productVariantId=5 
+16:35:46.416 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493300146416. description=China shoes. basePrice=50.0. active=true
+16:35:46.423 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=28. priceInfluence=30.0. availableQuantity=2
+16:35:46.435 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493300146426. value=Value1493300146426
+16:35:46.442 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=93. productVariantId=6 
+16:35:46.443 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Delete variant with attributeId=6. productVariantId=93 
+17:35:30.555 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730512. value=Value1493303730512
+17:35:30.582 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730568. value=Value1493303730568
+17:35:30.592 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730568. value=second
+17:35:30.602 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493303730568
+17:35:30.616 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730608. value=Value1493303730608
+17:35:30.624 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730608. value=second
+17:35:30.636 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730630. value=Value1493303730630
+17:35:30.648 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730642. value=Value1493303730642
+17:35:30.658 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 100
+17:35:30.663 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493303730663. description=China shoes. basePrice=50.0. active=true
+17:35:30.670 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=29. priceInfluence=30.0. availableQuantity=2
+17:35:30.684 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730673. value=Value1493303730673
+17:35:30.697 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730691. value=Value1493303730691
+17:35:30.707 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303730701. value=Value1493303730701
+17:37:16.253 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836212. value=Value1493303836212
+17:37:16.281 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836266. value=Value1493303836266
+17:37:16.293 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836266. value=second
+17:37:16.302 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493303836266
+17:37:16.316 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836308. value=Value1493303836308
+17:37:16.324 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836308. value=second
+17:37:16.337 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836329. value=Value1493303836329
+17:37:16.349 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836342. value=Value1493303836342
+17:37:16.359 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 110
+17:37:16.373 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493303836373. description=China shoes. basePrice=50.0. active=true
+17:37:16.381 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=30. priceInfluence=30.0. availableQuantity=2
+17:37:16.391 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836384. value=Value1493303836384
+17:37:16.398 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836384. value=value
+17:37:16.408 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=111. productVariantId=8 
+17:37:16.409 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=112. productVariantId=8 
+17:37:16.423 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836417. value=Value1493303836417
+17:37:16.433 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303836428. value=Value1493303836428
+17:38:21.007 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303900963. value=Value1493303900963
+17:38:21.037 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901021. value=Value1493303901021
+17:38:21.048 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901021. value=second
+17:38:21.059 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493303901021
+17:38:21.074 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901065. value=Value1493303901065
+17:38:21.083 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901065. value=second
+17:38:21.095 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901088. value=Value1493303901088
+17:38:21.108 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901101. value=Value1493303901101
+17:38:21.124 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 121
+17:38:21.130 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493303901130. description=China shoes. basePrice=50.0. active=true
+17:38:21.136 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=31. priceInfluence=30.0. availableQuantity=2
+17:38:21.147 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901140. value=Value1493303901140
+17:38:21.154 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=122. productVariantId=9 
+17:38:21.161 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901154. value=Value1493303901154
+17:38:21.166 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=123. productVariantId=9 
+17:38:21.180 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901174. value=Value1493303901174
+17:38:21.191 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493303901185. value=Value1493303901185
+17:45:58.574 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358529. value=Value1493304358529
+17:45:58.603 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358588. value=Value1493304358588
+17:45:58.615 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358588. value=second
+17:45:58.627 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493304358588
+17:45:58.641 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358633. value=Value1493304358633
+17:45:58.650 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358633. value=second
+17:45:58.664 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358656. value=Value1493304358656
+17:45:58.687 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358670. value=Value1493304358670
+17:45:58.699 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 132
+17:45:58.705 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493304358705. description=China shoes. basePrice=50.0. active=true
+17:45:58.712 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=32. priceInfluence=30.0. availableQuantity=2
+17:45:58.723 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358715. value=Value1493304358715
+17:45:58.730 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=133. productVariantId=10 
+17:45:58.738 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358731. value=Value1493304358731
+17:45:58.744 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=134. productVariantId=10 
+17:45:58.757 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358750. value=Value1493304358750
+17:45:58.769 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493304358762. value=Value1493304358762
+17:59:26.274 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166224. value=Value1493305166224
+17:59:26.306 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166289. value=Value1493305166289
+17:59:26.318 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166289. value=second
+17:59:26.329 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493305166289
+17:59:26.344 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166335. value=Value1493305166335
+17:59:26.353 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166335. value=second
+17:59:26.368 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166360. value=Value1493305166360
+17:59:26.389 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166381. value=Value1493305166381
+17:59:26.401 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 143
+17:59:26.407 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493305166406. description=China shoes. basePrice=50.0. active=true
+17:59:26.413 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=33. priceInfluence=30.0. availableQuantity=2
+17:59:26.426 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166417. value=Value1493305166417
+17:59:26.433 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=144. productVariantId=11 
+17:59:26.441 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166433. value=Value1493305166433
+17:59:26.447 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=145. productVariantId=11 
+17:59:26.460 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166453. value=Value1493305166453
+17:59:26.472 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493305166465. value=Value1493305166465
+18:02:34.961 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493305354960. description=China shoes. basePrice=50.0. active=true
+18:02:35.010 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493305355010. description=China shoes. basePrice=50.0. active=true
+18:02:35.032 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Update product with id=35. name=Adidas1493305355023. description=Vietnam shoes. basePrice=60.0. active=false
+18:02:35.038 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493305355038. description=China shoes. basePrice=50.0. active=true
+18:02:35.056 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493305355056. description=China shoes. basePrice=50.0. active=true
+18:02:35.073 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493305355073. description=China shoes. basePrice=50.0. active=true
+18:02:35.086 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Delete product with id 38
+18:15:04.323 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493306104322. description=China shoes. basePrice=50.0. active=true
+18:15:04.365 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=39. priceInfluence=30.0. availableQuantity=2
+18:15:04.407 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493306104371. value=Value1493306104371
+18:15:04.422 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=148. productVariantId=12 
+18:15:04.425 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493306104425. description=China shoes. basePrice=50.0. active=true
+18:15:04.433 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=40. priceInfluence=30.0. availableQuantity=2
+18:15:04.449 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493306104436. value=Value1493306104436
+18:15:04.458 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=149. productVariantId=13 
+18:15:04.460 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Delete variant with attributeId=13. productVariantId=149 

@@ -18,8 +18,8 @@ public class VariantServiceImpl implements IVariantService {
 	private IVariantDao variantDao;
 
 	@Override
-	public void delete(Integer attributeId, Integer productVariantId) {
-		variantDao.delete(attributeId, productVariantId);
+	public void delete(Integer productVariantId, Integer attributeId) {
+		variantDao.delete(productVariantId, attributeId);
 		LOGGER.info("Delete variant with attributeId={}. productVariantId={} ", attributeId, productVariantId);
 	}
 

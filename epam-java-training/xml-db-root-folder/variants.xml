@@ -1,16 +1,52 @@
 <com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
   <rows>
     <com.chuyeu.training.myapp.datamodel.Variant>
-      <attributeId>76</attributeId>
+      <productVariantId>2</productVariantId>
+      <attributeId>89</attributeId>
     </com.chuyeu.training.myapp.datamodel.Variant>
     <com.chuyeu.training.myapp.datamodel.Variant>
-      <attributeId>77</attributeId>
+      <productVariantId>3</productVariantId>
+      <attributeId>90</attributeId>
     </com.chuyeu.training.myapp.datamodel.Variant>
     <com.chuyeu.training.myapp.datamodel.Variant>
-      <attributeId>78</attributeId>
+      <productVariantId>5</productVariantId>
+      <attributeId>92</attributeId>
     </com.chuyeu.training.myapp.datamodel.Variant>
     <com.chuyeu.training.myapp.datamodel.Variant>
-      <attributeId>79</attributeId>
+      <productVariantId>8</productVariantId>
+      <attributeId>111</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>8</productVariantId>
+      <attributeId>112</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>9</productVariantId>
+      <attributeId>122</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>9</productVariantId>
+      <attributeId>123</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>10</productVariantId>
+      <attributeId>133</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>10</productVariantId>
+      <attributeId>134</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>11</productVariantId>
+      <attributeId>144</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>11</productVariantId>
+      <attributeId>145</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>12</productVariantId>
+      <attributeId>148</attributeId>
     </com.chuyeu.training.myapp.datamodel.Variant>
   </rows>
   <lastId>0</lastId>

@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
+import com.chuyeu.training.myapp.datamodel.ProductVariant;
 
 public class AttributeServiceTest extends AbstractTesst {
 
@@ -22,7 +23,6 @@ public class AttributeServiceTest extends AbstractTesst {
 		Attribute attribute = createAttribute();
 		attributeService.add(attribute);
 		attributeService.add(attribute);
-
 	}
 
 	@Test
@@ -78,7 +78,6 @@ public class AttributeServiceTest extends AbstractTesst {
 		attributeService.delete(attribute.getName());
 		Assert.isTrue(attributeService.getValuesByName(attribute.getName()).isEmpty(),
 				"The list of attribut values must be empty");
-
 	}
 
 	@Test
@@ -93,17 +92,33 @@ public class AttributeServiceTest extends AbstractTesst {
 		Assert.notNull(ids, "The list of attribute id must not be null");
 	}
 
-/*	@Test
+	@Test
 	public void getProductVariantAttributesTest() {
 		
-		
+		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
-		productVariantService.saveOrUpdate(productVariant);
-		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
-		List<Attribute> attributes = attributeService.getProductVariantAttributes(1);
+		Integer productVariantId = productVariantService.saveOrUpdate(productVariant);
 		
+		Attribute attribute1 = createAttribute();
+		attributeService.add(attribute1);
+		Integer attributeId1 = attributeService.getIdByNameAndValue(attribute1.getName(), attribute1.getValue());
+		variantService.add(productVariantId, attributeId1);
 		
-	}*/
+		Attribute attribute2 = createAttribute();
+		attributeService.add(attribute2);
+		Integer attributeId2 = attributeService.getIdByNameAndValue(attribute2.getName(), attribute2.getValue());
+		variantService.add(productVariantId, attributeId2);
+		
+		List<Attribute> attributes = attributeService.getProductVariantAttributes(productVariantId);
+		
+		Assert.notNull(attributes, "The list of attributes must not be null");
+		Assert.noNullElements(attributes.toArray(), "The list of attributes must not contain null elements");
+		Assert.notEmpty(attributes, "The list of attributes must not contain empty elements");
+		
+		Assert.isTrue(attributes.get(0).getName().equals(attribute1.getName()), "Attribute names must be equal");
+		Assert.isTrue(attributes.get(1).getName().equals(attribute2.getName()), "Attribute names must be equal");
+		Assert.isTrue(attributes.get(0).getValue().equals(attribute1.getValue()), "Attribute values must be equal");
+		Assert.isTrue(attributes.get(1).getValue().equals(attribute2.getValue()), "Attribute values must be equal");
+	}
 
 }

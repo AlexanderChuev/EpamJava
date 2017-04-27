@@ -1,10 +1,13 @@
 package services;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IProductService;
 import com.chuyeu.training.myapp.services.IProductVariantService;
 
@@ -17,20 +20,25 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		
 	}
 
-	/*@Test
+	@Test
 	public void getAllByProductTest() {
 
-		ProductVariant productVariant = createProductVariant();
-		productVariantService.saveOrUpdate(productVariant);
-		List<ProductVariantEntity> allByProduct = productVariantService.getAllByProduct(productVariant.getProductId());
+		Integer productId = productService.add(createProduct());
+		ProductVariant productVariant = createProductVariant(productId);
+		ProductVariant productVariant2 = createProductVariant(productId);
+		Integer productVariantId = productVariantService.saveOrUpdate(productVariant);
+		Integer productVariantId2 = productVariantService.saveOrUpdate(productVariant);
+		
+		List<ProductVariant> allByProduct = productVariantService.getAllByProduct(productId);
 
 		Assert.notNull(allByProduct, "List ProductVariantEntity must not be null");
 		Assert.noNullElements(allByProduct.toArray(), "List ProductVariantEntity must not have null items");
 		Assert.notEmpty(allByProduct, "List ProductVariantEntity must not be empty");
 
-		for (ProductVariantEntity productVariantEntity : allByProduct) {
-			checkProductVariantFromDb(productVariantEntity, productVariant);
-		}
+		ProductVariant productVariantFromDb = allByProduct.get(0);
+		ProductVariant productVariantFromDb2 = allByProduct.get(1);
+		
+		Assert.isTrue(productVariantFromDb.getProductId().equals(productVariant.getProductId()),"");
 	}
 
 	@Test
@@ -95,12 +103,5 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		Assert.isTrue(productVariantFromDb.getPriceInfluence().equals(productVariant.getPriceInfluence()), "Fields 'priceInfluence' from productVariantFromDb must be equal");
 		Assert.isTrue(productVariantFromDb.getAvailableQuantity().equals(productVariant.getAvailableQuantity()), "Fields 'availableQuantity' from productVariantFromDb must be equal");
 	}
-	
-	public ProductVariant createProductVariant(){
-		Product product = createProduct();
-		Integer productId = productService.add(product);
-		ProductVariant productVariant = createProductVariant(productId);
-		return productVariant;
-	}*/
 
 }

@@ -1,19 +1,10 @@
 package services;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import org.junit.Test;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
-import com.chuyeu.training.myapp.services.IAttributeService;
-import com.chuyeu.training.myapp.services.IProductService;
-import com.chuyeu.training.myapp.services.IProductVariantService;
-import com.chuyeu.training.myapp.services.IVariantService;
 
 public class VariantsServiceTest extends AbstractTesst{
 
@@ -25,6 +16,7 @@ public class VariantsServiceTest extends AbstractTesst{
 		Assert.notNull(attributeService, "The attributeService must not be null");
 	}
 	
+	//+++
 	@Test
 	public void addTest(){
 	
@@ -34,25 +26,18 @@ public class VariantsServiceTest extends AbstractTesst{
 		variantService.add(productVariantId, getSavedAttributeId());
 	}
 	
-	/*@Test
+	//+++
+	@Test
 	public void deleteTest(){
 		
 		Integer productId = productService.add(createProduct());
-		
 		ProductVariant productVariant = createProductVariant(productId);
-		productVariantService.saveOrUpdate(productVariant);
-		
-		Integer productVariantId = productVariantService.getAllByProduct(productId).get(0).getProductVariant().getId();
-		
+		Integer productVariantId = productVariantService.saveOrUpdate(productVariant);
 		Integer attributeId = getSavedAttributeId();
+		variantService.add(productVariantId, attributeId);
 		
-		List<Integer> list = new ArrayList<>();
-		list.add(attributeId);
-		variantService.add(productVariantId, list);
-		
-		variantService.delete(attributeId);
-		variantService.delete(attributeId);
-	}*/
+		variantService.delete(attributeId, productVariantId);
+	}
 	
 	private Integer getSavedAttributeId(){
 		Attribute attribute = createAttribute();

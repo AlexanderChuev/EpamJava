@@ -48,13 +48,6 @@ public class AbstractTesst {
 
 	@Inject
 	IUserService userService;
-	
-	
-	
-	@Inject
-	private IProductVariantService productVariantsService;
-	
-	
 
 	public Product createProduct() {
 

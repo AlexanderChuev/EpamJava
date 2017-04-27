@@ -3,8 +3,6 @@ package services;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.Test;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
@@ -12,7 +10,6 @@ import org.springframework.util.Assert;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.Product;
-import com.chuyeu.training.myapp.services.IProductService;
 
 public class ProductServiceTest extends AbstractTesst {
 
@@ -83,6 +80,14 @@ public class ProductServiceTest extends AbstractTesst {
 				checkProductFromDb(product);
 			}
 		}
+	}
+	
+	@Test
+	public void getProductQuantityTest() {
+		Product product = createProduct();
+		productService.add(product);
+		Integer productQuantity = productService.getProductQuantity();
+		Assert.notNull(productQuantity, "Product quantity must not be null");
 	}
 
 	private Product changeProduct(Product product) {

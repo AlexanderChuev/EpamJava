@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.chuyeu.training.myapp.dao.api.IAttributeDao;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
 import com.chuyeu.training.myapp.datamodel.Attribute;
+import com.chuyeu.training.myapp.datamodel.Variant;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import org.springframework.dao.DuplicateKeyException;
@@ -26,28 +27,33 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 	@Value("${root.folder}")
 	private String rootFolder;
 	
-	//private File attributesFile = new File(rootFolder + "attributes.xml");
-
 	@Override
 	public List<Attribute> getProductVariantAttributes(Integer productVariantId) {
 
-		/*File attributeFile = getAttributeFile();
-		File variantFile = getVariantFile();
+		File file = getFile();
+		File variantsFile = getVariantsFile();
 
 		@SuppressWarnings("unchecked")
-		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(attributeFile);
-		@SuppressWarnings("unchecked")
-		XmlModelWrapper<Vari> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(attributeFile);
-
-		List<Attribute> attributesFromDb = wrapper.getRows();
-		List<String> names = new ArrayList<>();
-
-		for (Attribute attribute : attributesFromDb) {
-			names.add(attribute.getName());
-		}
-		return names;*/
+		XmlModelWrapper<Attribute> attributeWrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
 		
-		return null;
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<Variant> variantWrapper = (XmlModelWrapper<Variant>) xstream.fromXML(variantsFile);
+
+		List<Attribute> attributesFromDb = attributeWrapper.getRows();
+		List<Variant> variantsFromDb = variantWrapper.getRows();
+		List<Attribute> productVariantAttributes = new ArrayList<>();
+ 		
+		for (Variant variant : variantsFromDb) {
+			if(variant.getProductVariantId().equals(productVariantId)){
+				Integer attributeId = variant.getAttributeId();
+				for (Attribute attribute : attributesFromDb) {
+					if(attribute.getId().equals(attributeId)){
+						productVariantAttributes.add(attribute);
+					}
+				}
+			}
+		}
+		return productVariantAttributes;
 	}
 
 	@Override
@@ -194,6 +200,11 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	private File getFile() {
         File file = new File(rootFolder + "attributes.xml");
+        return file;
+    }
+	
+	private File getVariantsFile() {
+        File file = new File(rootFolder + "variants.xml");
         return file;
     }
 }

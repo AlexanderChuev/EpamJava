@@ -3,6 +3,7 @@ package com.chuyeu.training.myapp.dao.xml.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -26,8 +27,18 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 	
 	@Override
 	public List<ProductVariant> getAllByProduct(Integer productId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
+		List<ProductVariant> productVariantsFromDb = wrapper.getRows();
+		List<ProductVariant> productVariantsById = new ArrayList<>();
+		for (ProductVariant productVariant : productVariantsFromDb) {
+			if(productVariant.getId().equals(productId)){
+				productVariantsById.add(productVariant);
+			}
+		}
+		return productVariantsById;
 	}
 
 	@Override
@@ -38,9 +49,10 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 
 	@Override
 	public Integer add(ProductVariant productVariant) {
-		/*File productVariantsFile = new File(rootFolder + "product_variants.xml");
+		
+		File file = getFile();
 		@SuppressWarnings("unchecked")
-		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(productVariantsFile);
+		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
 		List<ProductVariant> productVariantsFromDb = wrapper.getRows();
 		
 		Integer lastId = wrapper.getLastId();
@@ -50,9 +62,9 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 		productVariantsFromDb.add(productVariant);
 
 		wrapper.setLastId(newId);
-		writeNewData(productVariantsFile, wrapper);*/
+		writeNewData(file, wrapper);
 		
-		return null;
+		return newId;
 	}
 
 	@Override
