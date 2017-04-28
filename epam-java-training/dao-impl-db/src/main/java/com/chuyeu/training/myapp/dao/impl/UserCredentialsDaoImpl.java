@@ -56,10 +56,9 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 	}
 
 	@Override
-	public UserCredentials update(UserCredentials userCredentials) {
+	public void update(UserCredentials userCredentials) {
 		jdbcTemplate.update("update user_credentials set email = ?, password = ?, user_role = ? "
 				+ "where id = ?" , userCredentials.getEmail(), userCredentials.getPassword(), userCredentials.getUserRole().toString(), userCredentials.getId());
-		return get(userCredentials.getId());
 	}
 
 	@Override

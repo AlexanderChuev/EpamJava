@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IUserProfileDao;
@@ -19,10 +20,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 public class UserProfileDaoXmlImpl implements IUserProfileDao {
 
 	private final XStream xstream = new XStream(new DomDriver());
-	
+
 	@Value("${root.folder}")
 	private String rootFolder;
-	
+
 	@Override
 	public List<UserProfile> getAll(CommonFilter commonFilter) {
 		// TODO Auto-generated method stub
@@ -31,25 +32,77 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 
 	@Override
 	public UserProfile get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserProfile> wrapper = (XmlModelWrapper<UserProfile>) xstream.fromXML(file);
+		List<UserProfile> userProfileFromDb = wrapper.getRows();
+		for (UserProfile userProfile : userProfileFromDb) {
+			if (userProfile.getId().equals(id)) {
+				return userProfile;
+			}
+		}
+		throw new EmptyResultDataAccessException("User profile was not found, id = ", id);
 	}
 
 	@Override
 	public UserProfile insert(UserProfile userProfile) {
-		// TODO Auto-generated method stub
-		return null;
+
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserProfile> wrapper = (XmlModelWrapper<UserProfile>) xstream.fromXML(file);
+		List<UserProfile> userProfileFromDb = wrapper.getRows();
+
+		Integer lastId = wrapper.getLastId();
+		int newId = lastId + 1;
+
+		userProfile.setId(newId);
+		userProfileFromDb.add(userProfile);
+
+		wrapper.setLastId(newId);
+		writeNewData(file, wrapper);
+
+		return userProfile;
 	}
 
 	@Override
-	public UserProfile update(UserProfile userProfile) {
-		// TODO Auto-generated method stub
-		return null;
+	public void update(UserProfile userProfile) {
+
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserProfile> wrapper = (XmlModelWrapper<UserProfile>) xstream.fromXML(file);
+		List<UserProfile> userProfilesFromDb = wrapper.getRows();
+
+		for (UserProfile userProfileFromDb : userProfilesFromDb) {
+			if (userProfileFromDb.getId().equals(userProfile.getId())) {
+				userProfileFromDb.setFirstName(userProfile.getFirstName());
+				userProfileFromDb.setLastName(userProfile.getLastName());
+				break;
+			}
+		}
+		writeNewData(file, wrapper);
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserProfile> wrapper = (XmlModelWrapper<UserProfile>) xstream.fromXML(file);
+		List<UserProfile> userProfilesFromDb = wrapper.getRows();
+
+		UserProfile found = null;
+		for (UserProfile userProfile : userProfilesFromDb) {
+			if (userProfile.getId().equals(id)) {
+				found = userProfile;
+				break;
+			}
+		}
+
+		if (found != null) {
+			userProfilesFromDb.remove(found);
+			writeNewData(file, wrapper);
+		}
 
 	}
 
@@ -58,12 +111,12 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	private File getFile() {
 		File file = new File(rootFolder + "user_profiles.xml");
 		return file;
 	}
-	
+
 	private void writeNewData(File file, @SuppressWarnings("rawtypes") XmlModelWrapper obj) {
 		try {
 			xstream.toXML(obj, new FileOutputStream(file));

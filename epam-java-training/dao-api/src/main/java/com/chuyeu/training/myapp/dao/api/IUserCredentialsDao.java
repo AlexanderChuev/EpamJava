@@ -12,7 +12,7 @@ public interface IUserCredentialsDao {
 
 	Integer add(UserCredentials userCredentials);
 
-	UserCredentials update(UserCredentials userCredentials);
+	void update(UserCredentials userCredentials);
 
 	UserCredentials find(String email, String password);
 	

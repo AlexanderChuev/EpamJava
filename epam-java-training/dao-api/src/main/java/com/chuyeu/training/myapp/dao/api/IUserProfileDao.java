@@ -13,7 +13,7 @@ public interface IUserProfileDao {
 
 	UserProfile insert(UserProfile userProfile);
 
-	UserProfile update(UserProfile userProfile);
+	void update(UserProfile userProfile);
 
 	void delete(Integer id);
 	

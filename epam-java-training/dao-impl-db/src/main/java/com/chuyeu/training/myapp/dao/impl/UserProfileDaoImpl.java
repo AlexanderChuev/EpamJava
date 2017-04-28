@@ -59,10 +59,9 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 	}
 
 	@Override
-	public UserProfile update(UserProfile userProfile) {
+	public void update(UserProfile userProfile) {
 		jdbcTemplate.update("update user_profile set first_name = ?, last_name = ?, user_credentials_id = ? "
 				+ "where id = ?" , userProfile.getFirstName(), userProfile.getLastName(), userProfile.getUserCredentialsId(), userProfile.getId());
-		return get(userProfile.getId());
 	}
 
 	@Override

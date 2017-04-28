@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IProductVariantDao;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
-import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -33,8 +32,10 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
 		List<ProductVariant> productVariantsFromDb = wrapper.getRows();
 		List<ProductVariant> productVariantsById = new ArrayList<>();
+		
 		for (ProductVariant productVariant : productVariantsFromDb) {
-			if(productVariant.getId().equals(productId)){
+			if(productVariant.getProductId().equals(productId)){
+				System.out.println(productVariant.getId());
 				productVariantsById.add(productVariant);
 			}
 		}
@@ -43,8 +44,16 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 
 	@Override
 	public ProductVariant get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
+		List<ProductVariant> productVariantsFromDb = wrapper.getRows();
+		for (ProductVariant productVariant : productVariantsFromDb) {
+			if(productVariant.getId().equals(id)){
+				return productVariant;
+			}
+		}
+		throw new EmptyResultDataAccessException("This product variant is already exist",0);
 	}
 
 	@Override
@@ -69,14 +78,40 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 
 	@Override
 	public Integer update(ProductVariant productVariant) {
-		// TODO Auto-generated method stub
-		return null;
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
+		List<ProductVariant> productVariantsFromDb = wrapper.getRows();
+		for (ProductVariant productVariantFromDb : productVariantsFromDb) {
+			if(productVariantFromDb.getId().equals(productVariant.getId())){
+				productVariantFromDb.setPriceInfluence(productVariant.getPriceInfluence());
+				productVariantFromDb.setAvailableQuantity(productVariant.getAvailableQuantity());
+				break;
+			}
+		}
+		writeNewData(file, wrapper);
+		return productVariant.getId(); ////// change
 	}
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
+		List<ProductVariant> productVariantsFromDb = wrapper.getRows();
 
+		ProductVariant found = null;
+		for (ProductVariant productVariantFromDb : productVariantsFromDb) {
+			if (productVariantFromDb.getId().equals(id)) {
+				found = productVariantFromDb;
+				break;
+			}
+		}
+		if (found != null) {
+			productVariantsFromDb.remove(found);
+			writeNewData(file, wrapper);
+		}
 	}
 	
 	private File getFile() {

@@ -1,0 +1,11 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>1</id>
+      <firstName>FirstName1493375479975</firstName>
+      <lastName>LastName1493375479975</lastName>
+      <userCredentialsId>1</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+  </rows>
+  <lastId>2</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

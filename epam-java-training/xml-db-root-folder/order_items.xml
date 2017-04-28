@@ -1,0 +1,7 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
+	</com.chuyeu.training.myapp.datamodel.OrderItem>
+  </rows>
+  <lastId>0</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

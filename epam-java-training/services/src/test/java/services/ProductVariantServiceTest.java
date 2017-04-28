@@ -2,14 +2,11 @@ package services;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
-import com.chuyeu.training.myapp.services.IProductService;
-import com.chuyeu.training.myapp.services.IProductVariantService;
 
 public class ProductVariantServiceTest extends AbstractTesst {
 
@@ -26,9 +23,8 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
 		ProductVariant productVariant2 = createProductVariant(productId);
-		Integer productVariantId = productVariantService.saveOrUpdate(productVariant);
-		Integer productVariantId2 = productVariantService.saveOrUpdate(productVariant);
-		
+		productVariantService.saveOrUpdate(productVariant);
+		productVariantService.saveOrUpdate(productVariant2);
 		List<ProductVariant> allByProduct = productVariantService.getAllByProduct(productId);
 
 		Assert.notNull(allByProduct, "List ProductVariantEntity must not be null");
@@ -39,56 +35,58 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		ProductVariant productVariantFromDb2 = allByProduct.get(1);
 		
 		Assert.isTrue(productVariantFromDb.getProductId().equals(productVariant.getProductId()),"");
+		Assert.isTrue(productVariantFromDb.getAvailableQuantity().equals(productVariant.getAvailableQuantity()),"");
+		Assert.isTrue(productVariantFromDb.getPriceInfluence().equals(productVariant.getPriceInfluence()),"");
+		
+		Assert.isTrue(productVariantFromDb2.getProductId().equals(productVariant2.getProductId()),"");
+		Assert.isTrue(productVariantFromDb2.getAvailableQuantity().equals(productVariant2.getAvailableQuantity()),"");
+		Assert.isTrue(productVariantFromDb2.getPriceInfluence().equals(productVariant2.getPriceInfluence()),"");
 	}
 
 	@Test
 	public void getProductVariantTest() {
 		
-		ProductVariant productVariant = createProductVariant();
-		productVariantService.saveOrUpdate(productVariant);
-		List<ProductVariantEntity> allByProduct = productVariantService.getAllByProduct(productVariant.getProductId());
+		Integer productId = productService.add(createProduct());
+		ProductVariant productVariant = createProductVariant(productId);
+		Integer productVariantId= productVariantService.saveOrUpdate(productVariant);
 		
-		Integer id = allByProduct.get(0).getProductVariant().getId();
-		ProductVariantEntity productVariantEntity = productVariantService.getProductVariant(id);
-		
-		checkProductVariantFromDb(productVariantEntity, productVariant);
+		ProductVariant productVariantFromDb = productVariantService.getProductVariant(productVariantId);
+		checkProductVariantFromDb(productVariantFromDb, productVariant);
 	}
 
 	@Test
-	public void saveOrUpdateTest() {
+	public void updateTest() {
 		
-		ProductVariant productVariant = createProductVariant();
-		productVariantService.saveOrUpdate(productVariant);
-		List<ProductVariantEntity> allByProduct = productVariantService.getAllByProduct(productVariant.getProductId());
+		Integer productId = productService.add(createProduct());
+		ProductVariant productVariant = createProductVariant(productId);
+		Integer productVariantId= productVariantService.saveOrUpdate(productVariant);
+		ProductVariant productVariantFromDb = productVariantService.getProductVariant(productVariantId);
+		productVariantFromDb.setPriceInfluence(12d);
+		productVariantFromDb.setAvailableQuantity(12);
+		Integer updetedProductVariantId= productVariantService.saveOrUpdate(productVariantFromDb);
 		
-		Integer productVariantId = allByProduct.get(0).getProductVariant().getId();
-		ProductVariantEntity storedProductVariantEntity = productVariantService.getProductVariant(productVariantId);
+		Assert.isTrue(productVariantId.equals(updetedProductVariantId),"");
 		
-		checkProductVariantFromDb(storedProductVariantEntity, productVariant);
+		ProductVariant updatedProductVariantFromDb = productVariantService.getProductVariant(updetedProductVariantId);
+		Assert.isTrue(productVariantFromDb.getProductId().equals(updatedProductVariantFromDb.getProductId()),"");
+		Assert.isTrue(productVariantFromDb.getPriceInfluence().equals(updatedProductVariantFromDb.getPriceInfluence()),"");
+		Assert.isTrue(productVariantFromDb.getAvailableQuantity().equals(updatedProductVariantFromDb.getAvailableQuantity()),"");
 		
-		productVariant = createProductVariant();
-		productVariant.setId(productVariantId);
-		productVariantService.saveOrUpdate(productVariant);
-		ProductVariantEntity updatedProductVariantEntity = productVariantService.getProductVariant(productVariantId);
-		
-		checkProductVariantFromDb(updatedProductVariantEntity, productVariant);
 	}
 
 	@Test(expected = EmptyResultDataAccessException.class)
 	public void deleteTest() {
-		ProductVariant productVariant = createProductVariant();
-		productVariantService.saveOrUpdate(productVariant);
 		
-		List<ProductVariantEntity> allByProduct = productVariantService.getAllByProduct(productVariant.getProductId());
-		Integer productVariantId = allByProduct.get(0).getProductVariant().getId();
+		Integer productId = productService.add(createProduct());
+		ProductVariant productVariant = createProductVariant(productId);
+		Integer productVariantId= productVariantService.saveOrUpdate(productVariant);
 		
 		productVariantService.delete(productVariantId);
 		productVariantService.getProductVariant(productVariantId);
-		
 	}
 	
-	public void checkProductVariantFromDb(ProductVariantEntity productVariantEntity, ProductVariant productVariant) {
-		ProductVariant productVariantFromDb = productVariantEntity.getProductVariant();
+	public void checkProductVariantFromDb(ProductVariant productVariantFromDb, ProductVariant productVariant) {
+		
 		Assert.notNull(productVariantFromDb, "productVariantFromDb must be saved");
 		Assert.notNull(productVariantFromDb.getId(), "Field 'id' from productVariantFromDb must not be null");
 		Assert.notNull(productVariantFromDb.getProductId(), "Field 'productId' from productVariantFromDb must not be null");

@@ -48,6 +48,10 @@
       <productVariantId>12</productVariantId>
       <attributeId>148</attributeId>
     </com.chuyeu.training.myapp.datamodel.Variant>
+    <com.chuyeu.training.myapp.datamodel.Variant>
+      <productVariantId>40</productVariantId>
+      <attributeId>150</attributeId>
+    </com.chuyeu.training.myapp.datamodel.Variant>
   </rows>
   <lastId>0</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

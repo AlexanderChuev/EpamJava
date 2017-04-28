@@ -83,7 +83,7 @@ public class AbstractTesst {
 
 	public UserCredentials createUserCredentials() {
 		UserCredentials userCredentials = new UserCredentials();
-		userCredentials.setEmail("emael" + new Date().getTime());
+		userCredentials.setEmail("email" + new Date().getTime());
 		userCredentials.setPassword("password" + new Date().getTime());
 		userCredentials.setUserRole(UserRole.CLIENT);
 		return userCredentials;

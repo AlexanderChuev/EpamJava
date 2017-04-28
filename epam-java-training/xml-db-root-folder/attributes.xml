@@ -515,6 +515,16 @@
       <name>Name1493306104436</name>
       <value>Value1493306104436</value>
     </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>150</id>
+      <name>Name1493374259135</name>
+      <value>Value1493374259135</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>151</id>
+      <name>Name1493374259188</name>
+      <value>Value1493374259188</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
   </rows>
-  <lastId>149</lastId>
+  <lastId>151</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

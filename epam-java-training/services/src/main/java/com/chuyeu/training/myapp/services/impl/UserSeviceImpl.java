@@ -46,8 +46,7 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials)
-			throws DuplicateKeyException {
+	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials){
 
 		Integer userCredentialsId = userCredentialsDao.add(userCredentials);
 		userProfile.setUserCredentialsId(userCredentialsId);

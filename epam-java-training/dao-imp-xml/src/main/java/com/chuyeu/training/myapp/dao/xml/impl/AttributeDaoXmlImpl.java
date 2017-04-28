@@ -103,7 +103,7 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 				return attribute.getId();
 			}
 		}
-		throw new EmptyResultDataAccessException("This attribute is already exist",0);
+		throw new EmptyResultDataAccessException("Atribute was not found",0);
 	}
 
 	@Override

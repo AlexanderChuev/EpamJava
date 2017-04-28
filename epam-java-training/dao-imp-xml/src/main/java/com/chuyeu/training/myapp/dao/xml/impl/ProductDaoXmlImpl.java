@@ -43,7 +43,7 @@ public class ProductDaoXmlImpl implements IProductDao {
 				return product;
 			}
 		}
-		throw new EmptyResultDataAccessException("This attribute is already exist",0);
+		throw new EmptyResultDataAccessException("Product was not found, id = ",id);
 	}
 
 	@Override
