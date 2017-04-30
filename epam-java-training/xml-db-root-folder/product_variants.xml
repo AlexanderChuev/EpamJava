@@ -228,6 +228,12 @@
       <availableQuantity>2</availableQuantity>
       <priceInfluence>30.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
+    <com.chuyeu.training.myapp.datamodel.ProductVariant>
+      <id>42</id>
+      <productId>70</productId>
+      <availableQuantity>2</availableQuantity>
+      <priceInfluence>30.0</priceInfluence>
+    </com.chuyeu.training.myapp.datamodel.ProductVariant>
   </rows>
-  <lastId>41</lastId>
+  <lastId>42</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

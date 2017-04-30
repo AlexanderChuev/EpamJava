@@ -21,20 +21,6 @@
       <totalPrice>50.0</totalPrice>
       <orderStatus>BASKET</orderStatus>
     </com.chuyeu.training.myapp.datamodel.Order>
-    <com.chuyeu.training.myapp.datamodel.Order>
-      <id>4</id>
-      <created>2017-04-28 12:11:56.443 UTC</created>
-      <userProfileId>6</userProfileId>
-      <totalPrice>50.0</totalPrice>
-      <orderStatus>IN_PROCESSING</orderStatus>
-    </com.chuyeu.training.myapp.datamodel.Order>
-    <com.chuyeu.training.myapp.datamodel.Order>
-      <id>6</id>
-      <created>2017-04-28 12:48:31.116 UTC</created>
-      <userProfileId>8</userProfileId>
-      <totalPrice>50.0</totalPrice>
-      <orderStatus>BASKET</orderStatus>
-    </com.chuyeu.training.myapp.datamodel.Order>
   </rows>
-  <lastId>6</lastId>
+  <lastId>3</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

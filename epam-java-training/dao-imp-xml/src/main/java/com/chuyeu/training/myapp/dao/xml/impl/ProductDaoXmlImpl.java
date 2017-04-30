@@ -33,7 +33,6 @@ public class ProductDaoXmlImpl implements IProductDao {
 	public Product get(Integer id) {
 
 		File file = getFile();
-
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
 		List<Product> products = wrapper.getRows();
@@ -50,11 +49,10 @@ public class ProductDaoXmlImpl implements IProductDao {
 	public Integer add(Product product) {
 
 		File file = getFile();
-
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
-
 		List<Product> productsFromDb = wrapper.getRows();
+		
 		Integer lastId = wrapper.getLastId();
 		int newId = lastId + 1;
 
@@ -70,11 +68,10 @@ public class ProductDaoXmlImpl implements IProductDao {
 	public void update(Product product) {
 
 		File file = getFile();
-
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
-
 		List<Product> productsFromDb = wrapper.getRows();
+		
 		for (Product productFromDb : productsFromDb) {
 			if (productFromDb.getId().equals(product.getId())) {
 				productFromDb.setName(product.getName());
@@ -84,7 +81,6 @@ public class ProductDaoXmlImpl implements IProductDao {
 				break;
 			}
 		}
-
 		writeNewData(file, wrapper);
 	}
 
@@ -92,11 +88,10 @@ public class ProductDaoXmlImpl implements IProductDao {
 	public void delete(Integer id) {
 
 		File file = getFile();
-
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
-
 		List<Product> productsFromDb = wrapper.getRows();
+		
 		Product found = null;
 		for (Product productFromDb : productsFromDb) {
 			if (productFromDb.getId().equals(id)) {
@@ -113,11 +108,10 @@ public class ProductDaoXmlImpl implements IProductDao {
 
 	@Override
 	public Integer getProductQuantity() {
+		
 		File file = getFile();
-
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
-
 		List<Product> productsFromDb = wrapper.getRows();
 
 		return productsFromDb.size();

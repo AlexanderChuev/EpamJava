@@ -90,6 +90,17 @@ public class UserCredentialsDaoXmlImpl implements IUserCredentialsDao {
 
 	@Override
 	public UserCredentials find(String email, String password) {
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserCredentials> wrapper = (XmlModelWrapper<UserCredentials>) xstream.fromXML(file);
+		List<UserCredentials> userCredentialsFromDb = wrapper.getRows();
+		
+		for (UserCredentials userCredentials : userCredentialsFromDb) {
+			if(userCredentials.getEmail().equals(email) && userCredentials.getPassword().equals(password)){
+				return userCredentials;
+			}
+		}
 
 		return null;
 	}

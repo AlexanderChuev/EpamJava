@@ -99,3 +99,20 @@
 14:37:24.470 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=2. Email=email1493379444452. UserRole=CLIENT. FirstName=FirstName1493379444452. LastName=LastName1493379444452. 
 14:37:24.477 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Delete userProfile with id 2
 14:37:24.479 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Delete userCredentials with id 2
+15:04:16.949 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=3. Email=email1493381056928. UserRole=CLIENT. FirstName=FirstName1493381056929. LastName=LastName1493381056929. 
+15:04:16.955 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-04-28T15:04:16.954+0300. UserProfileId=3. OrderStatus=BASKET
+15:04:55.600 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=4. Email=email1493381095580. UserRole=CLIENT. FirstName=FirstName1493381095580. LastName=LastName1493381095580. 
+15:04:55.606 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-04-28T15:04:55.605+0300. UserProfileId=4. OrderStatus=BASKET
+15:06:56.541 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=5. Email=email1493381216518. UserRole=CLIENT. FirstName=FirstName1493381216518. LastName=LastName1493381216518. 
+15:06:56.547 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-04-28T15:06:56.547+0300. UserProfileId=5. OrderStatus=BASKET
+15:11:56.437 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=6. Email=email1493381516415. UserRole=CLIENT. FirstName=FirstName1493381516415. LastName=LastName1493381516415. 
+15:11:56.443 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-04-28T15:11:56.443+0300. UserProfileId=6. OrderStatus=BASKET
+15:11:56.458 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Update Order with id=4. Created=2017-04-28T15:11:56.443+0300. UserProfileId=6. TotalPrice=50.0. OrderStatus=IN_PROCESSING
+15:15:54.255 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=7. Email=email1493381754230. UserRole=CLIENT. FirstName=FirstName1493381754231. LastName=LastName1493381754231. 
+15:15:54.262 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-04-28T15:15:54.261+0300. UserProfileId=7. OrderStatus=BASKET
+15:15:54.278 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Delete order with id 5
+15:48:31.041 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493383711040. description=China shoes. basePrice=50.0. active=true
+15:48:31.094 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=70. priceInfluence=30.0. availableQuantity=2
+15:48:31.111 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=8. Email=email1493383711106. UserRole=CLIENT. FirstName=FirstName1493383711106. LastName=LastName1493383711106. 
+15:48:31.116 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-04-28T15:48:31.116+0300. UserProfileId=8. OrderStatus=BASKET
+15:48:31.127 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderItemServiceImpl - Insert OrderItem with ProductVariantId=42. OrderQuantity=1. OrderId=6

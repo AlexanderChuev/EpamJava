@@ -22,7 +22,7 @@ public class UserServiceTest extends AbstractTesst {
 		Assert.notNull(userService, "The userService must not be null");
 	}
 	
-/*	@Test
+	@Test
 	public void registrationTest() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -36,9 +36,9 @@ public class UserServiceTest extends AbstractTesst {
 		Assert.notNull(userProfileFromDb.getLastName(), "The LastName from userFromDb must not be null");
 		Assert.notNull(userProfileFromDb.getUserCredentialsId(), "The UserCredentialsId from userFromDb must not be null");
 
-	}*/
+	}
 
-/*
+
 	@Test
 	public void getCredentialsTest() {
 
@@ -49,9 +49,9 @@ public class UserServiceTest extends AbstractTesst {
 		UserCredentials userCredentialsFromDb = userService.getUserCredentials(userCredentialsId);
 		
 		checkUserCredentials(userCredentialsFromDb, userCredentials);
-	}*/
+	}
 
-/*	@Test
+	@Test
 	public void updateUserCredentialsTest() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -71,10 +71,10 @@ public class UserServiceTest extends AbstractTesst {
 		checkUserCredentials(modifiedUserCredentialsFromDb, userCredentialsFromDb);
 		Assert.isTrue(modifiedUserCredentialsFromDb.getId().equals(userCredentialsFromDb.getId()),"");
 
-	}*/
+	}
 
 
-	/*@Test(expected = DuplicateKeyException.class)
+	@Test(expected = DuplicateKeyException.class)
 	public void registrationUniqueTest() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -84,9 +84,9 @@ public class UserServiceTest extends AbstractTesst {
 		userService.registration(userProfile1, userCredentials);
 		userService.registration(userProfile2, userCredentials);
 
-	}*/
+	}
 
-/*	@Test
+	@Test
 	public void getUserProfileTest() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -102,12 +102,12 @@ public class UserServiceTest extends AbstractTesst {
 		Assert.notNull(userProfileFromDb.getUserCredentialsId(),
 				"The UserCredentialsId from userFromDb must not be null");
 		// + check on equals
-	}*/
+	}
 
-/*	@Test
+	@Test
 	public void getAllTest() {
 
-		List<UserProfile> allUserProfile = userService.getAll();
+	/*	List<UserProfile> allUserProfile = userService.getAll();
 
 		for (UserProfile userProfileFromDb : allUserProfile) {
 			Assert.notNull(userProfileFromDb, "The userFromDb must not be null");
@@ -116,10 +116,10 @@ public class UserServiceTest extends AbstractTesst {
 			Assert.notNull(userProfileFromDb.getLastName(), "The LastName from userFromDb must not be null");
 			Assert.notNull(userProfileFromDb.getUserCredentialsId(),
 					"The UserCredentialsId from userFromDb must not be null");
-		}
-	}*/
+		}*/
+	}
 
-/*	@Test
+	@Test
 	public void updateUserProfileTest() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -144,9 +144,9 @@ public class UserServiceTest extends AbstractTesst {
 		Assert.isTrue(modifiedUserProfileFromDb.getLastName().equals(userProfileFromDb.getLastName()),"");
 		Assert.isTrue(
 				modifiedUserProfileFromDb.getUserCredentialsId().equals(userProfileFromDb.getUserCredentialsId()),"");
-	}*/
+	}
 
-/*	@Test(expected = EmptyResultDataAccessException.class)
+	@Test(expected = EmptyResultDataAccessException.class)
 	public void deleteUserTest() { 
 		
 		UserCredentials userCredentials = createUserCredentials();
@@ -158,7 +158,7 @@ public class UserServiceTest extends AbstractTesst {
 		userService.delete(id);
 		userService.getUserProfile(id);
 		
-	}*/
+	}
 	
 		@Test
 	public void findUserCredentialsTest() {

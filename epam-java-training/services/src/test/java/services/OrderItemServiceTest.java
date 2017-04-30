@@ -1,14 +1,19 @@
 package services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.junit.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.datamodel.Order;
+import com.chuyeu.training.myapp.datamodel.OrderItem;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
+import com.chuyeu.training.myapp.datamodel.Product;
+import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.services.IOrderItemService;
@@ -32,12 +37,13 @@ public class OrderItemServiceTest extends AbstractTesst{
 /*	@Test
 	public void getAllByOrderIdTest() {
 
+		
 		OrderItem orderItem = new OrderItem();
 		orderItem.setProductVariantId(getProductVariantId());
 		orderItem.setOrderQuantity(1);
 		orderItem.setOrderId(getOrderId());
 		
-		OrderItem orderItemfromDb = orderItemService.saveOrUpdate(orderItem);
+		orderItemService.saveOrUpdate(orderItem);
 
 		List<OrderItem> allOrderItems = orderItemService.getAllByOrderId(orderItemfromDb.getOrderId());
 		Assert.notNull(allOrderItems, "The list of allOrderItems must not be null");
@@ -50,7 +56,7 @@ public class OrderItemServiceTest extends AbstractTesst{
 			Assert.notNull(orderItemFromDb.getOrderId(), "OrderId from OrderItemFromDb must not be null");
 		}
 	}
-
+*/
 	@Test
 	public void getTest() {
 		
@@ -59,23 +65,26 @@ public class OrderItemServiceTest extends AbstractTesst{
 		orderItem.setOrderQuantity(1);
 		orderItem.setOrderId(getOrderId());
 		
-		OrderItem orderItemfromDb = orderItemService.saveOrUpdate(orderItem);
-		OrderItem orderItemfromDb2 = orderItemService.get(orderItemfromDb.getId());
+		orderItemService.saveOrUpdate(orderItem);
+		List<OrderItem> orderItemsFromDb = orderItemService.getAllByOrderId(orderItem.getOrderId());
 		
-		Assert.notNull(orderItemfromDb2, "The orderItemFromDb must not be null");
-		Assert.notNull(orderItemfromDb2.getId(), "ID from OrderItemFromDb must not be null");
-		Assert.notNull(orderItemfromDb2.getProductVariantId(), "ProductVariantId from OrderItemFromDb must not be null");
-		Assert.notNull(orderItemfromDb2.getOrderQuantity(), "OrderQuantity from OrderItemFromDb must not be null");
-		Assert.notNull(orderItemfromDb2.getOrderId(), "OrderId from OrderItemFromDb must not be null");
+		OrderItem orderItemFromDb = orderItemsFromDb.get(0);
+		OrderItem orderItemFromDb2 = orderItemService.get(orderItemFromDb.getId());
 		
-		Assert.isTrue(orderItemfromDb2.getProductVariantId().equals(orderItem.getProductVariantId()), "ProductVariantIds from orderItems not equals");
-		Assert.isTrue(orderItemfromDb2.getOrderQuantity().equals(orderItem.getOrderQuantity()), "OrdersQuantity from ordersItem not equals");
-		Assert.isTrue(orderItemfromDb2.getOrderId().equals(orderItem.getOrderId()), "OrderQuantity from orderItems not equals");
+		Assert.notNull(orderItemFromDb2, "The orderItemFromDb must not be null");
+		Assert.notNull(orderItemFromDb2.getId(), "ID from OrderItemFromDb must not be null");
+		Assert.notNull(orderItemFromDb2.getProductVariantId(), "ProductVariantId from OrderItemFromDb must not be null");
+		Assert.notNull(orderItemFromDb2.getOrderQuantity(), "OrderQuantity from OrderItemFromDb must not be null");
+		Assert.notNull(orderItemFromDb2.getOrderId(), "OrderId from OrderItemFromDb must not be null");
+		
+		Assert.isTrue(orderItemFromDb2.getProductVariantId().equals(orderItem.getProductVariantId()), "ProductVariantIds from orderItems not equals");
+		Assert.isTrue(orderItemFromDb2.getOrderQuantity().equals(orderItem.getOrderQuantity()), "OrdersQuantity from ordersItem not equals");
+		Assert.isTrue(orderItemFromDb2.getOrderId().equals(orderItem.getOrderId()), "OrderQuantity from orderItems not equals");
 	}
 	
 	
 	
-	@Test
+	/*@Test
 	public void saveOrUpdateTest() {
 
 		OrderItem orderItem = new OrderItem();
@@ -83,7 +92,7 @@ public class OrderItemServiceTest extends AbstractTesst{
 		orderItem.setOrderQuantity(1);
 		orderItem.setOrderId(getOrderId());
 		
-		OrderItem orderItemfromDb = orderItemService.saveOrUpdate(orderItem);
+		orderItemService.saveOrUpdate(orderItem);
 
 		Assert.notNull(orderItemfromDb, "The orderItemFromDb must not be null");
 		Assert.notNull(orderItemfromDb.getId(), "ID from OrderItemFromDb must not be null");
@@ -104,21 +113,19 @@ public class OrderItemServiceTest extends AbstractTesst{
 		orderItem.setOrderQuantity(1);
 		orderItem.setOrderId(getOrderId());
 		
-		OrderItem orderItemfromDb = orderItemService.saveOrUpdate(orderItem);
+		orderItemService.saveOrUpdate(orderItem);
 		
 		orderItemService.delete(orderItemfromDb.getId());
 		orderItemService.get(orderItemfromDb.getId());
 		
 	}*/
 	
-/*	private Integer getProductVariantId(){
+	private Integer getProductVariantId(){
 		Product product = createProduct();
 		Integer productId = productService.add(product);
 		ProductVariant productVariant = createProductVariant(productId);
-		productVariantService.saveOrUpdate(productVariant);
-		List<ProductVariantEntity> productVariantEntity = productVariantService.getAllByProduct(productId);
-		return productVariantEntity.get(0).getProductVariant().getId();
-	} */
+		return productVariantService.saveOrUpdate(productVariant);
+	} 
 	
 	private Integer getOrderId(){
 		

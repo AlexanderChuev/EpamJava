@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
+import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.ProductModel;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
@@ -26,8 +30,13 @@ import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 @RequestMapping(value ={"/product"},produces="application/json;charset=UTF-8")
 public class ProductController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+	
 	@Inject
 	private IProductService productService;
+	
+	@Inject
+    private ApplicationContext context;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -60,7 +69,9 @@ public class ProductController {
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
-
+		
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		LOGGER.info("User role {} request product {}", userAuthStorage.getUserRole().toString(), id);
 		Product product;
 		try {
 			product = productService.get(id);

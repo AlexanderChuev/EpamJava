@@ -6,11 +6,15 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrderItemDao;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
+import com.chuyeu.training.myapp.datamodel.Attribute;
+import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderItem;
+import com.chuyeu.training.myapp.datamodel.Product;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -37,7 +41,20 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 
 	@Override
 	public void insert(OrderItem orderItem) {
-		// TODO Auto-generated method stub
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<OrderItem> wrapper = (XmlModelWrapper<OrderItem>) xstream.fromXML(file);
+		List<OrderItem> orderItems = wrapper.getRows();
+		
+		Integer lastId = wrapper.getLastId();
+		int newId = lastId + 1;
+
+		orderItem.setId(newId);
+		orderItems.add(orderItem);
+
+		wrapper.setLastId(newId);
+		writeNewData(file, wrapper);
 
 	}
 
@@ -49,7 +66,23 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<OrderItem> wrapper = (XmlModelWrapper<OrderItem>) xstream.fromXML(file);
+		List<OrderItem> orderItems = wrapper.getRows();
+		
+		OrderItem found = null;
+		for (OrderItem orderItem : orderItems) {
+			if (orderItem.getId().equals(id)) {
+				found = orderItem;
+				break;
+			}
+		}
+		if (found != null) {
+			orderItems.remove(found);
+			writeNewData(file, wrapper);
+		}
 
 	}
 	

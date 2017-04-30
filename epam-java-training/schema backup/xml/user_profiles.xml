@@ -1,0 +1,35 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>1</id>
+      <firstName>Иванов</firstName>
+      <lastName>Иван</lastName>
+      <userCredentialsId>1</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>2</id>
+      <firstName>Петров</firstName>
+      <lastName>Петр</lastName>
+      <userCredentialsId>2</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>3</id>
+      <firstName>Сидоров</firstName>
+      <lastName>Сид</lastName>
+      <userCredentialsId>3</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>4</id>
+      <firstName>Гончаров</firstName>
+      <lastName>Гена</lastName>
+      <userCredentialsId>4</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>5</id>
+      <firstName>Семенович</firstName>
+      <lastName>Семен</lastName>
+      <userCredentialsId>5</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+  </rows>
+  <lastId>5</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

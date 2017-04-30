@@ -29,6 +29,25 @@ public class OrderServiceTest extends AbstractTesst {
 	}
 
 /*	@Test
+	public void getAndSaveTest() {
+
+		Order order = createOrder();
+
+		Integer orderId = orderService.save(order);
+		Assert.notNull(orderId, "Id from order must not be null");
+
+		Order orderFromDb = orderService.get(orderId);
+		
+		checkOrder(orderFromDb);
+
+		Assert.isTrue(orderFromDb.getCreated().equals(order.getCreated()), "The columns with the date must be equals");
+		Assert.isTrue(orderFromDb.getTotalPrice().equals(order.getTotalPrice()), "The columns with the totalPrice must be equals");
+		Assert.isTrue(orderFromDb.getUserProfileId().equals(order.getUserProfileId()), "The columns with the UserProfileId must be equals");
+		Assert.isTrue(orderFromDb.getOrderStatus().equals(order.getOrderStatus()), "The columns with the OrderStatus must be equals");
+	}*/
+	
+	
+/*	@Test
 	public void getAllTest() {
 
 		orderService.save(createOrder());
@@ -62,25 +81,8 @@ public class OrderServiceTest extends AbstractTesst {
 		}
 	}*/
 
-	@Test
-	public void getAndSaveTest() {
 
-		Order order = createOrder();
-
-		Integer orderId = orderService.save(order);
-		Assert.notNull(orderId, "Id from order must not be null");
-
-		Order orderFromDb = orderService.get(orderId);
-		
-		checkOrder(orderFromDb);
-
-		Assert.isTrue(orderFromDb.getCreated().equals(order.getCreated()), "The columns with the date must be equals");
-		Assert.isTrue(orderFromDb.getTotalPrice().equals(order.getTotalPrice()), "The columns with the totalPrice must be equals");
-		Assert.isTrue(orderFromDb.getUserProfileId().equals(order.getUserProfileId()), "The columns with the UserProfileId must be equals");
-		Assert.isTrue(orderFromDb.getOrderStatus().equals(order.getOrderStatus()), "The columns with the OrderStatus must be equals");
-	}
-
-	@Test
+/*	@Test
 	public void updateTest() {
 
 		Integer orderId = orderService.save(createOrder());
@@ -98,7 +100,7 @@ public class OrderServiceTest extends AbstractTesst {
 		Assert.isTrue(updatedOrder.getTotalPrice().equals(orderFromDb.getTotalPrice()), "The columns with the totalPrice must be equals");
 		Assert.isTrue(updatedOrder.getUserProfileId().equals(orderFromDb.getUserProfileId()), "The columns with the UserProfileId must be equals");
 
-	}
+	}*/
 
 	@Test(expected = EmptyResultDataAccessException.class)
 	public void deleteTest() {
@@ -118,7 +120,6 @@ public class OrderServiceTest extends AbstractTesst {
 		Assert.notNull(order.getUserProfileId(), "UserProfileId from order must not be null");
 	}
 	
-
 	private Order createOrder() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -134,4 +135,5 @@ public class OrderServiceTest extends AbstractTesst {
 
 		return order;
 	}
+	
 }

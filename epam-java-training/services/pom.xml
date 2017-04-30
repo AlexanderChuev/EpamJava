@@ -16,7 +16,7 @@
 
 		<dependency>
 			<groupId>com.chuyeu.training.myapp</groupId>
-			<artifactId>dao-impl-xml</artifactId>
+			<artifactId>dao-impl-db</artifactId>
 		</dependency>
 
 		<dependency>

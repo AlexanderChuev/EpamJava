@@ -1,0 +1,47 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>1</id>
+      <name>Кроссовки Adidas</name>
+      <description>Very nice shoes</description>
+      <basePrice>50.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>2</id>
+      <name>Кроссовки Nike</name>
+      <description>Lightweight running shoes</description>
+      <basePrice>60.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>3</id>
+      <name>Кроссовки Puma</name>
+      <description>Street style</description>
+      <basePrice>40.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>4</id>
+      <name>Кроссовки Reebok</name>
+      <description>Comfortable shoes</description>
+      <basePrice>55.0</basePrice>
+      <active>false</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>5</id>
+      <name>Куртка Nike</name>
+      <description>Nice clothes</description>
+      <basePrice>35.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>6</id>
+      <name>Рюкзак Adidas</name>
+      <description>Big bag</description>
+      <basePrice>45.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+  </rows>
+  <lastId>6</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

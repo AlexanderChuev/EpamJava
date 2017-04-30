@@ -1,0 +1,50 @@
+<com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
+  <rows>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>1</id>
+      <name>Clothes Size</name>
+      <value>S</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>2</id>
+      <name>Clothes Size</name>
+      <value>M</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>3</id>
+      <name>Clothes Size</name>
+      <value>L</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>4</id>
+      <name>Shoes Size</name>
+      <value>42</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>5</id>
+      <name>Shoes Size</name>
+      <value>43</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>6</id>
+      <name>Shoes Size</name>
+      <value>44</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>7</id>
+      <name>Color</name>
+      <value>Black</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>8</id>
+      <name>Color</name>
+      <value>Red</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+    <com.chuyeu.training.myapp.datamodel.Attribute>
+      <id>9</id>
+      <name>Color</name>
+      <value>White</value>
+    </com.chuyeu.training.myapp.datamodel.Attribute>
+  </rows>
+  <lastId>9</lastId>
+</com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
