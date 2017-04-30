@@ -56,7 +56,7 @@ public class ProductServiceTest extends AbstractTesst {
 		productService.get(id);
 	}
 
-	@Test
+/*	@Test
 	public void getAllTest() {
 
 		productService.add(createProduct());
@@ -80,7 +80,7 @@ public class ProductServiceTest extends AbstractTesst {
 				checkProductFromDb(product);
 			}
 		}
-	}
+	}*/
 	
 	@Test
 	public void getProductQuantityTest() {

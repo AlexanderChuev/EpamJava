@@ -2,8 +2,6 @@ package com.chuyeu.training.myapp.dao.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -17,11 +15,7 @@ public class OrderMapper implements RowMapper<Order> {
 
 		Order order = new Order();
 		order.setId(rs.getInt("id"));
-
-		Timestamp timestamp = rs.getTimestamp("created");
-		Date date = new Date(timestamp.getTime());
-
-		order.setCreated(date);
+		order.setCreated(rs.getTimestamp("created"));
 		order.setUserProfileId(rs.getInt("user_profile_id"));
 		order.setTotalPrice(rs.getDouble("total_price"));
 		order.setOrderStatus(OrderStatus.valueOf(rs.getString("order_status")));

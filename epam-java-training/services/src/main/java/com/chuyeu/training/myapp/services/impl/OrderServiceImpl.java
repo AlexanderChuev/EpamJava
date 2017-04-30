@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.services.IOrderService;
 
@@ -22,8 +23,8 @@ public class OrderServiceImpl implements IOrderService {
 	private IOrdersDao ordersDao;
 
 	@Override
-	public List<Order> getAll(CommonFilter commonFilter) {
-		return ordersDao.getAll(commonFilter);
+	public List<Order> getAll(CommonFilter commonFilter, OrderFilter orderFilter) {
+		return ordersDao.getAll(commonFilter,orderFilter);
 	}
 
 	@Override

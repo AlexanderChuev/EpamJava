@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,9 @@ public class UserController {
 
 	@Inject
 	private IUserService userService;
+	
+	@Inject
+    private ApplicationContext context;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -38,7 +42,7 @@ public class UserController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction,null);
+		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
 		
 		List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
 		List<UserProfileModel> listUserProfileModel = new ArrayList<>();

@@ -45,7 +45,7 @@ public class ProductController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction,null);
+		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
 
 		List<Product> listProductsFromDb = productService.getAll(commonFilter);
 		List<ProductModel> listProductModel = new ArrayList<>();
@@ -71,7 +71,6 @@ public class ProductController {
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
 		
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-		LOGGER.info("User role {} request product {}", userAuthStorage.getUserRole().toString(), id);
 		Product product;
 		try {
 			product = productService.get(id);

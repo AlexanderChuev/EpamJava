@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,9 @@ public class AttributeController {
 
 	@Inject
 	private IAttributeService attributeService;
+	
+	@Inject
+    private ApplicationContext context;
 	
 	//+++
 	@RequestMapping(value = "/names", method = RequestMethod.GET)

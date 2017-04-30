@@ -2,6 +2,7 @@ package com.chuyeu.training.myapp.webapp.controllers;
 
 import javax.inject.Inject;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,9 @@ import com.chuyeu.training.myapp.webapp.models.VariantModel;
 @RestController
 @RequestMapping("/variant")
 public class VariantController {
+	
+	@Inject
+    private ApplicationContext context;
 
 	@Inject
 	private IVariantService variantService;

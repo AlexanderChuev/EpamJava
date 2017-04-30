@@ -1,11 +1,13 @@
 package com.chuyeu.training.myapp.dao.api.filters;
 
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
+import com.chuyeu.training.myapp.datamodel.UserRole;
 
 public class OrderFilter {
 
 	private OrderStatus orderStatus;
-	private SortData sort;
+	private Integer id;
+	private UserRole userRole;
 
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
@@ -15,12 +17,20 @@ public class OrderFilter {
 		this.orderStatus = orderStatus;
 	}
 
-	public SortData getSort() {
-		return sort;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setSort(SortData sort) {
-		this.sort = sort;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
 	}
 
 }

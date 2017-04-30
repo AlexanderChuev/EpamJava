@@ -16,8 +16,10 @@ import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.dao.mapper.OrderMapper;
 import com.chuyeu.training.myapp.datamodel.Order;
+import com.chuyeu.training.myapp.datamodel.UserRole;
 
 @Repository
 public class OrdersDaoImpl implements IOrdersDao {
@@ -26,9 +28,9 @@ public class OrdersDaoImpl implements IOrdersDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<Order> getAll(CommonFilter commonFilter) {
-		String sql = createSql(commonFilter);
-		return jdbcTemplate.query("select * from orders" + sql, new OrderMapper());
+	public List<Order> getAll(CommonFilter commonFilter, OrderFilter orderFilter) {
+		String sql = createSql(commonFilter, orderFilter);
+		return jdbcTemplate.query(sql, new OrderMapper());
 	}
 
 	@Override
@@ -68,17 +70,27 @@ public class OrdersDaoImpl implements IOrdersDao {
 	}
 
 	@Override
-	public void delete(Integer id){
+	public void delete(Integer id) {
 		jdbcTemplate.update("delete from orders where id=" + id);
 	}
-	
-	private String createSql(CommonFilter commonFilter) {
+
+	private String createSql(CommonFilter commonFilter, OrderFilter orderFilter) {
 
 		StringBuilder sql = new StringBuilder("");
-		if (commonFilter.getOrderStatus() != null) {
-			sql.append(" where order_status = '");
-			sql.append(commonFilter.getOrderStatus().toString());
+		if (orderFilter.getUserRole().equals(UserRole.CLIENT)) {
+
+			sql.append(
+					"select orders.id, created, user_profile_id, total_price, order_status from orders, user_profile where orders.user_profile_id = user_profile.id and user_profile.user_credentials_id = ");
+			sql.append(orderFilter.getId());
+			sql.append(" and order_status = '");
+			sql.append(orderFilter.getOrderStatus());
 			sql.append("'");
+
+		} else {
+			sql.append("select * from orders where order_status = '");
+			sql.append(orderFilter.getOrderStatus());
+			sql.append("'");
+
 		}
 
 		if (commonFilter.getSort() != null && commonFilter.getSort().getColumn() != null) {

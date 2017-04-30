@@ -7,16 +7,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrdersDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
+import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
-import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.Product;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -29,7 +27,7 @@ public class OrdersDaoXmlImpl implements IOrdersDao {
 	private String rootFolder;
 
 	@Override
-	public List<Order> getAll(CommonFilter commonFilter) {
+	public List<Order> getAll(CommonFilter commonFilter, OrderFilter orderFilter) {
 		// TODO Auto-generated method stub
 		return null;
 	}

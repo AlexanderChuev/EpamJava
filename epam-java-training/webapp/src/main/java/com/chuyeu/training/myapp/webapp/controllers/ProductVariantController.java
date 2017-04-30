@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,9 @@ public class ProductVariantController {
 
 	@Inject
 	private IProductVariantService productVariantService;
+	
+	@Inject
+    private ApplicationContext context;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)

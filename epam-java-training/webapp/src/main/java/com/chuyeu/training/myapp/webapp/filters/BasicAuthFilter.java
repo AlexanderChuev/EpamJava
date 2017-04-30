@@ -49,15 +49,14 @@ public class BasicAuthFilter implements Filter {
 
 		String[] credentials = resolveCredentials(req);
 
-		boolean isCredentialsResolved = credentials != null && credentials.length == 2;
-		if (!isCredentialsResolved) {
+		if (credentials == null || credentials.length != 2) {
 			res.sendError(401);
 			return;
 		}
 
 		UserCredentials user = userService.getByEmailAndPassword(credentials[0], credentials[1]);
 		UserAuthStorage userDataStorage = appContext.getBean(UserAuthStorage.class);
-		
+
 		if (user != null && user.getEmail() != null && user.getPassword() != null) {
 			userDataStorage.setId(user.getId());
 			userDataStorage.setUserRole(user.getUserRole());
@@ -69,10 +68,15 @@ public class BasicAuthFilter implements Filter {
 	}
 
 	private boolean isAuthRequired(HttpServletRequest req) {
-		if (req.getMethod().toUpperCase().equals("GET")) {
+		if (req.getMethod().toUpperCase().equals("GET") && (req.getRequestURI().equals("/product")
+				|| req.getRequestURI().equals("/attribute") || req.getRequestURI().equals("/product-variant"))) {
 			return false;
 		}
-		// TODO other variants
+		
+		if(req.getMethod().toUpperCase().equals("POST") && req.getRequestURI().equals("/order-item")){
+			return false;
+		}
+		
 		return true;
 	}
 

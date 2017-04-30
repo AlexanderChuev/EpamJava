@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.OrderItem;
 import com.chuyeu.training.myapp.services.IOrderItemService;
+import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.OrderItemModel;
 import com.chuyeu.training.myapp.webapp.models.parts.QuantityModel;
 
@@ -26,9 +28,14 @@ public class OrderItemController {
 	@Inject
 	private IOrderItemService orderItemService;
 	
+	@Inject
+    private ApplicationContext context;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllByOrderId(@RequestParam(value = "order-id", required = false) Integer orderId) {
 
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		
 		List<OrderItem> listOrderItems = orderItemService.getAllByOrderId(orderId);
 		List<OrderItemModel> listOrderItemsModel = new ArrayList<>();
 		
