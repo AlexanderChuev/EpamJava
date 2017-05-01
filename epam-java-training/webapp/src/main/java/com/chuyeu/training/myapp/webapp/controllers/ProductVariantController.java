@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +25,6 @@ public class ProductVariantController {
 
 	@Inject
 	private IProductVariantService productVariantService;
-	
-	@Inject
-    private ApplicationContext context;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -42,7 +38,7 @@ public class ProductVariantController {
 		}
 		return new ResponseEntity<List<ProductVariantModel>>(productVariantsModel, HttpStatus.OK);
 	}
-	
+
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
@@ -75,8 +71,9 @@ public class ProductVariantController {
 
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> updateProductVariant(@RequestBody ProductVariantModel productVariantModel, @PathVariable(value = "id") Integer id) {
-		
+	public ResponseEntity<Void> updateProductVariant(@RequestBody ProductVariantModel productVariantModel,
+			@PathVariable(value = "id") Integer id) {
+
 		ProductVariant productVariant = productVariantService.getProductVariant(id);
 		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
 		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());

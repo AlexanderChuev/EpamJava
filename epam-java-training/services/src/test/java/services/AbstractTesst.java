@@ -7,11 +7,8 @@ import javax.inject.Inject;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
-import com.chuyeu.training.myapp.datamodel.Order;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;

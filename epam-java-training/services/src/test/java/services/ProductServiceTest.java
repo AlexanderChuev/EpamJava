@@ -8,11 +8,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
-import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.Product;
 
 public class ProductServiceTest extends AbstractTesst {
-
 
 	@Test
 	public void test() {
@@ -56,7 +54,7 @@ public class ProductServiceTest extends AbstractTesst {
 		productService.get(id);
 	}
 
-/*	@Test
+	@Test
 	public void getAllTest() {
 
 		productService.add(createProduct());
@@ -69,7 +67,7 @@ public class ProductServiceTest extends AbstractTesst {
 		for (int i = 1; i <= pageCount; i++) {
 
 			Integer pageNumber = pageCount;
-			CommonFilter commonFilter = new CommonFilter(pageNumber, limit, "name", "desc", OrderStatus.BASKET);
+			CommonFilter commonFilter = new CommonFilter(pageNumber, limit, "name", "desc");
 
 			List<Product> products = productService.getAll(commonFilter);
 
@@ -80,8 +78,8 @@ public class ProductServiceTest extends AbstractTesst {
 				checkProductFromDb(product);
 			}
 		}
-	}*/
-	
+	}
+
 	@Test
 	public void getProductQuantityTest() {
 		Product product = createProduct();

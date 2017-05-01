@@ -6,7 +6,7 @@ import com.chuyeu.training.myapp.datamodel.OrderItem;
 
 public interface IOrderItemDao {
 
-	List<OrderItem> getAll();
+	List<OrderItem> getAll(Integer orderId);
 
 	OrderItem get(Integer id);
 

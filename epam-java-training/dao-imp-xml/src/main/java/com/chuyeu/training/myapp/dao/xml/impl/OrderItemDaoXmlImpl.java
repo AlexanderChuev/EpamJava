@@ -28,7 +28,7 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 	
 	
 	@Override
-	public List<OrderItem> getAll() {
+	public List<OrderItem> getAll(Integer orderId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

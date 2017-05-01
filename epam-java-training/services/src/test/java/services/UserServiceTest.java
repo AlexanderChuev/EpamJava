@@ -3,17 +3,15 @@ package services;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.Test;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.util.Assert;
 
+import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
-import com.chuyeu.training.myapp.services.IUserService;
 
 public class UserServiceTest extends AbstractTesst {
 
@@ -21,7 +19,7 @@ public class UserServiceTest extends AbstractTesst {
 	public void test() {
 		Assert.notNull(userService, "The userService must not be null");
 	}
-	
+
 	@Test
 	public void registrationTest() {
 
@@ -34,10 +32,10 @@ public class UserServiceTest extends AbstractTesst {
 		Assert.notNull(userProfileFromDb.getId(), "The id from userFromDb must not be null");
 		Assert.notNull(userProfileFromDb.getFirstName(), "The FirstName from userFromDb must not be null");
 		Assert.notNull(userProfileFromDb.getLastName(), "The LastName from userFromDb must not be null");
-		Assert.notNull(userProfileFromDb.getUserCredentialsId(), "The UserCredentialsId from userFromDb must not be null");
+		Assert.notNull(userProfileFromDb.getUserCredentialsId(),
+				"The UserCredentialsId from userFromDb must not be null");
 
 	}
-
 
 	@Test
 	public void getCredentialsTest() {
@@ -47,7 +45,7 @@ public class UserServiceTest extends AbstractTesst {
 		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
 		Integer userCredentialsId = userProfileFromDb.getUserCredentialsId();
 		UserCredentials userCredentialsFromDb = userService.getUserCredentials(userCredentialsId);
-		
+
 		checkUserCredentials(userCredentialsFromDb, userCredentials);
 	}
 
@@ -57,7 +55,7 @@ public class UserServiceTest extends AbstractTesst {
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
-		
+
 		Integer userCredentialsId = userProfileFromDb.getUserCredentialsId();
 		UserCredentials userCredentialsFromDb = userService.getUserCredentials(userCredentialsId);
 
@@ -67,12 +65,11 @@ public class UserServiceTest extends AbstractTesst {
 		userService.update(userCredentialsFromDb);
 
 		UserCredentials modifiedUserCredentialsFromDb = userService.getUserCredentials(userCredentialsId);
-		
+
 		checkUserCredentials(modifiedUserCredentialsFromDb, userCredentialsFromDb);
-		Assert.isTrue(modifiedUserCredentialsFromDb.getId().equals(userCredentialsFromDb.getId()),"");
+		Assert.isTrue(modifiedUserCredentialsFromDb.getId().equals(userCredentialsFromDb.getId()), "");
 
 	}
-
 
 	@Test(expected = DuplicateKeyException.class)
 	public void registrationUniqueTest() {
@@ -107,7 +104,8 @@ public class UserServiceTest extends AbstractTesst {
 	@Test
 	public void getAllTest() {
 
-	/*	List<UserProfile> allUserProfile = userService.getAll();
+		CommonFilter commonFilter = new CommonFilter(1, 2, "first_name", "asc");
+		List<UserProfile> allUserProfile = userService.getAll(commonFilter);
 
 		for (UserProfile userProfileFromDb : allUserProfile) {
 			Assert.notNull(userProfileFromDb, "The userFromDb must not be null");
@@ -116,7 +114,7 @@ public class UserServiceTest extends AbstractTesst {
 			Assert.notNull(userProfileFromDb.getLastName(), "The LastName from userFromDb must not be null");
 			Assert.notNull(userProfileFromDb.getUserCredentialsId(),
 					"The UserCredentialsId from userFromDb must not be null");
-		}*/
+		}
 	}
 
 	@Test
@@ -133,34 +131,34 @@ public class UserServiceTest extends AbstractTesst {
 
 		UserProfile modifiedUserProfileFromDb = userService.getUserProfile(userProfileFromDb.getId());
 
-		Assert.notNull(modifiedUserProfileFromDb,"");
-		Assert.notNull(modifiedUserProfileFromDb.getId(),"");
-		Assert.notNull(modifiedUserProfileFromDb.getFirstName(),"");
-		Assert.notNull(modifiedUserProfileFromDb.getLastName(),"");
-		Assert.notNull(modifiedUserProfileFromDb.getUserCredentialsId(),"");
+		Assert.notNull(modifiedUserProfileFromDb, "");
+		Assert.notNull(modifiedUserProfileFromDb.getId(), "");
+		Assert.notNull(modifiedUserProfileFromDb.getFirstName(), "");
+		Assert.notNull(modifiedUserProfileFromDb.getLastName(), "");
+		Assert.notNull(modifiedUserProfileFromDb.getUserCredentialsId(), "");
 
-		Assert.isTrue(modifiedUserProfileFromDb.getId().equals(userProfileFromDb.getId()),"");
-		Assert.isTrue(modifiedUserProfileFromDb.getFirstName().equals(userProfileFromDb.getFirstName()),"");
-		Assert.isTrue(modifiedUserProfileFromDb.getLastName().equals(userProfileFromDb.getLastName()),"");
-		Assert.isTrue(
-				modifiedUserProfileFromDb.getUserCredentialsId().equals(userProfileFromDb.getUserCredentialsId()),"");
+		Assert.isTrue(modifiedUserProfileFromDb.getId().equals(userProfileFromDb.getId()), "");
+		Assert.isTrue(modifiedUserProfileFromDb.getFirstName().equals(userProfileFromDb.getFirstName()), "");
+		Assert.isTrue(modifiedUserProfileFromDb.getLastName().equals(userProfileFromDb.getLastName()), "");
+		Assert.isTrue(modifiedUserProfileFromDb.getUserCredentialsId().equals(userProfileFromDb.getUserCredentialsId()),
+				"");
 	}
 
 	@Test(expected = EmptyResultDataAccessException.class)
-	public void deleteUserTest() { 
-		
+	public void deleteUserTest() {
+
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
-		
+
 		Integer id = userProfileFromDb.getId();
-		
+
 		userService.delete(id);
 		userService.getUserProfile(id);
-		
+
 	}
-	
-		@Test
+
+	@Test
 	public void findUserCredentialsTest() {
 
 		UserCredentials userCredentials = createUserCredentials();
@@ -168,23 +166,21 @@ public class UserServiceTest extends AbstractTesst {
 		userService.registration(userProfile, userCredentials);
 		UserCredentials userCredentialsFromDb = userService.getByEmailAndPassword(userCredentials.getEmail(),
 				userCredentials.getPassword());
-		
+
 		checkUserCredentials(userCredentialsFromDb, userCredentials);
 
 	}
-	
-	private void checkUserCredentials(UserCredentials userCredentialsFirst, UserCredentials userCredentialsSecond){
-		Assert.notNull(userCredentialsFirst,"");
-		Assert.notNull(userCredentialsFirst.getId(),"");
-		Assert.notNull(userCredentialsFirst.getEmail(),"");
-		Assert.notNull(userCredentialsFirst.getPassword(),"");
-		Assert.notNull(userCredentialsFirst.getUserRole(),"");
 
-		System.out.println(userCredentialsFirst.getEmail());
-		System.out.println(userCredentialsSecond.getEmail());
-		Assert.isTrue(userCredentialsFirst.getEmail().equals(userCredentialsSecond.getEmail()),"");
-		Assert.isTrue(userCredentialsFirst.getPassword().equals(userCredentialsSecond.getPassword()),"");
-		Assert.isTrue(userCredentialsFirst.getUserRole().equals(userCredentialsSecond.getUserRole()),"");
+	private void checkUserCredentials(UserCredentials userCredentialsFirst, UserCredentials userCredentialsSecond) {
+		Assert.notNull(userCredentialsFirst, "");
+		Assert.notNull(userCredentialsFirst.getId(), "");
+		Assert.notNull(userCredentialsFirst.getEmail(), "");
+		Assert.notNull(userCredentialsFirst.getPassword(), "");
+		Assert.notNull(userCredentialsFirst.getUserRole(), "");
+
+		Assert.isTrue(userCredentialsFirst.getEmail().equals(userCredentialsSecond.getEmail()), "");
+		Assert.isTrue(userCredentialsFirst.getPassword().equals(userCredentialsSecond.getPassword()), "");
+		Assert.isTrue(userCredentialsFirst.getUserRole().equals(userCredentialsSecond.getUserRole()), "");
 	}
 
 }

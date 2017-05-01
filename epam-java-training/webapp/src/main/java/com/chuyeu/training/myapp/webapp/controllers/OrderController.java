@@ -20,6 +20,7 @@ import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
+import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IOrderService;
 import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
@@ -34,7 +35,7 @@ public class OrderController {
 	private IOrderService orderService;
 
 	@Inject
-    private ApplicationContext context;
+	private ApplicationContext context;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page,
@@ -46,8 +47,8 @@ public class OrderController {
 		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		OrderFilter orderFilter = new OrderFilter();
-		if(status == null){
-			status ="basket";
+		if (status == null) {
+			status = "basket";
 		}
 		orderFilter.setOrderStatus(OrderStatus.valueOf(status.toUpperCase()));
 		orderFilter.setId(userAuthStorage.getId());
@@ -57,13 +58,7 @@ public class OrderController {
 		List<OrderModel> listOrderModel = new ArrayList<>();
 
 		for (Order orderFromDb : listOrdersFromDb) {
-			OrderModel orderModel = new OrderModel();
-			orderModel.setId(orderFromDb.getId());
-			orderModel.setCreated(orderFromDb.getCreated());
-			orderModel.setUserProfileId(orderFromDb.getUserProfileId());
-			orderModel.setTotalPrice(orderFromDb.getTotalPrice());
-			orderModel.setOrderStatus(orderFromDb.getOrderStatus());
-			listOrderModel.add(orderModel);
+			listOrderModel.add(entity2model(orderFromDb));
 		}
 
 		EntityModelWrapper<OrderModel> wrapper = new EntityModelWrapper<OrderModel>();
@@ -74,41 +69,57 @@ public class OrderController {
 		return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
 	}
 
-	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
 
-		Product product;
-		try {
-			product = productService.get(id);
-		} catch (EmptyResultDataAccessException e) {
-			return new ResponseEntity<String>("This product does not exist", HttpStatus.BAD_REQUEST);
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		Order order = orderService.get(id);
+		if (order.getUserProfileId().equals(userAuthStorage.getId()) || userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return new ResponseEntity<OrderModel>(entity2model(order), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<ProductModel>(entity2model(product), HttpStatus.OK);
 
-	}*/
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createOrder(@RequestBody OrderModel orderModel) {
-
-		Order order = new Order();
-		order.setCreated(new Date());
-		order.setUserProfileId(orderModel.getUserProfileId());
-		order.setOrderStatus(OrderStatus.BASKET);
-		order.setTotalPrice(0d);
-		Integer id = orderService.save(order);
-
+		Integer id = orderService.save(model2entity(orderModel));
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateOrder(@RequestBody OrderModel orderModel, @PathVariable(value = "id") Integer id) {
-
+		
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(id);
-		order.setTotalPrice(orderModel.getTotalPrice());
-		order.setOrderStatus(orderModel.getOrderStatus());
-		orderService.update(order);
+		if (order.getUserProfileId().equals(userAuthStorage.getId()) || userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
+			order.setTotalPrice(orderModel.getTotalPrice());
+			order.setOrderStatus(orderModel.getOrderStatus());
+			orderService.update(order);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+		}
+	}
 
-		return new ResponseEntity<Void>(HttpStatus.OK);
+	private OrderModel entity2model(Order order) {
+		OrderModel orderModel = new OrderModel();
+		orderModel.setId(order.getId());
+		orderModel.setCreated(order.getCreated());
+		orderModel.setUserProfileId(order.getUserProfileId());
+		orderModel.setTotalPrice(order.getTotalPrice());
+		orderModel.setOrderStatus(order.getOrderStatus());
+		return orderModel;
+	}
+
+	private Order model2entity(OrderModel orderModel) {
+		Order order = new Order();
+		order.setCreated(new Date());
+		order.setUserProfileId(orderModel.getUserProfileId());
+		order.setOrderStatus(OrderStatus.BASKET);
+		order.setTotalPrice(0d);
+		return order;
 	}
 
 }

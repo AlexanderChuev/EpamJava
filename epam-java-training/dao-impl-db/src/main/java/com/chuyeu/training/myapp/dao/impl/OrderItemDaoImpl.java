@@ -18,9 +18,9 @@ public class OrderItemDaoImpl implements IOrderItemDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<OrderItem> getAll() {
+	public List<OrderItem> getAll(Integer orderId) {
 
-		return jdbcTemplate.query("select * from order_item", new BeanPropertyRowMapper<OrderItem>(OrderItem.class));
+		return jdbcTemplate.query("select * from order_item where order_id = ? ", new Object[] { orderId }, new BeanPropertyRowMapper<OrderItem>(OrderItem.class));
 	}
 
 	@Override

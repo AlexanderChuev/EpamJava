@@ -20,6 +20,7 @@ import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
+import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;
@@ -31,9 +32,9 @@ public class UserController {
 
 	@Inject
 	private IUserService userService;
-	
+
 	@Inject
-    private ApplicationContext context;
+	private ApplicationContext context;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -42,60 +43,65 @@ public class UserController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		CommonFilter commonFilter = new CommonFilter(page,limit,column,direction);
-		
-		List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
-		List<UserProfileModel> listUserProfileModel = new ArrayList<>();
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		if (userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
 
-		for (UserProfile userProfile : listUserProfileFromDB) {
-			listUserProfileModel.add(entity2model(userProfile));
+			CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
+
+			List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
+			List<UserProfileModel> listUserProfileModel = new ArrayList<>();
+
+			for (UserProfile userProfile : listUserProfileFromDB) {
+				listUserProfileModel.add(entity2model(userProfile));
+			}
+
+			EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
+
+			wrapper.setListEntityModel(listUserProfileModel);
+			wrapper.setPageCount(userService.getUserProfileQuantity()); // quantity
+
+			return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
-		
-		EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
 
-		wrapper.setListEntityModel(listUserProfileModel);
-		wrapper.setPageCount(userService.getUserProfileQuantity()); // тут quantity а не page count
-
-		return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
 	}
 
 	// +++
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCredentials(@PathVariable(value = "id") Integer id) {
 
-		UserCredentials userCredentials = userService.getUserCredentials(id);
-		UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
-		userCredentialsModel.setEmail(userCredentials.getEmail());
-		userCredentialsModel.setUserRole(userCredentials.getUserRole().toString());
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		if (userAuthStorage.getId().equals(id)) {
 
-		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
+			UserCredentials userCredentials = userService.getUserCredentials(id);
+			UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
+			userCredentialsModel.setEmail(userCredentials.getEmail());
+			userCredentialsModel.setUserRole(userCredentials.getUserRole().toString());
+
+			return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+		}
 	}
 
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
-		UserProfile userProfile = userService.getUserProfile(id);
-		return new ResponseEntity<UserProfileModel>(entity2model(userProfile), HttpStatus.OK);
-	}
-	
-	
-	@RequestMapping(value = "/authorization", method = RequestMethod.GET)
-	public ResponseEntity<?> getByEmailAndPassword(@RequestParam(value = "email", required = false) String email,
-			@RequestParam(value = "password", required = false) String password) {
 
-		UserCredentials userCredentialsFromDb = userService.getByEmailAndPassword(email, password);
-		UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
-		userCredentialsModel.setId(userCredentialsFromDb.getId());
-		userCredentialsModel.setEmail(userCredentialsFromDb.getEmail());
-
-		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		if (userAuthStorage.getId().equals(id)) {
+			UserProfile userProfile = userService.getUserProfile(id);
+			return new ResponseEntity<UserProfileModel>(entity2model(userProfile), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN); // id могут не совп
+		}
 	}
 
 	// +++
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> registration(@RequestBody UserWrapper userWrapper) {
 
-		
 		if (userWrapper.getUserCredentialsModel() == null || userWrapper.getUserProfileModel() == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
@@ -112,42 +118,49 @@ public class UserController {
 		userService.registration(userProfile, userCredentials);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateUserCredentials(@RequestBody UserCredentialsModel userCredentialsModel, @PathVariable(value = "id") Integer id) {
-		UserCredentials userCredentialsFromDb = userService.getUserCredentials(id);
-		userCredentialsFromDb.setPassword(userCredentialsModel.getPassword());
-		userCredentialsFromDb.setUserRole(UserRole.valueOf(userCredentialsModel.getUserRole()));
-		userService.update(userCredentialsFromDb);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+	public ResponseEntity<?> updateUserCredentials(@RequestBody UserCredentialsModel userCredentialsModel,
+			@PathVariable(value = "id") Integer id) {
+
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		if (userAuthStorage.getId().equals(id)) {
+
+			UserCredentials userCredentialsFromDb = userService.getUserCredentials(id);
+			userCredentialsFromDb.setPassword(userCredentialsModel.getPassword());
+			userCredentialsFromDb.setUserRole(UserRole.valueOf(userCredentialsModel.getUserRole()));
+			userService.update(userCredentialsFromDb);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+		}
 	}
-	
+
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileModel userProfileModel,
 			@PathVariable(value = "id") Integer id) {
-		UserProfile userProfileFromDb = userService.getUserProfile(id);
-		userProfileFromDb.setFirstName(userProfileModel.getFirstName());
-		userProfileFromDb.setLastName(userProfileModel.getLastName());
-		userService.update(userProfileFromDb);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-	
 
-	private UserProfileModel entity2model(UserProfile userProfile){
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		if (userAuthStorage.getId().equals(id)) {
+
+			UserProfile userProfileFromDb = userService.getUserProfile(id);
+			userProfileFromDb.setFirstName(userProfileModel.getFirstName());
+			userProfileFromDb.setLastName(userProfileModel.getLastName());
+			userService.update(userProfileFromDb);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+		}
+	}
+
+	private UserProfileModel entity2model(UserProfile userProfile) {
 		UserProfileModel userProfileModel = new UserProfileModel();
 		userProfileModel.setFirstName(userProfile.getFirstName());
 		userProfileModel.setLastName(userProfile.getLastName());
 		userProfileModel.setUserCredentialsId(userProfile.getUserCredentialsId());
 		return userProfileModel;
 	}
-
-	// json
-/*	@RequestMapping(value = "/c/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getC(@PathVariable(value = "id") Integer id) {
-		UserWrapper userWrapper = new UserWrapper();
-		userWrapper.setUserCredentialsModel(new UserCredentialsModel());
-		userWrapper.setUserProfileModel(new UserProfileModel());
-		return new ResponseEntity<UserWrapper>(userWrapper, HttpStatus.OK);
-	}*/
 
 }

@@ -46,7 +46,7 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials){
+	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials) {
 
 		Integer userCredentialsId = userCredentialsDao.add(userCredentials);
 		userProfile.setUserCredentialsId(userCredentialsId);
@@ -76,13 +76,13 @@ public class UserSeviceImpl implements IUserService {
 		return userProfileDao.getAll(commonFilter);
 	}
 
-	/// ???
 	@Override
 	public void delete(Integer id) {
+		UserProfile userProfile = userProfileDao.get(id);
 		userProfileDao.delete(id);
 		LOGGER.info("Delete userProfile with id " + id);
-		userCredentialsDao.delete(id);
-		LOGGER.info("Delete userCredentials with id " + id);
+		userCredentialsDao.delete(userProfile.getUserCredentialsId());
+		LOGGER.info("Delete userCredentials with id " + userProfile.getUserCredentialsId());
 	}
 
 	@Override

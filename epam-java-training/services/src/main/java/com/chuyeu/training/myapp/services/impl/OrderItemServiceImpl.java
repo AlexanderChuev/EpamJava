@@ -22,7 +22,7 @@ public class OrderItemServiceImpl implements IOrderItemService {
 
 	@Override
 	public List<OrderItem> getAllByOrderId(Integer orderId) {
-		return orderItemDao.getAll();
+		return orderItemDao.getAll(orderId);
 	}
 
 	@Override

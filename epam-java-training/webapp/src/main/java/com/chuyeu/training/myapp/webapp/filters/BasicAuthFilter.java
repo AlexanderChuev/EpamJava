@@ -19,6 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
+import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
 import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
 
@@ -43,8 +44,9 @@ public class BasicAuthFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		if (isAuthRequired(req)) {
+		if (!isAuthRequired(req)) {
 			chain.doFilter(request, response);
+			return;
 		}
 
 		String[] credentials = resolveCredentials(req);
@@ -60,7 +62,12 @@ public class BasicAuthFilter implements Filter {
 		if (user != null && user.getEmail() != null && user.getPassword() != null) {
 			userDataStorage.setId(user.getId());
 			userDataStorage.setUserRole(user.getUserRole());
-			chain.doFilter(request, response);
+			boolean verificationAccess = verificationAccess(req, userDataStorage);
+			if (verificationAccess) {
+				chain.doFilter(request, response);
+			} else {
+				res.sendError(401);
+			}
 		} else {
 			res.sendError(401);
 		}
@@ -68,15 +75,15 @@ public class BasicAuthFilter implements Filter {
 	}
 
 	private boolean isAuthRequired(HttpServletRequest req) {
-		if (req.getMethod().toUpperCase().equals("GET") && (req.getRequestURI().equals("/product")
-				|| req.getRequestURI().equals("/attribute") || req.getRequestURI().equals("/product-variant"))) {
+		
+		if (req.getMethod().toUpperCase().equals("GET")
+				&& (req.getRequestURI().equals("/product") || req.getRequestURI().contains("attribute/product-variant")
+						|| req.getRequestURI().equals("/product-variant"))) {
 			return false;
 		}
-		
-		if(req.getMethod().toUpperCase().equals("POST") && req.getRequestURI().equals("/order-item")){
+		if(req.getMethod().toUpperCase().equals("POST")&&req.getRequestURI().equals("/user")){
 			return false;
 		}
-		
 		return true;
 	}
 
@@ -91,6 +98,58 @@ public class BasicAuthFilter implements Filter {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	private boolean verificationAccess(HttpServletRequest req, UserAuthStorage userDataStorage) {
+		
+		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("POST")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		} 
+		if(req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("PUT")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		if(req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		
+		if (req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("POST")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		} 
+		if(req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("PUT")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		if(req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		
+		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("POST")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		} 
+		if(req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("PUT")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		if(req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		
+		if(req.getRequestURI().contains("/user") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+			return true;
+		}
+		
+		else {
+			return false;
+		}
+
 	}
 
 	@Override
