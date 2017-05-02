@@ -41,8 +41,8 @@ public class AttributeServiceImpl implements IAttributeService {
 	}
 	
 	@Override
-	public void add(Attribute attribute) {
-		attributeDao.add(attribute);
+	public void save(Attribute attribute) {
+		attributeDao.save(attribute);
 		LOGGER.info("Insert new attribute name={}. value={}", attribute.getName(), attribute.getValue());
 	}
 

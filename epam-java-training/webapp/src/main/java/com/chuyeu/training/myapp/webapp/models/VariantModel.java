@@ -21,4 +21,9 @@ public class VariantModel {
 		this.attributeId = attributeId;
 	}
 
+	@Override
+	public String toString() {
+		return "VariantModel [productVariantId=" + productVariantId + ", attributeId=" + attributeId + "]";
+	}
+
 }

@@ -23,8 +23,8 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
 		ProductVariant productVariant2 = createProductVariant(productId);
-		productVariantService.saveOrUpdate(productVariant);
-		productVariantService.saveOrUpdate(productVariant2);
+		productVariantService.save(productVariant);
+		productVariantService.save(productVariant2);
 		List<ProductVariant> allByProduct = productVariantService.getAllByProduct(productId);
 
 		Assert.notNull(allByProduct, "List ProductVariantEntity must not be null");
@@ -48,7 +48,10 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
-		Integer productVariantId= productVariantService.saveOrUpdate(productVariant);
+		productVariantService.save(productVariant);
+		
+		List<ProductVariant> allByProduct = productVariantService.getAllByProduct(productId);
+		Integer productVariantId = allByProduct.get(0).getId();
 		
 		ProductVariant productVariantFromDb = productVariantService.getProductVariant(productVariantId);
 		checkProductVariantFromDb(productVariantFromDb, productVariant);
@@ -59,18 +62,18 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
-		Integer productVariantId= productVariantService.saveOrUpdate(productVariant);
-		ProductVariant productVariantFromDb = productVariantService.getProductVariant(productVariantId);
-		productVariantFromDb.setPriceInfluence(12d);
-		productVariantFromDb.setAvailableQuantity(12);
-		Integer updetedProductVariantId= productVariantService.saveOrUpdate(productVariantFromDb);
+		productVariantService.save(productVariant);
+		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
+		ProductVariant productVariantFromDb = productVariants.get(0);
+		productVariantFromDb.setAvailableQuantity(100);
+		productVariantFromDb.setPriceInfluence(100d);
 		
-		Assert.isTrue(productVariantId.equals(updetedProductVariantId),"");
+		productVariantService.update(productVariantFromDb);
+		List<ProductVariant> updatedProductVariants = productVariantService.getAllByProduct(productVariantFromDb.getProductId());
+		ProductVariant updatedProductVariant = updatedProductVariants.get(0);
 		
-		ProductVariant updatedProductVariantFromDb = productVariantService.getProductVariant(updetedProductVariantId);
-		Assert.isTrue(productVariantFromDb.getProductId().equals(updatedProductVariantFromDb.getProductId()),"");
-		Assert.isTrue(productVariantFromDb.getPriceInfluence().equals(updatedProductVariantFromDb.getPriceInfluence()),"");
-		Assert.isTrue(productVariantFromDb.getAvailableQuantity().equals(updatedProductVariantFromDb.getAvailableQuantity()),"");
+		Assert.isTrue(productVariantFromDb.getId().equals(updatedProductVariant.getId()),"");
+		Assert.isTrue(productVariantFromDb.getProductId().equals(updatedProductVariant.getProductId()),"");
 		
 	}
 
@@ -79,7 +82,10 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
-		Integer productVariantId= productVariantService.saveOrUpdate(productVariant);
+		productVariantService.save(productVariant);
+		
+		List<ProductVariant> allByProduct = productVariantService.getAllByProduct(productId);
+		Integer productVariantId = allByProduct.get(0).getId();
 		
 		productVariantService.delete(productVariantId);
 		productVariantService.getProductVariant(productVariantId);

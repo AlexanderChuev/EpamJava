@@ -18,7 +18,7 @@ public class AttributeDaoImpl implements IAttributeDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public void add(Attribute attribute) {
+	public void save(Attribute attribute) {
 		if(attribute.getValue() == null){
 			attribute.setValue("choose value");
 		}

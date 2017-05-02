@@ -24,7 +24,6 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	@Inject
 	private JdbcTemplate jdbcTemplate;
 
-
 	// +++
 	@Override
 	public ProductVariant get(Integer id) {
@@ -36,7 +35,7 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 
 	@Override
 	public Integer add(ProductVariant productVariant) {
-
+		
 		final String INSERT_SQL = "insert into product_variant (product_id, available_quantity, price_influence) values(?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -55,12 +54,11 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 		return keyHolder.getKey().intValue();
 	}
 
+
 	@Override
-	public Integer update(ProductVariant product_variant) {
-		return jdbcTemplate.update(
-				"update product_variant set product_id = ?, available_quantity = ?, price_influence = ?" + " where id = ?",
-				product_variant.getProductId(), product_variant.getAvailableQuantity(),
-				product_variant.getPriceInfluence(), product_variant.getId());
+	public void update(ProductVariant productVariant) { 
+		jdbcTemplate.update("update product_variant set available_quantity = ?, price_influence = ?" + " where id = ?",
+				productVariant.getAvailableQuantity(), productVariant.getPriceInfluence(), productVariant.getId());
 	}
 
 	@Override
@@ -70,7 +68,7 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 	}
 
 	@Override
-	public List<ProductVariant> getAllByProduct(Integer productId) throws EmptyResultDataAccessException{
+	public List<ProductVariant> getAllByProduct(Integer productId) throws EmptyResultDataAccessException {
 		return jdbcTemplate.query("select * from product_variant where product_id = ?", new Object[] { productId },
 				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
 	}

@@ -1,0 +1,2 @@
+# JMeter generated Header file
+Authorization	Basic YWFhQG1haWwucnU6YWFhYWFhYWE=

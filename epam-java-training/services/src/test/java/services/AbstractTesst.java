@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.Product;
@@ -24,24 +25,24 @@ import com.chuyeu.training.myapp.services.IVariantService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:services-context.xml")
-//@Transactional
+@Transactional
 public class AbstractTesst {
-	
+
 	@Inject
 	IProductService productService;
-	
+
 	@Inject
 	IVariantService variantService;
-	
+
 	@Inject
 	IAttributeService attributeService;
-	
+
 	@Inject
 	IProductVariantService productVariantService;
-	
+
 	@Inject
 	IOrderItemService orderItemService;
-	
+
 	@Inject
 	IOrderService orderService;
 

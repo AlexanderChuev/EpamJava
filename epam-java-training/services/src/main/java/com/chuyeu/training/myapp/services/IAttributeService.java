@@ -17,7 +17,7 @@ public interface IAttributeService {
 	Integer getIdByNameAndValue(String name, String value);
 
 	@Transactional
-	void add(Attribute attribute);
+	void save(Attribute attribute);
 
 	@Transactional
 	void deleteAttributeValue(Integer id);

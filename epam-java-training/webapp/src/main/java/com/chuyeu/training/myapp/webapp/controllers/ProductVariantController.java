@@ -65,8 +65,8 @@ public class ProductVariantController {
 		productVariant.setProductId(productVariantModel.getProductId());
 		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
 		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());
-		Integer id = productVariantService.saveOrUpdate(productVariant);
-		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
+		Integer id = productVariantService.save(productVariant);
+		return new ResponseEntity<IdModel>(new IdModel(id),HttpStatus.CREATED);
 	}
 
 	// +++
@@ -77,7 +77,7 @@ public class ProductVariantController {
 		ProductVariant productVariant = productVariantService.getProductVariant(id);
 		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
 		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());
-		productVariantService.saveOrUpdate(productVariant);
+		productVariantService.update(productVariant);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 

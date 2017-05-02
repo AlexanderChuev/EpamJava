@@ -32,25 +32,25 @@ public class ProductVariantServiceImpl implements IProductVariantService {
 	}
 
 	@Override
-	public Integer saveOrUpdate(ProductVariant productVariant) {
-		if (productVariant.getId() == null) {
-			LOGGER.info("Insert productVariant with product.id={}. priceInfluence={}. availableQuantity={}",
-					productVariant.getProductId(), productVariant.getPriceInfluence(),
-					productVariant.getAvailableQuantity());
-			return productVariantDao.add(productVariant);
-		} else {
-			LOGGER.info("Update productVariant with product.id={}. priceInfluence={}. availableQuantity={}",
-					productVariant.getProductId(), productVariant.getPriceInfluence(),
-					productVariant.getAvailableQuantity());
-			return productVariantDao.update(productVariant);
-		}
-
-	}
-
-	@Override
 	public void delete(Integer id) {
 		productVariantDao.delete(id);
 		LOGGER.info("Delete productVariant with id " + id);
+	}
+
+	@Override
+	public Integer save(ProductVariant productVariant) {
+		LOGGER.info("Insert productVariant with product.id={}. priceInfluence={}. availableQuantity={}",
+				productVariant.getProductId(), productVariant.getPriceInfluence(),
+				productVariant.getAvailableQuantity());
+		return productVariantDao.add(productVariant);
+	}
+
+	@Override
+	public void update(ProductVariant productVariant) {
+		LOGGER.info("Update productVariant with product.id={}. priceInfluence={}. availableQuantity={}",
+				productVariant.getProductId(), productVariant.getPriceInfluence(),
+				productVariant.getAvailableQuantity());
+		productVariantDao.update(productVariant);
 	}
 
 }

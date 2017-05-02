@@ -148,7 +148,7 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 	}
 
 	@Override
-	public void add(Attribute attribute) {
+	public void save(Attribute attribute) {
 		
 		File file = getFile();
 		@SuppressWarnings("unchecked")

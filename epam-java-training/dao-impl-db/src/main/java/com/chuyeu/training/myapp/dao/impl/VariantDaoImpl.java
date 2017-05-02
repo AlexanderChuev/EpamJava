@@ -15,12 +15,12 @@ public class VariantDaoImpl implements IVariantDao {
 
 	@Override
 	public void delete(Integer productVariantId, Integer attributeId) {
+		System.out.println();
 		jdbcTemplate.update("delete from variant where product_variant_id = ? and attribute_id = ?", productVariantId, attributeId);
 	}
 
 	@Override
 	public void add(Integer productVariantId, Integer attributeId) {
-
 		jdbcTemplate.update("insert into variant (product_variant_id, attribute_id) values (?,?)", productVariantId,
 				attributeId);
 	}

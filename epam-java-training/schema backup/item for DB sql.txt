@@ -34,8 +34,8 @@ INSERT INTO variant(product_variant_id, attribute_id) VALUES (4, 6);
 INSERT INTO variant(product_variant_id, attribute_id) VALUES (5, 1);
 INSERT INTO variant(product_variant_id, attribute_id) VALUES (6, 8);
 
-INSERT INTO user_credentials(email, password, user_role) VALUES ( 'aaa@mail.ru', 'aaaaaaaa', 'ADMIN');
-INSERT INTO user_credentials(email, password, user_role) VALUES ( 'bbb@mail.ru', 'bbbbbbbb', 'CLIENT');
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'aaa@mail.ru', 'aaaaaaaa', 'ADMIN');  /*YWFhQG1haWwucnU6YWFhYWFhYWE=*/
+INSERT INTO user_credentials(email, password, user_role) VALUES ( 'bbb@mail.ru', 'bbbbbbbb', 'CLIENT'); /*YmJiQG1haWwucnU6YmJiYmJiYmI=*/
 INSERT INTO user_credentials(email, password, user_role) VALUES ( 'ccc@mail.ru', 'cccccccc', 'CLIENT');
 INSERT INTO user_credentials(email, password, user_role) VALUES ( 'ddd@mail.ru', 'dddddddd', 'CLIENT');
 INSERT INTO user_credentials(email, password, user_role) VALUES ( 'eee@mail.ru', 'eeeeeeee', 'CLIENT');
@@ -46,8 +46,8 @@ INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('С
 INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Гончаров', 'Гена', 4);
 INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Семенович', 'Семен', 5);
 
-INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 16:07:30.016', 2, 55, 'BASKET');
-INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 17:07:30.016', 2, 100, 'IN_PROCESSING');
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 16:07:30.016', 2, 55, 'IN_PROCESSING');
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 17:07:30.016', 2, 100, 'BASKET');
 INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 18:07:30.016', 3, 100, 'ACCEPTED');
 INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 19:07:30.016', 4, 0, 'REJECTED');
 INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 20:07:30.016', 5, 100, 'COMPLETED');

@@ -37,7 +37,7 @@ public class OrderItemController {
 	private ApplicationContext context;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getAllByOrderId(@RequestParam(value = "order-id", required = false) Integer orderId) {
+	public ResponseEntity<?> getAllItems(@RequestParam(value = "order-id", required = false) Integer orderId) {
 
 		List<OrderItem> listOrderItems = orderItemService.getAllByOrderId(orderId);
 		List<OrderItemModel> listOrderItemsModel = new ArrayList<>();

@@ -43,9 +43,6 @@ public class UserController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-		if (userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
-
 			CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 
 			List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
@@ -61,18 +58,11 @@ public class UserController {
 			wrapper.setPageCount(userService.getUserProfileQuantity()); // quantity
 
 			return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
-		}
-
 	}
 
 	// +++
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCredentials(@PathVariable(value = "id") Integer id) {
-
-		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-		if (userAuthStorage.getId().equals(id)) {
 
 			UserCredentials userCredentials = userService.getUserCredentials(id);
 			UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
@@ -80,22 +70,13 @@ public class UserController {
 			userCredentialsModel.setUserRole(userCredentials.getUserRole().toString());
 
 			return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
-		}
 	}
 
 	// +++
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
-
-		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-		if (userAuthStorage.getId().equals(id)) {
 			UserProfile userProfile = userService.getUserProfile(id);
 			return new ResponseEntity<UserProfileModel>(entity2model(userProfile), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN); // id могут не совп
-		}
 	}
 
 	// +++
@@ -141,18 +122,11 @@ public class UserController {
 	public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileModel userProfileModel,
 			@PathVariable(value = "id") Integer id) {
 
-		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-		if (userAuthStorage.getId().equals(id)) {
-
 			UserProfile userProfileFromDb = userService.getUserProfile(id);
 			userProfileFromDb.setFirstName(userProfileModel.getFirstName());
 			userProfileFromDb.setLastName(userProfileModel.getLastName());
 			userService.update(userProfileFromDb);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-
-		} else {
-			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
-		}
 	}
 
 	private UserProfileModel entity2model(UserProfile userProfile) {

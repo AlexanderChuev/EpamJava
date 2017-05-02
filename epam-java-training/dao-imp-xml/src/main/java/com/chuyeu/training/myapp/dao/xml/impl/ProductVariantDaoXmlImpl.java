@@ -72,12 +72,12 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 
 		wrapper.setLastId(newId);
 		writeNewData(file, wrapper);
-		
 		return newId;
+		
 	}
 
 	@Override
-	public Integer update(ProductVariant productVariant) {
+	public void update(ProductVariant productVariant) {
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<ProductVariant> wrapper = (XmlModelWrapper<ProductVariant>) xstream.fromXML(file);
@@ -90,7 +90,6 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 			}
 		}
 		writeNewData(file, wrapper);
-		return productVariant.getId(); ////// change
 	}
 
 	@Override

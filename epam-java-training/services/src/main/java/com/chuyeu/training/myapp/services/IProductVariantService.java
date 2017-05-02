@@ -13,7 +13,10 @@ public interface IProductVariantService {
 	ProductVariant getProductVariant(Integer id);
 	
 	@Transactional
-	Integer saveOrUpdate(ProductVariant productVariant);
+	Integer save(ProductVariant productVariant);
+	
+	@Transactional
+	void update(ProductVariant productVariant);
 	
 	@Transactional
 	void delete (Integer id);

@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 
-public interface IAttributeDao {
+public interface IAttributeDao /*extends AbstractDao<Attribute,Void>*/{
+	
+
 
 	List<Attribute> getProductVariantAttributes(Integer productVariantId);
 	
@@ -18,7 +20,7 @@ public interface IAttributeDao {
 	
 	void deleteByName(String name);
 	
-	void add(Attribute attribute);
+	void save(Attribute attribute);
 
 	List<Integer> getAllIdByName(String name);
 }

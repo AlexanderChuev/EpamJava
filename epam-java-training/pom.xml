@@ -22,7 +22,7 @@
 		<module>datamodel</module>
 		<module>dao-api</module>
 		<module>dao-impl-db</module>
-		<module>dao-impl-xml</module>
+		<!-- <module>dao-impl-xml</module> -->
 		<module>services</module>
 		<module>webapp</module>
 	</modules>
@@ -48,11 +48,11 @@
 				<version>1.0.0</version>
 			</dependency>
 
-			<dependency>
+			<!-- <dependency>
 				<groupId>com.chuyeu.training.myapp</groupId>
 				<artifactId>dao-impl-xml</artifactId>
 				<version>1.0.0</version>
-			</dependency>
+			</dependency> -->
 
 
 			<dependency>

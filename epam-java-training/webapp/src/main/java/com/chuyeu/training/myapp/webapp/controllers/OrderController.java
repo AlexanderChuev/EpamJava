@@ -44,8 +44,9 @@ public class OrderController {
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "status", required = false) String status) {
 
-		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+
+		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 		OrderFilter orderFilter = new OrderFilter();
 		if (status == null) {
 			status = "basket";
@@ -55,18 +56,29 @@ public class OrderController {
 		orderFilter.setUserRole(userAuthStorage.getUserRole());
 
 		List<Order> listOrdersFromDb = orderService.getAll(commonFilter, orderFilter);
-		List<OrderModel> listOrderModel = new ArrayList<>();
+		EntityModelWrapper<OrderModel> wrapper = new EntityModelWrapper<OrderModel>();
+		
+		if (!(listOrdersFromDb==null || listOrdersFromDb.isEmpty())) {
+			
+			Integer userProfileId = listOrdersFromDb.get(0).getUserProfileId();
+			if (userProfileId.equals(userAuthStorage.getId()) || userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
 
-		for (Order orderFromDb : listOrdersFromDb) {
-			listOrderModel.add(entity2model(orderFromDb));
+				List<OrderModel> listOrderModel = new ArrayList<>();
+
+				for (Order orderFromDb : listOrdersFromDb) {
+					listOrderModel.add(entity2model(orderFromDb));
+				}
+				wrapper.setListEntityModel(listOrderModel);
+				wrapper.setPageCount(null);
+				return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
+
+			} else {
+				return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+			}
+		} else {
+			return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper , HttpStatus.OK);
 		}
 
-		EntityModelWrapper<OrderModel> wrapper = new EntityModelWrapper<OrderModel>();
-
-		wrapper.setListEntityModel(listOrderModel);
-		wrapper.setPageCount(null);
-
-		return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -74,7 +86,8 @@ public class OrderController {
 
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(id);
-		if (order.getUserProfileId().equals(userAuthStorage.getId()) || userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
+		if (order.getUserProfileId().equals(userAuthStorage.getId())
+				|| userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return new ResponseEntity<OrderModel>(entity2model(order), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
@@ -90,10 +103,11 @@ public class OrderController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateOrder(@RequestBody OrderModel orderModel, @PathVariable(value = "id") Integer id) {
-		
+
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(id);
-		if (order.getUserProfileId().equals(userAuthStorage.getId()) || userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
+		if (order.getUserProfileId().equals(userAuthStorage.getId())
+				|| userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
 			order.setTotalPrice(orderModel.getTotalPrice());
 			order.setOrderStatus(orderModel.getOrderStatus());
 			orderService.update(order);

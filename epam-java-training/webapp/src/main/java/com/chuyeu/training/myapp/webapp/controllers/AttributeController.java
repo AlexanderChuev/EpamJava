@@ -79,7 +79,7 @@ public class AttributeController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createAttribute(@RequestBody AttributeModel attributeModel) {
 		Attribute attribute = model2entity(attributeModel);
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 

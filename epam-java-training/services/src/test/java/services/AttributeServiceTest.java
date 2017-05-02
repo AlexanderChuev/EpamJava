@@ -21,15 +21,15 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void addTest() {
 
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
-		attributeService.add(attribute);
+		attributeService.save(attribute);
+		attributeService.save(attribute);
 	}
 
 	@Test
 	public void getNamesTest() {
 
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		List<String> names = attributeService.getNames();
 		
 		Assert.notNull(names, "The list of attribute names must not be null");
@@ -41,7 +41,7 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void getValuesByNameTest() {
 
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		List<String> values = attributeService.getValuesByName(attribute.getName());
 		
 		Assert.notNull(values, "The list of attribute values must not be null");
@@ -53,7 +53,7 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void getIdByNameAndValueTest() {
 
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
 		Assert.notNull(id, "Attribute id must not be null");
 	}
@@ -62,7 +62,7 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void deleteAttributeValueTest() {
 
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		Integer id = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
 		attributeService.deleteAttributeValue(id);
 		attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
@@ -72,9 +72,9 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void deleteByNameTest() {
 
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		attribute.setValue("second");
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		attributeService.delete(attribute.getName());
 		Assert.isTrue(attributeService.getValuesByName(attribute.getName()).isEmpty(),
 				"The list of attribut values must be empty");
@@ -84,9 +84,9 @@ public class AttributeServiceTest extends AbstractTesst {
 	public void getAllIdByNameTest() {
 		
 		Attribute attribute = createAttribute();
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		attribute.setValue("second");
-		attributeService.add(attribute);
+		attributeService.save(attribute);
 		List<Integer> ids = attributeService.getAllIdByName(attribute.getName());
 		
 		Assert.notNull(ids, "The list of attribute id must not be null");
@@ -97,15 +97,18 @@ public class AttributeServiceTest extends AbstractTesst {
 		
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
-		Integer productVariantId = productVariantService.saveOrUpdate(productVariant);
+		productVariantService.save(productVariant);
+		
+		List<ProductVariant> productVariantById = productVariantService.getAllByProduct(productId);
+		Integer productVariantId = productVariantById.get(0).getId();
 		
 		Attribute attribute1 = createAttribute();
-		attributeService.add(attribute1);
+		attributeService.save(attribute1);
 		Integer attributeId1 = attributeService.getIdByNameAndValue(attribute1.getName(), attribute1.getValue());
 		variantService.add(productVariantId, attributeId1);
 		
 		Attribute attribute2 = createAttribute();
-		attributeService.add(attribute2);
+		attributeService.save(attribute2);
 		Integer attributeId2 = attributeService.getIdByNameAndValue(attribute2.getName(), attribute2.getValue());
 		variantService.add(productVariantId, attributeId2);
 		

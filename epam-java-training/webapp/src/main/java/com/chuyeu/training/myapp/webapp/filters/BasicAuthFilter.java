@@ -75,13 +75,13 @@ public class BasicAuthFilter implements Filter {
 	}
 
 	private boolean isAuthRequired(HttpServletRequest req) {
-		
-		if (req.getMethod().toUpperCase().equals("GET")
-				&& (req.getRequestURI().equals("/product") || req.getRequestURI().contains("attribute/product-variant")
-						|| req.getRequestURI().equals("/product-variant"))) {
+
+		if (req.getMethod().toUpperCase().equals("GET") && (req.getRequestURI().contains("/product")
+				|| req.getRequestURI().contains("/attribute") || req.getRequestURI().contains("/product-variant")
+				|| req.getRequestURI().contains("/order-item"))) {
 			return false;
 		}
-		if(req.getMethod().toUpperCase().equals("POST")&&req.getRequestURI().equals("/user")){
+		if (req.getMethod().toUpperCase().equals("POST") && req.getRequestURI().contains("/user")) {
 			return false;
 		}
 		return true;
@@ -101,61 +101,107 @@ public class BasicAuthFilter implements Filter {
 	}
 
 	private boolean verificationAccess(HttpServletRequest req, UserAuthStorage userDataStorage) {
-		
+
 		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("POST")
 				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
-		} 
-		if(req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("PUT")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+		}
+		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("PUT")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
 		}
-		if(req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
 		}
-		
+
 		if (req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("POST")
 				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
-		} 
-		if(req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("PUT")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+		}
+
+		if (req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
 		}
-		if(req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
-			return true;
-		}
-		
+
 		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("POST")
 				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
-		} 
-		if(req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("PUT")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+		}
+		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("PUT")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
 		}
-		if(req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
+		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
 			return true;
-		}
-		
-		if(req.getRequestURI().contains("/user") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)){
-			return true;
-		}
-		
-		else {
-			return false;
 		}
 
+		if (req.getRequestURI().contains("/variant") && req.getMethod().toUpperCase().equals("POST")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		}
+
+		if (req.getRequestURI().contains("/variant") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		}
+
+		if (req.getRequestURI().contains("/user/credentials")
+				&& (req.getMethod().toUpperCase().equals("GET") || req.getMethod().toUpperCase().equals("PUT"))) {
+			if (userDataStorage.getUserRole().equals(UserRole.CLIENT)) {
+				String[] uri = req.getRequestURI().split("/");
+				Integer id = Integer.valueOf(uri[3]);
+				if (userDataStorage.getId().equals(id)) {
+					return true;
+				}
+			}
+			if (userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				return true;
+			}
+		}
+
+		if (req.getRequestURI().contains("/user/profile")
+				&& (req.getMethod().toUpperCase().equals("GET") || req.getMethod().toUpperCase().equals("PUT"))) {
+			if (userDataStorage.getUserRole().equals(UserRole.CLIENT)) {
+				String[] uri = req.getRequestURI().split("/");
+				Integer id = Integer.valueOf(uri[3]);
+				if (userDataStorage.getId().equals(id)) {
+					return true;
+				}
+			}
+			if (userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				return true;
+			}
+		}
+
+		if (req.getRequestURI().contains("/user") && req.getMethod().toUpperCase().equals("GET")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		}
+
+		if (req.getRequestURI().contains("/user") && req.getMethod().toUpperCase().equals("DELETE")
+				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			return true;
+		}
+
+		if (req.getRequestURI().contains("/order-item") && (req.getMethod().toUpperCase().equals("POST")
+				|| req.getMethod().toUpperCase().equals("PUT") || req.getMethod().toUpperCase().equals("DELETE"))) {
+			return true;
+		}
+
+		if (req.getRequestURI().contains("/order") && (req.getMethod().toUpperCase().equals("GET")
+				|| req.getMethod().toUpperCase().equals("POST") || req.getMethod().toUpperCase().equals("PUT")
+				|| req.getMethod().toUpperCase().equals("DELETE"))) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

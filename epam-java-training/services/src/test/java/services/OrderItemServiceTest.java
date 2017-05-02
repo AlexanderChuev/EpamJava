@@ -125,13 +125,16 @@ public class OrderItemServiceTest extends AbstractTesst {
 
 	}
 
-	private Integer getProductVariantId() {
+	private Integer getProductVariantId(){
 		Product product = createProduct();
 		Integer productId = productService.add(product);
 		ProductVariant productVariant = createProductVariant(productId);
-		return productVariantService.saveOrUpdate(productVariant);
+		productVariantService.save(productVariant);
+		List<ProductVariant> allByProduct = productVariantService.getAllByProduct(productId);
+		Integer productVariantId = allByProduct.get(0).getId();
+		return productVariantId;
 	}
-
+	
 	private Integer getOrderId() {
 
 		UserProfile userProfile = createUserProfile();
