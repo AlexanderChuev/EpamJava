@@ -48,11 +48,13 @@ public class OrderItemController {
 		return new ResponseEntity<List<OrderItemModel>>(listOrderItemsModel, HttpStatus.OK);
 	}
 
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
 		OrderItem orderItem = orderItemService.get(id);
 		return new ResponseEntity<OrderItemModel>(entyty2model(orderItem), HttpStatus.OK);
 	}
+	
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createOrderItem(@RequestBody OrderItemModel orderItemModel) {

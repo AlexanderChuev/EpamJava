@@ -55,7 +55,9 @@ public class UserController {
 			EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
 
 			wrapper.setListEntityModel(listUserProfileModel);
-			wrapper.setPageCount(userService.getUserProfileQuantity()); // quantity
+			Integer quantity = userService.getUserProfileQuantity();
+			Integer pageCount = (int) Math.ceil((double) quantity / limit);
+			wrapper.setPageCount(pageCount);
 
 			return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
 	}

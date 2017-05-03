@@ -30,6 +30,24 @@
       <lastName>Семен</lastName>
       <userCredentialsId>5</userCredentialsId>
     </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>6</id>
+      <firstName>firstName1</firstName>
+      <lastName>lastName</lastName>
+      <userCredentialsId>6</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>7</id>
+      <firstName>firstName1</firstName>
+      <lastName>lastName</lastName>
+      <userCredentialsId>7</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>8</id>
+      <firstName>firstName1</firstName>
+      <lastName>lastName</lastName>
+      <userCredentialsId>8</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
   </rows>
-  <lastId>5</lastId>
+  <lastId>8</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

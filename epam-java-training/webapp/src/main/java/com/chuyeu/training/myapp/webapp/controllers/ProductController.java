@@ -61,7 +61,9 @@ public class ProductController {
 		EntityModelWrapper<ProductModel> wrapper = new EntityModelWrapper<ProductModel>();
 
 		wrapper.setListEntityModel(listProductModel);
-		wrapper.setPageCount(productService.getProductQuantity());
+		Integer quantity =productService.getProductQuantity();
+		Integer pageCount = (int) Math.ceil((double) quantity / limit);
+		wrapper.setPageCount(pageCount);
 
 		return new ResponseEntity<EntityModelWrapper<ProductModel>>(wrapper, HttpStatus.OK);
 	}

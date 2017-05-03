@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IUserProfileDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
-import com.chuyeu.training.myapp.dao.xml.impl.comparators.AlphabetComparator;
+import com.chuyeu.training.myapp.dao.xml.impl.comparators.UserAlphabetComparator;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.thoughtworks.xstream.XStream;
@@ -36,7 +36,7 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 		List<UserProfile> userProfileFromDb = wrapper.getRows();
 
 		if (commonFilter.getSort().getColumn().toUpperCase().equals("LAST_NAME")) {
-			Collections.sort(userProfileFromDb, new AlphabetComparator());
+			Collections.sort(userProfileFromDb, new UserAlphabetComparator());
 		}
 
 		if (commonFilter.getSort().getDirection().toUpperCase().equals("DESC")) {
@@ -55,12 +55,12 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 			to = from + commonFilter.getLimit();
 		}
 
+		if (userProfileFromDb.size() < to) {
+			to = userProfileFromDb.size();
+		}
+
 		for (; from < to; from++) {
-			if (userProfileFromDb.size()>from) {
-				userProfileFiltered.add(userProfileFromDb.get(from));
-			} else {
-				break;
-			}
+			userProfileFiltered.add(userProfileFromDb.get(from));
 		}
 
 		return userProfileFiltered;
@@ -144,8 +144,12 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 
 	@Override
 	public Integer getUserProfileQuantity() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserProfile> wrapper = (XmlModelWrapper<UserProfile>) xstream.fromXML(file);
+		List<UserProfile> userProfilesFromDb = wrapper.getRows();
+		return userProfilesFromDb.size();
 	}
 
 	private File getFile() {

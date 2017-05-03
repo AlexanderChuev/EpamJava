@@ -42,6 +42,27 @@
       <basePrice>45.0</basePrice>
       <active>true</active>
     </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>10</id>
+      <name>Кроссовки Nike</name>
+      <description>Very nice shoes</description>
+      <basePrice>10.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>11</id>
+      <name>Кроссовки Nike</name>
+      <description>Very nice shoes</description>
+      <basePrice>10.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
+    <com.chuyeu.training.myapp.datamodel.Product>
+      <id>12</id>
+      <name>Кроссовки Nike</name>
+      <description>Very nice shoes</description>
+      <basePrice>10.0</basePrice>
+      <active>true</active>
+    </com.chuyeu.training.myapp.datamodel.Product>
   </rows>
-  <lastId>6</lastId>
+  <lastId>12</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

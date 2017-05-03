@@ -3,6 +3,8 @@ package com.chuyeu.training.myapp.dao.xml.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IProductDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
+import com.chuyeu.training.myapp.dao.xml.impl.comparators.ProductPriceComparator;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.thoughtworks.xstream.XStream;
@@ -26,7 +29,41 @@ public class ProductDaoXmlImpl implements IProductDao {
 
 	@Override
 	public List<Product> getAll(CommonFilter commonFilter) {
-		throw new UnsupportedOperationException();
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
+		List<Product> products = wrapper.getRows();
+		
+		if (commonFilter.getSort().getColumn().toUpperCase().equals("BASE_PRICE")) {
+			Collections.sort(products, new ProductPriceComparator());
+		}
+
+		if (commonFilter.getSort().getDirection().toUpperCase().equals("DESC")) {
+			Collections.reverse(products);
+		}
+
+		List<Product> productFiltered = new ArrayList<>();
+		int from, to;
+
+		if (commonFilter.getPageNumber() == null || commonFilter.getPageNumber().equals(1)
+				|| commonFilter.getPageNumber().equals(1)) {
+			from = 0;
+			to = commonFilter.getLimit();
+		} else {
+			from = commonFilter.getLimit() * (commonFilter.getPageNumber() - 1);
+			to = from + commonFilter.getLimit();
+		}
+
+		if (products.size() < to) {
+			to = products.size();
+		}
+
+		for (; from < to; from++) {
+			productFiltered.add(products.get(from));
+		}
+		
+		return productFiltered;
 	}
 
 	@Override
@@ -113,7 +150,6 @@ public class ProductDaoXmlImpl implements IProductDao {
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Product> wrapper = (XmlModelWrapper<Product>) xstream.fromXML(file);
 		List<Product> productsFromDb = wrapper.getRows();
-
 		return productsFromDb.size();
 	}
 

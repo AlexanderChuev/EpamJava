@@ -40,7 +40,7 @@ public class UserCredentialsDaoXmlImpl implements IUserCredentialsDao {
 				return userCredentials;
 			}
 		}
-		throw new EmptyResultDataAccessException("Product was not found, id = ", id);
+		throw new EmptyResultDataAccessException("User credentials was not found, id = ", id);
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class UserCredentialsDaoXmlImpl implements IUserCredentialsDao {
 			}
 		}
 
-		return null;
+		throw new EmptyResultDataAccessException("User credentials was not found", 0);
 	}
 
 	@Override
@@ -119,12 +119,10 @@ public class UserCredentialsDaoXmlImpl implements IUserCredentialsDao {
 				break;
 			}
 		}
-
 		if (found != null) {
 			userCredentialsFromDb.remove(found);
 			writeNewData(file, wrapper);
 		}
-
 	}
 
 	private File getFile() {

@@ -23,10 +23,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	private final XStream xstream = new XStream(new DomDriver());
-	
+
 	@Value("${root.folder}")
 	private String rootFolder;
-	
+
 	@Override
 	public List<Attribute> getProductVariantAttributes(Integer productVariantId) {
 
@@ -35,19 +35,19 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> attributeWrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
-		
+
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Variant> variantWrapper = (XmlModelWrapper<Variant>) xstream.fromXML(variantsFile);
 
 		List<Attribute> attributesFromDb = attributeWrapper.getRows();
 		List<Variant> variantsFromDb = variantWrapper.getRows();
 		List<Attribute> productVariantAttributes = new ArrayList<>();
- 		
+
 		for (Variant variant : variantsFromDb) {
-			if(variant.getProductVariantId().equals(productVariantId)){
+			if (variant.getProductVariantId().equals(productVariantId)) {
 				Integer attributeId = variant.getAttributeId();
 				for (Attribute attribute : attributesFromDb) {
-					if(attribute.getId().equals(attributeId)){
+					if (attribute.getId().equals(attributeId)) {
 						productVariantAttributes.add(attribute);
 					}
 				}
@@ -58,7 +58,7 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	@Override
 	public List<String> getNames() {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
@@ -74,7 +74,7 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	@Override
 	public List<String> getValuesByName(String attributeName) {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
@@ -83,7 +83,7 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 		List<String> values = new ArrayList<>();
 
 		for (Attribute attribute : attributesFromDb) {
-			if(attribute.getName().equals(attributeName)){
+			if (attribute.getName().equals(attributeName)) {
 				values.add(attribute.getValue());
 			}
 		}
@@ -92,23 +92,23 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	@Override
 	public Integer getIdByNameAndValue(String attributeName, String attributeValue) {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
 		List<Attribute> attributesFromDb = wrapper.getRows();
 
 		for (Attribute attribute : attributesFromDb) {
-			if(attribute.getName().equals(attributeName) && attribute.getValue().equals(attributeValue)){
+			if (attribute.getName().equals(attributeName) && attribute.getValue().equals(attributeValue)) {
 				return attribute.getId();
 			}
 		}
-		throw new EmptyResultDataAccessException("Atribute was not found",0);
+		throw new EmptyResultDataAccessException("Atribute was not found", 0);
 	}
 
 	@Override
 	public void deleteAttributeValue(Integer id) {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
@@ -116,12 +116,12 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 		Attribute found = null;
 		for (Attribute attribute : attributesFromDb) {
-			if(attribute.getId().equals(id)){
+			if (attribute.getId().equals(id)) {
 				found = attribute;
 				break;
 			}
 		}
-		
+
 		if (found != null) {
 			attributesFromDb.remove(found);
 			writeNewData(file, wrapper);
@@ -130,37 +130,38 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	@Override
 	public void deleteByName(String name) {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
 		List<Attribute> attributesFromDb = wrapper.getRows();
 
 		Iterator<Attribute> it = attributesFromDb.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			Attribute attribute = it.next();
-			if(attribute.getName().equals(name)){
+			if (attribute.getName().equals(name)) {
 				it.remove();
 			}
 		}
-		
+
 		writeNewData(file, wrapper);
 	}
 
 	@Override
 	public void save(Attribute attribute) {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
 		List<Attribute> attributesFromDb = wrapper.getRows();
-		
+
 		for (Attribute attributeFromDb : attributesFromDb) {
-			if(attributeFromDb.getName().equals(attribute.getName()) && attributeFromDb.getValue().equals(attribute.getValue())){
+			if (attributeFromDb.getName().equals(attribute.getName())
+					&& attributeFromDb.getValue().equals(attribute.getValue())) {
 				throw new DuplicateKeyException("This attribute is already exist");
 			}
 		}
-		
+
 		Integer lastId = wrapper.getLastId();
 		int newId = lastId + 1;
 
@@ -174,7 +175,7 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 
 	@Override
 	public List<Integer> getAllIdByName(String name) {
-		
+
 		File file = getFile();
 		@SuppressWarnings("unchecked")
 		XmlModelWrapper<Attribute> wrapper = (XmlModelWrapper<Attribute>) xstream.fromXML(file);
@@ -183,28 +184,28 @@ public class AttributeDaoXmlImpl implements IAttributeDao {
 		List<Integer> ids = new ArrayList<>();
 
 		for (Attribute attribute : attributesFromDb) {
-			if(attribute.getName().equals(name)){
+			if (attribute.getName().equals(name)) {
 				ids.add(attribute.getId());
 			}
 		}
 		return ids;
 	}
-	
+
 	private void writeNewData(File file, @SuppressWarnings("rawtypes") XmlModelWrapper obj) {
-        try {
-            xstream.toXML(obj, new FileOutputStream(file));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+		try {
+			xstream.toXML(obj, new FileOutputStream(file));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private File getFile() {
-        File file = new File(rootFolder + "attributes.xml");
-        return file;
-    }
-	
+		File file = new File(rootFolder + "attributes.xml");
+		return file;
+	}
+
 	private File getVariantsFile() {
-        File file = new File(rootFolder + "variants.xml");
-        return file;
-    }
+		File file = new File(rootFolder + "variants.xml");
+		return file;
+	}
 }

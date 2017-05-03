@@ -48,35 +48,26 @@ public class OrderController {
 
 		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 		OrderFilter orderFilter = new OrderFilter();
-		if (status == null) {
-			status = "basket";
-		}
 		orderFilter.setOrderStatus(OrderStatus.valueOf(status.toUpperCase()));
 		orderFilter.setId(userAuthStorage.getId());
 		orderFilter.setUserRole(userAuthStorage.getUserRole());
 
 		List<Order> listOrdersFromDb = orderService.getAll(commonFilter, orderFilter);
 		EntityModelWrapper<OrderModel> wrapper = new EntityModelWrapper<OrderModel>();
-		
-		if (!(listOrdersFromDb==null || listOrdersFromDb.isEmpty())) {
-			
-			Integer userProfileId = listOrdersFromDb.get(0).getUserProfileId();
-			if (userProfileId.equals(userAuthStorage.getId()) || userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
 
-				List<OrderModel> listOrderModel = new ArrayList<>();
+		if (!(listOrdersFromDb == null || listOrdersFromDb.isEmpty())) {
 
-				for (Order orderFromDb : listOrdersFromDb) {
-					listOrderModel.add(entity2model(orderFromDb));
-				}
-				wrapper.setListEntityModel(listOrderModel);
-				wrapper.setPageCount(null);
-				return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
+			List<OrderModel> listOrderModel = new ArrayList<>();
 
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
+			for (Order orderFromDb : listOrdersFromDb) {
+				listOrderModel.add(entity2model(orderFromDb));
 			}
+			wrapper.setListEntityModel(listOrderModel);
+			wrapper.setPageCount(null);
+			return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
+
 		} else {
-			return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper , HttpStatus.OK);
+			return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
 		}
 
 	}

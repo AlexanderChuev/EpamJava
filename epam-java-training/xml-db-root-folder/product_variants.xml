@@ -42,6 +42,24 @@
       <availableQuantity>7</availableQuantity>
       <priceInfluence>35.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
+    <com.chuyeu.training.myapp.datamodel.ProductVariant>
+      <id>14</id>
+      <productId>10</productId>
+      <availableQuantity>10</availableQuantity>
+      <priceInfluence>30.0</priceInfluence>
+    </com.chuyeu.training.myapp.datamodel.ProductVariant>
+    <com.chuyeu.training.myapp.datamodel.ProductVariant>
+      <id>15</id>
+      <productId>11</productId>
+      <availableQuantity>10</availableQuantity>
+      <priceInfluence>30.0</priceInfluence>
+    </com.chuyeu.training.myapp.datamodel.ProductVariant>
+    <com.chuyeu.training.myapp.datamodel.ProductVariant>
+      <id>16</id>
+      <productId>12</productId>
+      <availableQuantity>10</availableQuantity>
+      <priceInfluence>30.0</priceInfluence>
+    </com.chuyeu.training.myapp.datamodel.ProductVariant>
   </rows>
-  <lastId>7</lastId>
+  <lastId>16</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

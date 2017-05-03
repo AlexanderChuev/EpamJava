@@ -48,7 +48,6 @@ public class BasicAuthFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		}
-
 		String[] credentials = resolveCredentials(req);
 
 		if (credentials == null || credentials.length != 2) {
