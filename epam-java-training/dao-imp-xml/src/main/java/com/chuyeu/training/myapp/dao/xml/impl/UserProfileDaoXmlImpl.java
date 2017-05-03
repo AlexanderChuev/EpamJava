@@ -3,6 +3,8 @@ package com.chuyeu.training.myapp.dao.xml.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IUserProfileDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
+import com.chuyeu.training.myapp.dao.xml.impl.comparators.AlphabetComparator;
 import com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.thoughtworks.xstream.XStream;
@@ -26,8 +29,41 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 
 	@Override
 	public List<UserProfile> getAll(CommonFilter commonFilter) {
-		// TODO Auto-generated method stub
-		return null;
+
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<UserProfile> wrapper = (XmlModelWrapper<UserProfile>) xstream.fromXML(file);
+		List<UserProfile> userProfileFromDb = wrapper.getRows();
+
+		if (commonFilter.getSort().getColumn().toUpperCase().equals("LAST_NAME")) {
+			Collections.sort(userProfileFromDb, new AlphabetComparator());
+		}
+
+		if (commonFilter.getSort().getDirection().toUpperCase().equals("DESC")) {
+			Collections.reverse(userProfileFromDb);
+		}
+
+		List<UserProfile> userProfileFiltered = new ArrayList<>();
+		int from, to;
+
+		if (commonFilter.getPageNumber() == null || commonFilter.getPageNumber().equals(1)
+				|| commonFilter.getPageNumber().equals(1)) {
+			from = 0;
+			to = commonFilter.getLimit();
+		} else {
+			from = commonFilter.getLimit() * (commonFilter.getPageNumber() - 1);
+			to = from + commonFilter.getLimit();
+		}
+
+		for (; from < to; from++) {
+			if (userProfileFromDb.size()>from) {
+				userProfileFiltered.add(userProfileFromDb.get(from));
+			} else {
+				break;
+			}
+		}
+
+		return userProfileFiltered;
 	}
 
 	@Override

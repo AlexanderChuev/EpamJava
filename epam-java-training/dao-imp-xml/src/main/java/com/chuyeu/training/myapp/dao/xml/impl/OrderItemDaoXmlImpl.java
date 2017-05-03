@@ -3,9 +3,11 @@ package com.chuyeu.training.myapp.dao.xml.impl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.chuyeu.training.myapp.dao.api.IOrderItemDao;
@@ -25,14 +27,34 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 	
 	@Override
 	public List<OrderItem> getAll(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<OrderItem> wrapper = (XmlModelWrapper<OrderItem>) xstream.fromXML(file);
+		List<OrderItem> orderItems = wrapper.getRows();
+		
+		List<OrderItem> orderItemsById = new ArrayList<>();
+		
+		for (OrderItem orderItem : orderItems) {
+			if(orderItem.getOrderId().equals(orderId)){
+				orderItemsById.add(orderItem);
+			}
+		}
+		return orderItemsById;
 	}
 
 	@Override
 	public OrderItem get(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<OrderItem> wrapper = (XmlModelWrapper<OrderItem>) xstream.fromXML(file);
+		List<OrderItem> orderItems = wrapper.getRows();
+		for (OrderItem orderItem : orderItems) {
+			if(orderItem.getId().equals(id)){
+				return orderItem;
+			}
+		}
+		throw new EmptyResultDataAccessException("OrderItem was not found",id);
 	}
 
 	@Override
@@ -56,8 +78,19 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 
 	@Override
 	public void update(OrderItem orderItem) {
-		// TODO Auto-generated method stub
-
+		
+		File file = getFile();
+		@SuppressWarnings("unchecked")
+		XmlModelWrapper<OrderItem> wrapper = (XmlModelWrapper<OrderItem>) xstream.fromXML(file);
+		List<OrderItem> orderItems = wrapper.getRows();
+		
+		for (OrderItem orderItemFromDb : orderItems) {
+			if(orderItemFromDb.getId().equals(orderItem.getId())){
+				orderItemFromDb.setOrderQuantity(orderItem.getOrderQuantity());
+			}
+		}
+		
+		writeNewData(file, wrapper);
 	}
 
 	@Override

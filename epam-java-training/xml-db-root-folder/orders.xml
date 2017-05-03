@@ -2,39 +2,39 @@
   <rows>
     <com.chuyeu.training.myapp.datamodel.Order>
       <id>1</id>
-      <created>2017-04-28 12:04:16.954 UTC</created>
-      <userProfileId>3</userProfileId>
-      <totalPrice>50.0</totalPrice>
-      <orderStatus>BASKET</orderStatus>
+      <created>2017-04-30 16:07:30.016 UTC</created>
+      <userProfileId>2</userProfileId>
+      <totalPrice>45.0</totalPrice>
+      <orderStatus>IN_PROCESSING</orderStatus>
     </com.chuyeu.training.myapp.datamodel.Order>
     <com.chuyeu.training.myapp.datamodel.Order>
       <id>2</id>
-      <created>2017-04-28 12:04:55.605 UTC</created>
-      <userProfileId>4</userProfileId>
+      <created>2017-04-30 17:07:30.016 UTC</created>
+      <userProfileId>2</userProfileId>
       <totalPrice>50.0</totalPrice>
       <orderStatus>BASKET</orderStatus>
     </com.chuyeu.training.myapp.datamodel.Order>
     <com.chuyeu.training.myapp.datamodel.Order>
       <id>3</id>
-      <created>2017-04-28 12:06:56.547 UTC</created>
-      <userProfileId>5</userProfileId>
-      <totalPrice>50.0</totalPrice>
-      <orderStatus>BASKET</orderStatus>
+      <created>2017-04-30 18:07:30.016 UTC</created>
+      <userProfileId>3</userProfileId>
+      <totalPrice>55.0</totalPrice>
+      <orderStatus>ACCEPTED</orderStatus>
     </com.chuyeu.training.myapp.datamodel.Order>
-    <com.chuyeu.training.myapp.datamodel.Order>
+	<com.chuyeu.training.myapp.datamodel.Order>
       <id>4</id>
-      <created>2017-04-28 12:11:56.443 UTC</created>
-      <userProfileId>6</userProfileId>
-      <totalPrice>50.0</totalPrice>
-      <orderStatus>IN_PROCESSING</orderStatus>
+      <created>2017-04-30 19:07:30.016 UTC</created>
+      <userProfileId>4</userProfileId>
+      <totalPrice>0.0</totalPrice>
+      <orderStatus>REJECTED</orderStatus>
     </com.chuyeu.training.myapp.datamodel.Order>
-    <com.chuyeu.training.myapp.datamodel.Order>
-      <id>6</id>
-      <created>2017-04-28 12:48:31.116 UTC</created>
-      <userProfileId>8</userProfileId>
-      <totalPrice>50.0</totalPrice>
-      <orderStatus>BASKET</orderStatus>
+	<com.chuyeu.training.myapp.datamodel.Order>
+      <id>5</id>
+      <created>2017-04-30 20:07:30.016 UTC</created>
+      <userProfileId>5</userProfileId>
+      <totalPrice>60.0</totalPrice>
+      <orderStatus>COMPLETED</orderStatus>
     </com.chuyeu.training.myapp.datamodel.Order>
   </rows>
-  <lastId>6</lastId>
+  <lastId>5</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

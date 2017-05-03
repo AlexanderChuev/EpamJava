@@ -2,238 +2,46 @@
   <rows>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>1</id>
-      <productId>23</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
+      <productId>1</productId>
+      <availableQuantity>3</availableQuantity>
+      <priceInfluence>5.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>2</id>
-      <productId>24</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
+      <productId>1</productId>
+      <availableQuantity>5</availableQuantity>
+      <priceInfluence>10.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>3</id>
-      <productId>25</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
+      <productId>2</productId>
+      <availableQuantity>3</availableQuantity>
+      <priceInfluence>15.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>4</id>
-      <productId>26</productId>
+      <productId>3</productId>
       <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
+      <priceInfluence>20.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>5</id>
-      <productId>27</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
+      <productId>4</productId>
+      <availableQuantity>0</availableQuantity>
+      <priceInfluence>25.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>6</id>
-      <productId>28</productId>
-      <availableQuantity>2</availableQuantity>
+      <productId>5</productId>
+      <availableQuantity>3</availableQuantity>
       <priceInfluence>30.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
     <com.chuyeu.training.myapp.datamodel.ProductVariant>
       <id>7</id>
-      <productId>29</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>8</id>
-      <productId>30</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>9</id>
-      <productId>31</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>10</id>
-      <productId>32</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>11</id>
-      <productId>33</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>12</id>
-      <productId>39</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>13</id>
-      <productId>40</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>14</id>
-      <productId>41</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>15</id>
-      <productId>41</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>16</id>
-      <productId>42</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>17</id>
-      <productId>42</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>18</id>
-      <productId>43</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>19</id>
-      <productId>43</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>20</id>
-      <productId>44</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>21</id>
-      <productId>44</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>22</id>
-      <productId>45</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>23</id>
-      <productId>45</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>24</id>
-      <productId>51</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>25</id>
-      <productId>51</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>26</id>
-      <productId>52</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>27</id>
-      <productId>52</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>28</id>
-      <productId>53</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>29</id>
-      <productId>53</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>30</id>
-      <productId>54</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>31</id>
-      <productId>55</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>32</id>
-      <productId>56</productId>
-      <availableQuantity>12</availableQuantity>
-      <priceInfluence>12.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>35</id>
-      <productId>59</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>36</id>
-      <productId>60</productId>
-      <availableQuantity>12</availableQuantity>
-      <priceInfluence>12.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>38</id>
-      <productId>62</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>39</id>
-      <productId>62</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>40</id>
-      <productId>68</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>41</id>
-      <productId>69</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
-    </com.chuyeu.training.myapp.datamodel.ProductVariant>
-    <com.chuyeu.training.myapp.datamodel.ProductVariant>
-      <id>42</id>
-      <productId>70</productId>
-      <availableQuantity>2</availableQuantity>
-      <priceInfluence>30.0</priceInfluence>
+      <productId>6</productId>
+      <availableQuantity>7</availableQuantity>
+      <priceInfluence>35.0</priceInfluence>
     </com.chuyeu.training.myapp.datamodel.ProductVariant>
   </rows>
-  <lastId>42</lastId>
+  <lastId>7</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

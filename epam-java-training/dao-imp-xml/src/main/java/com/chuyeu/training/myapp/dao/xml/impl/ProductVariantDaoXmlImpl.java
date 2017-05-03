@@ -35,7 +35,6 @@ public class ProductVariantDaoXmlImpl implements IProductVariantDao {
 		
 		for (ProductVariant productVariant : productVariantsFromDb) {
 			if(productVariant.getProductId().equals(productId)){
-				System.out.println(productVariant.getId());
 				productVariantsById.add(productVariant);
 			}
 		}

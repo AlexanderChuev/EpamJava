@@ -46,11 +46,11 @@ INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('С
 INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Гончаров', 'Гена', 4);
 INSERT INTO user_profile(first_name, last_name, user_credentials_id) VALUES ('Семенович', 'Семен', 5);
 
-INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 16:07:30.016', 2, 55, 'IN_PROCESSING');
-INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 17:07:30.016', 2, 100, 'BASKET');
-INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 18:07:30.016', 3, 100, 'ACCEPTED');
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 16:07:30.016', 2, 45, 'IN_PROCESSING');
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 17:07:30.016', 2, 50, 'BASKET');
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 18:07:30.016', 3, 55, 'ACCEPTED');
 INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 19:07:30.016', 4, 0, 'REJECTED');
-INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 20:07:30.016', 5, 100, 'COMPLETED');
+INSERT INTO orders(created, user_profile_id, total_price, order_status) VALUES ('2017-04-30 20:07:30.016', 5, 60, 'COMPLETED');
 
 INSERT INTO order_item(product_variant_id, order_quantity, order_id) VALUES (1, 1, 1); /* корзина */
 INSERT INTO order_item(product_variant_id, order_quantity, order_id) VALUES (2, 1, 1); /* корзина */

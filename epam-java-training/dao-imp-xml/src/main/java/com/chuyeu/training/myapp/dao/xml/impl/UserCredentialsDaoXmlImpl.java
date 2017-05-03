@@ -26,8 +26,7 @@ public class UserCredentialsDaoXmlImpl implements IUserCredentialsDao {
 
 	@Override
 	public List<UserCredentials> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
