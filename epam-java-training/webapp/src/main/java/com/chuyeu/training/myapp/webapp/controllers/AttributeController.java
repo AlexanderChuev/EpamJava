@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +29,9 @@ public class AttributeController {
 
 	@Inject
 	private IAttributeService attributeService;
+	
+	@Autowired
+	ConversionService conversionService;
 
 	// +++
 	@RequestMapping(value = "/names", method = RequestMethod.GET)
@@ -70,7 +75,8 @@ public class AttributeController {
 		List<AttributeModel> attributesModel = new ArrayList<>();
 
 		for (Attribute attribute : attributes) {
-			attributesModel.add(entity2model(attribute));
+			AttributeModel model = conversionService.convert(attribute, AttributeModel.class);
+			attributesModel.add(model);
 		}
 		return new ResponseEntity<List<AttributeModel>>(attributesModel, HttpStatus.OK);
 	}
@@ -78,7 +84,7 @@ public class AttributeController {
 	// +++
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> createAttribute(@RequestBody AttributeModel attributeModel) {
-		Attribute attribute = model2entity(attributeModel);
+		Attribute attribute = conversionService.convert(attributeModel, Attribute.class);
 		attributeService.save(attribute);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
@@ -95,21 +101,6 @@ public class AttributeController {
 	public ResponseEntity<Void> deleteAttributeValue(@PathVariable(value = "name") String name) {
 		attributeService.delete(name);
 		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-
-	private AttributeModel entity2model(Attribute attribute) {
-		AttributeModel model = new AttributeModel();
-		model.setId(attribute.getId());
-		model.setName(attribute.getName());
-		model.setValue(attribute.getValue());
-		return model;
-	}
-
-	private Attribute model2entity(AttributeModel attributeModel) {
-		Attribute attribute = new Attribute();
-		attribute.setName(attributeModel.getName());
-		attribute.setValue(attributeModel.getValue());
-		return attribute;
 	}
 
 }

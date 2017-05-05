@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ public class ProductController {
 	@Inject
 	private IProductService productService;
 
+	@Autowired
+	ConversionService conversionService;
+	
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -36,14 +41,14 @@ public class ProductController {
 			@RequestParam(value = "column", required = false) String column,
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
-
+		
 		if (page == null) {
 			page = 1;
 		}
-		
+
 		if (limit == null) {
 			limit = 2;
-		} 
+		}
 
 		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 
@@ -51,17 +56,14 @@ public class ProductController {
 		List<ProductModel> listProductModel = new ArrayList<>();
 
 		for (Product product : listProductsFromDb) {
-			ProductModel productModel = new ProductModel();
-			productModel.setId(product.getId());
-			productModel.setName(product.getName());
-			productModel.setBasePrice(product.getBasePrice());
-			listProductModel.add(productModel);
+			ProductModel model = conversionService.convert(product, ProductModel.class);
+			listProductModel.add(model);
 		}
 
 		EntityModelWrapper<ProductModel> wrapper = new EntityModelWrapper<ProductModel>();
 
 		wrapper.setListEntityModel(listProductModel);
-		Integer quantity =productService.getProductQuantity();
+		Integer quantity = productService.getProductQuantity();
 		Integer pageCount = (int) Math.ceil((double) quantity / limit);
 		wrapper.setPageCount(pageCount);
 
@@ -71,14 +73,15 @@ public class ProductController {
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
-
+		
 		Product product;
 		try {
 			product = productService.get(id);
 		} catch (EmptyResultDataAccessException e) {
 			return new ResponseEntity<String>("This product does not exist", HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<ProductModel>(entity2model(product), HttpStatus.OK);
+		ProductModel model = conversionService.convert(product, ProductModel.class);
+		return new ResponseEntity<ProductModel>(model, HttpStatus.OK);
 
 	}
 
@@ -86,11 +89,13 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createNewProduct(@RequestBody ProductModel productModel) {
 
-			if (productModel == null) {
-				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-			}
-			Integer id = productService.add(model2entity(productModel));
-			return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
+		if (productModel == null) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
+
+		Product product = conversionService.convert(productModel, Product.class);
+		Integer id = productService.add(product);
+		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
 	// +++
@@ -98,39 +103,21 @@ public class ProductController {
 	public ResponseEntity<?> updateProduct(@RequestBody ProductModel productModel,
 			@PathVariable(value = "id") Integer id) {
 
-			Product productFromDb = productService.get(id);
-			productFromDb.setName(productModel.getName());
-			productFromDb.setDescription(productModel.getDescription());
-			productFromDb.setActive(productModel.getActive());
-			productFromDb.setBasePrice(productModel.getBasePrice());
-			productService.update(productFromDb);
+		Product productFromDb = productService.get(id);
+		productFromDb.setName(productModel.getName());
+		productFromDb.setDescription(productModel.getDescription());
+		productFromDb.setActive(productModel.getActive());
+		productFromDb.setBasePrice(productModel.getBasePrice());
+		productService.update(productFromDb);
 
-			return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer id) {
-			productService.delete(id);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-
-	private ProductModel entity2model(Product product) {
-		ProductModel model = new ProductModel();
-		model.setName(product.getName());
-		model.setDescription(product.getDescription());
-		model.setActive(product.getActive());
-		model.setBasePrice(product.getBasePrice());
-		return model;
-	}
-
-	private Product model2entity(ProductModel model) {
-		Product product = new Product();
-		product.setName(model.getName());
-		product.setDescription(model.getDescription());
-		product.setActive(model.getActive());
-		product.setBasePrice(model.getBasePrice());
-		return product;
+		productService.delete(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 }

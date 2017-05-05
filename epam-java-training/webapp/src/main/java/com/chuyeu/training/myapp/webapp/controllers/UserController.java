@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,7 @@ import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
-import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
+import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;
@@ -35,6 +37,9 @@ public class UserController {
 
 	@Inject
 	private ApplicationContext context;
+	
+	@Autowired
+	ConversionService conversionService;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -49,7 +54,8 @@ public class UserController {
 			List<UserProfileModel> listUserProfileModel = new ArrayList<>();
 
 			for (UserProfile userProfile : listUserProfileFromDB) {
-				listUserProfileModel.add(entity2model(userProfile));
+				UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
+				listUserProfileModel.add(userProfileModel);
 			}
 
 			EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
@@ -65,12 +71,8 @@ public class UserController {
 	// +++
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCredentials(@PathVariable(value = "id") Integer id) {
-
 			UserCredentials userCredentials = userService.getUserCredentials(id);
-			UserCredentialsModel userCredentialsModel = new UserCredentialsModel();
-			userCredentialsModel.setEmail(userCredentials.getEmail());
-			userCredentialsModel.setUserRole(userCredentials.getUserRole().toString());
-
+			UserCredentialsModel userCredentialsModel = conversionService.convert(userCredentials, UserCredentialsModel.class);
 			return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
 	}
 
@@ -78,7 +80,8 @@ public class UserController {
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
 			UserProfile userProfile = userService.getUserProfile(id);
-			return new ResponseEntity<UserProfileModel>(entity2model(userProfile), HttpStatus.OK);
+			UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
+			return new ResponseEntity<UserProfileModel>(userProfileModel, HttpStatus.OK);
 	}
 
 	// +++
@@ -89,15 +92,8 @@ public class UserController {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 
-		UserCredentials userCredentials = new UserCredentials();
-		userCredentials.setEmail(userWrapper.getUserCredentialsModel().getEmail());
-		userCredentials.setPassword(userWrapper.getUserCredentialsModel().getPassword());
-		userCredentials.setUserRole(UserRole.CLIENT);
-
-		UserProfile userProfile = new UserProfile();
-		userProfile.setFirstName(userWrapper.getUserProfileModel().getFirstName());
-		userProfile.setLastName(userWrapper.getUserProfileModel().getLastName());
-
+		UserCredentials userCredentials = conversionService.convert(userWrapper, UserCredentials.class);
+		UserProfile userProfile = conversionService.convert(userWrapper, UserProfile.class);
 		userService.registration(userProfile, userCredentials);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
@@ -129,14 +125,6 @@ public class UserController {
 			userProfileFromDb.setLastName(userProfileModel.getLastName());
 			userService.update(userProfileFromDb);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-
-	private UserProfileModel entity2model(UserProfile userProfile) {
-		UserProfileModel userProfileModel = new UserProfileModel();
-		userProfileModel.setFirstName(userProfile.getFirstName());
-		userProfileModel.setLastName(userProfile.getLastName());
-		userProfileModel.setUserCredentialsId(userProfile.getUserCredentialsId());
-		return userProfileModel;
 	}
 
 }

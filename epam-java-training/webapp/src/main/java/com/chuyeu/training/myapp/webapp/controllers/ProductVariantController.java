@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,9 @@ public class ProductVariantController {
 
 	@Inject
 	private IProductVariantService productVariantService;
+	
+	@Autowired
+	ConversionService conversionService;
 
 	// +++
 	@RequestMapping(method = RequestMethod.GET)
@@ -34,7 +39,9 @@ public class ProductVariantController {
 		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
 
 		for (ProductVariant productVariant : productVariants) {
-			productVariantsModel.add(entity2model(productVariant, productId));
+			ProductVariantModel productVariantModel = conversionService.convert(productVariant, ProductVariantModel.class);
+			productVariantModel.setProductId(productId);
+			productVariantsModel.add(productVariantModel);
 		}
 		return new ResponseEntity<List<ProductVariantModel>>(productVariantsModel, HttpStatus.OK);
 	}
@@ -44,12 +51,8 @@ public class ProductVariantController {
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
 
 		ProductVariant productVariant = productVariantService.getProductVariant(variantId);
-		ProductVariantModel productVariantModel = new ProductVariantModel();
-		productVariantModel.setId(productVariant.getId());
-		productVariantModel.setProductId(productVariant.getProductId());
-		productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
-		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
-
+		ProductVariantModel productVariantModel = conversionService.convert(productVariant, ProductVariantModel.class);
+		productVariantModel.setProductId(productVariant.getId());
 		return new ResponseEntity<ProductVariantModel>(productVariantModel, HttpStatus.OK);
 	}
 
@@ -60,11 +63,7 @@ public class ProductVariantController {
 		if (productVariantModel == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-
-		ProductVariant productVariant = new ProductVariant();
-		productVariant.setProductId(productVariantModel.getProductId());
-		productVariant.setAvailableQuantity(productVariantModel.getAvailableQuantity());
-		productVariant.setPriceInfluence(productVariantModel.getPriceInfluence());
+		ProductVariant productVariant = conversionService.convert(productVariantModel, ProductVariant.class);
 		Integer id = productVariantService.save(productVariant);
 		return new ResponseEntity<IdModel>(new IdModel(id),HttpStatus.CREATED);
 	}
@@ -88,12 +87,5 @@ public class ProductVariantController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	private ProductVariantModel entity2model(ProductVariant productVariant, Integer id) {
-		ProductVariantModel productVariantModel = new ProductVariantModel();
-		productVariantModel.setId(productVariant.getId());
-		productVariantModel.setProductId(id);
-		productVariantModel.setAvailableQuantity(productVariant.getAvailableQuantity());
-		productVariantModel.setPriceInfluence(productVariant.getPriceInfluence());
-		return productVariantModel;
-	}
+
 }

@@ -17,7 +17,6 @@ public class ProductServiceTest extends AbstractTesst {
 		Assert.notNull(productService, "The productService must not be null");
 	}
 
-	@Test
 	public void addAndGetTest() {
 
 		Product product = createProduct();

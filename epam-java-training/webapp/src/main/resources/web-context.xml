@@ -12,7 +12,49 @@
 	    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:component-scan base-package="com.chuyeu.training.myapp.webapp.controllers" />
-	
+
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.AttributeConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.AttributeModelConverter" />
+				<bean class="com.chuyeu.training.myapp.webapp.converters.OrderConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.OrderModelConverter" />
+
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.OrderItemConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.OrderItemModelConverter" />
+
+				<bean class="com.chuyeu.training.myapp.webapp.converters.ProductConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.ProductModelConverter" />
+
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.ProductVariantConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.ProductVariantModelConverter" />
+
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.UserCredentialsConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.UserWrapperConverter" />
+
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.UserProfileConverter" />
+				<bean
+					class="com.chuyeu.training.myapp.webapp.converters.UserProfileModelConverter" />
+
+			</list>
+		</property>
+	</bean>
+	<bean id="RedisClient" class="com.lambdaworks.redis.support.RedisClientFactoryBean">
+		<property name="uri" value="redis://localhost" />
+	</bean>
 	<mvc:annotation-driven />
 
 </beans>

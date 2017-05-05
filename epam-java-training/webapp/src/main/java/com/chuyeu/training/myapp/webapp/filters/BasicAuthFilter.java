@@ -21,12 +21,15 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
-import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
+import com.chuyeu.training.myapp.services.impl.util.IRedisUtil;
+import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
 
 public class BasicAuthFilter implements Filter {
 
 	private IUserService userService;
 	private ApplicationContext appContext;
+	private IRedisUtil redisUtil;
+	private UserCredentials user;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -34,6 +37,7 @@ public class BasicAuthFilter implements Filter {
 		WebApplicationContext context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(filterConfig.getServletContext());
 		userService = context.getBean(IUserService.class);
+		redisUtil = context.getBean(IRedisUtil.class);
 		appContext = context;
 
 	}
@@ -54,11 +58,20 @@ public class BasicAuthFilter implements Filter {
 			res.sendError(401);
 			return;
 		}
-
-		UserCredentials user = userService.getByEmailAndPassword(credentials[0], credentials[1]);
 		UserAuthStorage userDataStorage = appContext.getBean(UserAuthStorage.class);
+		
+		String[] userData = redisUtil.check(credentials);
+		if (userData==null) {
+			user = userService.getByEmailAndPassword(credentials[0], credentials[1]);
+			redisUtil.write(credentials, user);
+		} else {
+			user = new UserCredentials();
+			user.setId(Integer.valueOf(userData[0]));
+			user.setUserRole(UserRole.valueOf(userData[1].toUpperCase()));
+		}
+		
 
-		if (user != null && user.getEmail() != null && user.getPassword() != null) {
+		if (user != null) {
 			userDataStorage.setId(user.getId());
 			userDataStorage.setUserRole(user.getUserRole());
 			boolean verificationAccess = verificationAccess(req, userDataStorage);

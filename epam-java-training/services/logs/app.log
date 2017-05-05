@@ -1,122 +1,101 @@
-13:05:56.367 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556243. value=Value1493719556243
-13:05:56.401 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556400. value=Value1493719556400
-13:05:56.402 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556400. value=second
-13:05:56.444 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493719556400
-13:05:56.448 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556447. value=Value1493719556447
-13:05:56.448 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556447. value=second
-13:05:56.451 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556451. value=Value1493719556451
-13:05:56.513 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556512. value=Value1493719556512
-13:05:56.514 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 34
-13:05:56.520 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493719556519. description=China shoes. basePrice=50.0. active=true
-13:05:56.568 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=85. priceInfluence=30.0. availableQuantity=2
-13:05:56.648 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556648. value=Value1493719556648
-13:05:56.659 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=35. productVariantId=76 
-13:05:56.660 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556660. value=Value1493719556660
-13:05:56.661 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=36. productVariantId=76 
-13:05:56.666 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556666. value=Value1493719556666
-13:05:56.670 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493719556670. value=Value1493719556670
-13:22:31.849 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720551846. description=China shoes. basePrice=50.0. active=true
-13:22:31.869 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=86. priceInfluence=30.0. availableQuantity=2
-13:22:31.905 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720551905. description=China shoes. basePrice=50.0. active=true
-13:22:31.906 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=87. priceInfluence=30.0. availableQuantity=2
-13:22:31.908 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Update productVariant with product.id=87. priceInfluence=100.0. availableQuantity=100
-13:22:31.913 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720551912. description=China shoes. basePrice=50.0. active=true
-13:22:31.913 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=88. priceInfluence=30.0. availableQuantity=2
-13:22:31.953 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Delete productVariant with id 79
-13:22:31.956 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720551956. description=China shoes. basePrice=50.0. active=true
-13:22:31.957 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=89. priceInfluence=30.0. availableQuantity=2
-13:22:31.957 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=89. priceInfluence=30.0. availableQuantity=2
-13:24:26.028 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720666025. description=China shoes. basePrice=50.0. active=true
-13:24:26.049 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=90. priceInfluence=30.0. availableQuantity=2
-13:24:26.079 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720666078. value=Value1493720666078
-13:24:26.083 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=39. productVariantId=82 
-13:24:26.089 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720666089. description=China shoes. basePrice=50.0. active=true
-13:24:26.090 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=91. priceInfluence=30.0. availableQuantity=2
-13:24:26.092 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720666092. value=Value1493720666092
-13:24:26.093 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=40. productVariantId=83 
-13:24:26.094 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Delete variant with attributeId=83. productVariantId=40 
-13:25:29.702 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729691. value=Value1493720729691
-13:25:29.722 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729721. value=Value1493720729721
-13:25:29.723 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729721. value=second
-13:25:29.726 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with name Name1493720729721
-13:25:29.730 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729729. value=Value1493720729729
-13:25:29.731 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729729. value=second
-13:25:29.734 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729734. value=Value1493720729734
-13:25:29.783 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729783. value=Value1493720729783
-13:25:29.785 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Delete attribute with id 48
-13:25:29.789 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720729789. description=China shoes. basePrice=50.0. active=true
-13:25:29.793 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=92. priceInfluence=30.0. availableQuantity=2
-13:25:29.816 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729816. value=Value1493720729816
-13:25:29.818 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=49. productVariantId=84 
-13:25:29.818 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729818. value=Value1493720729818
-13:25:29.819 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=50. productVariantId=84 
-13:25:29.825 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729824. value=Value1493720729824
-13:25:29.828 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720729827. value=Value1493720729827
-13:25:29.844 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720729844. description=China shoes. basePrice=50.0. active=true
-13:25:29.845 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=93. priceInfluence=30.0. availableQuantity=2
-13:25:29.914 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=116. Email=email1493720729846. UserRole=CLIENT. FirstName=FirstName1493720729846. LastName=LastName1493720729846. 
-13:25:29.964 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:29.964+0300. UserProfileId=111. OrderStatus=BASKET
-13:25:30.007 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderItemServiceImpl - Insert OrderItem with ProductVariantId=85. OrderQuantity=1. OrderId=71
-13:25:30.012 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730012. description=China shoes. basePrice=50.0. active=true
-13:25:30.013 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=94. priceInfluence=30.0. availableQuantity=2
-13:25:30.015 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=117. Email=email1493720730015. UserRole=CLIENT. FirstName=FirstName1493720730015. LastName=LastName1493720730015. 
-13:25:30.017 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:30.016+0300. UserProfileId=112. OrderStatus=BASKET
-13:25:30.018 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderItemServiceImpl - Insert OrderItem with ProductVariantId=86. OrderQuantity=1. OrderId=72
-13:25:30.023 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730023. description=China shoes. basePrice=50.0. active=true
-13:25:30.024 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=95. priceInfluence=30.0. availableQuantity=2
-13:25:30.026 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=118. Email=email1493720730026. UserRole=CLIENT. FirstName=FirstName1493720730026. LastName=LastName1493720730026. 
-13:25:30.027 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:30.027+0300. UserProfileId=113. OrderStatus=BASKET
-13:25:30.029 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderItemServiceImpl - Insert OrderItem with ProductVariantId=87. OrderQuantity=1. OrderId=73
-13:25:30.032 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730032. description=China shoes. basePrice=50.0. active=true
-13:25:30.033 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=96. priceInfluence=30.0. availableQuantity=2
-13:25:30.035 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=119. Email=email1493720730035. UserRole=CLIENT. FirstName=FirstName1493720730035. LastName=LastName1493720730035. 
-13:25:30.036 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:30.036+0300. UserProfileId=114. OrderStatus=BASKET
-13:25:30.038 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderItemServiceImpl - Insert OrderItem with ProductVariantId=88. OrderQuantity=1. OrderId=74
-13:25:30.039 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderItemServiceImpl - Delete order item with id 42
-13:25:30.057 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=120. Email=email1493720730057. UserRole=CLIENT. FirstName=FirstName1493720730057. LastName=LastName1493720730057. 
-13:25:30.059 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:30.058+0300. UserProfileId=115. OrderStatus=BASKET
-13:25:30.065 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=121. Email=email1493720730064. UserRole=CLIENT. FirstName=FirstName1493720730064. LastName=LastName1493720730064. 
-13:25:30.066 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:30.066+0300. UserProfileId=116. OrderStatus=BASKET
-13:25:30.069 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Update Order with id=76. Created=2017-05-02T13:25:30.066+0300. UserProfileId=116. TotalPrice=50.0. OrderStatus=IN_PROCESSING
-13:25:30.077 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=122. Email=email1493720730076. UserRole=CLIENT. FirstName=FirstName1493720730076. LastName=LastName1493720730076. 
-13:25:30.078 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Insert Order with Created=2017-05-02T13:25:30.078+0300. UserProfileId=117. OrderStatus=BASKET
-13:25:30.079 [main] INFO  com.chuyeu.training.myapp.services.impl.OrderServiceImpl - Delete order with id 77
-13:25:30.094 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730094. description=China shoes. basePrice=50.0. active=true
-13:25:30.099 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730099. description=China shoes. basePrice=50.0. active=true
-13:25:30.101 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Update product with id=98. name=Adidas1493720730100. description=Vietnam shoes. basePrice=60.0. active=false
-13:25:30.108 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730108. description=China shoes. basePrice=50.0. active=true
-13:25:30.145 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730145. description=China shoes. basePrice=50.0. active=true
-13:25:30.149 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730149. description=China shoes. basePrice=50.0. active=true
-13:25:30.151 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Delete product with id 101
-13:25:30.166 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730166. description=China shoes. basePrice=50.0. active=true
-13:25:30.167 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=102. priceInfluence=30.0. availableQuantity=2
-13:25:30.172 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730172. description=China shoes. basePrice=50.0. active=true
-13:25:30.173 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=103. priceInfluence=30.0. availableQuantity=2
-13:25:30.174 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Update productVariant with product.id=103. priceInfluence=100.0. availableQuantity=100
-13:25:30.179 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730179. description=China shoes. basePrice=50.0. active=true
-13:25:30.180 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=104. priceInfluence=30.0. availableQuantity=2
-13:25:30.181 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Delete productVariant with id 91
-13:25:30.184 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730184. description=China shoes. basePrice=50.0. active=true
-13:25:30.185 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=105. priceInfluence=30.0. availableQuantity=2
-13:25:30.185 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=105. priceInfluence=30.0. availableQuantity=2
-13:25:30.202 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=123. Email=email1493720730201. UserRole=CLIENT. FirstName=FirstName1493720730201. LastName=LastName1493720730201. 
-13:25:30.208 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=124. Email=email1493720730207. UserRole=CLIENT. FirstName=FirstName1493720730207. LastName=LastName1493720730207. 
-13:25:30.209 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Update UserProfile with id=119. FirstName=FirstName1493720730208. LastName=LastName1493720730209. UserCredentialsId=124
-13:25:30.214 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=125. Email=email1493720730213. UserRole=CLIENT. FirstName=FirstName1493720730213. LastName=LastName1493720730213. 
-13:25:30.218 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=127. Email=email1493720730217. UserRole=CLIENT. FirstName=FirstName1493720730217. LastName=LastName1493720730217. 
-13:25:30.223 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=128. Email=email1493720730222. UserRole=CLIENT. FirstName=FirstName1493720730222. LastName=LastName1493720730222. 
-13:25:30.229 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=129. Email=email1493720730228. UserRole=CLIENT. FirstName=FirstName1493720730228. LastName=LastName1493720730228. 
-13:25:30.231 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Update userCredentials with id=129. Email=new email1493720730230. UserRole=ADMIN
-13:25:30.234 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=130. Email=email1493720730233. UserRole=CLIENT. FirstName=FirstName1493720730233. LastName=LastName1493720730233. 
-13:25:30.238 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Insert user  with id=131. Email=email1493720730237. UserRole=CLIENT. FirstName=FirstName1493720730237. LastName=LastName1493720730237. 
-13:25:30.276 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Delete userProfile with id 125
-13:25:30.277 [main] INFO  com.chuyeu.training.myapp.services.impl.UserSeviceImpl - Delete userCredentials with id 131
-13:25:30.291 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730291. description=China shoes. basePrice=50.0. active=true
-13:25:30.291 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=106. priceInfluence=30.0. availableQuantity=2
-13:25:30.296 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720730295. value=Value1493720730295
-13:25:30.298 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=53. productVariantId=94 
-13:25:30.301 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductServiceImpl - Insert product with name=Saucony1493720730301. description=China shoes. basePrice=50.0. active=true
-13:25:30.302 [main] INFO  com.chuyeu.training.myapp.services.impl.ProductVariantServiceImpl - Insert productVariant with product.id=107. priceInfluence=30.0. availableQuantity=2
-13:25:30.304 [main] INFO  com.chuyeu.training.myapp.services.impl.AttributeServiceImpl - Insert new attribute name=Name1493720730303. value=Value1493720730303
-13:25:30.305 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Add variant with attributeId=54. productVariantId=95 
-13:25:30.306 [main] INFO  com.chuyeu.training.myapp.services.impl.VariantServiceImpl - Delete variant with attributeId=95. productVariantId=54 
+15:26:43.804 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+15:26:43.811 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+15:29:10.320 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+15:29:10.321 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+15:37:33.219 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+15:37:33.223 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+15:43:03.703 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+15:43:03.706 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:02:59.400 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:02:59.404 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:09:09.145 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:09:09.149 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:12:39.997 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:12:40.000 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:13:32.897 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:13:32.901 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:16:05.307 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:16:05.311 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:19:14.206 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:19:14.210 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:32:18.190 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:32:18.194 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:17) [classes/:?]
+16:33:28.946 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:33:28.950 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+16:42:59.349 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:42:59.360 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+16:55:23.295 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:55:23.305 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+16:57:28.547 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+16:57:28.613 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:04:30.588 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:04:30.592 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:05:02.076 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:05:02.090 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:09:52.659 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:09:52.672 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:10:17.856 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:10:17.870 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:14:12.515 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:14:12.529 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:24:40.471 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:24:40.472 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:25:04.078 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:25:04.092 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:37:04.173 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:37:04.187 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:37:24.931 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+17:37:24.947 [main] ERROR com.chuyeu.training.myapp.services.impl.LoggerExample - Error Message Logged !!!
+java.lang.NullPointerException: NullError
+	at com.chuyeu.training.myapp.services.impl.LoggerExample.main(LoggerExample.java:14) [classes/:?]
+17:46:35.400 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+18:01:48.907 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+18:06:13.404 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+18:06:54.977 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!
+18:10:11.468 [main] INFO  com.chuyeu.training.myapp.services.impl.LoggerExample - Info Message Logged !!!

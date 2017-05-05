@@ -1,12 +1,13 @@
 package com.chuyeu.training.myapp.webapp.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IOrderService;
-import com.chuyeu.training.myapp.services.impl.UserAuthStorage;
+import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.OrderModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
@@ -36,6 +37,9 @@ public class OrderController {
 
 	@Inject
 	private ApplicationContext context;
+
+	@Autowired
+	ConversionService conversionService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page,
@@ -60,7 +64,8 @@ public class OrderController {
 			List<OrderModel> listOrderModel = new ArrayList<>();
 
 			for (Order orderFromDb : listOrdersFromDb) {
-				listOrderModel.add(entity2model(orderFromDb));
+				OrderModel orderModel = conversionService.convert(orderFromDb, OrderModel.class);
+				listOrderModel.add(orderModel);
 			}
 			wrapper.setListEntityModel(listOrderModel);
 			wrapper.setPageCount(null);
@@ -79,7 +84,8 @@ public class OrderController {
 		Order order = orderService.get(id);
 		if (order.getUserProfileId().equals(userAuthStorage.getId())
 				|| userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
-			return new ResponseEntity<OrderModel>(entity2model(order), HttpStatus.OK);
+			OrderModel orderModel = conversionService.convert(order, OrderModel.class);
+			return new ResponseEntity<OrderModel>(orderModel, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
@@ -88,7 +94,8 @@ public class OrderController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createOrder(@RequestBody OrderModel orderModel) {
-		Integer id = orderService.save(model2entity(orderModel));
+		Order order = conversionService.convert(orderModel, Order.class);
+		Integer id = orderService.save(order);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
@@ -106,25 +113,6 @@ public class OrderController {
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
-	}
-
-	private OrderModel entity2model(Order order) {
-		OrderModel orderModel = new OrderModel();
-		orderModel.setId(order.getId());
-		orderModel.setCreated(order.getCreated());
-		orderModel.setUserProfileId(order.getUserProfileId());
-		orderModel.setTotalPrice(order.getTotalPrice());
-		orderModel.setOrderStatus(order.getOrderStatus());
-		return orderModel;
-	}
-
-	private Order model2entity(OrderModel orderModel) {
-		Order order = new Order();
-		order.setCreated(new Date());
-		order.setUserProfileId(orderModel.getUserProfileId());
-		order.setOrderStatus(OrderStatus.BASKET);
-		order.setTotalPrice(0d);
-		return order;
 	}
 
 }

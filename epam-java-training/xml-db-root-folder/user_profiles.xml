@@ -48,6 +48,18 @@
       <lastName>lastName</lastName>
       <userCredentialsId>8</userCredentialsId>
     </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>9</id>
+      <firstName>firstName1</firstName>
+      <lastName>lastName</lastName>
+      <userCredentialsId>9</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
+    <com.chuyeu.training.myapp.datamodel.UserProfile>
+      <id>10</id>
+      <firstName>firstName1</firstName>
+      <lastName>lastName</lastName>
+      <userCredentialsId>10</userCredentialsId>
+    </com.chuyeu.training.myapp.datamodel.UserProfile>
   </rows>
-  <lastId>8</lastId>
+  <lastId>10</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

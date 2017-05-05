@@ -40,6 +40,10 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="RedisClient" class="com.lambdaworks.redis.support.RedisClientFactoryBean">
+		<property name="uri" value="redis://localhost" />
+	</bean>
+	
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource" />
 	</bean>
