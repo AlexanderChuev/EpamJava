@@ -4,10 +4,8 @@ import java.util.List;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 
-public interface IAttributeDao /*extends AbstractDao<Attribute,Void>*/{
+public interface IAttributeDao {
 	
-
-
 	List<Attribute> getProductVariantAttributes(Integer productVariantId);
 	
 	List<String> getNames();

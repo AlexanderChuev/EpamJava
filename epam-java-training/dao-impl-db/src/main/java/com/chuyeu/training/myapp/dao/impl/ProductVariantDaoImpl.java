@@ -19,19 +19,15 @@ import com.chuyeu.training.myapp.dao.api.IProductVariantDao;
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 
 @Repository
-public class ProductVariantDaoImpl implements IProductVariantDao {
+public class ProductVariantDaoImpl extends AbstractDaoImpl<ProductVariant> implements IProductVariantDao {
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
+	
+	protected ProductVariantDaoImpl() {
+        super(ProductVariant.class);
+    }
 
-	// +++
-	@Override
-	public ProductVariant get(Integer id) {
-
-		return jdbcTemplate.queryForObject("select * from product_variant where id = ? ", new Object[] { id },
-				new BeanPropertyRowMapper<ProductVariant>(ProductVariant.class));
-
-	}
 
 	@Override
 	public Integer add(ProductVariant productVariant) {
@@ -61,11 +57,6 @@ public class ProductVariantDaoImpl implements IProductVariantDao {
 				productVariant.getAvailableQuantity(), productVariant.getPriceInfluence(), productVariant.getId());
 	}
 
-	@Override
-	public void delete(Integer id) {
-		jdbcTemplate.update("delete from product_variant where id=" + id);
-
-	}
 
 	@Override
 	public List<ProductVariant> getAllByProduct(Integer productId) throws EmptyResultDataAccessException {

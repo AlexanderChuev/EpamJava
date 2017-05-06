@@ -4,15 +4,12 @@ import java.util.List;
 
 import com.chuyeu.training.myapp.datamodel.OrderItem;
 
-public interface IOrderItemDao {
+public interface IOrderItemDao extends AbstractDao<OrderItem>{
 
 	List<OrderItem> getAll(Integer orderId);
-
-	OrderItem get(Integer id);
 
 	void insert(OrderItem orderItem);
 
 	void update(OrderItem orderItem);
 
-	void delete(Integer id);
 }

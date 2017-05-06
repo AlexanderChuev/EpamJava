@@ -1,9 +1,11 @@
 package com.chuyeu.training.myapp.webapp.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
+import com.chuyeu.training.myapp.webapp.memorization.MemMap;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.ProductModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
@@ -72,15 +75,28 @@ public class ProductController {
 
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
+	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id, HttpServletRequest req) {
+		
+		ProductModel model;
+		
+		Object data = MemMap.getInstance().getData(req.getServletPath(), new Date());
+		if(data==null){
 		
 		Product product;
 		try {
 			product = productService.get(id);
+			System.out.println("Y");
 		} catch (EmptyResultDataAccessException e) {
 			return new ResponseEntity<String>("This product does not exist", HttpStatus.BAD_REQUEST);
 		}
-		ProductModel model = conversionService.convert(product, ProductModel.class);
+		model = conversionService.convert(product, ProductModel.class);
+		MemMap.getInstance().putData(req.getServletPath(), model);
+		
+		} else {
+			model= (ProductModel) data;
+			System.out.println("Map");
+		}
+		
 		return new ResponseEntity<ProductModel>(model, HttpStatus.OK);
 
 	}

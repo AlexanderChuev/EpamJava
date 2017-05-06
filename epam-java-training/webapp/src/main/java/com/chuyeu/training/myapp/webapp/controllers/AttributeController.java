@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
+import com.chuyeu.training.myapp.webapp.memorization.MemMap;
 import com.chuyeu.training.myapp.webapp.models.AttributeModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 import com.chuyeu.training.myapp.webapp.models.parts.NameModel;
@@ -35,7 +37,10 @@ public class AttributeController {
 
 	// +++
 	@RequestMapping(value = "/names", method = RequestMethod.GET)
-	public ResponseEntity<?> getAttributeNames() {
+	public ResponseEntity<?> getAttributeNames(HttpServletRequest request) {
+		
+	
+	//	Single.getInstance().getMap().put(key, value);
 
 		List<String> attributeNames = attributeService.getNames();
 		List<NameModel> names = new ArrayList<>();

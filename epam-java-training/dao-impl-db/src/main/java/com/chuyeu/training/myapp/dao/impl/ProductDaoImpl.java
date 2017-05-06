@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -20,16 +19,14 @@ import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 
 @Repository
-public class ProductDaoImpl implements IProductDao {
+public class ProductDaoImpl  extends AbstractDaoImpl<Product>  implements IProductDao {
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
-
-	@Override
-	public Product get(Integer id) {
-		return jdbcTemplate.queryForObject("select * from product where id = ?", new Object[] { id },
-				new BeanPropertyRowMapper<Product>(Product.class));
-	}
+	
+	protected ProductDaoImpl() {
+        super(Product.class);
+    }
 
 	@Override
 	public List<Product> getAll(CommonFilter commonFilter) {
@@ -71,13 +68,6 @@ public class ProductDaoImpl implements IProductDao {
 				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive(),
 				product.getId());
 	}
-
-	@Override
-	public void delete(Integer id) throws EmptyResultDataAccessException {
-		jdbcTemplate.update("delete from product where id=" + id);
-	}
-
-	
 	
 	private String createSql(CommonFilter commonFilter) {
 

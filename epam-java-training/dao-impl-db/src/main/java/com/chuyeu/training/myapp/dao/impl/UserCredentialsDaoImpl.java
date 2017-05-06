@@ -19,20 +19,19 @@ import com.chuyeu.training.myapp.dao.api.IUserCredentialsDao;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 
 @Repository
-public class UserCredentialsDaoImpl implements IUserCredentialsDao{
+public class UserCredentialsDaoImpl extends AbstractDaoImpl<UserCredentials> implements IUserCredentialsDao{
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
+	
+	protected UserCredentialsDaoImpl() {
+        super(UserCredentials.class);
+    }
 	
 	@Override
 	public List<UserCredentials> getAll() throws UnsupportedOperationException{
 		/*return jdbcTemplate.query("select * from user_credentials", new BeanPropertyRowMapper<UserCredentials>(UserCredentials.class));*/
 		return null;
-	}
-
-	@Override
-	public UserCredentials get(Integer id) {
-		return jdbcTemplate.queryForObject("select * from user_credentials where id = ? ", new Object []{ id }, new BeanPropertyRowMapper<UserCredentials>(UserCredentials.class));
 	}
 
 	@Override
@@ -64,12 +63,6 @@ public class UserCredentialsDaoImpl implements IUserCredentialsDao{
 	@Override
 	public UserCredentials find(String email, String password) {
 		return jdbcTemplate.queryForObject("select * from user_credentials where email = ? and password = ?", new Object []{email, password}, new BeanPropertyRowMapper<UserCredentials>(UserCredentials.class));
-	}
-
-	@Override
-	public void delete(Integer id) {
-		jdbcTemplate.update("delete from user_credentials where id = " + id);
-		
 	}
 
 }

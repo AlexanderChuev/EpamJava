@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -20,20 +19,19 @@ import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 
 @Repository
-public class UserProfileDaoImpl implements IUserProfileDao{
+public class UserProfileDaoImpl  extends AbstractDaoImpl<UserProfile> implements IUserProfileDao{
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
+	
+	protected UserProfileDaoImpl() {
+        super(UserProfile.class);
+    }
 	
 	@Override
 	public List<UserProfile> getAll(CommonFilter commonFilter) {
 		String sql = createSql(commonFilter);
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<UserProfile>(UserProfile.class));
-	}
-
-	@Override
-	public UserProfile get(Integer id) {
-		return jdbcTemplate.queryForObject("select * from user_profile where id = ? ", new Object []{ id }, new BeanPropertyRowMapper<UserProfile>(UserProfile.class));
 	}
 
 	@Override
@@ -62,12 +60,6 @@ public class UserProfileDaoImpl implements IUserProfileDao{
 	public void update(UserProfile userProfile) {
 		jdbcTemplate.update("update user_profile set first_name = ?, last_name = ?, user_credentials_id = ? "
 				+ "where id = ?" , userProfile.getFirstName(), userProfile.getLastName(), userProfile.getUserCredentialsId(), userProfile.getId());
-	}
-
-	@Override
-	public void delete(Integer id) throws EmptyResultDataAccessException{
-		jdbcTemplate.update("delete from user_profile where id=" + id);	
-		
 	}
 	
 	@Override

@@ -4,15 +4,11 @@ import java.util.List;
 
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 
-public interface IProductVariantDao {
+public interface IProductVariantDao extends AbstractDao<ProductVariant> {
 
 	List<ProductVariant> getAllByProduct(Integer productId);
 
-	ProductVariant get(Integer id);
-
 	Integer add(ProductVariant productVariant);
 
-	void update (ProductVariant productVariant);
-
-	void delete(Integer id);
+	void update(ProductVariant productVariant);
 }

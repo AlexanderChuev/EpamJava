@@ -22,7 +22,12 @@ import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 
 @Repository
-public class OrdersDaoImpl implements IOrdersDao {
+public class OrdersDaoImpl extends AbstractDaoImpl<Order> implements IOrdersDao {
+
+	protected OrdersDaoImpl() {
+		super(Order.class);
+	}
+
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
@@ -33,11 +38,11 @@ public class OrdersDaoImpl implements IOrdersDao {
 		return jdbcTemplate.query(sql, new OrderMapper());
 	}
 
-	@Override
+/*	@Override
 	public Order get(Integer id) {
 		return jdbcTemplate.queryForObject("select * from orders where id = ? ", new Object[] { id },
 				new OrderMapper());
-	}
+	}*/
 
 	@Override
 	public Integer save(Order order) {
@@ -69,10 +74,6 @@ public class OrdersDaoImpl implements IOrdersDao {
 
 	}
 
-	@Override
-	public void delete(Integer id) {
-		jdbcTemplate.update("delete from orders where id=" + id);
-	}
 
 	private String createSql(CommonFilter commonFilter, OrderFilter orderFilter) {
 
