@@ -21,8 +21,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
-import com.chuyeu.training.myapp.services.impl.util.IRedisUtil;
-import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
+import com.chuyeu.training.myapp.services.util.RedisUtil;
+import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 
 public class BasicAuthFilter implements Filter {
 
@@ -53,9 +53,10 @@ public class BasicAuthFilter implements Filter {
 			return;
 		}
 
-		IRedisUtil redisUtil = appContext.getBean(IRedisUtil.class);
+		RedisUtil redisUtil = appContext.getBean(RedisUtil.class);
 
 		String[] userData = redisUtil.check(credentials);
+		
 		if (userData == null) {
 			IUserService userService = appContext.getBean(IUserService.class);
 			user = userService.getByEmailAndPassword(credentials[0], credentials[1]);

@@ -25,7 +25,7 @@ public class AbstractDaoImpl<T> implements AbstractDao<T> {
 
 	@Override
 	public void delete(Integer id) {
-		jdbcTemplate.update("delete from " + type.getName() + " where id = ", id);
+		jdbcTemplate.update("delete from " + getTableName(type) + " where id = " + id);
 
 	}
 	

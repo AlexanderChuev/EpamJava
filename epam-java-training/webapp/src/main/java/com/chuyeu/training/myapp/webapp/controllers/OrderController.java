@@ -23,7 +23,7 @@ import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IOrderService;
-import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
+import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.OrderModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;

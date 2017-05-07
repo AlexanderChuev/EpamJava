@@ -22,7 +22,7 @@ import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
-import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
+import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;

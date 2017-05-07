@@ -21,7 +21,7 @@ import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderItem;
 import com.chuyeu.training.myapp.services.IOrderItemService;
 import com.chuyeu.training.myapp.services.IOrderService;
-import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
+import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.OrderItemModel;
 import com.chuyeu.training.myapp.webapp.models.parts.QuantityModel;
 
