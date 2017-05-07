@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-public class AttributeModel {
+import java.io.Serializable;
+
+public class AttributeModel implements Serializable{
 
 	private Integer id;
 	private String name;

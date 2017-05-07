@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-public class OrderItemModel {
+import java.io.Serializable;
+
+public class OrderItemModel implements Serializable{
 
 	private Integer id;
 	private Integer productVariantId;

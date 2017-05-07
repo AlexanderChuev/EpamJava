@@ -1,6 +1,7 @@
 package com.chuyeu.training.myapp.webapp.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.services.IAttributeService;
-import com.chuyeu.training.myapp.webapp.memorization.MemMap;
+import com.chuyeu.training.myapp.webapp.memorization.Memoization;
 import com.chuyeu.training.myapp.webapp.models.AttributeModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 import com.chuyeu.training.myapp.webapp.models.parts.NameModel;
@@ -40,7 +41,6 @@ public class AttributeController {
 	public ResponseEntity<?> getAttributeNames(HttpServletRequest request) {
 		
 	
-	//	Single.getInstance().getMap().put(key, value);
 
 		List<String> attributeNames = attributeService.getNames();
 		List<NameModel> names = new ArrayList<>();
@@ -73,15 +73,25 @@ public class AttributeController {
 	}
 
 	// +++
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/product-variant", method = RequestMethod.GET)
-	public ResponseEntity<?> getById(@RequestParam(value = "id", required = false) Integer id) {
-
+	public ResponseEntity<?> getAllById(@RequestParam(value = "id", required = false) Integer id, HttpServletRequest req) {
+		
+		List<AttributeModel> attributesModel;
+		String path = new StringBuilder(req.getServletPath()).append("?").append(req.getQueryString()).toString();
+		Object data = Memoization.getInstance().getData(path, new Date());
+		if (data == null) {
+		
 		List<Attribute> attributes = attributeService.getProductVariantAttributes(id);
-		List<AttributeModel> attributesModel = new ArrayList<>();
+		attributesModel = new ArrayList<>();
 
 		for (Attribute attribute : attributes) {
 			AttributeModel model = conversionService.convert(attribute, AttributeModel.class);
 			attributesModel.add(model);
+		}
+		Memoization.getInstance().putData(path, attributesModel);
+		} else {
+			attributesModel = (List<AttributeModel>) data;
 		}
 		return new ResponseEntity<List<AttributeModel>>(attributesModel, HttpStatus.OK);
 	}

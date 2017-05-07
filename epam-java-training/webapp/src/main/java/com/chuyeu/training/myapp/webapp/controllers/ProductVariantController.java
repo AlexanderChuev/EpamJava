@@ -1,9 +1,11 @@
 package com.chuyeu.training.myapp.webapp.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IProductVariantService;
+import com.chuyeu.training.myapp.webapp.memorization.Memoization;
 import com.chuyeu.training.myapp.webapp.models.ProductVariantModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
@@ -27,32 +30,48 @@ public class ProductVariantController {
 
 	@Inject
 	private IProductVariantService productVariantService;
-	
+
 	@Autowired
 	ConversionService conversionService;
 
 	// +++
+	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getAllByProduct(@RequestParam(value = "product-id", required = false) Integer productId) {
+	public ResponseEntity<?> getAllByProduct(@RequestParam(value = "product-id", required = false) Integer productId,
+			HttpServletRequest req) {
 
 		List<ProductVariantModel> productVariantsModel = new ArrayList<>();
-		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
+		String path = new StringBuilder(req.getServletPath()).append("?").append(req.getQueryString()).toString();
+		Object data = Memoization.getInstance().getData(path, new Date());
+		if (data == null) {
+			List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
 
-		for (ProductVariant productVariant : productVariants) {
-			ProductVariantModel productVariantModel = conversionService.convert(productVariant, ProductVariantModel.class);
-			productVariantModel.setProductId(productId);
-			productVariantsModel.add(productVariantModel);
+			for (ProductVariant productVariant : productVariants) {
+				ProductVariantModel productVariantModel = conversionService.convert(productVariant,
+						ProductVariantModel.class);
+				productVariantModel.setProductId(productId);
+				productVariantsModel.add(productVariantModel);
+			}
+			Memoization.getInstance().putData(path, productVariantsModel);
+		} else {
+			productVariantsModel = (List<ProductVariantModel>) data;
 		}
 		return new ResponseEntity<List<ProductVariantModel>>(productVariantsModel, HttpStatus.OK);
 	}
 
 	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId) {
-
-		ProductVariant productVariant = productVariantService.getProductVariant(variantId);
-		ProductVariantModel productVariantModel = conversionService.convert(productVariant, ProductVariantModel.class);
-		productVariantModel.setProductId(productVariant.getId());
+	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer variantId, HttpServletRequest req) {
+		ProductVariantModel productVariantModel;
+		Object data = Memoization.getInstance().getData(req.getServletPath(), new Date());
+		if (data == null) {
+			ProductVariant productVariant = productVariantService.getProductVariant(variantId);
+			productVariantModel = conversionService.convert(productVariant, ProductVariantModel.class);
+			productVariantModel.setProductId(productVariant.getId());
+			Memoization.getInstance().putData(req.getServletPath(), productVariantModel);
+		} else {
+			productVariantModel = (ProductVariantModel) data;
+		}
 		return new ResponseEntity<ProductVariantModel>(productVariantModel, HttpStatus.OK);
 	}
 
@@ -65,7 +84,7 @@ public class ProductVariantController {
 		}
 		ProductVariant productVariant = conversionService.convert(productVariantModel, ProductVariant.class);
 		Integer id = productVariantService.save(productVariant);
-		return new ResponseEntity<IdModel>(new IdModel(id),HttpStatus.CREATED);
+		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
 	// +++
@@ -86,6 +105,5 @@ public class ProductVariantController {
 		productVariantService.delete(id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
 
 }

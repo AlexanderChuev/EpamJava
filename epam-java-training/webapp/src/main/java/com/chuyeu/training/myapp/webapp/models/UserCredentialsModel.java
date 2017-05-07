@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-public class UserCredentialsModel {
+import java.io.Serializable;
+
+public class UserCredentialsModel implements Serializable{
 
 	private Integer id;
 	private String email;

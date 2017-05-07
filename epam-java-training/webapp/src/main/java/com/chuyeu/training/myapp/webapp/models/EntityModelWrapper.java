@@ -1,8 +1,9 @@
 package com.chuyeu.training.myapp.webapp.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EntityModelWrapper<T> {
+public class EntityModelWrapper<T> implements Serializable{
 
 	private List<T> listEntityModel;
 	private Integer pageCount;

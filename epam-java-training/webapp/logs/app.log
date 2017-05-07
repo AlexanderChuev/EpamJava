@@ -1,7 +1,0 @@
-14:09:00.836 [qtp1037324811-13] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User com.chuyeu.training.myapp.services.impl.UserAuthStorage@5a06c804 request product 1
-14:11:38.351 [qtp1037324811-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User com.chuyeu.training.myapp.services.impl.UserAuthStorage@5a06c804 request product 1
-14:15:25.562 [qtp1037324811-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User com.chuyeu.training.myapp.services.impl.UserAuthStorage@7e6d08d7 request product 1
-14:16:47.760 [qtp1037324811-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User com.chuyeu.training.myapp.services.impl.UserAuthStorage@36d29bac request product 1
-14:21:37.877 [qtp1037324811-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User com.chuyeu.training.myapp.services.impl.UserAuthStorage@3908e3ed request product 1
-16:17:38.531 [qtp1037324811-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User com.chuyeu.training.myapp.services.impl.UserAuthStorage@4c51f152 request product 1
-16:18:43.391 [qtp1037324811-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - User role ADMIN request product 1

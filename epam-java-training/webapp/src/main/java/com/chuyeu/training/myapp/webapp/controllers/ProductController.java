@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.datamodel.Product;
 import com.chuyeu.training.myapp.services.IProductService;
-import com.chuyeu.training.myapp.webapp.memorization.MemMap;
+import com.chuyeu.training.myapp.webapp.memorization.Memoization;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.ProductModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
@@ -39,12 +39,14 @@ public class ProductController {
 	
 
 	// +++
+	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "column", required = false) String column,
 			@RequestParam(value = "direction", required = false) String direction,
-			@RequestParam(value = "limit", required = false) Integer limit) {
+			@RequestParam(value = "limit", required = false) Integer limit, HttpServletRequest req) {
 		
+		// вынести в отдельный класс проверку и подтянуть спрингом.
 		if (page == null) {
 			page = 1;
 		}
@@ -52,6 +54,11 @@ public class ProductController {
 		if (limit == null) {
 			limit = 2;
 		}
+		EntityModelWrapper<ProductModel> wrapper = new EntityModelWrapper<ProductModel>();
+		String path = new StringBuilder(req.getServletPath()).append("?").append(req.getQueryString()).toString();
+		Object data = Memoization.getInstance().getData(path, new Date());
+		
+		if(data==null){
 
 		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 
@@ -63,12 +70,15 @@ public class ProductController {
 			listProductModel.add(model);
 		}
 
-		EntityModelWrapper<ProductModel> wrapper = new EntityModelWrapper<ProductModel>();
-
 		wrapper.setListEntityModel(listProductModel);
 		Integer quantity = productService.getProductQuantity();
 		Integer pageCount = (int) Math.ceil((double) quantity / limit);
 		wrapper.setPageCount(pageCount);
+		
+		Memoization.getInstance().putData(path, wrapper);
+		} else {
+			wrapper =  (EntityModelWrapper<ProductModel>) data;
+		}
 
 		return new ResponseEntity<EntityModelWrapper<ProductModel>>(wrapper, HttpStatus.OK);
 	}
@@ -79,22 +89,19 @@ public class ProductController {
 		
 		ProductModel model;
 		
-		Object data = MemMap.getInstance().getData(req.getServletPath(), new Date());
+		Object data = Memoization.getInstance().getData(req.getServletPath(), new Date());
 		if(data==null){
 		
 		Product product;
 		try {
 			product = productService.get(id);
-			System.out.println("Y");
 		} catch (EmptyResultDataAccessException e) {
 			return new ResponseEntity<String>("This product does not exist", HttpStatus.BAD_REQUEST);
 		}
 		model = conversionService.convert(product, ProductModel.class);
-		MemMap.getInstance().putData(req.getServletPath(), model);
-		
+		Memoization.getInstance().putData(req.getServletPath(), model);
 		} else {
 			model= (ProductModel) data;
-			System.out.println("Map");
 		}
 		
 		return new ResponseEntity<ProductModel>(model, HttpStatus.OK);

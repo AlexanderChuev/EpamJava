@@ -1,10 +1,11 @@
 package com.chuyeu.training.myapp.webapp.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
-public class OrderModel {
+public class OrderModel implements Serializable{
 
 	private Integer id;
 	private Date created;

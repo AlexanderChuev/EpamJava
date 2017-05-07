@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-public class UserProfileModel {
+import java.io.Serializable;
+
+public class UserProfileModel implements Serializable{
 
 	private String firstName;
 	private String lastName;

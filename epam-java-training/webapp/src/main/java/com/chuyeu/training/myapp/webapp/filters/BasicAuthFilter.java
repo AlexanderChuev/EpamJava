@@ -26,20 +26,14 @@ import com.chuyeu.training.myapp.services.impl.util.UserAuthStorage;
 
 public class BasicAuthFilter implements Filter {
 
-	private IUserService userService;
 	private ApplicationContext appContext;
-	private IRedisUtil redisUtil;
 	private UserCredentials user;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-
 		WebApplicationContext context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(filterConfig.getServletContext());
-		userService = context.getBean(IUserService.class);
-		redisUtil = context.getBean(IRedisUtil.class);
 		appContext = context;
-
 	}
 
 	@Override
@@ -58,10 +52,12 @@ public class BasicAuthFilter implements Filter {
 			res.sendError(401);
 			return;
 		}
-		UserAuthStorage userDataStorage = appContext.getBean(UserAuthStorage.class);
-		
+
+		IRedisUtil redisUtil = appContext.getBean(IRedisUtil.class);
+
 		String[] userData = redisUtil.check(credentials);
-		if (userData==null) {
+		if (userData == null) {
+			IUserService userService = appContext.getBean(IUserService.class);
 			user = userService.getByEmailAndPassword(credentials[0], credentials[1]);
 			redisUtil.write(credentials, user);
 		} else {
@@ -69,7 +65,8 @@ public class BasicAuthFilter implements Filter {
 			user.setId(Integer.valueOf(userData[0]));
 			user.setUserRole(UserRole.valueOf(userData[1].toUpperCase()));
 		}
-		
+
+		UserAuthStorage userDataStorage = appContext.getBean(UserAuthStorage.class);
 
 		if (user != null) {
 			userDataStorage.setId(user.getId());
@@ -90,7 +87,7 @@ public class BasicAuthFilter implements Filter {
 
 		if (req.getMethod().toUpperCase().equals("GET") && (req.getRequestURI().contains("/product")
 				|| req.getRequestURI().contains("/attribute") || req.getRequestURI().contains("/product-variant")
-				|| req.getRequestURI().contains("/order-item"))) {
+				|| req.getRequestURI().contains("/order-item") || req.getRequestURI().contains("/serialization"))) {
 			return false;
 		}
 		if (req.getMethod().toUpperCase().equals("POST") && req.getRequestURI().contains("/user")) {
@@ -110,6 +107,16 @@ public class BasicAuthFilter implements Filter {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	private String getLanguage(HttpServletRequest req) {
+		try {
+			Enumeration<String> headers = req.getHeaders("Accept-Language");
+			return headers.nextElement();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 	private boolean verificationAccess(HttpServletRequest req, UserAuthStorage userDataStorage) {

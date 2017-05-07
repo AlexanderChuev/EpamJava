@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-public class VariantModel {
+import java.io.Serializable;
+
+public class VariantModel implements Serializable {
 
 	private Integer productVariantId;
 	private Integer attributeId;

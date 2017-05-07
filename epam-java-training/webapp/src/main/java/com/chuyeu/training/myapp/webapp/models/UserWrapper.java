@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.models;
 
-public class UserWrapper {
+import java.io.Serializable;
+
+public class UserWrapper implements Serializable{
 
 	private UserCredentialsModel userCredentialsModel;
 	private UserProfileModel userProfileModel;
