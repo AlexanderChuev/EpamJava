@@ -17,7 +17,6 @@ public class OrderMapper implements RowMapper<Order> {
 		order.setId(rs.getInt("id"));
 		order.setCreated(rs.getTimestamp("created"));
 		order.setUserProfileId(rs.getInt("user_profile_id"));
-		order.setTotalPrice(rs.getDouble("total_price"));
 		order.setOrderStatus(OrderStatus.valueOf(rs.getString("order_status")));
 
 		return order;

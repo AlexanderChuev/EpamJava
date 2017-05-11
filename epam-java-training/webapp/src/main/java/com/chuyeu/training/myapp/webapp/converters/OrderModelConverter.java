@@ -15,8 +15,7 @@ public class OrderModelConverter implements Converter<OrderModel, Order>{
 		Order order = new Order();
 		order.setCreated(new Date());
 		order.setUserProfileId(orderModel.getUserProfileId());
-		order.setOrderStatus(OrderStatus.BASKET);
-		order.setTotalPrice(0d);
+		order.setOrderStatus(OrderStatus.CART);
 		return order;
 	}
 

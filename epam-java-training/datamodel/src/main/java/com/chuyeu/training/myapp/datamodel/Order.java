@@ -6,7 +6,6 @@ public class Order extends AbstractModel {
 
 	private Date created;
 	private Integer userProfileId;
-	private Double totalPrice;
 	private OrderStatus orderStatus;
 
 	public Date getCreated() {
@@ -25,14 +24,6 @@ public class Order extends AbstractModel {
 		this.userProfileId = userProfileId;
 	}
 
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
@@ -43,8 +34,7 @@ public class Order extends AbstractModel {
 
 	@Override
 	public String toString() {
-		return "Order [created=" + created + ", userProfileId=" + userProfileId + ", totalPrice=" + totalPrice
-				+ ", orderStatus=" + orderStatus + "]";
+		return "Order [created=" + created + ", userProfileId=" + userProfileId + ", orderStatus=" + orderStatus + "]";
 	}
 
 }

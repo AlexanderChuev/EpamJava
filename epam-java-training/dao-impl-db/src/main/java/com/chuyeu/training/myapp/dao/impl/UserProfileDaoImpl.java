@@ -35,7 +35,7 @@ public class UserProfileDaoImpl  extends AbstractDaoImpl<UserProfile> implements
 	}
 
 	@Override
-	public UserProfile insert(UserProfile userProfile) {
+	public Integer insert(UserProfile userProfile) {
 		final String INSERT_SQL = "insert into user_profile (first_name, last_name, user_credentials_id) values(?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -53,7 +53,7 @@ public class UserProfileDaoImpl  extends AbstractDaoImpl<UserProfile> implements
 
 		userProfile.setId(keyHolder.getKey().intValue());
 
-		return userProfile;
+		return keyHolder.getKey().intValue();
 	}
 
 	@Override

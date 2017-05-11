@@ -9,7 +9,7 @@ public interface IUserProfileDao extends AbstractDao<UserProfile>{
 
 	List<UserProfile> getAll(CommonFilter commonFilter);
 
-	UserProfile insert(UserProfile userProfile);
+	Integer insert(UserProfile userProfile);
 
 	void update(UserProfile userProfile);
 

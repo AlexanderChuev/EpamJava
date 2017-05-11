@@ -51,10 +51,12 @@ public class AbstractTesst {
 	public Product createProduct() {
 
 		Product product = new Product();
-		product.setName("Saucony" + new Date().getTime());
-		product.setDescription("China shoes");
+		product.setNameRu("Saucony" + new Date().getTime());
+		product.setDescriptionRu("Китайские кроссовки");
 		product.setBasePrice((double) 50);
 		product.setActive(true);
+		product.setNameEn("Saucony" + new Date().getTime());
+		product.setDescriptionEn("China shoes");
 		return product;
 	}
 

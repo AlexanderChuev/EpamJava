@@ -82,7 +82,7 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 	}
 
 	@Override
-	public UserProfile insert(UserProfile userProfile) {
+	public Integer insert(UserProfile userProfile) {
 
 		File file = getFile();
 		@SuppressWarnings("unchecked")
@@ -98,7 +98,7 @@ public class UserProfileDaoXmlImpl implements IUserProfileDao {
 		wrapper.setLastId(newId);
 		writeNewData(file, wrapper);
 
-		return userProfile;
+		return newId;
 	}
 
 	@Override

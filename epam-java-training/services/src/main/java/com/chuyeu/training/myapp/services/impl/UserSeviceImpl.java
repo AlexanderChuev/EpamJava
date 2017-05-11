@@ -45,7 +45,7 @@ public class UserSeviceImpl implements IUserService {
 	}
 
 	@Override
-	public UserProfile registration(UserProfile userProfile, UserCredentials userCredentials) {
+	public Integer registration(UserProfile userProfile, UserCredentials userCredentials) {
 
 		Integer userCredentialsId = userCredentialsDao.add(userCredentials);
 		userProfile.setUserCredentialsId(userCredentialsId);

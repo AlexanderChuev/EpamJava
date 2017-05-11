@@ -42,7 +42,7 @@ public class ProductDaoImpl  extends AbstractDaoImpl<Product>  implements IProdu
 	@Override
 	public Integer add(Product product) {
 
-		final String INSERT_SQL = "insert into product (name, description, base_price, active) values(?, ?, ?, ?)";
+		final String INSERT_SQL = "insert into product (name_ru, description_ru, base_price, active, name_en, description_en) values(?, ?, ?, ?, ?, ?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -50,10 +50,12 @@ public class ProductDaoImpl  extends AbstractDaoImpl<Product>  implements IProdu
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-				ps.setString(1, product.getName());
-				ps.setString(2, product.getDescription());
+				ps.setString(1, product.getNameRu());
+				ps.setString(2, product.getDescriptionRu());
 				ps.setDouble(3, product.getBasePrice());
 				ps.setBoolean(4, product.getActive());
+				ps.setString(5, product.getNameEn());
+				ps.setString(6, product.getDescriptionEn());
 				return ps;
 			}
 		}, keyHolder);
@@ -64,8 +66,8 @@ public class ProductDaoImpl  extends AbstractDaoImpl<Product>  implements IProdu
 	@Override
 	public void update(Product product) {
 		jdbcTemplate.update(
-				"update product set name = ?, description = ?, base_price = ?, active = ?" + " where id = ?",
-				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive(),
+				"update product set name_ru = ?, description_ru = ?, base_price = ?, active = ?, name_en = ?, description_en = ?" + " where id = ?",
+				product.getNameRu(), product.getDescriptionRu(), product.getBasePrice(), product.getActive(), product.getNameEn(), product.getDescriptionEn(),
 				product.getId());
 	}
 	

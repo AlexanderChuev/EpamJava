@@ -13,7 +13,7 @@ public interface IUserService {
 	UserCredentials getByEmailAndPassword(String email, String password);
 	
 	@Transactional
-	UserProfile registration(UserProfile userProfile, UserCredentials userCredentials);
+	Integer registration(UserProfile userProfile, UserCredentials userCredentials);
 
     UserProfile getUserProfile(Integer id);
 

@@ -111,10 +111,12 @@ public class ProductDaoXmlImpl implements IProductDao {
 		
 		for (Product productFromDb : productsFromDb) {
 			if (productFromDb.getId().equals(product.getId())) {
-				productFromDb.setName(product.getName());
-				productFromDb.setDescription(product.getDescription());
+				productFromDb.setNameRu(product.getNameRu());
+				productFromDb.setDescriptionRu(product.getDescriptionRu());
 				productFromDb.setBasePrice(product.getBasePrice());
 				productFromDb.setActive(product.getActive());
+				productFromDb.setNameRu(product.getNameEn());
+				productFromDb.setDescriptionRu(product.getDescriptionEn());
 				break;
 			}
 		}

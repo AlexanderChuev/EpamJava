@@ -5,6 +5,7 @@ public class OrderItem extends AbstractModel {
 	private Integer productVariantId;
 	private Integer orderQuantity;
 	private Integer orderId;
+	private Double price;
 
 	public Integer getProductVariantId() {
 		return productVariantId;
@@ -30,10 +31,18 @@ public class OrderItem extends AbstractModel {
 		this.orderId = orderId;
 	}
 
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderItem [productVariantId=" + productVariantId + ", orderQuantity=" + orderQuantity + ", orderId="
-				+ orderId + "]";
+				+ orderId + ", price=" + price + "]";
 	}
 
 }

@@ -26,8 +26,12 @@ public class UserServiceTest extends AbstractTesst {
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 
-		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
-
+		Integer registrationID = userService.registration(userProfile, userCredentials);
+		Assert.notNull(registrationID, "not null");
+		
+		UserProfile userProfileFromDb = userService.getUserProfile(registrationID);
+		
+		
 		Assert.notNull(userProfileFromDb, "The userFromDb must not be null");
 		Assert.notNull(userProfileFromDb.getId(), "The id from userFromDb must not be null");
 		Assert.notNull(userProfileFromDb.getFirstName(), "The FirstName from userFromDb must not be null");
@@ -42,8 +46,7 @@ public class UserServiceTest extends AbstractTesst {
 
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
-		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
-		Integer userCredentialsId = userProfileFromDb.getUserCredentialsId();
+		Integer userCredentialsId = userService.registration(userProfile, userCredentials);
 		UserCredentials userCredentialsFromDb = userService.getUserCredentials(userCredentialsId);
 
 		checkUserCredentials(userCredentialsFromDb, userCredentials);
@@ -54,9 +57,8 @@ public class UserServiceTest extends AbstractTesst {
 
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
-		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
+		Integer userCredentialsId = userService.registration(userProfile, userCredentials);
 
-		Integer userCredentialsId = userProfileFromDb.getUserCredentialsId();
 		UserCredentials userCredentialsFromDb = userService.getUserCredentials(userCredentialsId);
 
 		userCredentialsFromDb.setEmail("new email" + new Date().getTime());
@@ -89,8 +91,8 @@ public class UserServiceTest extends AbstractTesst {
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 
-		UserProfile userFromDb = userService.registration(userProfile, userCredentials);
-		UserProfile userProfileFromDb = userService.getUserProfile(userFromDb.getId());
+		Integer registrationId = userService.registration(userProfile, userCredentials);
+		UserProfile userProfileFromDb = userService.getUserProfile(registrationId);
 
 		Assert.notNull(userProfileFromDb, "The userFromDb must not be null");
 		Assert.notNull(userProfileFromDb.getId(), "The id from userFromDb must not be null");
@@ -122,7 +124,9 @@ public class UserServiceTest extends AbstractTesst {
 
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
-		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
+		Integer registrationId = userService.registration(userProfile, userCredentials);
+		
+		UserProfile userProfileFromDb = userService.getUserProfile(registrationId);
 
 		userProfileFromDb.setFirstName("FirstName" + new Date().getTime());
 		userProfileFromDb.setLastName("LastName" + new Date().getTime());
@@ -149,12 +153,11 @@ public class UserServiceTest extends AbstractTesst {
 
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
-		UserProfile userProfileFromDb = userService.registration(userProfile, userCredentials);
+		Integer registrationId = userService.registration(userProfile, userCredentials);
 
-		Integer id = userProfileFromDb.getId();
 
-		userService.delete(id);
-		userService.getUserProfile(id);
+		userService.delete(registrationId);
+		userService.getUserProfile(registrationId);
 
 	}
 

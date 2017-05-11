@@ -22,10 +22,11 @@ public class RedisUtil{
 		String[] userDataStorage = null;
 		RedisConnection<String, String> connection = redisClient.connect();
 		String userData = connection.get(credentials[0] + credentials[1]);
-		if (userData != null) {
+		if (userData != null && !userData.isEmpty()) {
 			userDataStorage = userData.split("!", 2);
+			//System.out.println(userDataStorage[0]+"!"+userDataStorage[1]);
 		}
-		System.out.println("Есть");
+		
 		connection.close();
 		return userDataStorage;
 	}
@@ -35,7 +36,6 @@ public class RedisUtil{
 		connection.set(credentials[0] + credentials[1],
 				user.getId().toString() + "!" + user.getUserRole().toString());
 		connection.expire(credentials[0] + credentials[1], 15);
-		System.out.println("Записал");
 		connection.close();
 	}
 

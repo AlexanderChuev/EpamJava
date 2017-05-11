@@ -13,6 +13,7 @@ public class OrderItemModelConverter implements Converter<OrderItemModel, OrderI
 		orderItem.setProductVariantId(orderItemModel.getProductVariantId());
 		orderItem.setOrderQuantity(orderItemModel.getOrderQuantity());
 		orderItem.setOrderId(orderItemModel.getOrderId());
+		orderItem.setPrice(orderItemModel.getPrice());
 		return orderItem;
 	}
 

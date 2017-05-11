@@ -36,7 +36,7 @@ public class OrderItemDaoImpl extends AbstractDaoImpl<OrderItem> implements IOrd
 	@Override
 	public void update(OrderItem orderItem) {
 		jdbcTemplate.update(
-				"update order_item set product_variant_id = ?, order_quantity = ?, order_id = ? " + "where id = ?",
+				"update order_item set order_quantity = ?, price = ? " + "where id = ?",
 				orderItem.getProductVariantId(), orderItem.getOrderQuantity(), orderItem.getOrderId(),
 				orderItem.getId());
 	}

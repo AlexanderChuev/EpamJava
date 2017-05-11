@@ -10,7 +10,6 @@ public class OrderModel implements Serializable{
 	private Integer id;
 	private Date created;
 	private Integer userProfileId;
-	private Double totalPrice;
 	private OrderStatus orderStatus;
 
 	public Integer getId() {
@@ -35,14 +34,6 @@ public class OrderModel implements Serializable{
 
 	public void setUserProfileId(Integer userProfileId) {
 		this.userProfileId = userProfileId;
-	}
-
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 	public OrderStatus getOrderStatus() {

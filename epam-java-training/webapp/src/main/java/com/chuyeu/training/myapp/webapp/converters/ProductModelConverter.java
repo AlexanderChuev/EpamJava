@@ -10,10 +10,13 @@ public class ProductModelConverter implements Converter<ProductModel, Product> {
 	@Override
 	public Product convert(ProductModel model) {
 		Product product = new Product();
-		product.setName(model.getName());
-		product.setDescription(model.getDescription());
 		product.setActive(model.getActive());
 		product.setBasePrice(model.getBasePrice());
+		product.setNameEn(model.getNameEn());
+		product.setDescriptionEn(model.getDescriptionEn());
+		product.setNameRu(model.getNameRu());
+		product.setDescriptionRu(model.getDescriptionRu());
+
 		return product;
 	}
 

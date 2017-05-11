@@ -13,7 +13,6 @@ public class OrderConverter implements Converter<Order, OrderModel>{
 		orderModel.setId(order.getId());
 		orderModel.setCreated(order.getCreated());
 		orderModel.setUserProfileId(order.getUserProfileId());
-		orderModel.setTotalPrice(order.getTotalPrice());
 		orderModel.setOrderStatus(order.getOrderStatus());
 		return orderModel;
 	}

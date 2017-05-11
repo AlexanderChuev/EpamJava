@@ -28,7 +28,7 @@ import com.chuyeu.training.myapp.webapp.models.ProductModel;
 import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
 @RestController
-@RequestMapping(value = { "/product" }, produces = "application/json;charset=UTF-8")
+@RequestMapping("/product")
 public class ProductController {
 
 	@Inject
@@ -115,7 +115,7 @@ public class ProductController {
 		if (productModel == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-
+		System.out.println(productModel);
 		Product product = conversionService.convert(productModel, Product.class);
 		Integer id = productService.add(product);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
@@ -127,8 +127,8 @@ public class ProductController {
 			@PathVariable(value = "id") Integer id) {
 
 		Product productFromDb = productService.get(id);
-		productFromDb.setName(productModel.getName());
-		productFromDb.setDescription(productModel.getDescription());
+		//productFromDb.setName(productModel.getName());
+		//productFromDb.setDescription(productModel.getDescription());
 		productFromDb.setActive(productModel.getActive());
 		productFromDb.setBasePrice(productModel.getBasePrice());
 		productService.update(productFromDb);

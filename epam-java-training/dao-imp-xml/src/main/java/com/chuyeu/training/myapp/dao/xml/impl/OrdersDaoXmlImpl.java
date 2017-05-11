@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.chuyeu.training.myapp.dao.api.IOrdersDao;
+import com.chuyeu.training.myapp.dao.api.IOrderDao;
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
 import com.chuyeu.training.myapp.dao.api.filters.OrderFilter;
 import com.chuyeu.training.myapp.dao.xml.impl.comparators.OrderDateComparator;
@@ -22,7 +22,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 @Repository
-public class OrdersDaoXmlImpl implements IOrdersDao {
+public class OrdersDaoXmlImpl implements IOrderDao {
 
 	private final XStream xstream = new XStream(new DomDriver());
 

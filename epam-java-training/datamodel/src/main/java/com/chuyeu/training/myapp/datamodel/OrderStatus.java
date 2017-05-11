@@ -2,6 +2,6 @@ package com.chuyeu.training.myapp.datamodel;
 
 public enum OrderStatus {
 
-	BASKET, IN_PROCESSING, ACCEPTED, REJECTED, COMPLETED
+	CART, IN_PROCESSING, ACCEPTED, REJECTED, COMPLETED
 
 }

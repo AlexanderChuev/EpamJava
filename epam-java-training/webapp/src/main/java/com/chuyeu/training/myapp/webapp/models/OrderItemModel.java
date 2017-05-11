@@ -2,12 +2,13 @@ package com.chuyeu.training.myapp.webapp.models;
 
 import java.io.Serializable;
 
-public class OrderItemModel implements Serializable{
+public class OrderItemModel implements Serializable {
 
 	private Integer id;
 	private Integer productVariantId;
 	private Integer orderQuantity;
 	private Integer orderId;
+	private Double price;
 
 	public Integer getId() {
 		return id;
@@ -39,6 +40,14 @@ public class OrderItemModel implements Serializable{
 
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 }

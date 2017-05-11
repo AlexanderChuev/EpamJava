@@ -21,13 +21,15 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserRole;
 import com.chuyeu.training.myapp.services.IUserService;
+import com.chuyeu.training.myapp.services.util.Language;
+import com.chuyeu.training.myapp.services.util.LanguageWrapper;
 import com.chuyeu.training.myapp.services.util.RedisUtil;
 import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 
 public class BasicAuthFilter implements Filter {
 
 	private ApplicationContext appContext;
-	private UserCredentials user;
+	
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -42,20 +44,27 @@ public class BasicAuthFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		
 		if (!isAuthRequired(req)) {
 			chain.doFilter(request, response);
 			return;
 		}
+
+		LanguageWrapper languageWrapper = appContext.getBean(LanguageWrapper.class);
+		languageWrapper.setLanguage(getLanguage(req));
+
+		
 		String[] credentials = resolveCredentials(req);
 
 		if (credentials == null || credentials.length != 2) {
 			res.sendError(401);
 			return;
 		}
-
 		RedisUtil redisUtil = appContext.getBean(RedisUtil.class);
 
 		String[] userData = redisUtil.check(credentials);
+		
+		UserCredentials user = null;
 		
 		if (userData == null) {
 			IUserService userService = appContext.getBean(IUserService.class);
@@ -63,8 +72,14 @@ public class BasicAuthFilter implements Filter {
 			redisUtil.write(credentials, user);
 		} else {
 			user = new UserCredentials();
-			user.setId(Integer.valueOf(userData[0]));
-			user.setUserRole(UserRole.valueOf(userData[1].toUpperCase()));
+			Integer valueOf = Integer.valueOf(userData[0]);
+			user.setId(valueOf);
+			UserRole valueOf2 = UserRole.valueOf(userData[1].toUpperCase());
+			user.setUserRole(valueOf2);
+			if(user.getUserRole()==null){
+				System.out.println(userData[0] +"!"+ userData[1]);
+				System.out.println(valueOf2+"??????????????????????????");
+			}
 		}
 
 		UserAuthStorage userDataStorage = appContext.getBean(UserAuthStorage.class);
@@ -72,6 +87,9 @@ public class BasicAuthFilter implements Filter {
 		if (user != null) {
 			userDataStorage.setId(user.getId());
 			userDataStorage.setUserRole(user.getUserRole());
+			if(userDataStorage.getUserRole()==null){
+				
+			}
 			boolean verificationAccess = verificationAccess(req, userDataStorage);
 			if (verificationAccess) {
 				chain.doFilter(request, response);
@@ -110,99 +128,97 @@ public class BasicAuthFilter implements Filter {
 		}
 	}
 
-	private String getLanguage(HttpServletRequest req) {
-		try {
-			Enumeration<String> headers = req.getHeaders("Accept-Language");
-			return headers.nextElement();
-		} catch (Exception e) {
-			return null;
+	private Language getLanguage(HttpServletRequest req) {
+		Enumeration<String> headers = req.getHeaders("Accept-Language");
+		if (headers.hasMoreElements()) {
+			return Language.valueOf(headers.nextElement().toUpperCase());
 		}
-
+		return Language.RU;
 	}
 
 	private boolean verificationAccess(HttpServletRequest req, UserAuthStorage userDataStorage) {
 
 		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("POST")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("PUT")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 		if (req.getRequestURI().contains("/product") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("POST")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/attribute") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("POST")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
-		}
+		} 
 		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("PUT")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 		if (req.getRequestURI().contains("/product-variant") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/variant") && req.getMethod().toUpperCase().equals("POST")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/variant") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/user/credentials")
 				&& (req.getMethod().toUpperCase().equals("GET") || req.getMethod().toUpperCase().equals("PUT"))) {
-			if (userDataStorage.getUserRole().equals(UserRole.CLIENT)) {
+			if (UserRole.CLIENT.equals(userDataStorage.getUserRole())) {
 				String[] uri = req.getRequestURI().split("/");
 				Integer id = Integer.valueOf(uri[3]);
 				if (userDataStorage.getId().equals(id)) {
 					return true;
 				}
 			}
-			if (userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			if (UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 				return true;
 			}
 		}
 
 		if (req.getRequestURI().contains("/user/profile")
 				&& (req.getMethod().toUpperCase().equals("GET") || req.getMethod().toUpperCase().equals("PUT"))) {
-			if (userDataStorage.getUserRole().equals(UserRole.CLIENT)) {
+			if (UserRole.CLIENT.equals(userDataStorage.getUserRole())) {
 				String[] uri = req.getRequestURI().split("/");
 				Integer id = Integer.valueOf(uri[3]);
 				if (userDataStorage.getId().equals(id)) {
 					return true;
 				}
 			}
-			if (userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+			if (UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 				return true;
 			}
 		}
 
 		if (req.getRequestURI().contains("/user") && req.getMethod().toUpperCase().equals("GET")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
 		if (req.getRequestURI().contains("/user") && req.getMethod().toUpperCase().equals("DELETE")
-				&& userDataStorage.getUserRole().equals(UserRole.ADMIN)) {
+				&& UserRole.ADMIN.equals(userDataStorage.getUserRole())) {
 			return true;
 		}
 
@@ -217,6 +233,8 @@ public class BasicAuthFilter implements Filter {
 			return true;
 		}
 
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(userDataStorage.getId()+"!"+userDataStorage.getUserRole());
 		return false;
 	}
 

@@ -1,6 +1,8 @@
 package com.chuyeu.training.myapp.webapp.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,15 +20,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.dao.api.filters.CommonFilter;
+import com.chuyeu.training.myapp.datamodel.Order;
+import com.chuyeu.training.myapp.datamodel.OrderStatus;
 import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 import com.chuyeu.training.myapp.datamodel.UserRole;
+import com.chuyeu.training.myapp.services.IOrderService;
 import com.chuyeu.training.myapp.services.IUserService;
 import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;
 import com.chuyeu.training.myapp.webapp.models.UserWrapper;
+import com.chuyeu.training.myapp.webapp.models.parts.Base64Model;
 
 @RestController
 @RequestMapping("/user")
@@ -34,10 +40,13 @@ public class UserController {
 
 	@Inject
 	private IUserService userService;
+	
+	@Inject
+	private IOrderService orderService;
 
 	@Inject
 	private ApplicationContext context;
-	
+
 	@Autowired
 	ConversionService conversionService;
 
@@ -48,40 +57,41 @@ public class UserController {
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
-			CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
+		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 
-			List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
-			List<UserProfileModel> listUserProfileModel = new ArrayList<>();
+		List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
+		List<UserProfileModel> listUserProfileModel = new ArrayList<>();
 
-			for (UserProfile userProfile : listUserProfileFromDB) {
-				UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
-				listUserProfileModel.add(userProfileModel);
-			}
+		for (UserProfile userProfile : listUserProfileFromDB) {
+			UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
+			listUserProfileModel.add(userProfileModel);
+		}
 
-			EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
+		EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
 
-			wrapper.setListEntityModel(listUserProfileModel);
-			Integer quantity = userService.getUserProfileQuantity();
-			Integer pageCount = (int) Math.ceil((double) quantity / limit);
-			wrapper.setPageCount(pageCount);
+		wrapper.setListEntityModel(listUserProfileModel);
+		Integer quantity = userService.getUserProfileQuantity();
+		Integer pageCount = (int) Math.ceil((double) quantity / limit);
+		wrapper.setPageCount(pageCount);
 
-			return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
+		return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
 	}
 
 	// +++
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCredentials(@PathVariable(value = "id") Integer id) {
-			UserCredentials userCredentials = userService.getUserCredentials(id);
-			UserCredentialsModel userCredentialsModel = conversionService.convert(userCredentials, UserCredentialsModel.class);
-			return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
+		UserCredentials userCredentials = userService.getUserCredentials(id);
+		UserCredentialsModel userCredentialsModel = conversionService.convert(userCredentials,
+				UserCredentialsModel.class);
+		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
 	}
 
 	// +++
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
-			UserProfile userProfile = userService.getUserProfile(id);
-			UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
-			return new ResponseEntity<UserProfileModel>(userProfileModel, HttpStatus.OK);
+		UserProfile userProfile = userService.getUserProfile(id);
+		UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
+		return new ResponseEntity<UserProfileModel>(userProfileModel, HttpStatus.OK);
 	}
 
 	// +++
@@ -91,11 +101,22 @@ public class UserController {
 		if (userWrapper.getUserCredentialsModel() == null || userWrapper.getUserProfileModel() == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-
+// ордес создается без возврата id
 		UserCredentials userCredentials = conversionService.convert(userWrapper, UserCredentials.class);
 		UserProfile userProfile = conversionService.convert(userWrapper, UserProfile.class);
-		userService.registration(userProfile, userCredentials);
-		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		Integer registrationId = userService.registration(userProfile, userCredentials);
+		UserProfile userProfileFromDb = userService.getUserProfile(registrationId);
+		
+		Order order = new Order();
+		order.setOrderStatus(OrderStatus.CART);
+		order.setUserProfileId(userProfileFromDb.getId());
+		
+		orderService.save(order);
+		
+		UserCredentials userCredentialsFromDb = userService
+				.getUserCredentials(userProfileFromDb.getUserCredentialsId());
+
+		return new ResponseEntity<Base64Model>(new Base64Model(convert(userCredentialsFromDb)), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.PUT)
@@ -120,11 +141,23 @@ public class UserController {
 	public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileModel userProfileModel,
 			@PathVariable(value = "id") Integer id) {
 
-			UserProfile userProfileFromDb = userService.getUserProfile(id);
-			userProfileFromDb.setFirstName(userProfileModel.getFirstName());
-			userProfileFromDb.setLastName(userProfileModel.getLastName());
-			userService.update(userProfileFromDb);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+		UserProfile userProfileFromDb = userService.getUserProfile(id);
+		userProfileFromDb.setFirstName(userProfileModel.getFirstName());
+		userProfileFromDb.setLastName(userProfileModel.getLastName());
+		userService.update(userProfileFromDb);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+
+	private String convert(UserCredentials userCredentialsFromDb) {
+
+		String base64Decode = null;
+		try {
+			base64Decode = Base64.getEncoder().encodeToString(
+					(userCredentialsFromDb.getEmail() + ":" + userCredentialsFromDb.getPassword()).getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return base64Decode;
 	}
 
 }

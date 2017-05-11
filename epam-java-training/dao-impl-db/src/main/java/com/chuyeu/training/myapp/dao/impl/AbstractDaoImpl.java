@@ -20,19 +20,16 @@ public class AbstractDaoImpl<T> implements AbstractDao<T> {
 
 	@Override
 	public T get(Integer id) {
-		return jdbcTemplate.queryForObject("select * from " + getTableName(type) + " where id = ?", new Object[] { id }, new BeanPropertyRowMapper<T>(type));
+		return jdbcTemplate.queryForObject("select * from \"" + getTableName(type) + "\" where id = ?", new Object[] { id }, new BeanPropertyRowMapper<T>(type));
 	}
 
 	@Override
 	public void delete(Integer id) {
-		jdbcTemplate.update("delete from " + getTableName(type) + " where id = " + id);
+		jdbcTemplate.update("delete from \"" + getTableName(type) + "\" where id = " + id);
 
 	}
 	
 	private String getTableName(Class<T> type) {
-		if(type.getSimpleName().toUpperCase().equals("ORDER")){
-			return "orders";
-		}
         return type.getSimpleName().replaceAll("(.)([A-Z])", "$1_$2").toLowerCase();
     }
 

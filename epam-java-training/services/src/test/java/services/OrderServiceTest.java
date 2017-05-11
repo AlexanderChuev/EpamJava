@@ -36,8 +36,6 @@ public class OrderServiceTest extends AbstractTesst {
 		checkOrder(orderFromDb);
 		Assert.isTrue((orderFromDb.getCreated().getTime() == order.getCreated().getTime()),
 				"The columns with the date must be equals");
-		Assert.isTrue(orderFromDb.getTotalPrice().equals(order.getTotalPrice()),
-				"The columns with the totalPrice must be equals");
 		Assert.isTrue(orderFromDb.getUserProfileId().equals(order.getUserProfileId()),
 				"The columns with the UserProfileId must be equals");
 		Assert.isTrue(orderFromDb.getOrderStatus().equals(order.getOrderStatus()),
@@ -50,7 +48,7 @@ public class OrderServiceTest extends AbstractTesst {
 		CommonFilter commonFilter = new CommonFilter(1, 2, "created", "asc");
 		OrderFilter orderFilter = new OrderFilter();
 		orderFilter.setId(1);
-		orderFilter.setOrderStatus(OrderStatus.BASKET);
+		orderFilter.setOrderStatus(OrderStatus.CART);
 		orderFilter.setUserRole(UserRole.CLIENT);
 
 		List<Order> allOrders = orderService.getAll(commonFilter, orderFilter);
@@ -76,8 +74,6 @@ public class OrderServiceTest extends AbstractTesst {
 		Assert.isTrue(updatedOrder.getId().equals(orderFromDb.getId()), "The columns with the id must be equals");
 		Assert.isTrue(updatedOrder.getCreated().equals(orderFromDb.getCreated()),
 				"The columns with the date must be equals");
-		Assert.isTrue(updatedOrder.getTotalPrice().equals(orderFromDb.getTotalPrice()),
-				"The columns with the totalPrice must be equals");
 		Assert.isTrue(updatedOrder.getUserProfileId().equals(orderFromDb.getUserProfileId()),
 				"The columns with the UserProfileId must be equals");
 
@@ -95,7 +91,6 @@ public class OrderServiceTest extends AbstractTesst {
 		Assert.notNull(order, "The order must not be null");
 		Assert.notNull(order.getId(), "Id from order must not be null");
 		Assert.notNull(order.getOrderStatus(), "OrderStatus from order must not be null");
-		Assert.notNull(order.getTotalPrice(), "TotalPrice from order must not be null");
 		Assert.notNull(order.getCreated(), "Date from order must not be null");
 		Assert.notNull(order.getUserProfileId(), "UserProfileId from order must not be null");
 	}
@@ -105,13 +100,12 @@ public class OrderServiceTest extends AbstractTesst {
 		UserCredentials userCredentials = createUserCredentials();
 		UserProfile userProfile = createUserProfile();
 
-		UserProfile savedUser = userService.registration(userProfile, userCredentials);
+		Integer registrationId = userService.registration(userProfile, userCredentials);
 
 		Order order = new Order();
 		order.setCreated(new Date());
-		order.setOrderStatus(OrderStatus.BASKET);
-		order.setTotalPrice(50d);
-		order.setUserProfileId(savedUser.getId());
+		order.setOrderStatus(OrderStatus.CART);
+		order.setUserProfileId(registrationId);
 
 		return order;
 	}

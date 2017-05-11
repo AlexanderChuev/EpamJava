@@ -139,13 +139,12 @@ public class OrderItemServiceTest extends AbstractTesst {
 
 		UserProfile userProfile = createUserProfile();
 		UserCredentials userCredentials = createUserCredentials();
-		UserProfile user = userService.registration(userProfile, userCredentials);
+		Integer registrationId = userService.registration(userProfile, userCredentials);
 
 		Order order = new Order();
 		order.setCreated(new Date());
-		order.setUserProfileId(user.getId());
-		order.setTotalPrice(50d); // посчитать
-		order.setOrderStatus(OrderStatus.BASKET);
+		order.setUserProfileId(registrationId);
+		order.setOrderStatus(OrderStatus.CART);
 		return orderService.save(order);
 	}
 

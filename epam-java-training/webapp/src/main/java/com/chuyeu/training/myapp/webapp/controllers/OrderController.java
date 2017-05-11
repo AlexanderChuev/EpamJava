@@ -1,6 +1,7 @@
 package com.chuyeu.training.myapp.webapp.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -77,13 +78,24 @@ public class OrderController {
 
 	}
 
+/*	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public ResponseEntity<?> getBasket(@PathVariable(value = "id") Integer id) {
+		
+		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+		orderService.get
+		userAuthStorage.getId()
+		
+		findOrderByUserId
+	}*/
+	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
+	public ResponseEntity<?> getByOrderId(@PathVariable(value = "id") Integer id) {
 
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(id);
 		if (order.getUserProfileId().equals(userAuthStorage.getId())
-				|| userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
+				|| UserRole.ADMIN.equals(userAuthStorage.getUserRole())) {
 			OrderModel orderModel = conversionService.convert(order, OrderModel.class);
 			return new ResponseEntity<OrderModel>(orderModel, HttpStatus.OK);
 		} else {
@@ -105,9 +117,9 @@ public class OrderController {
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(id);
 		if (order.getUserProfileId().equals(userAuthStorage.getId())
-				|| userAuthStorage.getUserRole().equals(UserRole.ADMIN)) {
-			order.setTotalPrice(orderModel.getTotalPrice());
+				|| UserRole.ADMIN.equals(userAuthStorage.getUserRole())) {
 			order.setOrderStatus(orderModel.getOrderStatus());
+			order.setCreated(new Date());
 			orderService.update(order);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} else {
