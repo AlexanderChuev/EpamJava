@@ -72,14 +72,10 @@ public class BasicAuthFilter implements Filter {
 			redisUtil.write(credentials, user);
 		} else {
 			user = new UserCredentials();
-			Integer valueOf = Integer.valueOf(userData[0]);
-			user.setId(valueOf);
-			UserRole valueOf2 = UserRole.valueOf(userData[1].toUpperCase());
-			user.setUserRole(valueOf2);
-			if(user.getUserRole()==null){
-				System.out.println(userData[0] +"!"+ userData[1]);
-				System.out.println(valueOf2+"??????????????????????????");
-			}
+			Integer id = Integer.valueOf(userData[0]);
+			user.setId(id);
+			UserRole role = UserRole.valueOf(userData[1].toUpperCase());
+			user.setUserRole(role);
 		}
 
 		UserAuthStorage userDataStorage = appContext.getBean(UserAuthStorage.class);

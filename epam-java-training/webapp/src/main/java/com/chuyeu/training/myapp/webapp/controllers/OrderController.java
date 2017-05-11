@@ -78,16 +78,15 @@ public class OrderController {
 
 	}
 
-/*	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public ResponseEntity<?> getBasket(@PathVariable(value = "id") Integer id) {
-		
-		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-		orderService.get
-		userAuthStorage.getId()
-		
-		findOrderByUserId
-	}*/
-	
+	/*
+	 * @RequestMapping(value = "/cart", method = RequestMethod.GET) public
+	 * ResponseEntity<?> getBasket(@PathVariable(value = "id") Integer id) {
+	 * 
+	 * UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
+	 * orderService.get userAuthStorage.getId()
+	 * 
+	 * findOrderByUserId }
+	 */
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getByOrderId(@PathVariable(value = "id") Integer id) {
@@ -116,10 +115,20 @@ public class OrderController {
 
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(id);
-		if (order.getUserProfileId().equals(userAuthStorage.getId())
-				|| UserRole.ADMIN.equals(userAuthStorage.getUserRole())) {
-			order.setOrderStatus(orderModel.getOrderStatus());
+
+		if (order.getUserProfileId().equals(userAuthStorage.getId())) {
+			order.setOrderStatus(OrderStatus.IN_PROCESSING);
 			order.setCreated(new Date());
+			orderService.update(order);
+			
+			Order newOrder = new Order();
+			newOrder.setOrderStatus(OrderStatus.CART);
+			newOrder.setUserProfileId(userAuthStorage.getId());
+			orderService.save(newOrder);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} else if (UserRole.ADMIN.equals(userAuthStorage.getUserRole())
+				&& !OrderStatus.CART.equals(order.getOrderStatus())) {
+			order.setOrderStatus(orderModel.getOrderStatus());
 			orderService.update(order);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} else {

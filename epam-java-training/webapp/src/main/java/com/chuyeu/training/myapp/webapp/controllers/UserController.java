@@ -6,10 +6,12 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +34,6 @@ import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.UserCredentialsModel;
 import com.chuyeu.training.myapp.webapp.models.UserProfileModel;
 import com.chuyeu.training.myapp.webapp.models.UserWrapper;
-import com.chuyeu.training.myapp.webapp.models.parts.Base64Model;
 
 @RestController
 @RequestMapping("/user")
@@ -40,7 +41,7 @@ public class UserController {
 
 	@Inject
 	private IUserService userService;
-	
+
 	@Inject
 	private IOrderService orderService;
 
@@ -96,27 +97,34 @@ public class UserController {
 
 	// +++
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> registration(@RequestBody UserWrapper userWrapper) {
-
+	public ResponseEntity<?> registration(@RequestBody UserWrapper userWrapper,  HttpServletRequest req) {
+		
+		if(req.getHeader("Authorization")!=null){
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
+		
 		if (userWrapper.getUserCredentialsModel() == null || userWrapper.getUserProfileModel() == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-// ордес создается без возврата id
+
 		UserCredentials userCredentials = conversionService.convert(userWrapper, UserCredentials.class);
 		UserProfile userProfile = conversionService.convert(userWrapper, UserProfile.class);
 		Integer registrationId = userService.registration(userProfile, userCredentials);
 		UserProfile userProfileFromDb = userService.getUserProfile(registrationId);
-		
+
 		Order order = new Order();
 		order.setOrderStatus(OrderStatus.CART);
 		order.setUserProfileId(userProfileFromDb.getId());
-		
+
 		orderService.save(order);
-		
+
 		UserCredentials userCredentialsFromDb = userService
 				.getUserCredentials(userProfileFromDb.getUserCredentialsId());
 
-		return new ResponseEntity<Base64Model>(new Base64Model(convert(userCredentialsFromDb)), HttpStatus.CREATED);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json; charset=UTF-8");
+		headers.set("Authorization", convert(userCredentialsFromDb));
+		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.PUT)
@@ -130,7 +138,11 @@ public class UserController {
 			userCredentialsFromDb.setPassword(userCredentialsModel.getPassword());
 			userCredentialsFromDb.setUserRole(UserRole.valueOf(userCredentialsModel.getUserRole()));
 			userService.update(userCredentialsFromDb);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type", "application/json; charset=UTF-8");
+			headers.set("Authorization", convert(userCredentialsFromDb));
+			return new ResponseEntity<Void>(headers, HttpStatus.OK);
 
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
