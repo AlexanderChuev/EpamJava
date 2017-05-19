@@ -21,14 +21,6 @@ public class Serializator {
 
 	private final String path = "src/main/resources/data.data";
 	private final Logger LOGGER = LoggerFactory.getLogger(Serializator.class);
-	private final String OBJECT_NOT_RESTORED = "Exception! The object is NOT restored!";
-	private final String FILE_NOT_FOUND_SERIALIZE = "File not found (serialization)";
-	private final String FILE_NOT_FOUND_DESERIALIZE = "File not found (deserialization)";
-	private final String FILE_IS_NOT_SERIALIZABLE = "File is not serializable";
-	private final String IO_SERIALIZATION_ERROR = "IO serialization error";
-	private final String IO_DESERIALIZATION_ERROR = "IO deserialization error";
-	private final String THE_FILE_CAN_NOT_BE_CREATE = "the file can not be created";
-	private final String VERSION_MISMATCH = "Version mismatch classes";
 
 	public void serialization(Map<String, JsonData> dataMap) {
 
@@ -38,11 +30,11 @@ public class Serializator {
 				ostream.writeObject(dataMap);
 			}
 		} catch (FileNotFoundException e) {
-			LOGGER.error(FILE_NOT_FOUND_SERIALIZE);
+			LOGGER.error("File with path {} not found / serialization", path);
 		} catch (NotSerializableException e) {
-			LOGGER.error(FILE_IS_NOT_SERIALIZABLE);
+			LOGGER.error("Object is not serializable");
 		} catch (IOException e) {
-			LOGGER.error(IO_SERIALIZATION_ERROR);
+			LOGGER.error("IO serialization error");
 		}
 
 	}
@@ -56,14 +48,14 @@ public class Serializator {
 			}
 
 		} catch (ClassNotFoundException e) {
-			LOGGER.error(THE_FILE_CAN_NOT_BE_CREATE);
+			LOGGER.error("Class Not Found Exception");
 		} catch (FileNotFoundException e) {
-			LOGGER.error(FILE_NOT_FOUND_DESERIALIZE);
+			LOGGER.error("File with path {} not found / deserialization", path);
 		} catch (InvalidClassException e) {
-			LOGGER.error(VERSION_MISMATCH);
+			LOGGER.error("Version classes mismatch");
 		} catch (IOException e) {
-			LOGGER.error(IO_DESERIALIZATION_ERROR);
+			LOGGER.error("IO deserialization error");
 		}
-		throw new InvalidObjectException(OBJECT_NOT_RESTORED);
+		throw new InvalidObjectException("Exception! The object is NOT restored!");
 	}
 }

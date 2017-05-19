@@ -1,0 +1,4 @@
+18:07:52.000 [main] ERROR services.Mailer - Hello
+18:09:10.126 [main] ERROR services.Mailer - Hello
+18:51:16.672 [main] ERROR com.chuyeu.training.myapp.services.impl.Mailer - Hello
+18:51:35.045 [main] ERROR com.chuyeu.training.myapp.services.impl.Mailer - Hello

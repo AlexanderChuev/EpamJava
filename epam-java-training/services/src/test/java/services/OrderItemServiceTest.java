@@ -16,7 +16,7 @@ import com.chuyeu.training.myapp.datamodel.UserCredentials;
 import com.chuyeu.training.myapp.datamodel.UserProfile;
 
 public class OrderItemServiceTest extends AbstractTesst {
-
+	
 	@Test
 	public void test() {
 		Assert.notNull(orderItemService, "The orderItemService must not be null");
@@ -38,13 +38,13 @@ public class OrderItemServiceTest extends AbstractTesst {
 		orderItemService.saveOrUpdate(orderItem);
 
 		List<OrderItem> allOrderItems = orderItemService.getAllByOrderId(orderId);
-		Assert.notNull(allOrderItems, "The list of allOrderItems must not be null");
+		Assert.notNull(allOrderItems, "The list of order items must not be null");
+		Assert.notEmpty(allOrderItems, "The list of order items must not be empty");
 
 		for (OrderItem orderItemFromDb : allOrderItems) {
 			Assert.notNull(orderItemFromDb, "The orderItemFromDb must not be null");
-			Assert.notNull(orderItemFromDb.getId(), "ID from OrderItemFromDb must not be null");
-			Assert.notNull(orderItemFromDb.getProductVariantId(),
-					"ProductVariantId from OrderItemFromDb must not be null");
+			Assert.notNull(orderItemFromDb.getId(), "Id from OrderItemFromDb must not be null");
+			Assert.notNull(orderItemFromDb.getProductVariantId(),"ProductVariantId from OrderItemFromDb must not be null");
 			Assert.notNull(orderItemFromDb.getOrderQuantity(), "OrderQuantity from OrderItemFromDb must not be null");
 			Assert.notNull(orderItemFromDb.getOrderId(), "OrderId from OrderItemFromDb must not be null");
 		}
@@ -66,17 +66,13 @@ public class OrderItemServiceTest extends AbstractTesst {
 
 		Assert.notNull(orderItemFromDb2, "The orderItemFromDb must not be null");
 		Assert.notNull(orderItemFromDb2.getId(), "ID from OrderItemFromDb must not be null");
-		Assert.notNull(orderItemFromDb2.getProductVariantId(),
-				"ProductVariantId from OrderItemFromDb must not be null");
+		Assert.notNull(orderItemFromDb2.getProductVariantId(),"ProductVariantId from OrderItemFromDb must not be null");
 		Assert.notNull(orderItemFromDb2.getOrderQuantity(), "OrderQuantity from OrderItemFromDb must not be null");
 		Assert.notNull(orderItemFromDb2.getOrderId(), "OrderId from OrderItemFromDb must not be null");
 
-		Assert.isTrue(orderItemFromDb2.getProductVariantId().equals(orderItem.getProductVariantId()),
-				"ProductVariantIds from orderItems not equals");
-		Assert.isTrue(orderItemFromDb2.getOrderQuantity().equals(orderItem.getOrderQuantity()),
-				"OrdersQuantity from ordersItem not equals");
-		Assert.isTrue(orderItemFromDb2.getOrderId().equals(orderItem.getOrderId()),
-				"OrderQuantity from orderItems not equals");
+		Assert.isTrue(orderItemFromDb2.getProductVariantId().equals(orderItem.getProductVariantId()),"ProductVariantIds from orderItems not equals");
+		Assert.isTrue(orderItemFromDb2.getOrderQuantity().equals(orderItem.getOrderQuantity()),"OrdersQuantity from ordersItem not equals");
+		Assert.isTrue(orderItemFromDb2.getOrderId().equals(orderItem.getOrderId()),"OrderQuantity from orderItems not equals");
 	}
 
 	@Test
@@ -116,16 +112,17 @@ public class OrderItemServiceTest extends AbstractTesst {
 		orderItem.setOrderId(orderId);
 
 		orderItemService.saveOrUpdate(orderItem);
-		
+
 		List<OrderItem> orderItemsFromDb = orderItemService.getAllByOrderId(orderItem.getOrderId());
 		OrderItem orderItemFromDb = orderItemsFromDb.get(orderItemsFromDb.size() - 1);
-		
+
 		orderItemService.delete(orderItemFromDb.getId());
 		orderItemService.get(orderItemFromDb.getId());
 
 	}
 
-	private Integer getProductVariantId(){
+	private Integer getProductVariantId() {
+		
 		Product product = createProduct();
 		Integer productId = productService.add(product);
 		ProductVariant productVariant = createProductVariant(productId);
@@ -134,7 +131,7 @@ public class OrderItemServiceTest extends AbstractTesst {
 		Integer productVariantId = allByProduct.get(0).getId();
 		return productVariantId;
 	}
-	
+
 	private Integer getOrderId() {
 
 		UserProfile userProfile = createUserProfile();

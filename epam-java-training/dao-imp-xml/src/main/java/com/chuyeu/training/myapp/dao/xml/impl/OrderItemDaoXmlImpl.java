@@ -24,7 +24,6 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 	@Value("${root.folder}")
 	private String rootFolder;
 	
-	
 	@Override
 	public List<OrderItem> getAll(Integer orderId) {
 		
@@ -87,9 +86,9 @@ public class OrderItemDaoXmlImpl implements IOrderItemDao {
 		for (OrderItem orderItemFromDb : orderItems) {
 			if(orderItemFromDb.getId().equals(orderItem.getId())){
 				orderItemFromDb.setOrderQuantity(orderItem.getOrderQuantity());
+				orderItemFromDb.setPrice(orderItem.getPrice());
 			}
 		}
-		
 		writeNewData(file, wrapper);
 	}
 

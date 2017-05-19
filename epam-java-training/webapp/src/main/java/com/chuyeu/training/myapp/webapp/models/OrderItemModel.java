@@ -50,4 +50,10 @@ public class OrderItemModel implements Serializable {
 		this.price = price;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderItemModel [id=" + id + ", productVariantId=" + productVariantId + ", orderQuantity="
+				+ orderQuantity + ", orderId=" + orderId + ", price=" + price + "]";
+	}
+
 }

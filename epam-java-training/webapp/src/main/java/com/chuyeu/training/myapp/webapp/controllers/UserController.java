@@ -8,6 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.convert.ConversionService;
@@ -39,6 +41,8 @@ import com.chuyeu.training.myapp.webapp.models.UserWrapper;
 @RequestMapping("/user")
 public class UserController {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
 	@Inject
 	private IUserService userService;
 
@@ -51,7 +55,6 @@ public class UserController {
 	@Autowired
 	ConversionService conversionService;
 
-	// +++
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAllUserProfile(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "column", required = false) String column,
@@ -59,7 +62,6 @@ public class UserController {
 			@RequestParam(value = "limit", required = false) Integer limit) {
 
 		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
-
 		List<UserProfile> listUserProfileFromDB = userService.getAll(commonFilter);
 		List<UserProfileModel> listUserProfileModel = new ArrayList<>();
 
@@ -67,63 +69,62 @@ public class UserController {
 			UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
 			listUserProfileModel.add(userProfileModel);
 		}
-
+		
 		EntityModelWrapper<UserProfileModel> wrapper = new EntityModelWrapper<UserProfileModel>();
-
 		wrapper.setListEntityModel(listUserProfileModel);
 		Integer quantity = userService.getUserProfileQuantity();
 		Integer pageCount = (int) Math.ceil((double) quantity / limit);
 		wrapper.setPageCount(pageCount);
-
+		LOGGER.info("An admin got list userProfiles");
 		return new ResponseEntity<EntityModelWrapper<UserProfileModel>>(wrapper, HttpStatus.OK);
 	}
 
-	// +++
 	@RequestMapping(value = "/credentials/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCredentials(@PathVariable(value = "id") Integer id) {
 		UserCredentials userCredentials = userService.getUserCredentials(id);
-		UserCredentialsModel userCredentialsModel = conversionService.convert(userCredentials,
-				UserCredentialsModel.class);
+		UserCredentialsModel userCredentialsModel = conversionService.convert(userCredentials, UserCredentialsModel.class);
+		LOGGER.info("{} got credentials by id= {}", userCredentialsModel, id);
 		return new ResponseEntity<UserCredentialsModel>(userCredentialsModel, HttpStatus.OK);
 	}
 
-	// +++
 	@RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getProfile(@PathVariable(value = "id") Integer id) {
 		UserProfile userProfile = userService.getUserProfile(id);
 		UserProfileModel userProfileModel = conversionService.convert(userProfile, UserProfileModel.class);
+		LOGGER.info("{} got userProfileModel by id={}", userProfileModel,id);
 		return new ResponseEntity<UserProfileModel>(userProfileModel, HttpStatus.OK);
 	}
 
-	// +++
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> registration(@RequestBody UserWrapper userWrapper,  HttpServletRequest req) {
-		
-		if(req.getHeader("Authorization")!=null){
+	public ResponseEntity<?> registration(@RequestBody UserWrapper userWrapper, HttpServletRequest req) {
+
+		if (req.getHeader("Authorization") != null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		
-		if (userWrapper.getUserCredentialsModel() == null || userWrapper.getUserProfileModel() == null) {
+
+		if (userWrapper == null || userWrapper.getUserCredentialsModel() == null || userWrapper.getUserProfileModel() == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 
 		UserCredentials userCredentials = conversionService.convert(userWrapper, UserCredentials.class);
 		UserProfile userProfile = conversionService.convert(userWrapper, UserProfile.class);
 		Integer registrationId = userService.registration(userProfile, userCredentials);
+		LOGGER.info("User with userProfile ={} is registered, id={}", userProfile, registrationId);
 		UserProfile userProfileFromDb = userService.getUserProfile(registrationId);
 
 		Order order = new Order();
 		order.setOrderStatus(OrderStatus.CART);
 		order.setUserProfileId(userProfileFromDb.getId());
-
 		orderService.save(order);
-
+		LOGGER.info("Cart for user with userProfile ={} is added", userProfile);
+		
 		UserCredentials userCredentialsFromDb = userService
 				.getUserCredentials(userProfileFromDb.getUserCredentialsId());
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json; charset=UTF-8");
 		headers.set("Authorization", convert(userCredentialsFromDb));
+		LOGGER.info("Send authorization data for user with id ={}", registrationId);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
@@ -138,13 +139,16 @@ public class UserController {
 			userCredentialsFromDb.setPassword(userCredentialsModel.getPassword());
 			userCredentialsFromDb.setUserRole(UserRole.valueOf(userCredentialsModel.getUserRole()));
 			userService.update(userCredentialsFromDb);
-
+			LOGGER.info("Update userCredentials with id ={}", userAuthStorage.getId());
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Type", "application/json; charset=UTF-8");
 			headers.set("Authorization", convert(userCredentialsFromDb));
+			LOGGER.info("Return new authorization data for user with id ={}", userAuthStorage.getId());
 			return new ResponseEntity<Void>(headers, HttpStatus.OK);
 
 		} else {
+			LOGGER.error("Attempt to access other people's resources, id ={}", userAuthStorage.getId());
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
 	}
@@ -157,6 +161,8 @@ public class UserController {
 		userProfileFromDb.setFirstName(userProfileModel.getFirstName());
 		userProfileFromDb.setLastName(userProfileModel.getLastName());
 		userService.update(userProfileFromDb);
+		LOGGER.info("Update userProfile with id={}. setFirstName ={} setLastName ={}", userProfileFromDb.getId(),
+				userProfileModel.getFirstName(), userProfileModel.getLastName());
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
@@ -167,7 +173,7 @@ public class UserController {
 			base64Decode = Base64.getEncoder().encodeToString(
 					(userCredentialsFromDb.getEmail() + ":" + userCredentialsFromDb.getPassword()).getBytes("utf-8"));
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			LOGGER.error("Error base64Decode");
 		}
 		return base64Decode;
 	}

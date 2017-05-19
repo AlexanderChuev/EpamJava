@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -95,6 +96,7 @@ public class OrdersDaoXmlImpl implements IOrderDao {
 		int newId = lastId + 1;
 
 		order.setId(newId);
+		order.setCreated(new Date());
 		orders.add(order);
 
 		wrapper.setLastId(newId);
@@ -114,6 +116,7 @@ public class OrdersDaoXmlImpl implements IOrderDao {
 		for (Order orderFromDb : orders) {
 			if (orderFromDb.getId().equals(order.getId())) {
 				orderFromDb.setOrderStatus(order.getOrderStatus());
+				orderFromDb.setCreated(new Date());
 				break;
 			}
 		}

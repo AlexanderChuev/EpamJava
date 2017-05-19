@@ -74,7 +74,7 @@ public class OrderDaoImpl extends AbstractDaoImpl<Order> implements IOrderDao {
 		if (orderFilter.getUserRole().equals(UserRole.CLIENT)) {
 
 			sql.append(
-					"select order.id, created, user_profile_id, order_status from \"order\", user_profile where order.user_profile_id = user_profile.id and user_profile.user_credentials_id = ");
+					"select o.id, created, user_profile_id, order_status from \"order\" o, user_profile where o.user_profile_id = user_profile.id and user_profile.user_credentials_id = ");
 			sql.append(orderFilter.getId());
 			sql.append(" and order_status = '");
 			sql.append(orderFilter.getOrderStatus());

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
 import com.chuyeu.training.myapp.datamodel.Product;
@@ -24,7 +25,7 @@ import com.chuyeu.training.myapp.services.IVariantService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:services-context.xml")
-//@Transactional
+@Transactional
 public class AbstractTesst {
 
 	@Inject
@@ -63,13 +64,8 @@ public class AbstractTesst {
 	public Attribute createAttribute() {
 
 		Attribute attribute = new Attribute();
-
-		String name = "Name" + new Date().getTime();
-		String value = "Value" + new Date().getTime();
-
-		attribute.setName(name);
-		attribute.setValue(value);
-
+		attribute.setName("Name" + new Date().getTime());
+		attribute.setValue("Value" + new Date().getTime());
 		return attribute;
 	}
 

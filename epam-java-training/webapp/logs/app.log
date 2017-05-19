@@ -1,0 +1,115 @@
+18:06:46.878 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @533ms
+18:06:46.980 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.13.v20150730
+18:06:47.104 [main] INFO  org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+18:06:47.159 [main] INFO  / - Initializing Spring root WebApplicationContext
+18:06:47.160 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+18:06:47.201 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Sat May 13 18:06:47 MSK 2017]; root of context hierarchy
+18:06:47.231 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [services-context.xml]
+18:06:47.290 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [dao-context.xml]
+18:06:47.555 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+18:06:47.821 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 661 ms
+18:06:47.879 [main] INFO  / - Initializing Spring FrameworkServlet 'SpringMVC'
+18:06:47.879 [main] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'SpringMVC': initialization started
+18:06:47.881 [main] INFO  org.springframework.web.context.support.XmlWebApplicationContext - Refreshing WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Sat May 13 18:06:47 MSK 2017]; parent: Root WebApplicationContext
+18:06:47.882 [main] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [web-context.xml]
+18:06:47.987 [main] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+18:06:48.194 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute/names],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.AttributeController.getAttributeNames(javax.servlet.http.HttpServletRequest)
+18:06:48.194 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.AttributeController.createAttribute(com.chuyeu.training.myapp.webapp.models.AttributeModel)
+18:06:48.195 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute/all/{name}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.AttributeController.deleteAttributeValue(java.lang.String)
+18:06:48.195 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute/{id}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.AttributeController.deleteAttributeValue(java.lang.Integer)
+18:06:48.195 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.AttributeController.getIdByNameAndValue(java.lang.String,java.lang.String)
+18:06:48.195 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute/values],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.AttributeController.getAttributeValues(java.lang.String)
+18:06:48.196 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/attribute/product-variant],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.AttributeController.getAllById(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+18:06:48.197 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderController.getAll(java.lang.Integer,java.lang.String,java.lang.String,java.lang.Integer,java.lang.String)
+18:06:48.198 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order/{id}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderController.getByOrderId(java.lang.Integer)
+18:06:48.198 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order],methods=[POST]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderController.createOrder(com.chuyeu.training.myapp.webapp.models.OrderModel)
+18:06:48.198 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order/{id}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderController.updateOrder(com.chuyeu.training.myapp.webapp.models.OrderModel,java.lang.Integer)
+18:06:48.203 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order-item],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderItemController.getAllItems(java.lang.Integer)
+18:06:48.203 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order-item/{id}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.OrderItemController.deleteOrderItem(java.lang.Integer)
+18:06:48.203 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order-item/{id}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderItemController.getById(java.lang.Integer)
+18:06:48.203 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order-item/{id}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderItemController.updateOrderItem(com.chuyeu.training.myapp.webapp.models.parts.PriceQuantityModel,java.lang.Integer)
+18:06:48.203 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/order-item],methods=[POST]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.OrderItemController.createOrderItem(com.chuyeu.training.myapp.webapp.models.OrderItemModel)
+18:06:48.205 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductController.getAll(java.lang.Integer,java.lang.String,java.lang.String,java.lang.Integer,javax.servlet.http.HttpServletRequest)
+18:06:48.205 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product],methods=[POST]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductController.createNewProduct(com.chuyeu.training.myapp.webapp.models.ProductModel)
+18:06:48.205 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product/{id}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductController.getById(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+18:06:48.205 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product/{id}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductController.updateProduct(com.chuyeu.training.myapp.webapp.models.ProductModel,java.lang.Integer)
+18:06:48.206 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product/{id}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.ProductController.deleteProduct(java.lang.Integer)
+18:06:48.207 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product-variant],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductVariantController.getAllByProduct(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+18:06:48.207 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product-variant],methods=[POST]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductVariantController.createProductVariant(com.chuyeu.training.myapp.webapp.models.ProductVariantModel)
+18:06:48.207 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product-variant/{id}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.ProductVariantController.updateProductVariant(com.chuyeu.training.myapp.webapp.models.ProductVariantModel,java.lang.Integer)
+18:06:48.207 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product-variant/{id}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.ProductVariantController.deleteProductVariant(java.lang.Integer)
+18:06:48.208 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/product-variant/{id}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.ProductVariantController.getById(java.lang.Integer,javax.servlet.http.HttpServletRequest)
+18:06:48.208 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/serialization/{error}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.SerializationController.save(java.lang.String)
+18:06:48.210 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/user],methods=[POST]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.UserController.registration(com.chuyeu.training.myapp.webapp.models.UserWrapper,javax.servlet.http.HttpServletRequest)
+18:06:48.211 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/user],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.UserController.getAllUserProfile(java.lang.Integer,java.lang.String,java.lang.String,java.lang.Integer)
+18:06:48.211 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/user/credentials/{id}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.UserController.updateUserCredentials(com.chuyeu.training.myapp.webapp.models.UserCredentialsModel,java.lang.Integer)
+18:06:48.211 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/user/profile/{id}],methods=[PUT]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.UserController.updateUserProfile(com.chuyeu.training.myapp.webapp.models.UserProfileModel,java.lang.Integer)
+18:06:48.211 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/user/profile/{id}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.UserController.getProfile(java.lang.Integer)
+18:06:48.212 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/user/credentials/{id}],methods=[GET]}" onto public org.springframework.http.ResponseEntity<?> com.chuyeu.training.myapp.webapp.controllers.UserController.getCredentials(java.lang.Integer)
+18:06:48.212 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/variant/{id1}/{id2}],methods=[DELETE]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.VariantController.deleteVariant(java.lang.Integer,java.lang.Integer)
+18:06:48.213 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped "{[/variant],methods=[POST]}" onto public org.springframework.http.ResponseEntity<java.lang.Void> com.chuyeu.training.myapp.webapp.controllers.VariantController.createVariant(com.chuyeu.training.myapp.webapp.models.VariantModel)
+18:06:48.466 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Sat May 13 18:06:47 MSK 2017]; parent: Root WebApplicationContext
+18:06:48.509 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: WebApplicationContext for namespace 'SpringMVC-servlet': startup date [Sat May 13 18:06:47 MSK 2017]; parent: Root WebApplicationContext
+18:06:48.574 [main] INFO  org.springframework.web.servlet.DispatcherServlet - FrameworkServlet 'SpringMVC': initialization completed in 695 ms
+18:06:48.574 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@3b2da18f{/,file:/C:/Users/Alex/workspace/epam-java-training/webapp/src/main/webapp/,AVAILABLE}{src/main/webapp}
+18:06:48.590 [main] INFO  org.eclipse.jetty.server.ServerConnector - Started ServerConnector@17c386de{HTTP/1.1}{0.0.0.0:8088}
+18:06:48.590 [main] INFO  org.eclipse.jetty.server.Server - Started @2251ms
+19:03:52.203 [qtp1883840933-19] ERROR com.chuyeu.training.myapp.webapp.serialization.Serializator - Version mismatch classes
+19:03:52.204 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.memorization.Memoization - Map not found
+19:05:27.347 [qtp1883840933-20] ERROR com.chuyeu.training.myapp.webapp.serialization.Serializator - Version mismatch classes
+19:05:27.347 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.memorization.Memoization - Map not found
+19:09:24.786 [qtp1883840933-20] ERROR com.chuyeu.training.myapp.webapp.serialization.Serializator - Version mismatch classes
+19:09:24.787 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.memorization.Memoization - Map not found
+19:10:45.613 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:45.710 [qtp1883840933-20] ERROR com.chuyeu.training.myapp.webapp.serialization.Serializator - Version mismatch classes
+19:10:45.710 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.memorization.Memoization - Map not found
+19:10:45.767 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:45.773 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:45.858 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:45.864 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:45.949 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:45.954 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.046 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.052 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.130 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.135 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.214 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.223 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.273 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.381 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.393 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.408 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.414 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.502 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.508 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.530 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.535 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.582 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.591 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.628 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.633 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.674 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.678 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.744 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.766 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.819 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.824 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.878 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.883 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.911 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.915 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.953 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.958 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.987 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:46.991 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.084 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.101 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.110 [qtp1883840933-16] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.120 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.332 [qtp1883840933-19] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.432 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.441 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.509 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.541 [qtp1883840933-17] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.612 [qtp1883840933-18] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll
+19:10:47.624 [qtp1883840933-20] INFO  com.chuyeu.training.myapp.webapp.controllers.ProductController - GetAll

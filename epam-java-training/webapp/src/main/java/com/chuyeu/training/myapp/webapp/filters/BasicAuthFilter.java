@@ -45,15 +45,14 @@ public class BasicAuthFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
+		LanguageWrapper languageWrapper = appContext.getBean(LanguageWrapper.class);
+		languageWrapper.setLanguage(getLanguage(req));
+		
 		if (!isAuthRequired(req)) {
 			chain.doFilter(request, response);
 			return;
 		}
 
-		LanguageWrapper languageWrapper = appContext.getBean(LanguageWrapper.class);
-		languageWrapper.setLanguage(getLanguage(req));
-
-		
 		String[] credentials = resolveCredentials(req);
 
 		if (credentials == null || credentials.length != 2) {
@@ -229,8 +228,6 @@ public class BasicAuthFilter implements Filter {
 			return true;
 		}
 
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(userDataStorage.getId()+"!"+userDataStorage.getUserRole());
 		return false;
 	}
 

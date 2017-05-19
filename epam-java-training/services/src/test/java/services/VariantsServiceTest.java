@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.util.Assert;
 
 import com.chuyeu.training.myapp.datamodel.Attribute;
@@ -18,35 +19,34 @@ public class VariantsServiceTest extends AbstractTesst{
 		Assert.notNull(attributeService, "The attributeService must not be null");
 	}
 	
-	//+++
-	@Test
+	@Test(expected = DuplicateKeyException.class)
 	public void addTest(){
-	
-		Integer productId = productService.add(createProduct());
-		ProductVariant productVariant = createProductVariant(productId);
-		productVariantService.save(productVariant);
-		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
-		variantService.add(productVariants.get(0).getId(), getSavedAttributeId());
-	}
-	
-	//+++
-	@Test
-	public void deleteTest(){
+		
+		Attribute attribute = createAttribute();
+		attributeService.save(attribute);
+		Integer attributeId = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
 		
 		Integer productId = productService.add(createProduct());
 		ProductVariant productVariant = createProductVariant(productId);
-		productVariantService.save(productVariant);
-		List<ProductVariant> productVariants = productVariantService.getAllByProduct(productId);
-		Integer productVariantId = productVariants.get(0).getId();
-		Integer attributeId = getSavedAttributeId();
+		Integer productVariantId = productVariantService.save(productVariant);
 		variantService.add(productVariantId, attributeId);
-		variantService.delete(attributeId, productVariantId);
+		variantService.add(productVariantId, attributeId);
 	}
 	
-	private Integer getSavedAttributeId(){
+	@Test
+	public void deleteTest(){
+		
 		Attribute attribute = createAttribute();
 		attributeService.save(attribute);
-		return attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
+		Integer attributeId = attributeService.getIdByNameAndValue(attribute.getName(), attribute.getValue());
+		
+		Integer productId = productService.add(createProduct());
+		ProductVariant productVariant = createProductVariant(productId);
+		Integer productVariantId = productVariantService.save(productVariant);
+		variantService.add(productVariantId, attributeId);
+		variantService.delete(productVariantId, attributeId);
+		List<Attribute> productVariantAttributes = attributeService.getProductVariantAttributes(productVariantId);
+		Assert.isTrue(productVariantAttributes.isEmpty(), "The list attributs must be empty");
 	}
 	
 }

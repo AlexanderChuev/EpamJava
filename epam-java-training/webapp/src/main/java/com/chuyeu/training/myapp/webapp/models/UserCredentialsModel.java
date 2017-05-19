@@ -2,7 +2,7 @@ package com.chuyeu.training.myapp.webapp.models;
 
 import java.io.Serializable;
 
-public class UserCredentialsModel implements Serializable{
+public class UserCredentialsModel implements Serializable {
 
 	private Integer id;
 	private String email;
@@ -39,6 +39,12 @@ public class UserCredentialsModel implements Serializable{
 
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
+	}
+
+	@Override
+	public String toString() {
+		return "UserCredentialsModel [id=" + id + ", email=" + email + ", password=" + password + ", userRole="
+				+ userRole + "]";
 	}
 
 }

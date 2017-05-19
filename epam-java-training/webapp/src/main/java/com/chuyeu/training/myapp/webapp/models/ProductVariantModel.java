@@ -2,7 +2,7 @@ package com.chuyeu.training.myapp.webapp.models;
 
 import java.io.Serializable;
 
-public class ProductVariantModel implements Serializable{
+public class ProductVariantModel implements Serializable {
 
 	private Integer id;
 	private Integer productId;
@@ -39,6 +39,12 @@ public class ProductVariantModel implements Serializable{
 
 	public void setPriceInfluence(Double priceInfluence) {
 		this.priceInfluence = priceInfluence;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductVariantModel [id=" + id + ", productId=" + productId + ", availableQuantity=" + availableQuantity
+				+ ", priceInfluence=" + priceInfluence + "]";
 	}
 
 }

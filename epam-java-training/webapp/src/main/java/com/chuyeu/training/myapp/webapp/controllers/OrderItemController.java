@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.convert.ConversionService;
@@ -19,18 +21,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chuyeu.training.myapp.datamodel.Order;
 import com.chuyeu.training.myapp.datamodel.OrderItem;
+import com.chuyeu.training.myapp.datamodel.ProductVariant;
 import com.chuyeu.training.myapp.services.IOrderItemService;
 import com.chuyeu.training.myapp.services.IOrderService;
+import com.chuyeu.training.myapp.services.IProductVariantService;
 import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.OrderItemModel;
-import com.chuyeu.training.myapp.webapp.models.parts.QuantityModel;
+import com.chuyeu.training.myapp.webapp.models.parts.PriceQuantityModel;
 
 @RestController
 @RequestMapping("/order-item")
 public class OrderItemController {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(OrderItemController.class);
+	
 	@Inject
 	private IOrderItemService orderItemService;
+	
+	@Inject
+	private IProductVariantService productVariantService;
 
 	@Inject
 	private IOrderService orderService;
@@ -51,6 +60,7 @@ public class OrderItemController {
 			OrderItemModel orderItemModel = conversionService.convert(orderItem, OrderItemModel.class);
 			listOrderItemsModel.add(orderItemModel);
 		}
+		LOGGER.info("Get all orderItems by order id ={}",orderId);
 		return new ResponseEntity<List<OrderItemModel>>(listOrderItemsModel, HttpStatus.OK);
 	}
 
@@ -58,6 +68,7 @@ public class OrderItemController {
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id) {
 		OrderItem orderItem = orderItemService.get(id);
 		OrderItemModel orderItemModel = conversionService.convert(orderItem, OrderItemModel.class);
+		LOGGER.info("Get orderItem by  id ={}",id);
 		return new ResponseEntity<OrderItemModel>(orderItemModel, HttpStatus.OK);
 	}
 
@@ -71,6 +82,7 @@ public class OrderItemController {
 			
 			OrderItem orderItem = conversionService.convert(orderItemModel, OrderItem.class);
 			orderItemService.saveOrUpdate(orderItem);
+			LOGGER.info("OrderItem ={} was created", orderItem);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
@@ -78,7 +90,7 @@ public class OrderItemController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateOrderItem(@RequestBody QuantityModel quantityModel,
+	public ResponseEntity<?> updateOrderItem(@RequestBody PriceQuantityModel priceQuantityModel,
 			@PathVariable(value = "id") Integer id) {
 
 		OrderItem orderItem = orderItemService.get(id);
@@ -87,10 +99,20 @@ public class OrderItemController {
 
 		if (order.getUserProfileId().equals(userAuthStorage.getId())) {
 
-			orderItem.setOrderQuantity(quantityModel.getQuantity());
+			Integer productVariantId = orderItem.getProductVariantId();
+			ProductVariant productVariant = productVariantService.getProductVariant(productVariantId);
+			if(productVariant.getAvailableQuantity()<priceQuantityModel.getQuantity()){
+				return new ResponseEntity<Void>(HttpStatus.PRECONDITION_FAILED);
+			} else {
+				productVariant.setAvailableQuantity(productVariant.getAvailableQuantity()-priceQuantityModel.getQuantity());
+				productVariantService.update(productVariant);
+				LOGGER.info("Updete quantity for orderItem ={} with id ={}",orderItem, id);
+			}
+			orderItem.setOrderQuantity(priceQuantityModel.getQuantity());
+			orderItem.setPrice(priceQuantityModel.getPrice());
 			orderItemService.saveOrUpdate(orderItem);
+			LOGGER.info("Update orderItem ={} with id ={}",orderItem, id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
@@ -102,9 +124,10 @@ public class OrderItemController {
 		OrderItem orderItem = orderItemService.get(id);
 		UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
 		Order order = orderService.get(orderItem.getOrderId());
-
+		
 		if (order.getUserProfileId().equals(userAuthStorage.getId())) {
 			orderItemService.delete(id);
+			LOGGER.info("Delete orderItem ={} with id ={}",orderItem, id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);

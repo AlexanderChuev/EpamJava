@@ -17,15 +17,26 @@ public class CommonFilter {
 	}
 
 	public Integer getPageNumber() {
+		if (pageNumber == null || pageNumber.equals(new Integer(0))) {
+			pageNumber = 1;
+		}
 		return pageNumber;
 	}
 
 	public Integer getLimit() {
+		if (limit == null) {
+			limit = 2;
+		}
 		return limit;
 	}
 
 	public SortData getSort() {
 		return sort;
+	}
+
+	@Override
+	public String toString() {
+		return "CommonFilter [pageNumber=" + pageNumber + ", limit=" + limit + ", sort=" + sort + "]";
 	}
 
 }

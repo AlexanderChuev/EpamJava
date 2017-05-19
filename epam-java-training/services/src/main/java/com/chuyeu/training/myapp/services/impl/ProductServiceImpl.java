@@ -39,16 +39,18 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public Integer add(Product product) {
-	/*	LOGGER.info("Insert product with name={}. description={}. basePrice={}. active={}", product.getName(),
-				product.getDescription(), product.getBasePrice(), product.getActive());*/
+		LOGGER.info("Insert product with nameRu={} descriptionRu={} basePrice={} active={} nameEn={} descriptionEn={}", product.getNameRu(),
+				product.getDescriptionRu(), product.getBasePrice(), product.getActive(), product.getNameEn(),
+				product.getDescriptionEn());
 		return productDao.add(product);
 	}
 
 	@Override
 	public void update(Product product) {
 		productDao.update(product);
-		/*LOGGER.info("Update product with id={}. name={}. description={}. basePrice={}. active={}", product.getId(),
-				product.getName(), product.getDescription(), product.getBasePrice(), product.getActive());*/
+		LOGGER.info("Update product with id={} nameRu={} descriptionRu={} basePrice={} active={} nameEn={} descriptionEn={}", product.getId(),
+				product.getNameRu(), product.getDescriptionRu(), product.getBasePrice(), product.getActive(), product.getNameEn(),
+				product.getDescriptionEn());
 	}
 
 	@Override

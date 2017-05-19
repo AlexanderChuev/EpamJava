@@ -21,30 +21,37 @@
 				class="com.chuyeu.training.myapp.services.logger.ConnectionFactory"
 				method="getDatabaseConnection" />
 			<Column name="EVENT_DATE" isEventTimestamp="true" isUnicode="false" />
-            <Column name="LEVEL" pattern="%level" isUnicode="false" />
-            <Column name="LOGGER" pattern="%logger" isUnicode="false" />
-            <Column name="MESSAGE" pattern="%msg%n" isUnicode="false" />
+			<Column name="LEVEL" pattern="%level" isUnicode="false" />
+			<Column name="LOGGER" pattern="%logger" isUnicode="false" />
+			<Column name="MESSAGE" pattern="%msg%n" isUnicode="false" />
 		</JDBC>
+
+		<SMTP name="Mailer" subject="Error Log" to="aliaksandr.chuyeu@gmail.com"
+			from="prikid.by@gmail.com" smtpHost="smtp.gmail.com" smtpPort="465"
+			smtpProtocol="smtps" smtpUsername="prikid.by@gmail.com" smtpPassword="***"
+			smtpDebug="false" bufferSize="20">
+			<PatternLayout>
+				<pattern>%d{dd-MM-yyyy HH:mm:ss,SSS} %5p %m%n</pattern>
+			</PatternLayout>
+		</SMTP>
 
 	</Appenders>
 
 	<Loggers>
-
 		<Root level="info">
 			<AppenderRef ref="Console" />
 		</Root>
 
-	<!-- 	<Logger level="info" name="com.chuyeu.training.myapp.webapp.services.impl"
-			additivity="true">
-			<AppenderRef ref="databaseAppender" />
-		</Logger> -->
-
-		<Logger level="info" name="com.chuyeu.training.myapp.webapp"
-			additivity="true">
-			<AppenderRef ref="RollingFile" />
+		<Logger level="info" name="com.chuyeu.training.myapp.services.impl"
+			additivity="false">
+			<AppenderRef ref="Console" />
+			<!-- <AppenderRef ref="RollingFile" /> -->
 		</Logger>
 
+		<Logger level="error" name="com.chuyeu.training.myapp.webapp.controllers"
+			additivity="false">
+			<AppenderRef ref="databaseAppender" />
+			<AppenderRef ref="Mailer" />
+		</Logger>
 	</Loggers>
-
-
 </Configuration>

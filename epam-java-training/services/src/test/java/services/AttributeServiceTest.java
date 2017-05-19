@@ -18,7 +18,7 @@ public class AttributeServiceTest extends AbstractTesst {
 	}
 
 	@Test(expected = DuplicateKeyException.class)
-	public void addTest() {
+	public void addDuplicateTest() {
 
 		Attribute attribute = createAttribute();
 		attributeService.save(attribute);
@@ -76,8 +76,8 @@ public class AttributeServiceTest extends AbstractTesst {
 		attribute.setValue("second");
 		attributeService.save(attribute);
 		attributeService.delete(attribute.getName());
-		Assert.isTrue(attributeService.getValuesByName(attribute.getName()).isEmpty(),
-				"The list of attribut values must be empty");
+		List<String> valuesByName = attributeService.getValuesByName(attribute.getName());
+		Assert.isTrue(valuesByName.isEmpty(),"The list of attribut values must be empty");
 	}
 
 	@Test
@@ -88,7 +88,6 @@ public class AttributeServiceTest extends AbstractTesst {
 		attribute.setValue("second");
 		attributeService.save(attribute);
 		List<Integer> ids = attributeService.getAllIdByName(attribute.getName());
-		
 		Assert.notNull(ids, "The list of attribute id must not be null");
 	}
 

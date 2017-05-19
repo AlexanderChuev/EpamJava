@@ -28,4 +28,9 @@ public class UserAuthStorage {
 		this.userRole = userRole;
 	}
 
+	@Override
+	public String toString() {
+		return "UserAuthStorage [id=" + id + ", userRole=" + userRole + "]";
+	}
+
 }

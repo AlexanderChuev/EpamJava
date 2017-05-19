@@ -25,7 +25,20 @@ public class ProductServiceTest extends AbstractTesst {
 		Assert.notNull(id, "The product id from DB must not be null");
 
 		Product productFromDb = productService.get(id);
-		checkProducts(productFromDb, product);
+
+		Assert.notNull(productFromDb, "The product from DB must not be null");
+		Assert.notNull(productFromDb.getNameRu(), "The product name from DB must not be null");
+		Assert.notNull(productFromDb.getNameEn(), "The product name from DB must not be null");
+		Assert.notNull(productFromDb.getBasePrice(), "The initial base price from DB must not be null");
+		Assert.notNull(productFromDb.getActive(), "The active product from DB must not be null");
+		Assert.isTrue(productFromDb.getNameRu().equals(product.getNameRu()), "Fields must be equal (name)");
+		Assert.isTrue(productFromDb.getDescriptionRu().equals(product.getDescriptionRu()),
+				"Fields must be equal (description)");
+		Assert.isTrue(productFromDb.getNameEn().equals(product.getNameEn()), "Fields must be equal (name)");
+		Assert.isTrue(productFromDb.getDescriptionEn().equals(product.getDescriptionEn()),
+				"Fields must be equal (description)");
+		Assert.isTrue(productFromDb.getBasePrice().equals(product.getBasePrice()), "Fields must be equal (price)");
+		Assert.isTrue(productFromDb.getActive().equals(product.getActive()), "Fields must be equal (active)");
 
 	}
 
@@ -41,7 +54,19 @@ public class ProductServiceTest extends AbstractTesst {
 		productService.update(changeProduct(product));
 		Product productFromDb = productService.get(id);
 
-		checkProducts(productFromDb, product);
+		Assert.notNull(productFromDb, "The product from DB must not be null");
+		Assert.notNull(productFromDb.getNameRu(), "The product name from DB must not be null");
+		Assert.notNull(productFromDb.getNameEn(), "The product name from DB must not be null");
+		Assert.notNull(productFromDb.getBasePrice(), "The initial base price from DB must not be null");
+		Assert.notNull(productFromDb.getActive(), "The active product from DB must not be null");
+		Assert.isTrue(productFromDb.getNameRu().equals(product.getNameRu()), "Fields must be equal (name)");
+		Assert.isTrue(productFromDb.getDescriptionRu().equals(product.getDescriptionRu()),
+				"Fields must be equal (description)");
+		Assert.isTrue(productFromDb.getNameEn().equals(product.getNameEn()), "Fields must be equal (name)");
+		Assert.isTrue(productFromDb.getDescriptionEn().equals(product.getDescriptionEn()),
+				"Fields must be equal (description)");
+		Assert.isTrue(productFromDb.getBasePrice().equals(product.getBasePrice()), "Fields must be equal (price)");
+		Assert.isTrue(productFromDb.getActive().equals(product.getActive()), "Fields must be equal (active)");
 
 	}
 
@@ -74,7 +99,11 @@ public class ProductServiceTest extends AbstractTesst {
 			Assert.notEmpty(products, "The list of products must not be empty");
 
 			for (Product product : products) {
-				checkProductFromDb(product);
+				Assert.notNull(product, "The product from DB must not be null");
+				Assert.notNull(product.getNameRu(), "The product name from DB must not be null");
+				Assert.notNull(product.getNameEn(), "The product name from DB must not be null");
+				Assert.notNull(product.getBasePrice(), "The initial base price from DB must not be null");
+				Assert.notNull(product.getActive(), "The active product from DB must not be null");
 			}
 		}
 	}
@@ -95,25 +124,4 @@ public class ProductServiceTest extends AbstractTesst {
 		return product;
 	}
 
-	private void checkProducts(Product productFromDb, Product product) {
-
-		checkProductFromDb(productFromDb);
-
-		Assert.isTrue(productFromDb.getNameRu().equals(product.getNameRu()), "Fields must be equal (name)");
-		Assert.isTrue(productFromDb.getDescriptionRu().equals(product.getDescriptionRu()),
-				"Fields must be equal (description)");
-		Assert.isTrue(productFromDb.getNameEn().equals(product.getNameEn()), "Fields must be equal (name)");
-		Assert.isTrue(productFromDb.getDescriptionEn().equals(product.getDescriptionEn()),
-				"Fields must be equal (description)");
-		Assert.isTrue(productFromDb.getBasePrice().equals(product.getBasePrice()), "Fields must be equal (price)");
-		Assert.isTrue(productFromDb.getActive().equals(product.getActive()), "Fields must be equal (active)");
-	}
-
-	private void checkProductFromDb(Product productFromDb) {
-		Assert.notNull(productFromDb, "The product from DB must not be null");
-		Assert.notNull(productFromDb.getNameRu(), "The product name from DB must not be null");
-		Assert.notNull(productFromDb.getNameEn(), "The product name from DB must not be null");
-		Assert.notNull(productFromDb.getBasePrice(), "The initial base price from DB must not be null");
-		Assert.notNull(productFromDb.getActive(), "The active product from DB must not be null");
-	}
 }

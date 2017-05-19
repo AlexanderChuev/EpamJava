@@ -2,7 +2,7 @@ package com.chuyeu.training.myapp.webapp.models;
 
 import java.io.Serializable;
 
-public class AttributeModel implements Serializable{
+public class AttributeModel implements Serializable {
 
 	private Integer id;
 	private String name;
@@ -30,6 +30,11 @@ public class AttributeModel implements Serializable{
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		return "AttributeModel [id=" + id + ", name=" + name + ", value=" + value + "]";
 	}
 
 }

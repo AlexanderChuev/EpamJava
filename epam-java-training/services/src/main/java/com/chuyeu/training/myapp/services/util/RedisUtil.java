@@ -24,7 +24,6 @@ public class RedisUtil{
 		String userData = connection.get(credentials[0] + credentials[1]);
 		if (userData != null && !userData.isEmpty()) {
 			userDataStorage = userData.split("!", 2);
-			//System.out.println(userDataStorage[0]+"!"+userDataStorage[1]);
 		}
 		
 		connection.close();
@@ -35,7 +34,7 @@ public class RedisUtil{
 		RedisConnection<String, String> connection = redisClient.connect();
 		connection.set(credentials[0] + credentials[1],
 				user.getId().toString() + "!" + user.getUserRole().toString());
-		connection.expire(credentials[0] + credentials[1], 15);
+		connection.expire(credentials[0] + credentials[1], 2);
 		connection.close();
 	}
 

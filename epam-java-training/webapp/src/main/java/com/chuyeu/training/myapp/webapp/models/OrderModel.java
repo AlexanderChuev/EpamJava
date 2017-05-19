@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.chuyeu.training.myapp.datamodel.OrderStatus;
 
-public class OrderModel implements Serializable{
+public class OrderModel implements Serializable {
 
 	private Integer id;
 	private Date created;
@@ -42,6 +42,12 @@ public class OrderModel implements Serializable{
 
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderModel [id=" + id + ", created=" + created + ", userProfileId=" + userProfileId + ", orderStatus="
+				+ orderStatus + "]";
 	}
 
 }

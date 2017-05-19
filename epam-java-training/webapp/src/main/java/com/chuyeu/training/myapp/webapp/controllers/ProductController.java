@@ -7,9 +7,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,115 +32,102 @@ import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 @RequestMapping("/product")
 public class ProductController {
 
+	private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+
 	@Inject
 	private IProductService productService;
 
 	@Autowired
 	ConversionService conversionService;
-	
 
-	// +++
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<?> getAll(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "column", required = false) String column,
 			@RequestParam(value = "direction", required = false) String direction,
 			@RequestParam(value = "limit", required = false) Integer limit, HttpServletRequest req) {
-		
-		// вынести в отдельный класс проверку и подтянуть спрингом.
-		if (page == null) {
-			page = 1;
-		}
 
-		if (limit == null) {
-			limit = 2;
-		}
 		EntityModelWrapper<ProductModel> wrapper = new EntityModelWrapper<ProductModel>();
 		String path = new StringBuilder(req.getServletPath()).append("?").append(req.getQueryString()).toString();
 		Object data = Memoization.getInstance().getData(path, new Date());
-		
-		if(data==null){
 
-		CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
+		if (data == null) {
 
-		List<Product> listProductsFromDb = productService.getAll(commonFilter);
-		List<ProductModel> listProductModel = new ArrayList<>();
+			CommonFilter commonFilter = new CommonFilter(page, limit, column, direction);
 
-		for (Product product : listProductsFromDb) {
-			ProductModel model = conversionService.convert(product, ProductModel.class);
-			listProductModel.add(model);
-		}
+			List<Product> listProductsFromDb = productService.getAll(commonFilter);
+			List<ProductModel> listProductModel = new ArrayList<>();
 
-		wrapper.setListEntityModel(listProductModel);
-		Integer quantity = productService.getProductQuantity();
-		Integer pageCount = (int) Math.ceil((double) quantity / limit);
-		wrapper.setPageCount(pageCount);
-		
-		Memoization.getInstance().putData(path, wrapper);
+			for (Product product : listProductsFromDb) {
+				ProductModel model = conversionService.convert(product, ProductModel.class);
+				listProductModel.add(model);
+			}
+
+			wrapper.setListEntityModel(listProductModel);
+			Integer quantity = productService.getProductQuantity();
+			Integer pageCount = (int) Math.ceil((double) quantity / limit);
+			wrapper.setPageCount(pageCount);
+
+			Memoization.getInstance().putData(path, wrapper);
+			LOGGER.info("Put data with path={} in cache", path);
 		} else {
-			wrapper =  (EntityModelWrapper<ProductModel>) data;
+			wrapper = (EntityModelWrapper<ProductModel>) data;
+			LOGGER.info("Took the data from cache by path={}", path);
 		}
-
 		return new ResponseEntity<EntityModelWrapper<ProductModel>>(wrapper, HttpStatus.OK);
 	}
 
-	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getById(@PathVariable(value = "id") Integer id, HttpServletRequest req) {
-		
-		ProductModel model;
-		
-		Object data = Memoization.getInstance().getData(req.getServletPath(), new Date());
-		if(data==null){
-		
-		Product product;
-		try {
-			product = productService.get(id);
-		} catch (EmptyResultDataAccessException e) {
-			return new ResponseEntity<String>("This product does not exist", HttpStatus.BAD_REQUEST);
-		}
-		model = conversionService.convert(product, ProductModel.class);
-		Memoization.getInstance().putData(req.getServletPath(), model);
-		} else {
-			model= (ProductModel) data;
-		}
-		
-		return new ResponseEntity<ProductModel>(model, HttpStatus.OK);
 
+		ProductModel model = null;
+
+		String path = req.getServletPath();
+		Object data = Memoization.getInstance().getData(path, new Date());
+		if (data == null) {
+			Product product = productService.get(id);
+			model = conversionService.convert(product, ProductModel.class);
+			Memoization.getInstance().putData(path, model);
+			LOGGER.info("Put productModel ={} with path={} in cache", model, path);
+		} else {
+			model = (ProductModel) data;
+			LOGGER.info("Took the productModel ={} from cache by path={}", model, path);
+		}
+		return new ResponseEntity<ProductModel>(model, HttpStatus.OK);
 	}
 
-	// +++
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> createNewProduct(@RequestBody ProductModel productModel) {
 
 		if (productModel == null) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
-		System.out.println(productModel);
 		Product product = conversionService.convert(productModel, Product.class);
 		Integer id = productService.add(product);
+		LOGGER.info("Create product ={} with id ={}", product, id);
 		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
-	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<?> updateProduct(@RequestBody ProductModel productModel,
 			@PathVariable(value = "id") Integer id) {
 
 		Product productFromDb = productService.get(id);
-		//productFromDb.setName(productModel.getName());
-		//productFromDb.setDescription(productModel.getDescription());
+		productFromDb.setNameRu(productModel.getNameRu());
+		productFromDb.setDescriptionRu(productModel.getDescriptionRu());
+		productFromDb.setNameEn(productModel.getNameEn());
+		productFromDb.setDescriptionEn(productModel.getDescriptionEn());
 		productFromDb.setActive(productModel.getActive());
 		productFromDb.setBasePrice(productModel.getBasePrice());
 		productService.update(productFromDb);
-
+		LOGGER.info("Update product with id ={}", id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	// +++
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Integer id) {
 		productService.delete(id);
+		LOGGER.info("Delete product with id ={}", id);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 

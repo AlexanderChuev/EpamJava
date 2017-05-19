@@ -2,45 +2,57 @@
   <rows>
     <com.chuyeu.training.myapp.datamodel.Product>
       <id>1</id>
-      <name>Кроссовки Adidas</name>
-      <description>Very nice shoes</description>
+      <nameRu>Кроссовки Adidas</nameRu>
+      <descriptionRu>Очень хорошая обувь</descriptionRu>
       <basePrice>50.0</basePrice>
       <active>true</active>
+	  <nameEn>Sneakers Adidas</nameEn>
+      <descriptionEn>Very nice shoes</descriptionEn>
     </com.chuyeu.training.myapp.datamodel.Product>
     <com.chuyeu.training.myapp.datamodel.Product>
       <id>2</id>
-      <name>Кроссовки Nike</name>
-      <description>Lightweight running shoes</description>
+      <nameRu>Кроссовки Nike</nameRu>
+      <descriptionRu>Легкие беговые кроссовки</descriptionRu>
       <basePrice>60.0</basePrice>
       <active>true</active>
+	  <nameEn>Sneakers Nike</nameEn>
+      <descriptionEn>Lightweight running shoes</descriptionEn>
     </com.chuyeu.training.myapp.datamodel.Product>
     <com.chuyeu.training.myapp.datamodel.Product>
       <id>3</id>
-      <name>Кроссовки Puma</name>
-      <description>Street style</description>
+      <nameRu>Кроссовки Puma</nameRu>
+      <descriptionRu>Уличный стиль</descriptionRu>
       <basePrice>40.0</basePrice>
       <active>true</active>
+	  <nameEn>Sneakers Puma</nameEn>
+      <descriptionEn>Street style</descriptionEn>
     </com.chuyeu.training.myapp.datamodel.Product>
     <com.chuyeu.training.myapp.datamodel.Product>
       <id>4</id>
-      <name>Кроссовки Reebok</name>
-      <description>Comfortable shoes</description>
+      <nameRu>Кроссовки Reebok</nameRu>
+      <descriptionRu>Удобные кроссовки</descriptionRu>
       <basePrice>55.0</basePrice>
       <active>false</active>
+	  <nameEn>Sneakers Reebok</nameEn>
+      <descriptionEn>Comfortable shoes</descriptionEn>
     </com.chuyeu.training.myapp.datamodel.Product>
     <com.chuyeu.training.myapp.datamodel.Product>
       <id>5</id>
-      <name>Куртка Nike</name>
-      <description>Nice clothes</description>
+      <nameRu>Куртка Nike</nameRu>
+      <descriptionRu>Красивая куртка</descriptionRu>
       <basePrice>35.0</basePrice>
       <active>true</active>
+	  <nameEn>Jacket Nike</nameEn>
+      <descriptionEn>Nice jacket</descriptionEn>
     </com.chuyeu.training.myapp.datamodel.Product>
     <com.chuyeu.training.myapp.datamodel.Product>
       <id>6</id>
-      <name>Рюкзак Adidas</name>
-      <description>Big bag</description>
+      <nameRu>Рюкзак Adidas</nameRu>
+      <descriptionRu>40 литров</descriptionRu>
       <basePrice>45.0</basePrice>
       <active>true</active>
+	  <nameEn>Backpack Adidas</nameEn>
+      <descriptionEn>40 liters</descriptionEn>
     </com.chuyeu.training.myapp.datamodel.Product>
   </rows>
   <lastId>6</lastId>

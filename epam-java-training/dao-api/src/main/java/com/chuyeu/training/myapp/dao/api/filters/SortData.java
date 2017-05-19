@@ -27,4 +27,9 @@ public class SortData {
 		this.direction = direction;
 	}
 
+	@Override
+	public String toString() {
+		return "SortData [column=" + column + ", direction=" + direction + "]";
+	}
+
 }

@@ -2,7 +2,7 @@ package com.chuyeu.training.myapp.webapp.models;
 
 import java.io.Serializable;
 
-public class UserProfileModel implements Serializable{
+public class UserProfileModel implements Serializable {
 
 	private String firstName;
 	private String lastName;
@@ -30,6 +30,12 @@ public class UserProfileModel implements Serializable{
 
 	public void setUserCredentialsId(Integer userCredentialsId) {
 		this.userCredentialsId = userCredentialsId;
+	}
+
+	@Override
+	public String toString() {
+		return "UserProfileModel [firstName=" + firstName + ", lastName=" + lastName + ", userCredentialsId="
+				+ userCredentialsId + "]";
 	}
 
 }

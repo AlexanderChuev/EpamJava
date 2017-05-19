@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.convert.ConversionService;
@@ -27,11 +29,12 @@ import com.chuyeu.training.myapp.services.IOrderService;
 import com.chuyeu.training.myapp.services.util.UserAuthStorage;
 import com.chuyeu.training.myapp.webapp.models.EntityModelWrapper;
 import com.chuyeu.training.myapp.webapp.models.OrderModel;
-import com.chuyeu.training.myapp.webapp.models.parts.IdModel;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+
+	private final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
 	@Inject
 	private IOrderService orderService;
@@ -70,23 +73,15 @@ public class OrderController {
 			}
 			wrapper.setListEntityModel(listOrderModel);
 			wrapper.setPageCount(null);
+			LOGGER.info("Get all orders for userAuthStorage ={} with commonFilter ={}", userAuthStorage, commonFilter);
 			return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
 
 		} else {
+			LOGGER.info("Return empty list of orders with commonFilter ={}", commonFilter);
 			return new ResponseEntity<EntityModelWrapper<OrderModel>>(wrapper, HttpStatus.OK);
 		}
 
 	}
-
-	/*
-	 * @RequestMapping(value = "/cart", method = RequestMethod.GET) public
-	 * ResponseEntity<?> getBasket(@PathVariable(value = "id") Integer id) {
-	 * 
-	 * UserAuthStorage userAuthStorage = context.getBean(UserAuthStorage.class);
-	 * orderService.get userAuthStorage.getId()
-	 * 
-	 * findOrderByUserId }
-	 */
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getByOrderId(@PathVariable(value = "id") Integer id) {
@@ -96,18 +91,12 @@ public class OrderController {
 		if (order.getUserProfileId().equals(userAuthStorage.getId())
 				|| UserRole.ADMIN.equals(userAuthStorage.getUserRole())) {
 			OrderModel orderModel = conversionService.convert(order, OrderModel.class);
+			LOGGER.info("The user with userAuthStorage ={} got order ={}", userAuthStorage,orderModel);
 			return new ResponseEntity<OrderModel>(orderModel, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		}
 
-	}
-
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createOrder(@RequestBody OrderModel orderModel) {
-		Order order = conversionService.convert(orderModel, Order.class);
-		Integer id = orderService.save(order);
-		return new ResponseEntity<IdModel>(new IdModel(id), HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -120,16 +109,20 @@ public class OrderController {
 			order.setOrderStatus(OrderStatus.IN_PROCESSING);
 			order.setCreated(new Date());
 			orderService.update(order);
-			
+			LOGGER.info("Client made an order ={}, client id ={}", order, userAuthStorage.getId());
+
 			Order newOrder = new Order();
 			newOrder.setOrderStatus(OrderStatus.CART);
 			newOrder.setUserProfileId(userAuthStorage.getId());
 			orderService.save(newOrder);
+			LOGGER.info("The new cart for user with id ={}, was created", userAuthStorage.getId());
 			return new ResponseEntity<Void>(HttpStatus.OK);
+
 		} else if (UserRole.ADMIN.equals(userAuthStorage.getUserRole())
 				&& !OrderStatus.CART.equals(order.getOrderStatus())) {
 			order.setOrderStatus(orderModel.getOrderStatus());
 			orderService.update(order);
+			LOGGER.info("Admin changed order={} to new status ={}", order, orderModel.getOrderStatus());
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);

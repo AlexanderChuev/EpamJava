@@ -4,38 +4,50 @@
       <id>1</id>
       <productVariantId>1</productVariantId>
       <orderQuantity>1</orderQuantity>
-      <orderId>1</orderId>
+      <orderId>2</orderId>
+      <price>55.0</price>
     </com.chuyeu.training.myapp.datamodel.OrderItem>
-	<com.chuyeu.training.myapp.datamodel.OrderItem>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
       <id>2</id>
       <productVariantId>2</productVariantId>
       <orderQuantity>1</orderQuantity>
-      <orderId>1</orderId>
+      <orderId>4</orderId>
+      <price>60.0</price>
     </com.chuyeu.training.myapp.datamodel.OrderItem>
-	<com.chuyeu.training.myapp.datamodel.OrderItem>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
       <id>3</id>
       <productVariantId>2</productVariantId>
       <orderQuantity>1</orderQuantity>
-      <orderId>2</orderId>
+      <orderId>6</orderId>
+      <price>60.0</price>
     </com.chuyeu.training.myapp.datamodel.OrderItem>
-	<com.chuyeu.training.myapp.datamodel.OrderItem>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
       <id>4</id>
       <productVariantId>3</productVariantId>
       <orderQuantity>1</orderQuantity>
-      <orderId>3</orderId>
+      <orderId>8</orderId>
     </com.chuyeu.training.myapp.datamodel.OrderItem>
-	<com.chuyeu.training.myapp.datamodel.OrderItem>
-      <id>5</id>
-      <productVariantId>4</productVariantId>
-      <orderQuantity>1</orderQuantity>
-      <orderId>4</orderId>
-    </com.chuyeu.training.myapp.datamodel.OrderItem>
-	<com.chuyeu.training.myapp.datamodel.OrderItem>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
       <id>6</id>
-      <productVariantId>7</productVariantId>
+      <productVariantId>1</productVariantId>
       <orderQuantity>1</orderQuantity>
-      <orderId>5</orderId>
+      <orderId>10</orderId>
+      <price>0.0</price>
+    </com.chuyeu.training.myapp.datamodel.OrderItem>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
+      <id>8</id>
+      <productVariantId>1</productVariantId>
+      <orderQuantity>1</orderQuantity>
+      <orderId>11</orderId>
+      <price>0.0</price>
+    </com.chuyeu.training.myapp.datamodel.OrderItem>
+    <com.chuyeu.training.myapp.datamodel.OrderItem>
+      <id>10</id>
+      <productVariantId>1</productVariantId>
+      <orderQuantity>1</orderQuantity>
+      <orderId>12</orderId>
+      <price>0.0</price>
     </com.chuyeu.training.myapp.datamodel.OrderItem>
   </rows>
-  <lastId>6</lastId>
+  <lastId>10</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>

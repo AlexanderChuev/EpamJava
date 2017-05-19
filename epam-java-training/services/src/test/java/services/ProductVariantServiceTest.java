@@ -34,13 +34,12 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		ProductVariant productVariantFromDb = allByProduct.get(0);
 		ProductVariant productVariantFromDb2 = allByProduct.get(1);
 		
-		Assert.isTrue(productVariantFromDb.getProductId().equals(productVariant.getProductId()),"");
-		Assert.isTrue(productVariantFromDb.getAvailableQuantity().equals(productVariant.getAvailableQuantity()),"");
-		Assert.isTrue(productVariantFromDb.getPriceInfluence().equals(productVariant.getPriceInfluence()),"");
-		
-		Assert.isTrue(productVariantFromDb2.getProductId().equals(productVariant2.getProductId()),"");
-		Assert.isTrue(productVariantFromDb2.getAvailableQuantity().equals(productVariant2.getAvailableQuantity()),"");
-		Assert.isTrue(productVariantFromDb2.getPriceInfluence().equals(productVariant2.getPriceInfluence()),"");
+		Assert.isTrue(productVariantFromDb.getProductId().equals(productVariant.getProductId()),"The ids from productVariant must be equal");
+		Assert.isTrue(productVariantFromDb.getAvailableQuantity().equals(productVariant.getAvailableQuantity()),"The availableQuantity from productVariant must be equal");
+		Assert.isTrue(productVariantFromDb.getPriceInfluence().equals(productVariant.getPriceInfluence()),"The priceInfluence from productVariant must be equal");
+		Assert.isTrue(productVariantFromDb2.getProductId().equals(productVariant2.getProductId()),"The ids from productVariant must be equal");
+		Assert.isTrue(productVariantFromDb2.getAvailableQuantity().equals(productVariant2.getAvailableQuantity()),"The availableQuantity from productVariant must be equal");
+		Assert.isTrue(productVariantFromDb2.getPriceInfluence().equals(productVariant2.getPriceInfluence()),"The priceInfluence from productVariant must be equal");
 	}
 
 	@Test
@@ -72,8 +71,8 @@ public class ProductVariantServiceTest extends AbstractTesst {
 		List<ProductVariant> updatedProductVariants = productVariantService.getAllByProduct(productVariantFromDb.getProductId());
 		ProductVariant updatedProductVariant = updatedProductVariants.get(0);
 		
-		Assert.isTrue(productVariantFromDb.getId().equals(updatedProductVariant.getId()),"");
-		Assert.isTrue(productVariantFromDb.getProductId().equals(updatedProductVariant.getProductId()),"");
+		Assert.isTrue(productVariantFromDb.getId().equals(updatedProductVariant.getId()),"The ids from productVariant must be equal");
+		Assert.isTrue(productVariantFromDb.getProductId().equals(updatedProductVariant.getProductId()),"The productIds from productVariant must be equal");
 		
 	}
 

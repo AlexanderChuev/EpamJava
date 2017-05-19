@@ -45,16 +45,6 @@
       <name>Color</name>
       <value>White</value>
     </com.chuyeu.training.myapp.datamodel.Attribute>
-    <com.chuyeu.training.myapp.datamodel.Attribute>
-      <id>10</id>
-      <name>name2017/05/03 17:21:59.3401</name>
-      <value>value2017/05/03 17:21:59.3401</value>
-    </com.chuyeu.training.myapp.datamodel.Attribute>
-    <com.chuyeu.training.myapp.datamodel.Attribute>
-      <id>11</id>
-      <name>name2017/05/03 17:22:03.1961</name>
-      <value>value2017/05/03 17:22:03.1961</value>
-    </com.chuyeu.training.myapp.datamodel.Attribute>
   </rows>
-  <lastId>13</lastId>
+  <lastId>9</lastId>
 </com.chuyeu.training.myapp.dao.xml.impl.wrapper.XmlModelWrapper>
